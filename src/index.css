@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #111111;
+    background-color: #F7F7F5;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.03em;
+  }
+
+  .font-persian {
+    font-family: 'Vazirmatn', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Natural Tones Outline Stroke Text */
+.stroke-text {
+  -webkit-text-stroke: 1.5px #111111;
+  color: transparent;
+}
+
+.stroke-text-light {
+  -webkit-text-stroke: 1.5px #F7F7F5;
+  color: transparent;
+}
+
+/* Custom natural noise texture overlay for tactile editorial feel */
+.bg-noise {
+  background-image: radial-gradient(rgba(17, 17, 17, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Custom scrollbar in Natural Stone tones */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F7F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d1cf;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a9a9a6;
+}
+
+/* Dynamic Island Animation */
+@keyframes dynamicPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.dynamic-island-active {
+  animation: dynamicPulse 3s ease-in-out infinite;
+}
+
+/* Custom cursor hide default */
+@media (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor [role="button"] {
+    cursor: none !important;
+  }
+}
+
+/* Natural Tones Frame Shadow & Borders */
+.natural-stone-border {
+  border-color: #d1d1cf;
+}
+
+.natural-stone-card {
+  background-color: #F7F7F5;
+  border: 1px solid #e0e0de;
+}
+
+.titanium-edge {
+  box-shadow: 
+    0 0 0 1.5px #d1d1cf,
+    0 50px 100px -20px rgba(0, 0, 0, 0.15),
+    0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+
