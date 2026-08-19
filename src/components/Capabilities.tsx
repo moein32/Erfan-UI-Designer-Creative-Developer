@@ -11,7 +11,7 @@ export const Capabilities: React.FC = () => {
   return (
     <section
       id="capabilities"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#111111]/10"
+      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#d1d1cf]"
     >
       <SectionHeading
         number="03"
@@ -23,7 +23,7 @@ export const Capabilities: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left List of Capabilities with Interactive Hover / Click */}
-        <div className="lg:col-span-7 divide-y divide-[#111111]/10 border-y border-[#111111]/10">
+        <div className="lg:col-span-7 divide-y divide-[#d1d1cf] border-y border-[#d1d1cf]">
           {CAPABILITIES.map((cap) => {
             const isActive = activeCapId === cap.id;
             return (
@@ -58,7 +58,7 @@ export const Capabilities: React.FC = () => {
                       className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
                         isActive
                           ? 'bg-[#111111] text-[#F7F7F5] border-[#111111]'
-                          : 'border-[#D0D0CB] text-[#777777] group-hover:border-[#111111]'
+                          : 'border-[#d1d1cf] text-[#777777] group-hover:border-[#111111]'
                       }`}
                     >
                       {isActive ? <Minus size={14} /> : <Plus size={14} />}
@@ -68,13 +68,13 @@ export const Capabilities: React.FC = () => {
 
                 {/* Mobile Expanded View */}
                 {isActive && (
-                  <div className="lg:hidden mt-4 pt-4 border-t border-[#E5E5E0] space-y-4 animate-in fade-in duration-200">
+                  <div className="lg:hidden mt-4 pt-4 border-t border-[#d1d1cf] space-y-4 animate-in fade-in duration-200">
                     <p className="text-sm text-[#555555] leading-relaxed">{cap.description}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {cap.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-[#FFFFFF] border border-[#E0E0DC] text-[#333333]"
+                          className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-[#FFFFFF] border border-[#d1d1cf] text-[#333333]"
                         >
                           {skill}
                         </span>
@@ -92,7 +92,7 @@ export const Capabilities: React.FC = () => {
           {(() => {
             const current = CAPABILITIES.find((c) => c.id === activeCapId) || CAPABILITIES[0];
             return (
-              <div className="p-8 rounded-3xl bg-[#FFFFFF] border border-[#111111]/10 shadow-lg space-y-6 animate-in fade-in zoom-in-95 duration-200">
+              <div className="p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-sm space-y-6 animate-in fade-in zoom-in-95 duration-200">
                 <div className="flex items-center justify-between pb-4 border-b border-[#F0F0EC]">
                   <span className="text-xs font-mono font-bold text-[#111111] bg-[#111111]/5 px-3 py-1 rounded-md">
                     {current.number} / SPECIFICATION
@@ -110,7 +110,7 @@ export const Capabilities: React.FC = () => {
                 </div>
 
                 {/* Highlight Quote */}
-                <div className="p-4 rounded-xl bg-[#F7F7F5] border border-[#E5E5E0] text-xs font-mono text-[#444444] flex items-center gap-2.5">
+                <div className="p-4 rounded-2xl bg-[#F7F7F5] border border-[#d1d1cf] text-xs font-mono text-[#444444] flex items-center gap-2.5">
                   <Sparkles size={16} className="text-[#FF5C39] shrink-0" />
                   <span>{current.highlight}</span>
                 </div>
@@ -124,7 +124,7 @@ export const Capabilities: React.FC = () => {
                     {current.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1 rounded-lg text-xs font-mono bg-[#F7F7F5] border border-[#E0E0DC] text-[#222222] font-medium"
+                        className="px-3 py-1 rounded-lg text-xs font-mono bg-[#F7F7F5] border border-[#d1d1cf] text-[#222222] font-medium"
                       >
                         {skill}
                       </span>

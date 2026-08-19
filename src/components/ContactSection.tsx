@@ -64,7 +64,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
   return (
     <section
       id="contact"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#111111]/10"
+      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#d1d1cf]"
     >
       <SectionHeading
         number="05"
@@ -78,7 +78,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
         
         {/* Left Column: Direct Email & Direct CTA */}
         <div className="lg:col-span-6 space-y-8">
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#111111] text-[#F7F7F5] space-y-6 shadow-2xl relative overflow-hidden">
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#111111] text-[#F7F7F5] space-y-6 shadow-2xl relative overflow-hidden border border-[#222222]">
             <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#FF5C39]/20 to-transparent rounded-full blur-3xl pointer-events-none" />
 
             <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold">
@@ -107,7 +107,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
               <button
                 onClick={handleCopyEmail}
                 id="copy-email-btn"
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white text-black text-xs font-mono font-bold flex items-center justify-center gap-2 hover:bg-white/90 active:scale-95 transition-all shadow-sm"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white text-black text-xs font-mono font-bold flex items-center justify-center gap-2 hover:bg-white/90 active:scale-95 transition-all shadow-sm cursor-pointer"
                 onMouseEnter={() => setCursor({ type: 'button' })}
                 onMouseLeave={resetCursor}
               >
@@ -149,7 +149,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
         </div>
 
         {/* Right Column: Interactive Quick Brief Form */}
-        <div className="lg:col-span-6 p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#111111]/10 shadow-sm">
+        <div className="lg:col-span-6 p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-sm">
           {formSubmitted ? (
             <div className="text-center py-12 space-y-4 animate-in fade-in zoom-in-95 duration-300">
               <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
@@ -163,7 +163,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
               </p>
               <button
                 onClick={() => setFormSubmitted(false)}
-                className="mt-4 px-6 py-2.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold"
+                className="mt-4 px-6 py-2.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold cursor-pointer"
               >
                 SEND ANOTHER MESSAGE
               </button>
@@ -187,7 +187,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Jane Doe"
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#E5E5E0] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
                   />
                 </div>
 
@@ -200,7 +200,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="jane@company.com"
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#E5E5E0] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
                   />
                 </div>
               </div>
@@ -212,7 +212,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                     id="service-select"
                     value={formData.projectType}
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#E5E5E0] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
                   >
                     <option>Mobile App / UI/UX</option>
                     <option>Design System (Tokens)</option>
@@ -228,7 +228,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                     id="budget-select"
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#E5E5E0] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
                   >
                     <option>$5k - $10k</option>
                     <option>$10k - $25k</option>
@@ -247,14 +247,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell me about your product goals, core audience, and target launch window..."
-                  className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#E5E5E0] text-sm focus:outline-none focus:border-[#111111] font-sans resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans resize-none"
                 />
               </div>
 
               <button
                 type="submit"
                 id="submit-brief-btn"
-                className="w-full py-4 rounded-xl bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2A2A2A] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-md"
+                className="w-full py-4 rounded-xl bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2A2A2A] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-md cursor-pointer"
                 onMouseEnter={() => setCursor({ type: 'button', text: 'SEND' })}
                 onMouseLeave={resetCursor}
               >

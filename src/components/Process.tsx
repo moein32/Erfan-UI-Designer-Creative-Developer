@@ -37,7 +37,7 @@ export const Process: React.FC = () => {
     <section
       ref={sectionRef}
       id="process"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#111111]/10"
+      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#d1d1cf]"
     >
       <SectionHeading
         number="04"
@@ -52,7 +52,7 @@ export const Process: React.FC = () => {
         {PROCESS_STEPS.map((step, idx) => (
           <div
             key={step.number}
-            className="process-card-item p-8 rounded-3xl bg-[#FFFFFF] border border-[#111111]/10 flex flex-col justify-between hover:border-[#111111]/30 hover:shadow-md transition-all duration-300 group"
+            className="process-card-item p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] flex flex-col justify-between hover:border-[#111111]/40 hover:shadow-sm transition-all duration-300 group shadow-xs"
             onMouseEnter={() => setCursor({ type: 'button' })}
             onMouseLeave={resetCursor}
           >

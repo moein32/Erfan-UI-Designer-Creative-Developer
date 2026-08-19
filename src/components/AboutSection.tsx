@@ -73,7 +73,7 @@ export const AboutSection: React.FC = () => {
     <section
       ref={containerRef}
       id="about"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#111111]/10"
+      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#d1d1cf]"
     >
       <SectionHeading
         number="02"
@@ -97,7 +97,7 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Persian Editorial Quote Card */}
-          <div className="about-stagger-item p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border border-[#111111]/10 shadow-sm relative overflow-hidden">
+          <div className="about-stagger-item p-6 sm:p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5C39]/05 rounded-full blur-2xl pointer-events-none" />
             <span className="text-xs font-mono text-[#888888] tracking-widest uppercase block mb-3">
               DESIGN PHILOSOPHY / فلسفه طراحی
@@ -116,7 +116,7 @@ export const AboutSection: React.FC = () => {
             {corePillars.map((pillar) => (
               <div
                 key={pillar.title}
-                className="p-5 rounded-xl bg-[#FFFFFF] border border-[#E5E5E0] space-y-2 hover:border-[#111111]/30 transition-colors"
+                className="p-6 rounded-2xl bg-[#FFFFFF] border border-[#d1d1cf] space-y-2 hover:border-[#111111]/40 transition-colors shadow-xs"
               >
                 <div className="flex items-center gap-2.5">
                   <div className="p-2 rounded-lg bg-[#111111]/5">{pillar.icon}</div>
@@ -131,7 +131,7 @@ export const AboutSection: React.FC = () => {
         {/* Right Credentials & Stack Box */}
         <div className="lg:col-span-5 space-y-6">
           {/* Quick Profile Summary */}
-          <div className="about-stagger-item p-6 sm:p-8 rounded-3xl bg-[#111111] text-[#F7F7F5] shadow-xl space-y-6">
+          <div className="about-stagger-item p-6 sm:p-8 rounded-3xl bg-[#111111] text-[#F7F7F5] shadow-xl space-y-6 border border-[#222222]">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-xs font-mono text-emerald-400 font-bold block mb-0.5">
@@ -179,7 +179,7 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Studio Guarantee Banner */}
-          <div className="about-stagger-item p-6 rounded-2xl bg-[#FFFFFF] border border-[#111111]/10 flex items-start gap-4">
+          <div className="about-stagger-item p-6 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] flex items-start gap-4 shadow-xs">
             <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
             <div className="text-xs space-y-1">
               <span className="font-bold text-[#111111] font-mono block">NO TEMPLATES. NO AI SLOP.</span>

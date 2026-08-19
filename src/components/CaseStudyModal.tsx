@@ -1,16 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ProjectData } from '../types';
 import { useCursor } from '../context/CursorContext';
-import { X, ArrowUpRight, CheckCircle, Layers, Palette, Type, Sparkles, ExternalLink } from 'lucide-react';
+import {
+  X,
+  ArrowUpRight,
+  CheckCircle,
+  Layers,
+  Palette,
+  Type,
+  Sparkles,
+  ChevronLeft,
+  ChevronRight,
+  TrendingUp,
+  ShieldCheck,
+  Zap,
+  Clock,
+  User,
+  Compass,
+} from 'lucide-react';
 import { IphoneMockup } from './IphoneMockup';
+import { PROJECTS } from '../data/projectsData';
 
 interface CaseStudyModalProps {
   project: ProjectData | null;
   onClose: () => void;
+  onSelectProject?: (project: ProjectData) => void;
 }
 
-export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ project, onClose }) => {
+export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
+  project,
+  onClose,
+  onSelectProject,
+}) => {
   const { setCursor, resetCursor } = useCursor();
+  const [activeSection, setActiveSection] = useState('overview');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -20,6 +44,9 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ project, onClose
     if (project) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop = 0;
+      }
     }
 
     return () => {
@@ -30,244 +57,425 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ project, onClose
 
   if (!project) return null;
 
+  const currentIndex = PROJECTS.findIndex((p) => p.id === project.id);
+  const prevProject = currentIndex > 0 ? PROJECTS[currentIndex - 1] : PROJECTS[PROJECTS.length - 1];
+  const nextProject = currentIndex < PROJECTS.length - 1 ? PROJECTS[currentIndex + 1] : PROJECTS[0];
+
+  const chapters = [
+    { id: 'overview', label: '01 Overview' },
+    { id: 'challenge', label: '02 Challenge & Friction' },
+    { id: 'solution', label: '03 System Architecture' },
+    { id: 'tokens', label: '04 Design Tokens' },
+    { id: 'simulation', label: '05 Device Studio' },
+    { id: 'impact', label: '06 Measurable Impact' },
+  ];
+
+  const scrollToChapter = (id: string) => {
+    setActiveSection(id);
+    const element = document.getElementById(`cs-${id}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div
-      id="case-study-modal-backdrop"
-      className="fixed inset-0 z-[9000] bg-[#111111]/80 backdrop-blur-xl flex justify-center overflow-y-auto p-4 sm:p-6 md:p-10 animate-in fade-in duration-300"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+      id="case-study-fullscreen-takeover"
+      ref={scrollContainerRef}
+      className="fixed inset-0 z-[9000] bg-[#F7F7F5] overflow-y-auto text-[#111111] animate-in fade-in duration-300 select-text"
     >
-      {/* Modal Container */}
-      <div
-        id="case-study-modal-container"
-        className="relative w-full max-w-5xl bg-[#F7F7F5] rounded-3xl md:rounded-[36px] border border-[#111111]/15 shadow-2xl overflow-hidden my-auto animate-in zoom-in-95 duration-300 text-[#111111]"
-      >
-        {/* Sticky Top Bar */}
-        <div className="sticky top-0 z-40 bg-[#F7F7F5]/90 backdrop-blur-md px-6 md:px-10 py-5 border-b border-[#E5E5E0] flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono tracking-widest text-[#777777] uppercase">
-              CASE STUDY
-            </span>
-            <span className="text-[#CCCCCC]">/</span>
-            <span className="text-xs font-mono font-bold text-[#111111]">{project.title}</span>
-            {project.persianTitle && (
-              <span className="hidden sm:inline-block text-xs font-persian text-[#888888]">
-                ({project.persianTitle.split('—')[0]})
-              </span>
-            )}
-          </div>
-
+      {/* Sticky Top Navigation Bar */}
+      <header className="sticky top-0 z-50 bg-[#F7F7F5]/90 backdrop-blur-md border-b border-[#d1d1cf] px-6 md:px-12 py-4 flex items-center justify-between transition-all">
+        {/* Breadcrumb Info */}
+        <div className="flex items-center gap-3">
           <button
             onClick={onClose}
-            id="close-modal-btn"
-            className="p-2.5 rounded-full bg-[#111111]/5 hover:bg-[#111111] hover:text-white transition-all duration-200"
-            aria-label="Close Case Study"
+            className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase text-[#777777] hover:text-[#111111] transition-colors"
+            onMouseEnter={() => setCursor({ type: 'button' })}
+            onMouseLeave={resetCursor}
+          >
+            <ChevronLeft size={14} />
+            <span>PORTFOLIO</span>
+          </button>
+          <span className="text-[#CCCCCC]">/</span>
+          <span className="text-xs font-mono font-bold text-[#111111]">{project.title}</span>
+          <span className="hidden sm:inline-block text-[11px] font-mono text-[#888888] px-2 py-0.5 rounded-full bg-[#111111]/5">
+            0{currentIndex + 1} of 0{PROJECTS.length}
+          </span>
+        </div>
+
+        {/* Quick Chapter Jump on Desktop */}
+        <div className="hidden lg:flex items-center gap-1 bg-[#FFFFFF] border border-[#d1d1cf] rounded-full px-3 py-1 shadow-xs">
+          {chapters.map((ch) => (
+            <button
+              key={ch.id}
+              onClick={() => scrollToChapter(ch.id)}
+              className="px-2.5 py-1 text-[11px] font-mono rounded-full hover:bg-[#111111]/5 transition-colors text-[#555555] hover:text-[#111111]"
+            >
+              {ch.label.split(' ')[1]}
+            </button>
+          ))}
+        </div>
+
+        {/* Close Button */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onClose}
+            id="close-fullscreen-cs-btn"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111111] text-[#F7F7F5] hover:bg-[#2A2A2A] text-xs font-mono font-bold transition-all shadow-xs"
             onMouseEnter={() => setCursor({ type: 'button', text: 'CLOSE' })}
             onMouseLeave={resetCursor}
           >
-            <X size={18} />
+            <span>ESC / CLOSE</span>
+            <X size={14} />
           </button>
         </div>
+      </header>
 
-        {/* Content Body */}
-        <div className="p-6 md:p-12 space-y-16">
-          
-          {/* Header & Hero Info */}
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium border"
-              style={{
-                backgroundColor: `${project.accentColor}15`,
-                borderColor: `${project.accentColor}40`,
-                color: project.accentColor,
-              }}
-            >
-              <Sparkles size={12} />
-              <span>{project.badge}</span>
+      {/* Main Content Area */}
+      <main className="max-w-6xl mx-auto px-6 md:px-12 py-12 md:py-20 space-y-24">
+        
+        {/* 01 / HERO & EXECUTIVE SUMMARY */}
+        <section id="cs-overview" className="space-y-10">
+          <div className="space-y-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <span
+                className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider border"
+                style={{
+                  backgroundColor: `${project.accentColor}12`,
+                  borderColor: `${project.accentColor}35`,
+                  color: project.accentColor,
+                }}
+              >
+                {project.category}
+              </span>
+              <span className="text-xs font-mono text-[#777777]">{project.year} Release</span>
+              <span className="text-xs font-mono text-[#777777]">·</span>
+              <span className="text-xs font-mono text-[#777777]">{project.badge}</span>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.08]">
-              {project.title} — {project.tagline}
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-[#111111] leading-[0.98]">
+              {project.title}
             </h1>
 
+            <p className="text-xl sm:text-2xl md:text-3xl font-display font-medium text-[#444444] leading-snug max-w-3xl">
+              {project.tagline}
+            </p>
+
             {project.persianTitle && (
-              <div className="text-lg md:text-xl font-persian text-[#666666] leading-relaxed">
+              <div className="font-persian text-lg sm:text-xl text-[#777777] pt-1">
                 {project.persianTitle}
               </div>
             )}
+          </div>
 
-            {/* Metadata Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-[#E5E5E0] text-xs font-mono">
-              <div>
-                <span className="text-[#888888] block mb-1">CLIENT</span>
-                <span className="text-[#111111] font-semibold">{project.client}</span>
+          {/* Project Spec Metadata Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 sm:p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs">
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono text-[#888888] uppercase tracking-wider flex items-center gap-1.5">
+                <User size={13} /> CLIENT
+              </span>
+              <div className="font-mono text-sm sm:text-base font-bold text-[#111111]">
+                {project.client}
               </div>
-              <div>
-                <span className="text-[#888888] block mb-1">ROLE</span>
-                <span className="text-[#111111] font-semibold">{project.role}</span>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono text-[#888888] uppercase tracking-wider flex items-center gap-1.5">
+                <Sparkles size={13} /> ROLE & SCOPE
+              </span>
+              <div className="font-mono text-sm sm:text-base font-bold text-[#111111]">
+                {project.role}
               </div>
-              <div>
-                <span className="text-[#888888] block mb-1">TIMELINE</span>
-                <span className="text-[#111111] font-semibold">{project.timeline}</span>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono text-[#888888] uppercase tracking-wider flex items-center gap-1.5">
+                <Clock size={13} /> TIMELINE
+              </span>
+              <div className="font-mono text-sm sm:text-base font-bold text-[#111111]">
+                {project.timeline}
               </div>
-              <div>
-                <span className="text-[#888888] block mb-1">YEAR</span>
-                <span className="text-[#111111] font-semibold">{project.year}</span>
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono text-[#888888] uppercase tracking-wider flex items-center gap-1.5">
+                <Compass size={13} /> PLATFORM
+              </span>
+              <div className="font-mono text-sm sm:text-base font-bold text-[#111111]">
+                iOS 18 + Web App
               </div>
             </div>
           </div>
 
-          {/* Device Showcase & Interactive Mockup */}
-          <div className="relative rounded-3xl p-8 md:p-12 bg-[#121214] text-white flex flex-col lg:flex-row items-center justify-between gap-10 overflow-hidden shadow-xl">
-            <div className="space-y-4 max-w-md">
-              <span className="text-xs font-mono tracking-widest uppercase text-[#AAAAAA]">
-                INTERACTIVE SIMULATION
-              </span>
-              <h3 className="font-display text-2xl md:text-3xl font-bold">
-                Experience {project.title} on Device
+          {/* Narrative Overview */}
+          <div className="prose prose-lg max-w-none text-[#555555] leading-relaxed text-base sm:text-lg">
+            <p>{project.overview}</p>
+          </div>
+        </section>
+
+        {/* 02 / THE CHALLENGE VS SYSTEMIC SOLUTION */}
+        <section id="cs-challenge" className="space-y-8 pt-8 border-t border-[#d1d1cf]">
+          <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-[#777777] uppercase">
+            <span className="font-bold text-[#111111]">02</span>
+            <span>/</span>
+            <span>STRATEGIC CONTEXT</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#F0F0EC]">
+                <span className="text-xs font-mono font-bold text-rose-600 uppercase tracking-wider">
+                  THE CHALLENGE & FRICTION
+                </span>
+                <span className="text-xs font-mono text-[#888888]">PRE-INTERVENTION</span>
+              </div>
+              <h3 className="font-display text-2xl font-bold text-[#111111]">
+                Cognitive Overload & System Breakdown
               </h3>
-              <p className="text-sm text-[#AAAAAA] leading-relaxed">
-                Interact directly with the simulated iOS 18 device interface. Toggle tabs, inspect the dynamic island alerts, and explore the design tokens.
+              <p className="text-sm sm:text-base text-[#555555] leading-relaxed">
+                {project.challenge}
               </p>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/10 text-white/90"
-                  >
-                    {tag}
-                  </span>
-                ))}
+            </div>
+
+            <div className="p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#F0F0EC]">
+                <span className="text-xs font-mono font-bold text-emerald-600 uppercase tracking-wider">
+                  THE SYSTEMIC SOLUTION
+                </span>
+                <span className="text-xs font-mono text-[#888888]">POST-INTERVENTION</span>
+              </div>
+              <h3 className="font-display text-2xl font-bold text-[#111111]">
+                Architectural Clarity & Kinetic Flow
+              </h3>
+              <p className="text-sm sm:text-base text-[#555555] leading-relaxed">
+                {project.solution}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 03 / INTERACTIVE SIMULATION STAGE */}
+        <section id="cs-simulation" className="space-y-8 pt-8 border-t border-[#d1d1cf]">
+          <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-[#777777] uppercase">
+            <span className="font-bold text-[#111111]">03</span>
+            <span>/</span>
+            <span>LIVE INTERACTIVE SIMULATION</span>
+          </div>
+
+          <div className="rounded-[36px] bg-[#111111] text-[#F7F7F5] p-8 sm:p-12 md:p-16 border border-[#222222] shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="space-y-6 max-w-lg">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-mono text-white/90">
+                <Sparkles size={13} className="text-emerald-400" />
+                <span>DYNAMIC HARDWARE EMULATION</span>
+              </div>
+
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+                Inspect Every State On Device
+              </h2>
+
+              <p className="text-sm sm:text-base text-[#AAAAAA] leading-relaxed">
+                Experience tactile micro-interactions, active dynamic island notifications, and customized typographic scales directly on this simulated iPhone 16 Pro chassis.
+              </p>
+
+              <div className="space-y-2 pt-2">
+                <span className="text-[11px] font-mono text-white/50 uppercase tracking-widest block">
+                  INCLUDED PROTOTYPE SCREENS
+                </span>
+                <div className="space-y-2">
+                  {project.appScreens.map((sc, i) => (
+                    <div
+                      key={sc.id}
+                      className="p-3 rounded-xl bg-white/5 border border-white/10 text-xs font-mono flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        <span className="font-bold text-white">{sc.title}</span>
+                      </div>
+                      <span className="text-white/50">{sc.description}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="w-full max-w-[280px] sm:max-w-[310px]">
+            <div className="w-full max-w-[310px] shrink-0">
               <IphoneMockup project={project} />
             </div>
           </div>
+        </section>
 
-          {/* Quantified Business Impact & Metrics */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-[#777777] uppercase">
-              <Layers size={14} />
-              <span>MEASURABLE OUTCOMES</span>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {project.metrics.map((metric) => (
-                <div
-                  key={metric.label}
-                  className="p-6 rounded-2xl bg-[#FFFFFF] border border-[#E5E5E0] shadow-sm text-left"
-                >
+        {/* 04 / DESIGN SYSTEM TOKENS & TYPOGRAPHY */}
+        <section id="cs-tokens" className="space-y-8 pt-8 border-t border-[#d1d1cf]">
+          <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-[#777777] uppercase">
+            <span className="font-bold text-[#111111]">04</span>
+            <span>/</span>
+            <span>DESIGN SYSTEM TOKENS</span>
+          </div>
+
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs space-y-10">
+            {/* Color Tokens */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="font-display text-2xl font-bold text-[#111111] flex items-center gap-2">
+                  <Palette size={20} className="text-[#FF5C39]" />
+                  <span>Semantic Color Palette</span>
+                </h3>
+                <span className="text-xs font-mono text-[#888888]">WCAG 2.1 AA Compliant</span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {project.colorPalette.map((col) => (
                   <div
-                    className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight mb-1"
-                    style={{ color: project.accentColor }}
+                    key={col.name}
+                    className="p-4 rounded-2xl border border-[#d1d1cf] bg-[#F7F7F5] flex flex-col justify-between h-36"
                   >
-                    {metric.value}
+                    <div
+                      className="w-full h-14 rounded-xl border border-black/10 shadow-xs"
+                      style={{ backgroundColor: col.hex }}
+                    />
+                    <div className="space-y-0.5">
+                      <div className="flex items-center justify-between text-xs font-mono font-bold">
+                        <span>{col.name}</span>
+                        <span className="text-[#777777]">{col.hex}</span>
+                      </div>
+                      <span className="text-[10px] text-[#888888] block truncate">{col.desc}</span>
+                    </div>
                   </div>
-                  <div className="text-xs font-mono text-[#666666]">{metric.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Deep Narrative: Challenge vs Solution */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-2xl bg-[#FFFFFF] border border-[#E5E5E0] space-y-4">
-              <span className="text-xs font-mono tracking-widest text-rose-600 font-semibold uppercase">
-                THE CHALLENGE
-              </span>
-              <h3 className="font-display text-xl font-bold">Overcoming Interface Friction</h3>
-              <p className="text-sm text-[#555555] leading-relaxed">{project.challenge}</p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-[#FFFFFF] border border-[#E5E5E0] space-y-4">
-              <span className="text-xs font-mono tracking-widest text-emerald-600 font-semibold uppercase">
-                THE SOLUTION
-              </span>
-              <h3 className="font-display text-xl font-bold">Systemic Architectural Innovation</h3>
-              <p className="text-sm text-[#555555] leading-relaxed">{project.solution}</p>
-            </div>
-          </div>
-
-          {/* Design System & Token Tokens Showcase */}
-          <div className="space-y-8 p-8 md:p-10 rounded-3xl bg-[#FFFFFF] border border-[#E5E5E0]">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <span className="text-xs font-mono tracking-widest text-[#777777] uppercase flex items-center gap-2">
-                  <Palette size={14} />
-                  <span>DESIGN SYSTEM TOKENS</span>
-                </span>
-                <h3 className="font-display text-2xl font-bold mt-1">Color Palette & Semantic Roles</h3>
+                ))}
               </div>
             </div>
 
-            {/* Color Swatches */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {project.colorPalette.map((color) => (
-                <div
-                  key={color.name}
-                  className="p-4 rounded-xl border border-[#ECECE8] flex flex-col justify-between h-32"
-                >
-                  <div
-                    className="w-full h-12 rounded-lg border border-black/10 shadow-sm"
-                    style={{ backgroundColor: color.hex }}
-                  />
-                  <div>
-                    <div className="flex items-center justify-between text-xs font-mono font-semibold">
-                      <span>{color.name}</span>
-                      <span className="text-[#888888]">{color.hex}</span>
-                    </div>
-                    <span className="text-[10px] text-[#777777] block truncate">{color.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {/* Typography Tokens */}
+            <div className="space-y-4 pt-6 border-t border-[#F0F0EC]">
+              <div className="flex items-center justify-between">
+                <h3 className="font-display text-2xl font-bold text-[#111111] flex items-center gap-2">
+                  <Type size={20} className="text-[#6366F1]" />
+                  <span>Typographic Architecture</span>
+                </h3>
+                <span className="text-xs font-mono text-[#888888]">Bilingual Metric Harmony</span>
+              </div>
 
-            {/* Typography Specimen */}
-            <div className="pt-6 border-t border-[#ECECE8] space-y-4">
-              <span className="text-xs font-mono tracking-widest text-[#777777] uppercase flex items-center gap-2">
-                <Type size={14} />
-                <span>TYPOGRAPHIC CADENCE</span>
-              </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {project.typography.map((type) => (
-                  <div key={type.font} className="p-5 rounded-xl bg-[#F7F7F5] border border-[#E5E5E0]">
-                    <span className="text-xs font-mono text-[#888888] block mb-1">{type.usage}</span>
-                    <h4 className="font-bold text-sm text-[#111111] mb-2">{type.font}</h4>
-                    <p className="text-base text-[#444444] font-persian italic">"{type.sample}"</p>
+                {project.typography.map((t) => (
+                  <div
+                    key={t.font}
+                    className="p-6 rounded-2xl bg-[#F7F7F5] border border-[#d1d1cf] space-y-2"
+                  >
+                    <div className="flex items-center justify-between text-xs font-mono text-[#888888]">
+                      <span>{t.usage}</span>
+                      <span className="font-bold text-[#111111]">{t.font}</span>
+                    </div>
+                    <p className="text-lg font-persian font-medium text-[#222222] italic pt-1">
+                      "{t.sample}"
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Deliverables Checklist */}
-          <div className="p-8 rounded-2xl bg-[#FFFFFF] border border-[#E5E5E0] space-y-4">
-            <h3 className="font-display text-lg font-bold">Shipped Deliverables & Artifacts</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {/* 05 / QUANTIFIED BUSINESS IMPACT */}
+        <section id="cs-impact" className="space-y-8 pt-8 border-t border-[#d1d1cf]">
+          <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-[#777777] uppercase">
+            <span className="font-bold text-[#111111]">05</span>
+            <span>/</span>
+            <span>MEASURABLE OUTCOMES</span>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {project.metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="p-6 sm:p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs text-left"
+              >
+                <div
+                  className="font-display text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2"
+                  style={{ color: project.accentColor }}
+                >
+                  {metric.value}
+                </div>
+                <div className="text-xs sm:text-sm font-mono text-[#555555]">
+                  {metric.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Shipped Deliverables */}
+          <div className="p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs space-y-4">
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#111111] uppercase tracking-wider">
+              <ShieldCheck size={16} className="text-emerald-600" />
+              <span>COMMISSIONED ARTIFACTS & DELIVERABLES</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pt-2">
               {project.deliverables.map((item) => (
-                <div key={item} className="flex items-center gap-2.5 text-xs font-mono text-[#444444]">
-                  <CheckCircle size={14} className="text-emerald-500 shrink-0" />
+                <div
+                  key={item}
+                  className="flex items-center gap-2.5 text-xs font-mono text-[#444444] p-2.5 rounded-xl bg-[#F7F7F5] border border-[#E8E8E4]"
+                >
+                  <CheckCircle size={13} className="text-emerald-500 shrink-0" />
                   <span>{item}</span>
                 </div>
               ))}
             </div>
           </div>
+        </section>
 
-          {/* Footer CTA in modal */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[#E5E5E0]">
-            <span className="text-xs font-mono text-[#777777]">
-              Case Study documented by Erfan · 2026
+        {/* 06 / NEXT PROJECT SEAMLESS NAVIGATOR */}
+        <section className="pt-12 border-t border-[#d1d1cf] space-y-8">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono text-[#777777] uppercase tracking-widest">
+              NEXT CASE STUDY
             </span>
+            <span className="text-xs font-mono text-[#888888]">0{PROJECTS.indexOf(nextProject) + 1} OF 05</span>
+          </div>
+
+          <div
+            onClick={() => onSelectProject?.(nextProject)}
+            className="group p-8 sm:p-12 rounded-3xl bg-[#111111] text-[#F7F7F5] border border-[#222222] shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 cursor-pointer hover:bg-[#1A1A1A] transition-all"
+            onMouseEnter={() => setCursor({ type: 'button', text: 'EXPLORE' })}
+            onMouseLeave={resetCursor}
+          >
+            <div className="space-y-2">
+              <span className="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">
+                {nextProject.category}
+              </span>
+              <h3 className="font-display text-3xl sm:text-5xl font-bold tracking-tight group-hover:text-[#FF5C39] transition-colors">
+                {nextProject.title} — {nextProject.tagline}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#888888] font-mono">
+                {nextProject.client} · {nextProject.year}
+              </p>
+            </div>
+
+            <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
+              <ArrowUpRight size={24} />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between pt-6">
+            <button
+              onClick={() => onSelectProject?.(prevProject)}
+              className="flex items-center gap-2 text-xs font-mono font-bold text-[#555555] hover:text-[#111111] transition-colors"
+            >
+              <ChevronLeft size={14} />
+              <span>PREVIOUS: {prevProject.title}</span>
+            </button>
+
             <button
               onClick={onClose}
-              className="px-6 py-3 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2B2B2B] transition-colors"
+              className="px-6 py-2.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold hover:bg-[#2A2A2A] transition-colors"
             >
-              CLOSE CASE STUDY
+              RETURN TO MAIN FEED
             </button>
           </div>
-        </div>
-      </div>
+        </section>
+
+      </main>
     </div>
   );
 };
+

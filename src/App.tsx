@@ -122,6 +122,7 @@ export default function App() {
         <CaseStudyModal
           project={selectedCaseStudy}
           onClose={() => setSelectedCaseStudy(null)}
+          onSelectProject={(p) => setSelectedCaseStudy(p)}
         />
 
         {/* Quick Project Inquiry Modal */}

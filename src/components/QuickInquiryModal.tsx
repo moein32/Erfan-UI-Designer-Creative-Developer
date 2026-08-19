@@ -57,7 +57,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
     >
       <div
         id="quick-inquiry-modal-card"
-        className="relative w-full max-w-lg bg-[#FFFFFF] rounded-3xl border border-[#111111]/15 shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-200 text-[#111111]"
+        className="relative w-full max-w-lg bg-[#FFFFFF] rounded-3xl border border-[#d1d1cf] shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-200 text-[#111111]"
       >
         <div className="flex items-center justify-between pb-4 border-b border-[#F0F0EC] mb-6">
           <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider">
@@ -66,7 +66,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-[#111111]/5 hover:bg-[#111111] hover:text-white transition-colors"
+            className="p-2 rounded-full bg-[#111111]/5 hover:bg-[#111111] hover:text-white transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X size={16} />
@@ -84,7 +84,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
             </p>
             <button
               onClick={onClose}
-              className="mt-2 px-6 py-2.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold"
+              className="mt-2 px-6 py-2.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold cursor-pointer"
             >
               CLOSE
             </button>
@@ -100,7 +100,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Erfan Moein"
-                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#E0E0DC] text-sm focus:outline-none focus:border-[#111111]"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111]"
               />
             </div>
 
@@ -113,7 +113,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="erfan@studio.design"
-                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#E0E0DC] text-sm focus:outline-none focus:border-[#111111]"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111]"
               />
             </div>
 
@@ -124,7 +124,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
                   id="modal-scope-select"
                   value={formData.scope}
                   onChange={(e) => setFormData({ ...formData, scope: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#E0E0DC] text-xs"
+                  className="w-full px-3 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-xs"
                 >
                   <option>Mobile UI/UX</option>
                   <option>Design System</option>
@@ -139,7 +139,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
                   id="modal-timeline-select"
                   value={formData.timeline}
                   onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#E0E0DC] text-xs"
+                  className="w-full px-3 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-xs"
                 >
                   <option>Urgent (&lt; 2 wks)</option>
                   <option>Within 1 Month</option>
@@ -156,14 +156,14 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Briefly describe what you're building..."
-                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#E0E0DC] text-sm focus:outline-none focus:border-[#111111] resize-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] resize-none"
               />
             </div>
 
             <button
               type="submit"
               id="modal-submit-btn"
-              className="w-full py-3.5 rounded-xl bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2A2A2A] transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
+              className="w-full py-3.5 rounded-xl bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2A2A2A] transition-all flex items-center justify-center gap-2 shadow-md active:scale-95 cursor-pointer"
               onMouseEnter={() => setCursor({ type: 'button', text: 'SEND' })}
               onMouseLeave={resetCursor}
             >
