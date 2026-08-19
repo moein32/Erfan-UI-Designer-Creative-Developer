@@ -98,6 +98,7 @@ export default function App() {
                 index={idx}
                 total={PROJECTS.length}
                 onOpenCaseStudy={(p) => setSelectedCaseStudy(p)}
+                isPersianMode={isPersianMode}
               />
             ))}
           </div>

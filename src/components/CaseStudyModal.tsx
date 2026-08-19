@@ -19,6 +19,7 @@ import {
   Compass,
 } from 'lucide-react';
 import { IphoneMockup } from './IphoneMockup';
+import { OvaraPhoneScene } from './projects/ovara/OvaraPhoneScene';
 import { PROJECTS } from '../data/projectsData';
 
 interface CaseStudyModalProps {
@@ -34,6 +35,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
 }) => {
   const { setCursor, resetCursor } = useCursor();
   const [activeSection, setActiveSection] = useState('overview');
+  const [modalScreenIndex, setModalScreenIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -299,8 +301,16 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
               </div>
             </div>
 
-            <div className="w-full max-w-[310px] shrink-0">
-              <IphoneMockup project={project} />
+            <div className="w-full max-w-[340px] shrink-0">
+              {project.id === 'ovara' ? (
+                <OvaraPhoneScene
+                  activeScreenIndex={modalScreenIndex}
+                  onScreenChange={setModalScreenIndex}
+                  isInteractive={true}
+                />
+              ) : (
+                <IphoneMockup project={project} />
+              )}
             </div>
           </div>
         </section>

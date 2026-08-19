@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ProjectData } from '../types';
 import { useCursor } from '../context/CursorContext';
 import { IphoneMockup } from './IphoneMockup';
+import { OvaraExperience } from './projects/ovara/OvaraExperience';
 import { ArrowUpRight, Sparkles, Layers, ChevronRight, Check } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,6 +14,7 @@ interface ProjectSceneProps {
   index: number;
   total: number;
   onOpenCaseStudy: (project: ProjectData) => void;
+  isPersianMode?: boolean;
 }
 
 export const ProjectScene: React.FC<ProjectSceneProps> = ({
@@ -20,7 +22,21 @@ export const ProjectScene: React.FC<ProjectSceneProps> = ({
   index,
   total,
   onOpenCaseStudy,
+  isPersianMode = false,
 }) => {
+  // If this is Ovara, render the flagship OvaraExperience showcase!
+  if (project.id === 'ovara') {
+    return (
+      <OvaraExperience
+        project={project}
+        index={index}
+        total={total}
+        onOpenCaseStudy={onOpenCaseStudy}
+        isPersianMode={isPersianMode}
+      />
+    );
+  }
+
   const { setCursor, resetCursor } = useCursor();
   const sceneRef = useRef<HTMLDivElement>(null);
   const phoneWrapperRef = useRef<HTMLDivElement>(null);
