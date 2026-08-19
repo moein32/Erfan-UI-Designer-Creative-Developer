@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Language, TranslationSchema, getTranslation } from '../i18n';
+import { getProductLocale } from '../i18n/productLocales';
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
   t: TranslationSchema;
+  productLocale: ReturnType<typeof getProductLocale>;
   isRTL: boolean;
   formatNumber: (num: number | string) => string;
 }
@@ -26,6 +28,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   });
 
   const t = getTranslation(language);
+  const productLocale = getProductLocale(language);
   const isRTL = language === 'fa';
 
   useEffect(() => {
@@ -73,6 +76,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setLanguage,
         toggleLanguage,
         t,
+        productLocale,
         isRTL,
         formatNumber,
       }}
@@ -81,6 +85,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     </LanguageContext.Provider>
   );
 };
+
 
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext);

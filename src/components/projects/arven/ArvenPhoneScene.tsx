@@ -1,13 +1,13 @@
 import React from 'react';
 import { ArvenScreen } from './ArvenScreen';
-import { Home, CheckSquare, Calendar, Brain, Wifi, Battery } from 'lucide-react';
+import { Home, CheckSquare, Calendar, Brain, Battery } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface ArvenPhoneSceneProps {
   activeChapterIndex: number;
   onChapterChange?: (index: number) => void;
   isInteractive?: boolean;
-  isPersianMode?: boolean;
 }
 
 const CHAPTER_SCREENS: ('think' | 'organize' | 'plan' | 'create')[] = [
@@ -21,22 +21,36 @@ export const ArvenPhoneScene: React.FC<ArvenPhoneSceneProps> = ({
   activeChapterIndex,
   onChapterChange,
   isInteractive = true,
-  isPersianMode = false,
 }) => {
+  const { isRTL, formatNumber } = useLanguage();
   const currentScreenId = CHAPTER_SCREENS[activeChapterIndex] || 'think';
+
+  const tabs = isRTL
+    ? [
+        { idx: 0, label: 'مرکز کنترل', icon: Home },
+        { idx: 1, label: 'وظایف', icon: CheckSquare },
+        { idx: 2, label: 'تقویم', icon: Calendar },
+        { idx: 3, label: 'دانش', icon: Brain },
+      ]
+    : [
+        { idx: 0, label: 'Command', icon: Home },
+        { idx: 1, label: 'Tasks', icon: CheckSquare },
+        { idx: 2, label: 'Timeline', icon: Calendar },
+        { idx: 3, label: 'Graph', icon: Brain },
+      ];
 
   return (
     <div className="relative flex flex-col items-center select-none">
       {/* Device Label above chassis */}
       <div className="w-[320px] sm:w-[340px] flex items-center justify-between px-2 mb-3 text-xs font-mono text-[#888884]">
         <span className="font-bold text-[#111116]">
-          0{activeChapterIndex + 1} / 04
+          {isRTL ? `۰${formatNumber(activeChapterIndex + 1)} / ۰۴` : `0${activeChapterIndex + 1} / 04`}
         </span>
         <span className="uppercase tracking-widest text-[10px] text-[#5146E5] font-bold">
-          {activeChapterIndex === 0 && '01 / THINK'}
-          {activeChapterIndex === 1 && '02 / ORGANIZE'}
-          {activeChapterIndex === 2 && '03 / PLAN'}
-          {activeChapterIndex === 3 && '04 / CREATE'}
+          {activeChapterIndex === 0 && (isRTL ? '۰۱ / تفکر هوشمند' : '01 / THINK')}
+          {activeChapterIndex === 1 && (isRTL ? '۰۲ / سازمان‌دهی' : '02 / ORGANIZE')}
+          {activeChapterIndex === 2 && (isRTL ? '۰۳ / برنامه‌ریزی' : '03 / PLAN')}
+          {activeChapterIndex === 3 && (isRTL ? '۰۴ / سنتز دانش' : '04 / CREATE')}
         </span>
       </div>
 
@@ -52,7 +66,7 @@ export const ArvenPhoneScene: React.FC<ArvenPhoneSceneProps> = ({
         <div className="relative w-full h-full rounded-[44px] bg-[#F9FAFF] overflow-hidden flex flex-col border-[5px] border-[#0B0C11] shadow-inner">
           {/* Status Bar & Dynamic Island */}
           <div className="relative z-50 h-11 px-6 pt-2 flex items-center justify-between text-[11px] font-bold font-mono text-[#161824]">
-            <span>9:41</span>
+            <span>{isRTL ? '۹:۴۱' : '9:41'}</span>
             {/* Dynamic Island */}
             <div className="absolute left-1/2 -translate-x-1/2 top-2.5 w-24 h-6 rounded-full bg-[#050507] flex items-center justify-end px-2 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#5146E5] animate-pulse" />
@@ -74,19 +88,17 @@ export const ArvenPhoneScene: React.FC<ArvenPhoneSceneProps> = ({
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="h-full"
               >
-                <ArvenScreen screenId={currentScreenId} isPersianMode={isPersianMode} />
+                <ArvenScreen screenId={currentScreenId} />
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Bottom App Navigation Dock */}
-          <div className="absolute bottom-0 inset-x-0 h-16 bg-[#FAFAFD]/90 backdrop-blur-md border-t border-[#E1E3EB]/80 flex items-center justify-around px-3 z-40">
-            {[
-              { idx: 0, label: 'خانه', icon: Home },
-              { idx: 1, label: 'وظایف', icon: CheckSquare },
-              { idx: 2, label: 'تقویم', icon: Calendar },
-              { idx: 3, label: 'دانش', icon: Brain },
-            ].map((tab) => {
+          <div
+            className="absolute bottom-0 inset-x-0 h-16 bg-[#FAFAFD]/90 backdrop-blur-md border-t border-[#E1E3EB]/80 flex items-center justify-around px-3 z-40"
+            dir={isRTL ? 'rtl' : 'ltr'}
+          >
+            {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeChapterIndex === tab.idx;
               return (
@@ -104,7 +116,13 @@ export const ArvenPhoneScene: React.FC<ArvenPhoneSceneProps> = ({
                   >
                     <Icon size={16} />
                   </div>
-                  <span className="text-[8.5px] font-bold font-persian">{tab.label}</span>
+                  <span
+                    className={`text-[8.5px] font-bold ${
+                      isRTL ? 'font-persian' : 'font-sans'
+                    }`}
+                  >
+                    {tab.label}
+                  </span>
                 </button>
               );
             })}
@@ -133,3 +151,4 @@ export const ArvenPhoneScene: React.FC<ArvenPhoneSceneProps> = ({
     </div>
   );
 };
+

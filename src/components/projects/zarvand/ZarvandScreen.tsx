@@ -1,35 +1,28 @@
 import React, { useState } from 'react';
 import {
   Bell,
-  ArrowUpRight,
   TrendingUp,
   TrendingDown,
   Send,
   Download,
   QrCode,
   CreditCard,
-  ChevronRight,
   Plus,
   ArrowLeft,
-  Bot,
+  ArrowRight,
   Sparkles,
   Lock,
   Globe,
-  Sliders,
-  ShieldCheck,
-  Check,
-  Wallet,
 } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface ZarvandScreenProps {
   screenId: 'liquidity' | 'portfolio' | 'analytics' | 'advisor';
-  isPersianMode?: boolean;
 }
 
-export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
-  screenId,
-  isPersianMode = false,
-}) => {
+export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({ screenId }) => {
+  const { isRTL, formatNumber } = useLanguage();
+
   // Screen 4 Security toggles
   const [onlinePay, setOnlinePay] = useState(true);
   const [tempFreeze, setTempFreeze] = useState(false);
@@ -38,21 +31,40 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
   // CHAPTER 01: LIQUIDITY (Main Treasury & Financial Dashboard)
   // ----------------------------------------------------
   if (screenId === 'liquidity') {
+    const quickActions = isRTL
+      ? [
+          { label: 'انتقال', icon: Send, color: '#2563EB', bg: '#EFF6FF' },
+          { label: 'دریافت', icon: Download, color: '#16A34A', bg: '#ECFDF3' },
+          { label: 'اسکن QR', icon: QrCode, color: '#F59E0B', bg: '#FFF7ED' },
+          { label: 'کارت‌ها', icon: CreditCard, color: '#7C3AED', bg: '#F5F3FF' },
+        ]
+      : [
+          { label: 'Transfer', icon: Send, color: '#2563EB', bg: '#EFF6FF' },
+          { label: 'Receive', icon: Download, color: '#16A34A', bg: '#ECFDF3' },
+          { label: 'QR Pay', icon: QrCode, color: '#F59E0B', bg: '#FFF7ED' },
+          { label: 'Cards', icon: CreditCard, color: '#7C3AED', bg: '#F5F3FF' },
+        ];
+
     return (
-      <div className="w-full h-full text-[#111827] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#111827] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-3.5">
           {/* Top Bar */}
           <div className="flex items-center justify-between pt-1">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#6366F1] to-[#818CF8] text-white flex items-center justify-center font-black text-xs shadow-xs">
-                ع
+                {isRTL ? 'ع' : 'EM'}
               </div>
               <div>
                 <span className="text-[9px] text-[#9AA2B1] block">
-                  {isPersianMode ? 'صبح بخیر' : 'Good Morning'}
+                  {isRTL ? 'صبح بخیر' : 'Good Morning,'}
                 </span>
                 <strong className="text-xs font-black text-[#111827] block">
-                  {isPersianMode ? 'عرفان معین' : 'Erfan Moein'}
+                  {isRTL ? 'عرفان معین' : 'Erfan Moein'}
                 </strong>
               </div>
             </div>
@@ -69,14 +81,14 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
 
             <div className="relative z-10 space-y-1">
               <span className="text-[9px] opacity-80 font-bold block">
-                {isPersianMode ? 'موجودی کل حساب‌ها' : 'Total Portfolio Liquidity'}
+                {isRTL ? 'موجودی کل حساب‌ها' : 'Total Portfolio Liquidity'}
               </span>
 
-              <div className="flex items-baseline justify-between pt-0.5">
-                <div className="text-xl font-mono font-black tracking-tight">
-                  345,820,000
-                  <span className="text-[9px] font-sans font-normal opacity-85 mr-1.5">
-                    {isPersianMode ? 'تومان' : 'TMN'}
+              <div className="flex items-baseline justify-between pt-0.5 font-mono">
+                <div className="text-xl font-black tracking-tight">
+                  {isRTL ? '۳۴۵,۸۲۰,۰۰۰' : '$128,450.00'}
+                  <span className="text-[9px] font-sans font-normal opacity-85 mx-1.5">
+                    {isRTL ? 'تومان' : 'USD'}
                   </span>
                 </div>
               </div>
@@ -84,10 +96,10 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
               <div className="flex items-center justify-between pt-2">
                 <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-white/15 text-[8px] font-bold">
                   <TrendingUp size={10} />
-                  <span>+۱۲.۴٪</span>
+                  <span>{isRTL ? '+۱۲.۴٪' : '+12.4%'}</span>
                 </div>
                 <span className="text-[8px] opacity-75">
-                  {isPersianMode ? 'نسبت به ماه گذشته' : 'vs last 30 days'}
+                  {isRTL ? 'نسبت به ماه گذشته' : 'vs last 30 days'}
                 </span>
               </div>
             </div>
@@ -95,12 +107,7 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
 
           {/* Quick Actions 4-Grid */}
           <div className="grid grid-cols-4 gap-2">
-            {[
-              { label: 'انتقال', labelEn: 'Transfer', icon: Send, color: '#2563EB', bg: '#EFF6FF' },
-              { label: 'دریافت', labelEn: 'Receive', icon: Download, color: '#16A34A', bg: '#ECFDF3' },
-              { label: 'اسکن QR', labelEn: 'QR Pay', icon: QrCode, color: '#F59E0B', bg: '#FFF7ED' },
-              { label: 'کارت‌ها', labelEn: 'Cards', icon: CreditCard, color: '#7C3AED', bg: '#F5F3FF' },
-            ].map((act, i) => {
+            {quickActions.map((act, i) => {
               const Icon = act.icon;
               return (
                 <div key={i} className="text-center group cursor-pointer">
@@ -111,7 +118,7 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
                     <Icon size={16} />
                   </div>
                   <span className="text-[8px] font-bold text-[#687285] mt-1 block">
-                    {isPersianMode ? act.label : act.labelEn}
+                    {act.label}
                   </span>
                 </div>
               );
@@ -122,10 +129,10 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
           <div className="space-y-1.5 pt-1">
             <div className="flex items-center justify-between text-[11px] font-bold px-0.5">
               <span className="text-[#111827]">
-                {isPersianMode ? 'تراکنش‌های اخیر' : 'Recent Transactions'}
+                {isRTL ? 'تراکنش‌های اخیر' : 'Recent Transactions'}
               </span>
               <span className="text-[#2563EB] text-[9px] cursor-pointer hover:underline">
-                {isPersianMode ? 'مشاهده همه' : 'View All'}
+                {isRTL ? 'مشاهده همه' : 'View All'}
               </span>
             </div>
 
@@ -133,18 +140,22 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
               {/* Item 1 */}
               <div className="py-2 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-[#FFF1F2] text-[#EF4444] flex items-center justify-center">
+                  <div className="w-7 h-7 rounded-lg bg-[#FFF1F2] text-[#EF4444] flex items-center justify-center shrink-0">
                     <TrendingDown size={13} />
                   </div>
                   <div>
                     <strong className="text-[9px] font-bold text-[#111827] block">
-                      {isPersianMode ? 'دیجی‌کالا — خرید آنلاین' : 'Digikala Merchant'}
+                      {isRTL ? 'دیجی‌کالا — خرید آنلاین' : 'Apple Store Merchant'}
                     </strong>
-                    <span className="text-[7px] text-[#A1A8B5] block">امروز، ۱۸:۴۵</span>
+                    <span className="text-[7px] text-[#A1A8B5] block">
+                      {isRTL ? 'امروز، ۱۸:۴۵' : 'Today, 18:45'}
+                    </span>
                   </div>
                 </div>
-                <div className="text-left font-mono">
-                  <strong className="text-[10px] font-bold text-[#EF4444] block">-450,000</strong>
+                <div className={`${isRTL ? 'text-left' : 'text-right'} font-mono`}>
+                  <strong className="text-[10px] font-bold text-[#EF4444] block">
+                    {isRTL ? '-۴۵۰,۰۰۰' : '-$349.00'}
+                  </strong>
                   <span className="text-[6px] text-[#A1A8B5]">TRX-9482</span>
                 </div>
               </div>
@@ -152,18 +163,22 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
               {/* Item 2 */}
               <div className="py-2 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-[#ECFDF3] text-[#16A34A] flex items-center justify-center">
+                  <div className="w-7 h-7 rounded-lg bg-[#ECFDF3] text-[#16A34A] flex items-center justify-center shrink-0">
                     <TrendingUp size={13} />
                   </div>
                   <div>
                     <strong className="text-[9px] font-bold text-[#111827] block">
-                      {isPersianMode ? 'واریز سود ماهانه صندوق' : 'Treasury Yield Payout'}
+                      {isRTL ? 'واریز سود ماهانه صندوق' : 'Treasury Yield Payout'}
                     </strong>
-                    <span className="text-[7px] text-[#A1A8B5] block">دیروز، ۰۶:۰۰</span>
+                    <span className="text-[7px] text-[#A1A8B5] block">
+                      {isRTL ? 'دیروز، ۰۶:۰۰' : 'Yesterday, 06:00'}
+                    </span>
                   </div>
                 </div>
-                <div className="text-left font-mono">
-                  <strong className="text-[10px] font-bold text-[#16A34A] block">+2,400,000</strong>
+                <div className={`${isRTL ? 'text-left' : 'text-right'} font-mono`}>
+                  <strong className="text-[10px] font-bold text-[#16A34A] block">
+                    {isRTL ? '+۲,۴۰۰,۰۰۰' : '+$1,850.00'}
+                  </strong>
                   <span className="text-[6px] text-[#A1A8B5]">TRX-1029</span>
                 </div>
               </div>
@@ -178,16 +193,72 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
   // CHAPTER 02: PORTFOLIO (Multi-Asset Sovereign Vault)
   // ----------------------------------------------------
   if (screenId === 'portfolio') {
+    const assets = [
+      {
+        symbol: '₿',
+        nameFa: 'بیت‌کوین',
+        nameEn: 'Bitcoin',
+        amount: '0.4502 BTC',
+        usd: '$31,240.00',
+        changeFa: '+۲.۴٪',
+        changeEn: '+2.4%',
+        positive: true,
+        color: '#F59E0B',
+        bg: '#FFF7ED',
+      },
+      {
+        symbol: 'Ξ',
+        nameFa: 'اتریوم',
+        nameEn: 'Ethereum',
+        amount: '4.2000 ETH',
+        usd: '$8,650.00',
+        changeFa: '-۱.۲٪',
+        changeEn: '-1.2%',
+        positive: false,
+        color: '#6366F1',
+        bg: '#EEF2FF',
+      },
+      {
+        symbol: '₮',
+        nameFa: 'تتر استیبل‌کوین',
+        nameEn: 'Tether USD',
+        amount: '12,400 USDT',
+        usd: '$12,400.00',
+        changeFa: '۰.۰۰٪',
+        changeEn: '0.00%',
+        positive: true,
+        color: '#16A34A',
+        bg: '#ECFDF3',
+      },
+      {
+        symbol: '$',
+        nameFa: 'دلار نقدی بانکی',
+        nameEn: 'USD Liquidity',
+        amount: '2,850 USD',
+        usd: '$2,850.00',
+        changeFa: '+۰.۳٪',
+        changeEn: '+0.3%',
+        positive: true,
+        color: '#2563EB',
+        bg: '#EFF6FF',
+      },
+    ];
+
     return (
-      <div className="w-full h-full text-[#111827] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#111827] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-3.5">
           {/* Header */}
           <div className="flex items-center justify-between pt-1">
             <div className="w-7 h-7 rounded-lg border border-[#E7EAF0] bg-white flex items-center justify-center text-[#697386] shadow-xs">
-              <ArrowLeft size={13} />
+              {isRTL ? <ArrowRight size={13} /> : <ArrowLeft size={13} />}
             </div>
             <strong className="text-xs font-black text-[#111827]">
-              {isPersianMode ? 'سبد دارایی‌ها' : 'Asset Portfolio'}
+              {isRTL ? 'سبد دارایی‌ها' : 'Asset Portfolio'}
             </strong>
             <div className="w-7 h-7 rounded-lg border border-[#E7EAF0] bg-white flex items-center justify-center text-[#2563EB] shadow-xs cursor-pointer">
               <Plus size={14} />
@@ -197,78 +268,35 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
           {/* Portfolio Total Valuation */}
           <div className="p-3.5 rounded-2xl bg-white border border-[#E8EBF1] shadow-xs space-y-1">
             <span className="text-[9px] text-[#8B94A4] block">
-              {isPersianMode ? 'ارزش کل دارایی‌ها' : 'Total Asset Valuation'}
+              {isRTL ? 'ارزش کل دارایی‌ها' : 'Total Asset Valuation'}
             </span>
             <div className="flex items-baseline justify-between">
-              <strong className="text-lg font-mono font-black text-[#111827]">$55,140.00</strong>
-              <span className="text-[8px] font-bold text-[#16A34A] bg-[#ECFDF3] px-2 py-0.5 rounded-md">
-                +4.8% (24h)
+              <strong className="text-lg font-mono font-black text-[#111827]">
+                {isRTL ? '$۵۵,۱۴۰.۰۰' : '$55,140.00'}
+              </strong>
+              <span className="text-[8px] font-bold text-[#16A34A] bg-[#ECFDF3] px-2 py-0.5 rounded-md font-mono">
+                {isRTL ? '+۴.۸٪ (۲۴س)' : '+4.8% (24h)'}
               </span>
             </div>
           </div>
 
           {/* Asset Rows */}
           <div className="space-y-2">
-            {[
-              {
-                symbol: '₿',
-                name: 'بیت‌کوین',
-                nameEn: 'Bitcoin',
-                amount: '0.4502 BTC',
-                usd: '$31,240',
-                change: '+2.4%',
-                positive: true,
-                color: '#F59E0B',
-                bg: '#FFF7ED',
-              },
-              {
-                symbol: 'Ξ',
-                name: 'اتریوم',
-                nameEn: 'Ethereum',
-                amount: '4.2000 ETH',
-                usd: '$8,650',
-                change: '-1.2%',
-                positive: false,
-                color: '#6366F1',
-                bg: '#EEF2FF',
-              },
-              {
-                symbol: '₮',
-                name: 'تتر استیبل‌کوین',
-                nameEn: 'Tether USD',
-                amount: '12,400 USDT',
-                usd: '$12,400',
-                change: '0.00%',
-                positive: true,
-                color: '#16A34A',
-                bg: '#ECFDF3',
-              },
-              {
-                symbol: '$',
-                name: 'دلار بانکی',
-                nameEn: 'USD Liquidity',
-                amount: '2,850 USD',
-                usd: '$2,850',
-                change: '+0.3%',
-                positive: true,
-                color: '#2563EB',
-                bg: '#EFF6FF',
-              },
-            ].map((asset, i) => (
+            {assets.map((asset, i) => (
               <div
                 key={i}
                 className="p-3 rounded-2xl bg-white border border-[#E8EBF1] shadow-xs flex items-center justify-between hover:border-[#CBD5E1] transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm"
+                    className="w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm shrink-0"
                     style={{ backgroundColor: asset.bg, color: asset.color }}
                   >
                     {asset.symbol}
                   </div>
                   <div>
                     <strong className="text-[10px] font-bold text-[#111827] block">
-                      {isPersianMode ? asset.name : asset.nameEn}
+                      {isRTL ? asset.nameFa : asset.nameEn}
                     </strong>
                     <span className="text-[7px] text-[#9AA2B0] font-mono block">
                       {asset.amount}
@@ -276,7 +304,7 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
                   </div>
                 </div>
 
-                <div className="text-left font-mono">
+                <div className={`${isRTL ? 'text-left' : 'text-right'} font-mono`}>
                   <strong className="text-[10px] font-black text-[#111827] block">
                     {asset.usd}
                   </strong>
@@ -284,7 +312,7 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
                     className="text-[8px] font-bold"
                     style={{ color: asset.positive ? '#16A34A' : '#EF4444' }}
                   >
-                    {asset.change}
+                    {isRTL ? asset.changeFa : asset.changeEn}
                   </small>
                 </div>
               </div>
@@ -300,13 +328,18 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
   // ----------------------------------------------------
   if (screenId === 'analytics') {
     return (
-      <div className="w-full h-full text-[#111827] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#111827] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-3">
           {/* Header */}
           <div className="flex items-center justify-between pt-1">
             <div className="w-7 h-7" />
             <strong className="text-xs font-black text-[#111827]">
-              {isPersianMode ? 'بودجه و تحلیل هزینه‌ها' : 'Expense & Budget Telemetry'}
+              {isRTL ? 'بودجه و تحلیل هزینه‌ها' : 'Expense & Budget Telemetry'}
             </strong>
             <div className="w-7 h-7" />
           </div>
@@ -348,10 +381,14 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className="text-[8px] text-[#9AA2B0]">مصرف این ماه</span>
-                <strong className="text-sm font-mono font-black text-[#111827]">12.4M</strong>
-                <span className="text-[7px] font-bold text-[#727B8B] bg-[#F3F5F8] px-1.5 py-0.5 rounded-md mt-0.5">
-                  آبان ۱۴۰۵
+                <span className="text-[8px] text-[#9AA2B0]">
+                  {isRTL ? 'مصرف این ماه' : 'Monthly Burn'}
+                </span>
+                <strong className="text-sm font-mono font-black text-[#111827]">
+                  {isRTL ? '۱۲.۴M' : '$4,280'}
+                </strong>
+                <span className="text-[7px] font-bold text-[#727B8B] bg-[#F3F5F8] px-1.5 py-0.5 rounded-md mt-0.5 font-mono">
+                  {isRTL ? 'آبان ۱۴۰۵' : 'Nov 2026'}
                 </span>
               </div>
             </div>
@@ -362,45 +399,57 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
             {/* Category 1 */}
             <div className="p-2.5 rounded-xl bg-white border border-[#E8EBF1] shadow-xs space-y-1">
               <div className="flex items-center justify-between text-[8px]">
-                <span className="font-bold text-[#737C8D]">مسکن و قبوض</span>
-                <strong className="font-mono text-[#111827]">5,200,000</strong>
+                <span className="font-bold text-[#737C8D]">
+                  {isRTL ? 'مسکن و قبوض شهری' : 'Housing & Utilities'}
+                </span>
+                <strong className="font-mono text-[#111827]">
+                  {isRTL ? '۵,۲۰۰,۰۰۰' : '$2,100.00'}
+                </strong>
               </div>
               <div className="w-full h-1.5 bg-[#EEF1F5] rounded-full overflow-hidden">
                 <div className="h-full bg-[#2563EB] rounded-full w-[65%]" />
               </div>
               <div className="flex justify-between text-[7px] text-[#A0A7B3]">
-                <span>۶۵٪ مصرف‌شده</span>
-                <span>۲,۰۰۰,۰۰۰ تومان مانده</span>
+                <span>{isRTL ? '۶۵٪ مصرف‌شده' : '65% Utilized'}</span>
+                <span>{isRTL ? '۲,۰۰۰,۰۰۰ تومان مانده' : '$1,100 remaining'}</span>
               </div>
             </div>
 
             {/* Category 2 */}
             <div className="p-2.5 rounded-xl bg-white border border-[#E8EBF1] shadow-xs space-y-1">
               <div className="flex items-center justify-between text-[8px]">
-                <span className="font-bold text-[#737C8D]">سرمایه‌گذاری و آموزش</span>
-                <strong className="font-mono text-[#111827]">3,100,000</strong>
+                <span className="font-bold text-[#737C8D]">
+                  {isRTL ? 'سرمایه‌گذاری و آموزش' : 'Investments & Education'}
+                </span>
+                <strong className="font-mono text-[#111827]">
+                  {isRTL ? '۳,۱۰۰,۰۰۰' : '$1,450.00'}
+                </strong>
               </div>
               <div className="w-full h-1.5 bg-[#EEF1F5] rounded-full overflow-hidden">
                 <div className="h-full bg-[#7C3AED] rounded-full w-[45%]" />
               </div>
               <div className="flex justify-between text-[7px] text-[#A0A7B3]">
-                <span>۴۵٪ مصرف‌شده</span>
-                <span>پایدار و بدون محدودیت</span>
+                <span>{isRTL ? '۴۵٪ مصرف‌شده' : '45% Utilized'}</span>
+                <span>{isRTL ? 'پایدار و بدون ریسک' : 'On-target & healthy'}</span>
               </div>
             </div>
 
             {/* Category 3 */}
             <div className="p-2.5 rounded-xl bg-white border border-[#E8EBF1] shadow-xs space-y-1">
               <div className="flex items-center justify-between text-[8px]">
-                <span className="font-bold text-[#737C8D]">خرید و سرگرمی</span>
-                <strong className="font-mono text-[#111827]">2,100,000</strong>
+                <span className="font-bold text-[#737C8D]">
+                  {isRTL ? 'خرید و سرگرمی' : 'Lifestyle & Dining'}
+                </span>
+                <strong className="font-mono text-[#111827]">
+                  {isRTL ? '۲,۱۰۰,۰۰۰' : '$730.00'}
+                </strong>
               </div>
               <div className="w-full h-1.5 bg-[#EEF1F5] rounded-full overflow-hidden">
                 <div className="h-full bg-[#F59E0B] rounded-full w-[32%]" />
               </div>
               <div className="flex justify-between text-[7px] text-[#A0A7B3]">
-                <span>۳۲٪ مصرف‌شده</span>
-                <span>۳,۹۰۰,۰۰۰ تومان مانده</span>
+                <span>{isRTL ? '۳۲٪ مصرف‌شده' : '32% Utilized'}</span>
+                <span>{isRTL ? '۳,۹۰۰,۰۰۰ تومان مانده' : '$1,500 remaining'}</span>
               </div>
             </div>
           </div>
@@ -413,7 +462,12 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
   // CHAPTER 04: ADVISOR & SECURITY (AI Agent & Smart Cards)
   // ----------------------------------------------------
   return (
-    <div className="w-full h-full text-[#111827] font-persian flex flex-col justify-between select-none">
+    <div
+      className={`w-full h-full text-[#111827] flex flex-col justify-between select-none ${
+        isRTL ? 'font-persian text-right' : 'font-sans text-left'
+      }`}
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       <div className="space-y-3">
         {/* Zarvand Midnight Smart Card */}
         <div className="relative overflow-hidden p-3.5 rounded-2xl bg-gradient-to-br from-[#172033] via-[#25334C] to-[#111827] text-white shadow-[0_12px_22px_rgba(15,23,42,0.2)]">
@@ -429,11 +483,11 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
             </strong>
           </div>
 
-          <div className="my-2.5 font-mono text-xs tracking-wider text-left font-bold text-[#F1F5F9]">
+          <div className="my-2.5 font-mono text-xs tracking-wider text-left font-bold text-[#F1F5F9]" dir="ltr">
             5022  2910  8492  0014
           </div>
 
-          <div className="flex items-center justify-between text-[7px] text-[#9CA8BA]">
+          <div className="flex items-center justify-between text-[7px] text-[#9CA8BA]" dir="ltr">
             <div>
               <span className="block text-[6px]">CARD HOLDER</span>
               <strong className="text-white text-[8px]">ERFAN MOEIN</strong>
@@ -451,12 +505,22 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
             <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-[#7C3AED] to-[#A78BFA] text-white flex items-center justify-center">
               <Sparkles size={11} />
             </div>
-            <span className="text-[8px] font-bold text-[#111827]">مشاور هوشمند زروند</span>
+            <span className="text-[8px] font-bold text-[#111827]">
+              {isRTL ? 'مشاور هوشمند زروند' : 'Zarvand AI Wealth Advisor'}
+            </span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] ml-auto animate-pulse" />
           </div>
 
           <div className="p-2 rounded-lg bg-[#F8FAFC] border border-[#E8EDF4] text-[8px] leading-relaxed text-[#334155]">
-            تحلیل الگوی هزینه‌ها نشان می‌دهد این ماه <strong>۱۵٪</strong> در هزینه‌ها صرفه‌جویی شده. پیشنهاد: انتقال ۱.۵M به صندوق درآمد ثابت با سود <strong>۲۴٪</strong> سالانه.
+            {isRTL ? (
+              <>
+                تحلیل الگوی هزینه‌ها نشان می‌دهد این ماه <strong>۱۵٪</strong> در هزینه‌ها صرفه‌جویی شده. پیشنهاد: انتقال ۱.۵M به صندوق درآمد ثابت با سود <strong>۲۴٪</strong> سالانه.
+              </>
+            ) : (
+              <>
+                Cash-flow analysis confirms a <strong>15%</strong> surplus this cycle. Recommended: Allocate $1,500 to the fixed-yield treasury vault earning <strong>7.2% APY</strong>.
+              </>
+            )}
           </div>
         </div>
 
@@ -472,9 +536,11 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
               </div>
               <div>
                 <strong className="text-[8px] font-bold text-[#111827] block">
-                  پرداخت اینترنتی
+                  {isRTL ? 'پرداخت اینترنتی' : 'Online E-Commerce Payments'}
                 </strong>
-                <span className="text-[6px] text-[#9AA2B0]">خرید از درگاه‌های آنلاین</span>
+                <span className="text-[6px] text-[#9AA2B0]">
+                  {isRTL ? 'خرید از درگاه‌های آنلاین' : 'Permit domestic & global online checkouts'}
+                </span>
               </div>
             </div>
             <div
@@ -484,7 +550,7 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
             >
               <div
                 className={`w-3 h-3 rounded-full bg-white shadow-xs absolute top-0.5 transition-transform ${
-                  onlinePay ? 'right-0.5' : 'left-0.5'
+                  onlinePay ? (isRTL ? 'left-0.5' : 'right-0.5') : (isRTL ? 'right-0.5' : 'left-0.5')
                 }`}
               />
             </div>
@@ -500,9 +566,11 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
               </div>
               <div>
                 <strong className="text-[8px] font-bold text-[#111827] block">
-                  مسدودسازی موقت
+                  {isRTL ? 'مسدودسازی موقت' : 'Instant Freeze Protection'}
                 </strong>
-                <span className="text-[6px] text-[#9AA2B0]">غیرفعال‌سازی فوری کارت</span>
+                <span className="text-[6px] text-[#9AA2B0]">
+                  {isRTL ? 'غیرفعال‌سازی فوری کارت' : 'Lock card instantly across all networks'}
+                </span>
               </div>
             </div>
             <div
@@ -512,7 +580,7 @@ export const ZarvandScreen: React.FC<ZarvandScreenProps> = ({
             >
               <div
                 className={`w-3 h-3 rounded-full bg-white shadow-xs absolute top-0.5 transition-transform ${
-                  tempFreeze ? 'right-0.5' : 'left-0.5'
+                  tempFreeze ? (isRTL ? 'left-0.5' : 'right-0.5') : (isRTL ? 'right-0.5' : 'left-0.5')
                 }`}
               />
             </div>

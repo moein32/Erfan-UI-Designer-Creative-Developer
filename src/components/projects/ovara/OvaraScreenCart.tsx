@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Trash2, Plus, Minus, Tag, Zap, CreditCard, ShieldCheck, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { Trash2, Plus, Minus, Tag, CreditCard, CheckCircle2 } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface OvaraScreenProps {
   onNavigateToProfile?: () => void;
@@ -10,12 +11,14 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
   onNavigateToProfile,
   onBack,
 }) => {
+  const { isRTL, formatNumber } = useLanguage();
+
   const [items, setItems] = useState([
     {
       id: 1,
-      name: 'iPhone 16 Pro Max 256GB',
-      variant: 'تیتانیوم طبیعی · گارانتی ۲۴ ماهه',
-      price: 154900000,
+      name: isRTL ? 'iPhone 16 Pro Max 256GB' : 'iPhone 16 Pro Max 256GB',
+      variant: isRTL ? 'تیتانیوم طبیعی · گارانتی ۲۴ ماهه' : 'Natural Titanium · 24-Mo Warranty',
+      price: isRTL ? 154900000 : 1199,
       qty: 1,
       icon: '📱',
       colorBg: 'bg-[#ECEAE8]',
@@ -23,8 +26,8 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
     {
       id: 2,
       name: 'AirPods Max USB-C',
-      variant: 'Midnight · کیس مسافرتی هوشمند',
-      price: 32700000,
+      variant: isRTL ? 'Midnight · کیس مسافرتی هوشمند' : 'Midnight · Smart Travel Case',
+      price: isRTL ? 32700000 : 549,
       qty: 1,
       icon: '🎧',
       colorBg: 'bg-[#1E2026] text-white',
@@ -32,8 +35,8 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
     {
       id: 3,
       name: 'Aesop Tacit Eau de Parfum',
-      variant: '50ml · بسته بندی اختصاصی هدیه',
-      price: 5250000,
+      variant: isRTL ? '50ml · بسته‌بندی هدیه اختصاصی' : '50ml · Bespoke Gift Packaging',
+      price: isRTL ? 5250000 : 145,
       qty: 1,
       icon: '🌿',
       colorBg: 'bg-[#EAF9F5]',
@@ -43,7 +46,6 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
   const [promoCode, setPromoCode] = useState('');
   const [promoApplied, setPromoApplied] = useState(false);
   const [deliveryMethod, setDeliveryMethod] = useState<'express' | 'standard'>('express');
-  const [paymentMethod, setPaymentMethod] = useState<'shetab' | 'crypto'>('shetab');
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
 
@@ -62,7 +64,7 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
   };
 
   const rawSubtotal = items.reduce((acc, it) => acc + it.price * it.qty, 0);
-  const discount = promoApplied ? 7850000 : 0;
+  const discount = promoApplied ? (isRTL ? 7850000 : 150) : 0;
   const finalTotal = rawSubtotal - discount;
 
   const handleApplyPromo = () => {
@@ -82,21 +84,35 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
     }, 900);
   };
 
+  const formatCurrency = (val: number) => {
+    if (isRTL) {
+      return `${val.toLocaleString('fa-IR')} تومان`;
+    }
+    return `$${val.toLocaleString('en-US')}`;
+  };
+
   return (
-    <div className="flex flex-col min-h-full pb-20 font-persian text-[#111116] select-none text-right" dir="rtl">
+    <div
+      className={`flex flex-col min-h-full pb-20 text-[#111116] select-none ${
+        isRTL ? 'font-persian text-right' : 'font-sans text-left'
+      }`}
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       {/* Top Header */}
       <div className="flex items-center justify-between pt-1 pb-2">
         <div className="flex items-center gap-2">
-          <h2 className="text-sm font-black tracking-tight text-[#111116]">سبد خرید</h2>
+          <h2 className="text-sm font-black tracking-tight text-[#111116]">
+            {isRTL ? 'سبد خرید' : 'Shopping Bag'}
+          </h2>
           <span className="px-2 py-0.5 bg-[#FFF0ED] text-[#FF5C39] text-[9px] font-black rounded-full">
-            {items.length} کالا
+            {isRTL ? `${formatNumber(items.length)} کالا` : `${items.length} Items`}
           </span>
         </div>
         <button
           onClick={onBack}
           className="text-[9px] text-[#7667F4] font-bold hover:underline"
         >
-          ادامه خرید
+          {isRTL ? 'ادامه خرید' : 'Continue Shopping'}
         </button>
       </div>
 
@@ -105,9 +121,13 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
           <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-3 animate-bounce">
             <CheckCircle2 size={32} />
           </div>
-          <h3 className="text-sm font-black text-[#111116]">سفارش شما با موفقیت ثبت شد!</h3>
+          <h3 className="text-sm font-black text-[#111116]">
+            {isRTL ? 'سفارش شما با موفقیت ثبت شد!' : 'Order Placed Successfully!'}
+          </h3>
           <p className="text-[10px] text-[#858791] mt-1 max-w-[200px]">
-            کد سفارش: #OV-84219 · در حال هدایت به بخش رهگیری سفارشات...
+            {isRTL
+              ? 'کد سفارش: #OV-84219 · در حال هدایت به بخش رهگیری سفارشات...'
+              : 'Order Ref #OV-84219 · Redirecting to real-time tracker...'}
           </p>
         </div>
       ) : (
@@ -132,8 +152,7 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
                   
                   <div className="flex items-center justify-between mt-1.5">
                     <span className="text-[10px] font-black text-[#111116]">
-                      {(item.price * item.qty).toLocaleString('fa-IR')}{' '}
-                      <small className="text-[7px] text-[#858791] font-normal">تومان</small>
+                      {formatCurrency(item.price * item.qty)}
                     </span>
 
                     {/* Quantity Stepper */}
@@ -144,7 +163,9 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
                       >
                         {item.qty === 1 ? <Trash2 size={10} className="text-rose-500" /> : <Minus size={10} />}
                       </button>
-                      <span className="w-4 text-center text-[9px] font-black">{item.qty}</span>
+                      <span className="w-4 text-center text-[9px] font-black">
+                        {isRTL ? formatNumber(item.qty) : item.qty}
+                      </span>
                       <button
                         onClick={() => updateQty(item.id, 1)}
                         className="w-5 h-5 rounded flex items-center justify-center text-[#555] hover:bg-[#F0F0F0] active:scale-90 text-[10px]"
@@ -161,10 +182,10 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
           {/* Promo Code Input */}
           <div className="mt-3">
             <div className="flex items-center gap-1.5 bg-[#F6F6F8] border border-[#EDEDF1] rounded-2xl p-1 shadow-2xs">
-              <Tag size={13} className="text-[#999] mr-2" />
+              <Tag size={13} className={`text-[#999] ${isRTL ? 'mr-2' : 'ml-2'}`} />
               <input
                 type="text"
-                placeholder="کد تخفیف (مثال: OVARA2026)"
+                placeholder={isRTL ? 'کد تخفیف (مثال: OVARA2026)' : 'Promo Code (e.g. VIP2026)'}
                 value={promoCode}
                 onChange={(e) => setPromoCode(e.target.value)}
                 disabled={promoApplied}
@@ -179,18 +200,24 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
                     : 'bg-[#111116] text-white hover:bg-[#333]'
                 }`}
               >
-                {promoApplied ? 'اعمال شد ✓' : 'ثبت کد'}
+                {promoApplied
+                  ? (isRTL ? 'اعمال شد ✓' : 'Applied ✓')
+                  : (isRTL ? 'ثبت کد' : 'Apply')}
               </button>
             </div>
           </div>
 
           {/* Delivery Method Selection */}
           <div className="mt-3.5 pt-3 border-t border-[#ECECF1]">
-            <span className="text-[10px] font-bold text-[#111116] block mb-1.5">روش ارسال:</span>
+            <span className="text-[10px] font-bold text-[#111116] block mb-1.5">
+              {isRTL ? 'روش ارسال:' : 'Delivery Method:'}
+            </span>
             <div className="grid grid-cols-2 gap-1.5">
               <button
                 onClick={() => setDeliveryMethod('express')}
-                className={`p-2 rounded-xl border text-right transition-all flex items-start gap-1.5 ${
+                className={`p-2 rounded-xl border ${
+                  isRTL ? 'text-right' : 'text-left'
+                } transition-all flex items-start gap-1.5 ${
                   deliveryMethod === 'express'
                     ? 'border-[#7667F4] bg-[#F0EFFF] text-[#7667F4]'
                     : 'border-[#ECECF1] bg-[#F9F9FB] text-[#666]'
@@ -200,14 +227,20 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
                   ⚡
                 </div>
                 <div>
-                  <div className="text-[9px] font-black">ارسال اکسپرس</div>
-                  <div className="text-[7px] text-emerald-600 font-bold">تحویل فردا · رایگان</div>
+                  <div className="text-[9px] font-black">
+                    {isRTL ? 'ارسال اکسپرس' : 'Express Courier'}
+                  </div>
+                  <div className="text-[7px] text-emerald-600 font-bold">
+                    {isRTL ? 'تحویل فردا · رایگان' : 'Next-Day · Free VIP'}
+                  </div>
                 </div>
               </button>
 
               <button
                 onClick={() => setDeliveryMethod('standard')}
-                className={`p-2 rounded-xl border text-right transition-all flex items-start gap-1.5 ${
+                className={`p-2 rounded-xl border ${
+                  isRTL ? 'text-right' : 'text-left'
+                } transition-all flex items-start gap-1.5 ${
                   deliveryMethod === 'standard'
                     ? 'border-[#7667F4] bg-[#F0EFFF] text-[#7667F4]'
                     : 'border-[#ECECF1] bg-[#F9F9FB] text-[#666]'
@@ -217,8 +250,12 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
                   📦
                 </div>
                 <div>
-                  <div className="text-[9px] font-black">ارسال سفارشی</div>
-                  <div className="text-[7px] text-[#888]">۲ الی ۳ روز کاری</div>
+                  <div className="text-[9px] font-black">
+                    {isRTL ? 'ارسال سفارشی' : 'Standard Shipping'}
+                  </div>
+                  <div className="text-[7px] text-[#888]">
+                    {isRTL ? '۲ الی ۳ روز کاری' : '2-3 Business Days'}
+                  </div>
                 </div>
               </button>
             </div>
@@ -227,23 +264,29 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
           {/* Financial Breakdown Card */}
           <div className="mt-3.5 bg-[#F6F6F8] border border-[#EDEDF1] rounded-2xl p-3 space-y-1.5 text-[9px]">
             <div className="flex items-center justify-between text-[#666]">
-              <span>مجموع قیمت کالاها ({items.length})</span>
-              <span className="font-bold">{rawSubtotal.toLocaleString('fa-IR')} تومان</span>
+              <span>
+                {isRTL
+                  ? `مجموع قیمت کالاها (${formatNumber(items.length)})`
+                  : `Cart Subtotal (${items.length})`}
+              </span>
+              <span className="font-bold">{formatCurrency(rawSubtotal)}</span>
             </div>
             {promoApplied && (
               <div className="flex items-center justify-between text-emerald-600 font-bold">
-                <span>تخفیف ویژه جشنواره OVARA</span>
-                <span>− {discount.toLocaleString('fa-IR')} تومان</span>
+                <span>{isRTL ? 'تخفیف ویژه جشنواره OVARA' : 'OVARA VIP Pass Voucher'}</span>
+                <span>− {formatCurrency(discount)}</span>
               </div>
             )}
             <div className="flex items-center justify-between text-[#666]">
-              <span>هزینه بسته‌بندی و ارسال VIP</span>
-              <span className="text-emerald-600 font-bold">رایگان (هدیه اعضا)</span>
+              <span>{isRTL ? 'هزینه بسته‌بندی و ارسال VIP' : 'Insured Atelier Handling'}</span>
+              <span className="text-emerald-600 font-bold">
+                {isRTL ? 'رایگان (هدیه اعضا)' : 'Complimentary Free'}
+              </span>
             </div>
             <div className="pt-2 border-t border-[#ECECF1] flex items-center justify-between text-[#111116] font-black text-[11px]">
-              <span>مبلغ قابل پرداخت</span>
+              <span>{isRTL ? 'مبلغ قابل پرداخت' : 'Total Amount'}</span>
               <span className="text-[#FF5C39] text-xs">
-                {finalTotal.toLocaleString('fa-IR')} تومان
+                {formatCurrency(finalTotal)}
               </span>
             </div>
           </div>
@@ -258,12 +301,20 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
               {isProcessing ? (
                 <div className="flex items-center gap-2">
                   <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>در حال اتصال به درگاه امن بانکی...</span>
+                  <span>
+                    {isRTL
+                      ? 'در حال اتصال به درگاه امن بانکی...'
+                      : 'Connecting to Secure Checkout Gate...'}
+                  </span>
                 </div>
               ) : (
                 <>
                   <CreditCard size={14} />
-                  <span>پرداخت و ثبت نهایی · {finalTotal.toLocaleString('fa-IR')} تومان</span>
+                  <span>
+                    {isRTL
+                      ? `پرداخت و ثبت نهایی · ${formatCurrency(finalTotal)}`
+                      : `Place Order · ${formatCurrency(finalTotal)}`}
+                  </span>
                 </>
               )}
             </button>
@@ -273,3 +324,4 @@ export const OvaraScreenCart: React.FC<OvaraScreenProps> = ({
     </div>
   );
 };
+

@@ -2,12 +2,12 @@ import React from 'react';
 import { ZarvandScreen } from './ZarvandScreen';
 import { Home, Wallet, BarChart3, Bot, Battery } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface ZarvandPhoneSceneProps {
   activeChapterIndex: number;
   onChapterChange?: (index: number) => void;
   isInteractive?: boolean;
-  isPersianMode?: boolean;
 }
 
 const CHAPTER_SCREENS: ('liquidity' | 'portfolio' | 'analytics' | 'advisor')[] = [
@@ -21,22 +21,36 @@ export const ZarvandPhoneScene: React.FC<ZarvandPhoneSceneProps> = ({
   activeChapterIndex,
   onChapterChange,
   isInteractive = true,
-  isPersianMode = false,
 }) => {
+  const { isRTL, formatNumber } = useLanguage();
   const currentScreenId = CHAPTER_SCREENS[activeChapterIndex] || 'liquidity';
+
+  const tabs = isRTL
+    ? [
+        { idx: 0, label: 'خزانه', icon: Home },
+        { idx: 1, label: 'سبد دارایی', icon: Wallet },
+        { idx: 2, label: 'تحلیل مالی', icon: BarChart3 },
+        { idx: 3, label: 'دستیار هوشمند', icon: Bot },
+      ]
+    : [
+        { idx: 0, label: 'Liquidity', icon: Home },
+        { idx: 1, label: 'Portfolio', icon: Wallet },
+        { idx: 2, label: 'Analytics', icon: BarChart3 },
+        { idx: 3, label: 'Advisor', icon: Bot },
+      ];
 
   return (
     <div className="relative flex flex-col items-center select-none">
       {/* Device Header Tag */}
       <div className="w-[320px] sm:w-[340px] flex items-center justify-between px-2 mb-3 text-xs font-mono text-[#8B94A4]">
         <span className="font-bold text-[#111827]">
-          0{activeChapterIndex + 1} / 04
+          {isRTL ? `۰${formatNumber(activeChapterIndex + 1)} / ۰۴` : `0${activeChapterIndex + 1} / 04`}
         </span>
         <span className="uppercase tracking-widest text-[10px] text-[#2563EB] font-bold">
-          {activeChapterIndex === 0 && '01 / LIQUIDITY'}
-          {activeChapterIndex === 1 && '02 / PORTFOLIO'}
-          {activeChapterIndex === 2 && '03 / ANALYTICS'}
-          {activeChapterIndex === 3 && '04 / ADVISOR & SECURITY'}
+          {activeChapterIndex === 0 && (isRTL ? '۰۱ / نقدینگی و خزانه' : '01 / LIQUIDITY')}
+          {activeChapterIndex === 1 && (isRTL ? '۰۲ / سبد دارایی‌ها' : '02 / PORTFOLIO')}
+          {activeChapterIndex === 2 && (isRTL ? '۰۳ / تحلیل و تلمتری' : '03 / ANALYTICS')}
+          {activeChapterIndex === 3 && (isRTL ? '۰۴ / مشاور و امنیت' : '04 / ADVISOR & SECURITY')}
         </span>
       </div>
 
@@ -52,7 +66,7 @@ export const ZarvandPhoneScene: React.FC<ZarvandPhoneSceneProps> = ({
         <div className="relative w-full h-full rounded-[44px] bg-[#F8FAFD] overflow-hidden flex flex-col border-[5px] border-[#111827] shadow-inner">
           {/* Status Bar & Dynamic Island */}
           <div className="relative z-50 h-11 px-6 pt-2 flex items-center justify-between text-[11px] font-bold font-mono text-[#111827]">
-            <span>9:41</span>
+            <span>{isRTL ? '۹:۴۱' : '9:41'}</span>
             {/* Dynamic Island */}
             <div className="absolute left-1/2 -translate-x-1/2 top-2.5 w-24 h-6 rounded-full bg-[#08090B] flex items-center justify-end px-2 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
@@ -74,19 +88,17 @@ export const ZarvandPhoneScene: React.FC<ZarvandPhoneSceneProps> = ({
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="h-full"
               >
-                <ZarvandScreen screenId={currentScreenId} isPersianMode={isPersianMode} />
+                <ZarvandScreen screenId={currentScreenId} />
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Bottom App Navigation Dock */}
-          <div className="absolute bottom-0 inset-x-0 h-16 bg-[#FFFFFF]/92 backdrop-blur-md border-t border-[#E7EAF0] flex items-center justify-around px-3 z-40">
-            {[
-              { idx: 0, label: 'خانه', icon: Home },
-              { idx: 1, label: 'دارایی‌ها', icon: Wallet },
-              { idx: 2, label: 'تحلیل', icon: BarChart3 },
-              { idx: 3, label: 'دستیار', icon: Bot },
-            ].map((tab) => {
+          <div
+            className="absolute bottom-0 inset-x-0 h-16 bg-[#FFFFFF]/92 backdrop-blur-md border-t border-[#E7EAF0] flex items-center justify-around px-3 z-40"
+            dir={isRTL ? 'rtl' : 'ltr'}
+          >
+            {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeChapterIndex === tab.idx;
               return (
@@ -107,9 +119,10 @@ export const ZarvandPhoneScene: React.FC<ZarvandPhoneSceneProps> = ({
           </div>
 
           {/* Home indicator bar */}
-          <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-28 h-1 rounded-full bg-[#111827] opacity-80 z-50" />
+          <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-28 h-1 rounded-full bg-[#111827] opacity-80 z-50 pointer-events-none" />
         </div>
       </div>
     </div>
   );
 };
+

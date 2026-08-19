@@ -3,29 +3,25 @@ import {
   Sparkles,
   Check,
   Calendar,
-  Layers,
   Plus,
   Search,
   SlidersHorizontal,
   FileText,
-  Brain,
   Clock,
   ArrowLeft,
-  ChevronRight,
-  TrendingUp,
+  ArrowRight,
   CheckCircle2,
-  Circle,
-  BarChart3,
-  Flame,
   Zap,
 } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface ArvenScreenProps {
   screenId: 'think' | 'organize' | 'plan' | 'create';
-  isPersianMode?: boolean;
 }
 
-export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMode = false }) => {
+export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId }) => {
+  const { isRTL, formatNumber } = useLanguage();
+
   // Screen 1 (THINK) State
   const [completedPriorities, setCompletedPriorities] = useState<number[]>([0]);
 
@@ -55,21 +51,72 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
   // CHAPTER 01: THINK (AI Workspace & Command Center)
   // ----------------------------------------------------
   if (screenId === 'think') {
+    const priorities = isRTL
+      ? [
+          {
+            title: 'طراحی معماری سیستم Arven',
+            tag: 'طراحی رابط و تجربه کاربری',
+            time: '۱۰:۳۰',
+          },
+          {
+            title: 'بررسی گزارش عملکرد و تله‌متری',
+            tag: 'تحلیل داده و شاخص‌ها',
+            time: '۱۳:۰۰',
+          },
+          {
+            title: 'جلسه هماهنگی تیم محصول',
+            tag: 'گوگل میت · آنلاین',
+            time: '۱۶:۳۰',
+          },
+        ]
+      : [
+          {
+            title: 'Design Arven Core System Architecture',
+            tag: 'UI/UX Design Tokens',
+            time: '10:30 AM',
+          },
+          {
+            title: 'Review Telemetry & Performance Report',
+            tag: 'Analytics Engine',
+            time: '1:00 PM',
+          },
+          {
+            title: 'Product Design Sync & Review',
+            tag: 'Google Meet · Live',
+            time: '4:30 PM',
+          },
+        ];
+
+    const quickCommands = isRTL
+      ? [
+          { title: 'برنامه‌ریزی روز', sub: 'بلاک‌بندی زمانی هوشمند', icon: Calendar },
+          { title: 'خلاصه هوشمند', sub: 'جمع‌بندی داده‌های کاری', icon: Sparkles },
+        ]
+      : [
+          { title: 'Plan Day', sub: 'Smart Time Blocking', icon: Calendar },
+          { title: 'AI Summary', sub: 'Context Digest', icon: Sparkles },
+        ];
+
     return (
-      <div className="w-full h-full text-[#111426] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#111426] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-4">
           {/* Hero Greeting */}
           <div className="flex items-center justify-between pt-1">
             <div>
               <span className="text-[11px] font-medium text-[#73788C]">
-                {isPersianMode ? 'صبح بخیر' : 'Good Morning'}
+                {isRTL ? 'صبح بخیر' : 'Good Morning,'}
               </span>
               <h2 className="text-xl font-black tracking-tight text-[#111426] mt-0.5">
-                {isPersianMode ? 'عرفان عزیز' : 'Erfan Moein'}
+                {isRTL ? 'عرفان عزیز' : 'Erfan Moein'}
               </h2>
             </div>
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#5146E5] to-[#8B5CF6] text-white flex items-center justify-center font-bold text-xs shadow-md shadow-[#5146E5]/25">
-              EM
+              {isRTL ? 'ع' : 'EM'}
             </div>
           </div>
 
@@ -89,7 +136,7 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
               </div>
 
               <p className="text-[11px] leading-relaxed font-medium text-white/95 max-w-[240px]">
-                {isPersianMode
+                {isRTL
                   ? 'برنامه کاری امروز با ۹۰ دقیقه تمرکز عمیق روی پروژه بازطراحی بهینه‌سازی شد.'
                   : 'Daily workflow synthesized with a 90-min deep focus block for system design.'}
               </p>
@@ -97,10 +144,10 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
               <div className="flex items-center gap-2 pt-1">
                 <div className="px-2.5 py-1 rounded-lg bg-white/20 text-[9px] font-bold flex items-center gap-1.5 backdrop-blur-xs">
                   <Zap size={11} className="text-yellow-300" />
-                  <span>92% Focus Score</span>
+                  <span>{isRTL ? 'امتیاز تمرکز ۹۲٪' : '92% Focus Score'}</span>
                 </div>
                 <span className="text-[9px] text-white/70">
-                  {isPersianMode ? '۳ وظیفه باقی‌مانده' : '3 priority tasks'}
+                  {isRTL ? '۳ وظیفه با اولویت بالا' : '3 priority tasks'}
                 </span>
               </div>
             </div>
@@ -110,31 +157,15 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs px-1">
               <span className="font-bold text-[#111426]">
-                {isPersianMode ? 'اولویت‌های امروز' : "Today's Priorities"}
+                {isRTL ? 'اولویت‌های امروز' : "Today's Priorities"}
               </span>
               <span className="text-[10px] text-[#5146E5] font-bold cursor-pointer">
-                {isPersianMode ? 'مشاهده همه' : 'View all'}
+                {isRTL ? 'مشاهده همه' : 'View all'}
               </span>
             </div>
 
             <div className="bg-white rounded-2xl border border-[#E7E9F1] shadow-xs divide-y divide-[#F0F2F8] overflow-hidden">
-              {[
-                {
-                  title: isPersianMode ? 'طراحی معماری سیستم Arven' : 'Design Arven Core System Architecture',
-                  tag: 'UI/UX Design',
-                  time: '10:30',
-                },
-                {
-                  title: isPersianMode ? 'بررسی گزارش عملکرد و تحلیل داده' : 'Review Telemetry & Performance Report',
-                  tag: 'Analytics',
-                  time: '13:00',
-                },
-                {
-                  title: isPersianMode ? 'جلسه هماهنگی تیم محصول' : 'Product Design Sync & Review',
-                  tag: 'Google Meet',
-                  time: '16:30',
-                },
-              ].map((item, idx) => {
+              {priorities.map((item, idx) => {
                 const isChecked = completedPriorities.includes(idx);
                 return (
                   <div
@@ -172,10 +203,7 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
 
           {/* Quick AI Commands Grid */}
           <div className="grid grid-cols-2 gap-2 pt-1">
-            {[
-              { title: isPersianMode ? 'برنامه‌ریزی روز' : 'Plan Day', sub: 'Smart Time Blocking', icon: Calendar },
-              { title: isPersianMode ? 'خلاصه هوشمند' : 'AI Summary', sub: 'Context Digest', icon: Sparkles },
-            ].map((cmd, i) => {
+            {quickCommands.map((cmd, i) => {
               const Icon = cmd.icon;
               return (
                 <div
@@ -202,17 +230,46 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
   // CHAPTER 02: ORGANIZE (Smart Tasks & Project Engine)
   // ----------------------------------------------------
   if (screenId === 'organize') {
+    const segments = isRTL
+      ? [
+          { id: 'today', label: 'امروز' },
+          { id: 'upcoming', label: 'آینده' },
+          { id: 'priority', label: 'اولویت' },
+        ]
+      : [
+          { id: 'today', label: 'Today' },
+          { id: 'upcoming', label: 'Upcoming' },
+          { id: 'priority', label: 'Priority' },
+        ];
+
+    const tasks = isRTL
+      ? [
+          { id: 101, title: 'طراحی ساختار داشبورد', tag: 'تکمیل شد', done: true },
+          { id: 102, title: 'سیستم کارت‌ها و توکن‌های بصری', tag: 'امروز · حیاتی', priority: 'high' },
+          { id: 103, title: 'ساخت پروتوتایپ تعاملی فاز ۱', tag: 'فردا · متوسط', priority: 'medium' },
+        ]
+      : [
+          { id: 101, title: 'Dashboard UX Architecture', tag: 'Done', done: true },
+          { id: 102, title: 'Design Token & Component Library', tag: 'Today · Critical', priority: 'high' },
+          { id: 103, title: 'Interactive Motion Prototype', tag: 'Tomorrow · Medium', priority: 'medium' },
+        ];
+
     return (
-      <div className="w-full h-full text-[#111426] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#111426] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-3.5">
           {/* Top Bar */}
           <div className="flex items-center justify-between pt-1">
             <div>
               <h2 className="text-lg font-black text-[#111426]">
-                {isPersianMode ? 'وظایف هوشمند' : 'Smart Tasks'}
+                {isRTL ? 'وظایف هوشمند' : 'Smart Tasks'}
               </h2>
               <span className="text-[10px] text-[#73788C]">
-                {isPersianMode ? '۱۲ کار فعال در جریان' : '12 active tasks in queue'}
+                {isRTL ? '۱۲ کار فعال در جریان' : '12 active tasks in queue'}
               </span>
             </div>
             <button className="w-8 h-8 rounded-xl bg-white border border-[#E7E9F1] shadow-xs text-[#5146E5] flex items-center justify-center">
@@ -222,11 +279,7 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
 
           {/* Segmented Filter */}
           <div className="grid grid-cols-3 gap-1 p-1 bg-[#ECEEF5] rounded-xl text-[9.5px] font-bold text-center">
-            {[
-              { id: 'today', label: isPersianMode ? 'امروز' : 'Today' },
-              { id: 'upcoming', label: isPersianMode ? 'آینده' : 'Upcoming' },
-              { id: 'priority', label: isPersianMode ? 'اولویت' : 'Priority' },
-            ].map((seg) => (
+            {segments.map((seg) => (
               <button
                 key={seg.id}
                 onClick={() => setActiveSegment(seg.id as any)}
@@ -251,16 +304,20 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
               <span className="text-[8px] text-[#73788C]">Auto-Decompose</span>
             </div>
             <p className="text-[9.5px] leading-relaxed text-[#555B70]">
-              {isPersianMode
+              {isRTL
                 ? 'پروژه بزرگ «طراحی Prototype» به ۳ زیروظیفه قابل انجام در ۴۵ دقیقه تقسیم شد.'
                 : 'Complex task decomposed into 3 bite-sized actionable micro-tasks.'}
             </p>
             <div className="flex items-center justify-between p-2 rounded-xl bg-[#5146E5]/6 text-[8.5px] font-bold text-[#5146E5]">
               <span className="flex items-center gap-1.5">
                 <CheckCircle2 size={12} />
-                {isPersianMode ? 'ایجاد خودکار ۳ مرحله کاری' : 'Generated 3 sub-steps'}
+                {isRTL ? 'ایجاد خودکار ۳ مرحله کاری' : 'Generated 3 sub-steps'}
               </span>
-              <ArrowLeft size={11} className="rotate-180" />
+              {isRTL ? (
+                <ArrowLeft size={11} className="rotate-180" />
+              ) : (
+                <ArrowRight size={11} />
+              )}
             </div>
           </div>
 
@@ -270,10 +327,12 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#5146E5]" />
                 <span className="text-[11px] font-extrabold text-[#111426]">
-                  {isPersianMode ? 'پروژه طراحی Arven' : 'Arven Product Design'}
+                  {isRTL ? 'پروژه طراحی Arven' : 'Arven Product Design'}
                 </span>
               </div>
-              <span className="text-[9px] font-mono font-bold text-[#5146E5]">72%</span>
+              <span className="text-[9px] font-mono font-bold text-[#5146E5]">
+                {isRTL ? '۷۲٪' : '72%'}
+              </span>
             </div>
 
             {/* Progress Bar */}
@@ -283,11 +342,7 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
 
             {/* Task List */}
             <div className="space-y-2 pt-1 divide-y divide-[#F0F2F8]">
-              {[
-                { id: 101, title: 'طراحی ساختار داشبورد', tag: 'تکمیل شد', done: true },
-                { id: 102, title: 'سیستم کارت‌ها و Tokenها', tag: 'امروز • مهم', priority: 'high' },
-                { id: 103, title: 'ساخت Prototype تعاملی', tag: 'فردا • متوسط', priority: 'medium' },
-              ].map((t) => {
+              {tasks.map((t) => {
                 const isChecked = completedTasks.includes(t.id);
                 return (
                   <div
@@ -316,12 +371,12 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
 
                     {t.priority === 'high' && (
                       <span className="px-1.5 py-0.5 rounded bg-rose-50 text-rose-600 text-[7.5px] font-bold">
-                        HIGH
+                        {isRTL ? 'فوری' : 'HIGH'}
                       </span>
                     )}
                     {t.priority === 'medium' && (
                       <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[7.5px] font-bold">
-                        MED
+                        {isRTL ? 'متوسط' : 'MED'}
                       </span>
                     )}
                   </div>
@@ -338,17 +393,92 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
   // CHAPTER 03: PLAN (Smart Calendar & Focus Timeline)
   // ----------------------------------------------------
   if (screenId === 'plan') {
+    const days = isRTL
+      ? [
+          { day: 'چهارشنبه', date: 22 },
+          { day: 'پنجشنبه', date: 23 },
+          { day: 'جمعه', date: 24 },
+          { day: 'شنبه', date: 25 },
+          { day: 'یکشنبه', date: 26 },
+        ]
+      : [
+          { day: 'Wed', date: 22 },
+          { day: 'Thu', date: 23 },
+          { day: 'Fri', date: 24 },
+          { day: 'Sat', date: 25 },
+          { day: 'Sun', date: 26 },
+        ];
+
+    const timelineEvents = isRTL
+      ? [
+          {
+            time: '۰۹:۰۰',
+            title: 'مرور برنامه روزانه و اهداف',
+            sub: 'Arven AI · ۳۰ دقیقه',
+            color: 'border-r-4 border-r-[#5146E5]',
+          },
+          {
+            time: '۱۰:۰۰',
+            title: 'طراحی داشبورد محصول Arven',
+            sub: 'تمرکز عمیق · بدون نوتیفیکیشن',
+            color: 'border-r-4 border-r-[#25B8D9] bg-[#F4FBFC]',
+          },
+          {
+            time: '۱۲:۰۰',
+            title: 'جلسه تیم محصول و بازبینی UX',
+            sub: '۴ نفر · ۴۵ دقیقه',
+            color: 'border-r-4 border-r-[#8B5CF6]',
+          },
+          {
+            time: '۱۴:۰۰',
+            title: 'زمان آزاد شخصی و بازسازی انرژی',
+            sub: 'زمان آزاد · ۶۰ دقیقه',
+            color: 'border-r-4 border-r-[#20B486]',
+          },
+        ]
+      : [
+          {
+            time: '09:00',
+            title: 'Daily Goal Review & Briefing',
+            sub: 'Arven AI · 30 mins',
+            color: 'border-l-4 border-l-[#5146E5]',
+          },
+          {
+            time: '10:00',
+            title: 'Arven Core Workspace Architecture',
+            sub: 'Deep Focus · Zero Notifications',
+            color: 'border-l-4 border-l-[#25B8D9] bg-[#F4FBFC]',
+          },
+          {
+            time: '12:00',
+            title: 'Design Critique & Engineering Sync',
+            sub: '4 Team Members · 45 mins',
+            color: 'border-l-4 border-l-[#8B5CF6]',
+          },
+          {
+            time: '14:00',
+            title: 'Personal Recharge & Free Reading',
+            sub: 'Free Time · 60 mins',
+            color: 'border-l-4 border-l-[#20B486]',
+          },
+        ];
+
     return (
-      <div className="w-full h-full text-[#111426] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#111426] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-3">
           {/* Top Bar */}
           <div className="flex items-center justify-between pt-1">
             <div>
               <h2 className="text-lg font-black text-[#111426]">
-                {isPersianMode ? 'تقویم هوشمند' : 'Smart Calendar'}
+                {isRTL ? 'تقویم هوشمند' : 'Smart Calendar'}
               </h2>
               <span className="text-[10px] text-[#73788C]">
-                {isPersianMode ? 'شنبه، ۲۵ مرداد ۱۴۰۵' : 'Saturday, Aug 25'}
+                {isRTL ? 'شنبه، ۲۵ مرداد ۱۴۰۵' : 'Saturday, Aug 25'}
               </span>
             </div>
             <button className="w-8 h-8 rounded-xl bg-white border border-[#E7E9F1] shadow-xs text-[#5146E5] flex items-center justify-center">
@@ -358,13 +488,7 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
 
           {/* Date Strip */}
           <div className="flex gap-1.5 justify-between">
-            {[
-              { day: 'چهارشنبه', date: 22 },
-              { day: 'پنجشنبه', date: 23 },
-              { day: 'جمعه', date: 24 },
-              { day: 'شنبه', date: 25 },
-              { day: 'یکشنبه', date: 26 },
-            ].map((d) => {
+            {days.map((d) => {
               const isActive = selectedDate === d.date;
               return (
                 <div
@@ -377,48 +501,39 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
                   }`}
                 >
                   <span className="text-[7.5px] opacity-80">{d.day.slice(0, 3)}</span>
-                  <span className="text-[13px] font-black">{d.date}</span>
+                  <span className="text-[13px] font-black">
+                    {isRTL ? formatNumber(d.date) : d.date}
+                  </span>
                 </div>
               );
             })}
           </div>
 
           {/* Schedule Timeline */}
-          <div className="relative pl-7 space-y-2 py-1">
+          <div
+            className={`relative ${
+              isRTL ? 'pr-7' : 'pl-7'
+            } space-y-2 py-1`}
+          >
             {/* Vertical Line */}
-            <div className="absolute left-3 top-2 bottom-2 w-px bg-[#E3E5ED]" />
+            <div
+              className={`absolute ${
+                isRTL ? 'right-3' : 'left-3'
+              } top-2 bottom-2 w-px bg-[#E3E5ED]`}
+            />
 
-            {[
-              {
-                time: '09:00',
-                title: 'مرور برنامه روزانه و اهداف',
-                sub: 'Arven AI • ۳۰ دقیقه',
-                color: 'border-l-4 border-l-[#5146E5]',
-              },
-              {
-                time: '10:00',
-                title: 'طراحی داشبورد محصول Arven',
-                sub: 'تمرکز عمیق • بدون نوتیفیکیشن',
-                color: 'border-l-4 border-l-[#25B8D9] bg-[#F4FBFC]',
-              },
-              {
-                time: '12:00',
-                title: 'جلسه تیم محصول و بازبینی UX',
-                sub: '۴ نفر • ۴۵ دقیقه',
-                color: 'border-l-4 border-l-[#8B5CF6]',
-              },
-              {
-                time: '14:00',
-                title: 'ناهار و زمان آزاد',
-                sub: 'زمان آزاد شخصی • ۶۰ دقیقه',
-                color: 'border-l-4 border-l-[#20B486]',
-              },
-            ].map((ev, i) => (
+            {timelineEvents.map((ev, i) => (
               <div key={i} className="relative">
                 {/* Timeline Dot */}
-                <div className="absolute -left-7 top-3 w-2.5 h-2.5 rounded-full bg-[#5146E5] border-2 border-white ring-1 ring-[#5146E5]" />
                 <div
-                  className={`p-2.5 rounded-xl bg-white border border-[#E7E9F1] shadow-xs text-right ${ev.color}`}
+                  className={`absolute ${
+                    isRTL ? '-right-7' : '-left-7'
+                  } top-3 w-2.5 h-2.5 rounded-full bg-[#5146E5] border-2 border-white ring-1 ring-[#5146E5]`}
+                />
+                <div
+                  className={`p-2.5 rounded-xl bg-white border border-[#E7E9F1] shadow-xs ${
+                    isRTL ? 'text-right' : 'text-left'
+                  } ${ev.color}`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[9.5px] font-bold text-[#111426]">{ev.title}</span>
@@ -437,11 +552,17 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
                 <Clock size={16} />
               </div>
               <div>
-                <div className="text-[10px] font-bold text-[#111426]">Focus Block Active</div>
-                <div className="text-[8px] text-[#73788C]">Deep Work Mode On</div>
+                <div className="text-[10px] font-bold text-[#111426]">
+                  {isRTL ? 'بلاک تمرکز فعال' : 'Focus Block Active'}
+                </div>
+                <div className="text-[8px] text-[#73788C]">
+                  {isRTL ? 'حالت کار عمیق روشن' : 'Deep Work Mode On'}
+                </div>
               </div>
             </div>
-            <span className="text-[12px] font-mono font-black text-[#5146E5]">01:42</span>
+            <span className="text-[12px] font-mono font-black text-[#5146E5]">
+              {isRTL ? '۰۱:۴۲' : '01:42'}
+            </span>
           </div>
         </div>
       </div>
@@ -451,17 +572,36 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
   // ----------------------------------------------------
   // CHAPTER 04: CREATE (Knowledge Synthesis & Copilot)
   // ----------------------------------------------------
+  const tags = isRTL
+    ? [
+        { id: 'all', label: 'همه یادداشت‌ها' },
+        { id: 'product', label: 'طراحی محصول' },
+        { id: 'ai', label: 'هوش مصنوعی' },
+        { id: 'ideas', label: 'ایده‌ها' },
+      ]
+    : [
+        { id: 'all', label: 'All Notes' },
+        { id: 'product', label: 'Product UI' },
+        { id: 'ai', label: 'AI Systems' },
+        { id: 'ideas', label: 'Ideas' },
+      ];
+
   return (
-    <div className="w-full h-full text-[#111426] font-persian flex flex-col justify-between select-none">
+    <div
+      className={`w-full h-full text-[#111426] flex flex-col justify-between select-none ${
+        isRTL ? 'font-persian text-right' : 'font-sans text-left'
+      }`}
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       <div className="space-y-3">
         {/* Top Bar */}
         <div className="flex items-center justify-between pt-1">
           <div>
             <h2 className="text-lg font-black text-[#111426]">
-              {isPersianMode ? 'دانش و یادداشت‌ها' : 'Knowledge & Notes'}
+              {isRTL ? 'دانش و یادداشت‌ها' : 'Knowledge & Notes'}
             </h2>
             <span className="text-[10px] text-[#73788C]">
-              {isPersianMode ? '۲۴۸ یادداشت هوشمند' : '248 notes indexed'}
+              {isRTL ? '۲۴۸ یادداشت هوشمند' : '248 notes indexed'}
             </span>
           </div>
           <button className="w-8 h-8 rounded-xl bg-white border border-[#E7E9F1] shadow-xs text-[#5146E5] flex items-center justify-center">
@@ -473,24 +613,24 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
         <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-[#E7E9F1] shadow-xs text-xs text-[#73788C]">
           <Search size={14} className="text-[#9BA0B2]" />
           <span className="text-[9.5px] flex-1">
-            {isPersianMode ? 'جستجو در یادداشت‌ها و مستندات...' : 'Search neural knowledge graph...'}
+            {isRTL ? 'جستجو در یادداشت‌ها و مستندات...' : 'Search neural knowledge graph...'}
           </span>
           <SlidersHorizontal size={12} className="text-[#9BA0B2]" />
         </div>
 
         {/* Filter Tags */}
         <div className="flex gap-1.5 overflow-x-auto pb-1 text-[8.5px] font-bold scrollbar-none">
-          {['همه', 'طراحی محصول', 'هوش مصنوعی', 'ایده‌ها'].map((tag, idx) => (
+          {tags.map((tag) => (
             <button
-              key={tag}
-              onClick={() => setActiveTag(tag)}
+              key={tag.id}
+              onClick={() => setActiveTag(tag.id)}
               className={`px-3 py-1 rounded-full whitespace-nowrap transition-colors ${
-                (idx === 0 && activeTag === 'all') || activeTag === tag
+                activeTag === tag.id
                   ? 'bg-[#5146E5] text-white shadow-xs'
                   : 'bg-white border border-[#E7E9F1] text-[#73788C]'
               }`}
             >
-              {tag}
+              {tag.label}
             </button>
           ))}
         </div>
@@ -502,13 +642,16 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
               <div className="w-6 h-6 rounded-lg bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center">
                 <FileText size={13} />
               </div>
-              <span className="text-[10px] font-bold text-[#111426]">اصول طراحی نسل جدید UI</span>
+              <span className="text-[10px] font-bold text-[#111426]">
+                {isRTL ? 'اصول طراحی نسل جدید UI' : 'Next-Gen Interface Principles'}
+              </span>
             </div>
-            <span className="text-[8px] text-[#9BA0B2]">امروز</span>
+            <span className="text-[8px] text-[#9BA0B2]">{isRTL ? 'امروز' : 'Today'}</span>
           </div>
           <p className="text-[9px] leading-relaxed text-[#73788C]">
-            تجربه کاربری مدرن باید از پیچیدگی بصری فاصله بگیرد و اطلاعات مهم را در کوتاه‌ترین مسیر
-            ارائه دهد.
+            {isRTL
+              ? 'تجربه کاربری مدرن باید از پیچیدگی بصری فاصله بگیرد و اطلاعات مهم را در کوتاه‌ترین مسیر ارائه دهد.'
+              : 'Modern UX must eliminate unnecessary cognitive friction, providing instant access to synthesized insights.'}
           </p>
           <div className="flex gap-1 pt-1">
             {['UX', 'Product', 'Design'].map((chip) => (
@@ -526,16 +669,21 @@ export const ArvenScreen: React.FC<ArvenScreenProps> = ({ screenId, isPersianMod
         <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#25B8D9]/10 via-[#5146E5]/8 to-white border border-[#5146E5]/15 space-y-2">
           <div className="flex items-center gap-2 text-[#5146E5]">
             <Sparkles size={14} />
-            <span className="text-[9.5px] font-black">بینش استخراج‌شده توسط Arven AI</span>
+            <span className="text-[9.5px] font-black">
+              {isRTL ? 'بینش استخراج‌شده توسط Arven AI' : 'Insight synthesized by Arven AI'}
+            </span>
           </div>
           <p className="text-[9px] leading-relaxed text-[#555B70]">
-            الگوی تکرارشونده در یادداشت‌ها: محور تمام ایده‌ها بر «سادگی + اتوماسیون هوشمند» قرار دارد.
+            {isRTL
+              ? 'الگوی تکرارشونده در یادداشت‌ها: محور تمام ایده‌ها بر «سادگی + اتوماسیون هوشمند» قرار دارد.'
+              : 'Pattern discovered across 24 notes: emphasis on frictionless automation and clean typography.'}
           </p>
           <button className="w-full py-1.5 rounded-xl bg-[#5146E5] text-white text-[8.5px] font-bold shadow-xs">
-            ساخت نقشه دانش خودکار
+            {isRTL ? 'ساخت نقشه دانش خودکار' : 'Generate Neural Knowledge Map'}
           </button>
         </div>
       </div>
     </div>
   );
 };
+

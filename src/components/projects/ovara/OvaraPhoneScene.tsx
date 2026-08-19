@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Wifi, Battery, Signal, Home, Search, ShoppingBag, User, Sparkles } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 import { OvaraScreenHome } from './OvaraScreenHome';
 import { OvaraScreenDiscovery } from './OvaraScreenDiscovery';
 import { OvaraScreenDetails } from './OvaraScreenDetails';
@@ -19,34 +20,56 @@ export const OvaraPhoneScene: React.FC<OvaraPhoneSceneProps> = ({
   className = '',
   isInteractive = true,
 }) => {
+  const { isRTL, productLocale, formatNumber } = useLanguage();
   const [islandState, setIslandState] = useState<'idle' | 'expanded'>('idle');
+  const locale = productLocale.ovara;
 
   // Dynamic Island status text corresponding to current screen
   const getIslandInfo = () => {
     switch (activeScreenIndex) {
       case 0:
-        return { title: 'Ovara Atelier', sub: 'Live Drop Online', badge: 'VIP' };
+        return {
+          title: isRTL ? 'اووارا آتلیه' : 'Ovara Atelier',
+          sub: isRTL ? 'کالکشن جدید فعال شد' : 'Live Drop Online',
+          badge: 'VIP',
+        };
       case 1:
-        return { title: 'Smart Search', sub: '124 Items Synced', badge: 'AI' };
+        return {
+          title: isRTL ? 'جستجوی هوشمند' : 'Smart Search',
+          sub: isRTL ? 'بیش از ۴,۵۰۰ کالا' : '4,500+ Items',
+          badge: 'AI',
+        };
       case 2:
-        return { title: '3D Inspector', sub: 'Titanium Grade 5', badge: 'AR' };
+        return {
+          title: isRTL ? 'بازرسی سه‌بعدی' : '3D Inspector',
+          sub: isRTL ? 'تیتانیوم گرید ۵' : 'Titanium Grade 5',
+          badge: 'AR',
+        };
       case 3:
-        return { title: 'Express Bag', sub: '3 Items · Free VIP', badge: 'Cart' };
+        return {
+          title: isRTL ? 'سبد خرید اکسپرس' : 'Express Bag',
+          sub: isRTL ? '۳ کالا · ارسال VIP رایگان' : '3 Items · Free VIP',
+          badge: 'Cart',
+        };
       case 4:
-        return { title: 'Order #OV-84219', sub: 'Courier In Transit', badge: 'Live' };
+        return {
+          title: isRTL ? 'سفارش #OV-84219' : 'Order #OV-84219',
+          sub: isRTL ? 'سفیر در مسیر تحویل' : 'Courier In Transit',
+          badge: 'Live',
+        };
       default:
-        return { title: 'OVARA', sub: 'Luxury Experience', badge: 'Pro' };
+        return { title: 'OVARA', sub: isRTL ? 'تجربه فوق‌لوکس' : 'Luxury Experience', badge: 'Pro' };
     }
   };
 
   const island = getIslandInfo();
 
   const navItems = [
-    { id: 0, label: 'خانه', en: 'Home', icon: Home },
-    { id: 1, label: 'کاوش', en: 'Explore', icon: Search },
-    { id: 2, label: 'محصول', en: 'Detail', icon: Sparkles },
-    { id: 3, label: 'سبد خرید', en: 'Cart', icon: ShoppingBag, badge: 3 },
-    { id: 4, label: 'پروفایل', en: 'Profile', icon: User },
+    { id: 0, label: locale.navigation.home, icon: Home },
+    { id: 1, label: locale.navigation.explore, icon: Search },
+    { id: 2, label: locale.navigation.detail, icon: Sparkles },
+    { id: 3, label: locale.navigation.cart, icon: ShoppingBag, badge: 3 },
+    { id: 4, label: locale.navigation.profile, icon: User },
   ];
 
   return (
@@ -69,19 +92,19 @@ export const OvaraPhoneScene: React.FC<OvaraPhoneSceneProps> = ({
             
             {/* Status Bar */}
             <div className="relative z-30 h-11 px-6 flex items-center justify-between text-[11px] font-bold text-[#111116] bg-transparent">
-              <span className="font-mono text-xs">9:41</span>
+              <span className="font-mono text-xs">{isRTL ? formatNumber('9:41') : '9:41'}</span>
 
               {/* Dynamic Island */}
               <div 
                 onClick={() => setIslandState(islandState === 'idle' ? 'expanded' : 'idle')}
                 className={`absolute top-2 left-1/2 -translate-x-1/2 rounded-full bg-[#09090B] text-white flex items-center justify-between px-3 cursor-pointer transition-all duration-300 shadow-md ${
                   islandState === 'expanded'
-                    ? 'w-[210px] h-8 bg-black/95 scale-105'
+                    ? 'w-[220px] h-8 bg-black/95 scale-105'
                     : 'w-[100px] h-6 hover:w-[110px]'
                 }`}
               >
                 {islandState === 'expanded' ? (
-                  <div className="w-full flex items-center justify-between text-[9px] px-0.5">
+                  <div className="w-full flex items-center justify-between text-[9px] px-0.5" dir={isRTL ? 'rtl' : 'ltr'}>
                     <span className="text-[#FF5C39] font-black">{island.title}</span>
                     <span className="text-[8px] text-white/70">{island.sub}</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
@@ -159,10 +182,10 @@ export const OvaraPhoneScene: React.FC<OvaraPhoneSceneProps> = ({
                       strokeWidth={isActive ? 2.6 : 1.8}
                       className={isActive ? 'text-[#FF5C39]' : ''}
                     />
-                    <span className="text-[8px] font-persian leading-none">{tab.label}</span>
+                    <span className="text-[8px] leading-none whitespace-nowrap">{tab.label}</span>
                     {tab.badge && !isActive && (
-                      <span className="absolute 1 top-0 right-1 w-3.5 h-3.5 bg-[#FF5C39] text-white text-[7px] font-black rounded-full flex items-center justify-center shadow-xs">
-                        {tab.badge}
+                      <span className="absolute top-0 right-1 w-3.5 h-3.5 bg-[#FF5C39] text-white text-[7px] font-black rounded-full flex items-center justify-center shadow-xs">
+                        {isRTL ? formatNumber(tab.badge) : tab.badge}
                       </span>
                     )}
                     {isActive && (
@@ -192,8 +215,8 @@ export const OvaraPhoneScene: React.FC<OvaraPhoneSceneProps> = ({
                   : 'bg-white/80 hover:bg-white text-[#666] border border-[#E5E5E2]'
               }`}
             >
-              <span>0{tab.id + 1}</span>
-              <span className="font-sans font-medium">{tab.en}</span>
+              <span>{isRTL ? formatNumber(`0${tab.id + 1}`) : `0${tab.id + 1}`}</span>
+              <span className="font-sans font-medium">{tab.label}</span>
             </button>
           ))}
         </div>
@@ -201,3 +224,4 @@ export const OvaraPhoneScene: React.FC<OvaraPhoneSceneProps> = ({
     </div>
   );
 };
+

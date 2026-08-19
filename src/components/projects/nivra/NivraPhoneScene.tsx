@@ -2,12 +2,12 @@ import React from 'react';
 import { NivraScreen } from './NivraScreen';
 import { Home, Compass, Calendar, Sparkles, Battery } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface NivraPhoneSceneProps {
   activeChapterIndex: number;
   onChapterChange?: (index: number) => void;
   isInteractive?: boolean;
-  isPersianMode?: boolean;
 }
 
 const CHAPTER_SCREENS: ('discover' | 'plan' | 'explore' | 'travel')[] = [
@@ -21,22 +21,36 @@ export const NivraPhoneScene: React.FC<NivraPhoneSceneProps> = ({
   activeChapterIndex,
   onChapterChange,
   isInteractive = true,
-  isPersianMode = false,
 }) => {
+  const { isRTL, formatNumber } = useLanguage();
   const currentScreenId = CHAPTER_SCREENS[activeChapterIndex] || 'discover';
+
+  const tabs = isRTL
+    ? [
+        { idx: 0, label: 'کشف مقاصد', icon: Home },
+        { idx: 1, label: 'برنامه سفر', icon: Calendar },
+        { idx: 2, label: 'کاوش جزئیات', icon: Compass },
+        { idx: 3, label: 'رزرو نهایی', icon: Sparkles },
+      ]
+    : [
+        { idx: 0, label: 'Discover', icon: Home },
+        { idx: 1, label: 'Itinerary', icon: Calendar },
+        { idx: 2, label: 'Explore', icon: Compass },
+        { idx: 3, label: 'Booking', icon: Sparkles },
+      ];
 
   return (
     <div className="relative flex flex-col items-center select-none">
       {/* Device Label */}
       <div className="w-[320px] sm:w-[340px] flex items-center justify-between px-2 mb-3 text-xs font-mono text-[#71818A]">
         <span className="font-bold text-[#10212B]">
-          0{activeChapterIndex + 1} / 04
+          {isRTL ? `۰${formatNumber(activeChapterIndex + 1)} / ۰۴` : `0${activeChapterIndex + 1} / 04`}
         </span>
         <span className="uppercase tracking-widest text-[10px] text-[#168DF5] font-bold">
-          {activeChapterIndex === 0 && '01 / DISCOVER'}
-          {activeChapterIndex === 1 && '02 / PLAN'}
-          {activeChapterIndex === 2 && '03 / EXPLORE'}
-          {activeChapterIndex === 3 && '04 / TRAVEL'}
+          {activeChapterIndex === 0 && (isRTL ? '۰۱ / کشف الهام‌بخش' : '01 / DISCOVER')}
+          {activeChapterIndex === 1 && (isRTL ? '۰۲ / برنامه‌ریزی هوشمند' : '02 / PLAN')}
+          {activeChapterIndex === 2 && (isRTL ? '۰۳ / کاوش تجربیات' : '03 / EXPLORE')}
+          {activeChapterIndex === 3 && (isRTL ? '۰۴ / سفر و اقامت' : '04 / TRAVEL')}
         </span>
       </div>
 
@@ -52,7 +66,7 @@ export const NivraPhoneScene: React.FC<NivraPhoneSceneProps> = ({
         <div className="relative w-full h-full rounded-[44px] bg-[#F7FAFB] overflow-hidden flex flex-col border-[5px] border-[#0A161D] shadow-inner">
           {/* Status Bar & Dynamic Island */}
           <div className="relative z-50 h-11 px-6 pt-2 flex items-center justify-between text-[11px] font-bold font-mono text-[#10212B]">
-            <span>9:41</span>
+            <span>{isRTL ? '۹:۴۱' : '9:41'}</span>
             {/* Dynamic Island */}
             <div className="absolute left-1/2 -translate-x-1/2 top-2.5 w-24 h-6 rounded-full bg-[#050B0E] flex items-center justify-end px-2 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#18C5BD] animate-pulse" />
@@ -74,19 +88,17 @@ export const NivraPhoneScene: React.FC<NivraPhoneSceneProps> = ({
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="h-full"
               >
-                <NivraScreen screenId={currentScreenId} isPersianMode={isPersianMode} />
+                <NivraScreen screenId={currentScreenId} />
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Bottom App Navigation Dock */}
-          <div className="absolute bottom-0 inset-x-0 h-16 bg-[#FFFFFF]/90 backdrop-blur-md border-t border-[#E4EDF1]/80 flex items-center justify-around px-3 z-40">
-            {[
-              { idx: 0, label: 'خانه', icon: Home },
-              { idx: 1, label: 'سفرهای من', icon: Calendar },
-              { idx: 2, label: 'کشف', icon: Compass },
-              { idx: 3, label: 'رزرو', icon: Sparkles },
-            ].map((tab) => {
+          <div
+            className="absolute bottom-0 inset-x-0 h-16 bg-[#FFFFFF]/90 backdrop-blur-md border-t border-[#E4EDF1]/80 flex items-center justify-around px-3 z-40"
+            dir={isRTL ? 'rtl' : 'ltr'}
+          >
+            {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeChapterIndex === tab.idx;
               return (
@@ -104,7 +116,13 @@ export const NivraPhoneScene: React.FC<NivraPhoneSceneProps> = ({
                   >
                     <Icon size={16} />
                   </div>
-                  <span className="text-[8.5px] font-bold font-persian">{tab.label}</span>
+                  <span
+                    className={`text-[8.5px] font-bold ${
+                      isRTL ? 'font-persian' : 'font-sans'
+                    }`}
+                  >
+                    {tab.label}
+                  </span>
                 </button>
               );
             })}
@@ -133,3 +151,4 @@ export const NivraPhoneScene: React.FC<NivraPhoneSceneProps> = ({
     </div>
   );
 };
+

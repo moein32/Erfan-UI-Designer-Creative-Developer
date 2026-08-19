@@ -2,12 +2,12 @@ import React from 'react';
 import { VaryaScreen } from './VaryaScreen';
 import { Home, Activity, Moon, Bot, Battery } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface VaryaPhoneSceneProps {
   activeChapterIndex: number;
   onChapterChange?: (index: number) => void;
   isInteractive?: boolean;
-  isPersianMode?: boolean;
 }
 
 const CHAPTER_SCREENS: ('equilibrium' | 'vitality' | 'circadian' | 'intelligence')[] = [
@@ -21,22 +21,36 @@ export const VaryaPhoneScene: React.FC<VaryaPhoneSceneProps> = ({
   activeChapterIndex,
   onChapterChange,
   isInteractive = true,
-  isPersianMode = false,
 }) => {
+  const { isRTL, formatNumber } = useLanguage();
   const currentScreenId = CHAPTER_SCREENS[activeChapterIndex] || 'equilibrium';
+
+  const tabs = isRTL
+    ? [
+        { idx: 0, label: 'تعادل زیستی', icon: Home },
+        { idx: 1, label: 'پویایی و فعالیت', icon: Activity },
+        { idx: 2, label: 'معماری خواب', icon: Moon },
+        { idx: 3, label: 'مربی هوشمند', icon: Bot },
+      ]
+    : [
+        { idx: 0, label: 'Equilibrium', icon: Home },
+        { idx: 1, label: 'Vitality', icon: Activity },
+        { idx: 2, label: 'Circadian', icon: Moon },
+        { idx: 3, label: 'Intelligence', icon: Bot },
+      ];
 
   return (
     <div className="relative flex flex-col items-center select-none">
       {/* Device Header Tag */}
       <div className="w-[320px] sm:w-[340px] flex items-center justify-between px-2 mb-3 text-xs font-mono text-[#8B8DA1]">
         <span className="font-bold text-[#171827]">
-          0{activeChapterIndex + 1} / 04
+          {isRTL ? `۰${formatNumber(activeChapterIndex + 1)} / ۰۴` : `0${activeChapterIndex + 1} / 04`}
         </span>
         <span className="uppercase tracking-widest text-[10px] text-[#6F62E8] font-bold">
-          {activeChapterIndex === 0 && '01 / EQUILIBRIUM'}
-          {activeChapterIndex === 1 && '02 / VITALITY'}
-          {activeChapterIndex === 2 && '03 / CIRCADIAN'}
-          {activeChapterIndex === 3 && '04 / INTELLIGENCE'}
+          {activeChapterIndex === 0 && (isRTL ? '۰۱ / تعادل زیستی' : '01 / EQUILIBRIUM')}
+          {activeChapterIndex === 1 && (isRTL ? '۰۲ / انرژی و پویایی' : '02 / VITALITY')}
+          {activeChapterIndex === 2 && (isRTL ? '۰۳ / معماری خواب' : '03 / CIRCADIAN')}
+          {activeChapterIndex === 3 && (isRTL ? '۰۴ / هوش ارگانیک' : '04 / INTELLIGENCE')}
         </span>
       </div>
 
@@ -52,7 +66,7 @@ export const VaryaPhoneScene: React.FC<VaryaPhoneSceneProps> = ({
         <div className="relative w-full h-full rounded-[44px] bg-[#F8F8FC] overflow-hidden flex flex-col border-[5px] border-[#08090C] shadow-inner">
           {/* Status Bar & Dynamic Island */}
           <div className="relative z-50 h-11 px-6 pt-2 flex items-center justify-between text-[11px] font-bold font-mono text-[#171827]">
-            <span>9:41</span>
+            <span>{isRTL ? '۹:۴۱' : '9:41'}</span>
             {/* Dynamic Island */}
             <div className="absolute left-1/2 -translate-x-1/2 top-2.5 w-24 h-6 rounded-full bg-[#050507] flex items-center justify-end px-2 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#55C99B] animate-pulse" />
@@ -74,19 +88,17 @@ export const VaryaPhoneScene: React.FC<VaryaPhoneSceneProps> = ({
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="h-full"
               >
-                <VaryaScreen screenId={currentScreenId} isPersianMode={isPersianMode} />
+                <VaryaScreen screenId={currentScreenId} />
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Bottom App Navigation Dock */}
-          <div className="absolute bottom-0 inset-x-0 h-16 bg-[#FFFFFF]/90 backdrop-blur-md border-t border-[#E9E9F1]/80 flex items-center justify-around px-3 z-40">
-            {[
-              { idx: 0, label: 'خانه', icon: Home },
-              { idx: 1, label: 'فعالیت', icon: Activity },
-              { idx: 2, label: 'خواب', icon: Moon },
-              { idx: 3, label: 'مربی هوشمند', icon: Bot },
-            ].map((tab) => {
+          <div
+            className="absolute bottom-0 inset-x-0 h-16 bg-[#FFFFFF]/90 backdrop-blur-md border-t border-[#E9E9F1]/80 flex items-center justify-around px-3 z-40"
+            dir={isRTL ? 'rtl' : 'ltr'}
+          >
+            {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeChapterIndex === tab.idx;
               return (
@@ -107,9 +119,10 @@ export const VaryaPhoneScene: React.FC<VaryaPhoneSceneProps> = ({
           </div>
 
           {/* Home indicator bar */}
-          <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-28 h-1 rounded-full bg-[#111217] opacity-80 z-50" />
+          <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-28 h-1 rounded-full bg-[#111217] opacity-80 z-50 pointer-events-none" />
         </div>
       </div>
     </div>
   );
 };
+

@@ -170,10 +170,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
 
       {/* Main Hero Visual Composition: Intersecting Typography + Portrait */}
       <div className="my-auto py-8 md:py-12 lg:py-16 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column (or Right in RTL): Editorial Typography & Designer Identity */}
-          <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center space-y-6 md:space-y-8 z-10">
+          <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center space-y-6 md:space-y-8 z-10">
             
             {/* Designer Brand Identity Pill */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-subtle border border-white/10 self-start shadow-md">
@@ -190,7 +190,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
             {/* Primary Display Headline with Layered Character Lines */}
             <div ref={headlineRef} className="space-y-1 will-change-transform">
               {isRTL ? (
-                <h1 className="text-[40px] sm:text-[62px] md:text-[76px] lg:text-[84px] leading-[1.1] font-bold text-[#F5F5F7] tracking-tight">
+                <h1 className="text-[42px] sm:text-[64px] md:text-[78px] lg:text-[84px] xl:text-[90px] leading-[1.08] font-bold text-[#F5F5F7] tracking-tight">
                   <div className="hero-reveal-line overflow-hidden pb-1">
                     {t.hero.roleLine1}
                   </div>
@@ -200,7 +200,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
                   </div>
                 </h1>
               ) : (
-                <h1 className="text-[48px] sm:text-[72px] md:text-[88px] lg:text-[96px] xl:text-[104px] leading-[0.9] font-black tracking-[-0.04em] uppercase text-[#F5F5F7]">
+                <h1 className="text-[48px] sm:text-[72px] md:text-[86px] lg:text-[92px] xl:text-[100px] leading-[0.9] font-black tracking-[-0.04em] uppercase text-[#F5F5F7]">
                   <div className="hero-reveal-line overflow-hidden pb-1">
                     {t.hero.roleLine1}
                   </div>
@@ -249,19 +249,24 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
 
           </div>
 
-          {/* Right Column (or Left in RTL): Art-Directed Personal Portrait Anchor */}
+          {/* Right Column (or Left in RTL): Dominant Personal Portrait Visual */}
           <div
             ref={portraitContainerRef}
-            className="lg:col-span-5 xl:col-span-5 flex justify-center lg:justify-end relative order-first lg:order-last"
+            className="lg:col-span-5 xl:col-span-6 flex justify-center lg:justify-end relative order-first lg:order-last"
           >
-            {/* Ambient Backlight for Portrait */}
-            <div className="absolute -inset-4 bg-gradient-to-tr from-white/10 via-white/5 to-transparent rounded-[44px] blur-2xl pointer-events-none -z-10" />
+            {/* Soft Ambient Atmospheric Light behind Portrait */}
+            <div className="absolute -inset-8 bg-gradient-to-tr from-white/15 via-white/6 to-transparent rounded-[52px] blur-3xl pointer-events-none -z-10" />
 
-            {/* Outer Subtle Glass Atmosphere Backdrop */}
-            <div className="relative w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] aspect-[4/5] rounded-[32px] sm:rounded-[36px] overflow-hidden bg-[#0D0D11] border border-white/12 shadow-2xl shadow-black/80 group">
+            {/* Dominant Editorial Portrait Composition Frame */}
+            <div 
+              className="relative w-full max-w-[360px] sm:max-w-[440px] md:max-w-[490px] lg:max-w-[540px] xl:max-w-[580px] aspect-[4/4.9] rounded-[36px] sm:rounded-[44px] overflow-hidden bg-[#0D0D12] border border-white/14 shadow-[0_30px_90px_rgba(0,0,0,0.9)] group"
+              style={{
+                width: 'clamp(340px, 38vw, 600px)',
+              }}
+            >
               
               {/* Subtle Top-Edge Specular Glass Light */}
-              <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/15 to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/20 via-white/5 to-transparent pointer-events-none z-10" />
 
               {/* Graceful Fallback if Image Fails or is Loading */}
               {!imageLoaded && !imageError && (
@@ -302,17 +307,17 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
               />
 
               {/* Subtle Bottom Vignette Gradient to blend smoothly with dark framing */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0D0D11] via-[#0D0D11]/60 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#0D0D12] via-[#0D0D12]/70 to-transparent pointer-events-none" />
 
               {/* Bottom Identity Label Overlay Inside Frame */}
-              <div className="absolute bottom-4 inset-x-4 flex items-center justify-between text-white z-20">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span className="font-mono text-[11px] font-bold tracking-wider uppercase drop-shadow-sm text-[#F5F5F7]">
+              <div className="absolute bottom-5 inset-x-6 flex items-center justify-between text-white z-20">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <span className="font-mono text-xs font-bold tracking-wider uppercase drop-shadow-sm text-[#F5F5F7]">
                     {t.hero.shortName}
                   </span>
                 </div>
-                <span className="font-mono text-[10px] tracking-widest text-[#A1A1AA] uppercase">
+                <span className="font-mono text-[11px] tracking-widest text-[#A1A1AA] uppercase">
                   {isRTL ? 'تهران' : 'IR · 2026'}
                 </span>
               </div>
@@ -321,19 +326,19 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
             {/* Floating Refined Liquid Glass Card Overlay (Apple / Editorial Detail) */}
             <div
               ref={floatingBadgeRef}
-              className={`absolute -bottom-5 ${
-                isRTL ? '-right-4 sm:-right-6' : '-left-4 sm:-left-6'
-              } glass-strong border border-white/14 rounded-2xl p-3.5 sm:p-4 shadow-2xl z-20 max-w-[210px] sm:max-w-[230px]`}
+              className={`absolute -bottom-6 ${
+                isRTL ? '-right-2 sm:-right-4' : '-left-2 sm:-left-4'
+              } glass-strong border border-white/16 rounded-2xl p-4 sm:p-4.5 shadow-2xl z-20 max-w-[220px] sm:max-w-[250px]`}
             >
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0 border border-white/10">
-                  <Sparkles size={14} className="text-emerald-400" />
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-white/12 text-white flex items-center justify-center shrink-0 border border-white/12">
+                  <Sparkles size={16} className="text-emerald-400" />
                 </div>
                 <div className="space-y-0.5 min-w-0">
-                  <div className="text-[10px] font-mono font-bold text-[#F5F5F7] truncate uppercase">
+                  <div className="text-[11px] font-mono font-bold text-[#F5F5F7] truncate uppercase">
                     {isRTL ? 'معماری رابط کاربری' : 'UI ARCHITECTURE'}
                   </div>
-                  <div className="text-[9px] font-mono text-[#A1A1AA] truncate">
+                  <div className="text-[10px] font-mono text-[#A1A1AA] truncate">
                     {isRTL ? 'طراحی + کدنویسی فرانت‌اند' : 'Design Systems + Code'}
                   </div>
                 </div>

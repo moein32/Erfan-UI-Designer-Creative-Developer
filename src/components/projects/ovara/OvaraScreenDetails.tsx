@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronRight, Heart, Share2, ShieldCheck, Truck, Star, Check, Sparkles } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Heart, Share2, ShieldCheck, Truck, Star, Check, Sparkles } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface OvaraScreenProps {
   onBack?: () => void;
@@ -10,20 +11,30 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
   onBack,
   onNavigateToCart,
 }) => {
+  const { isRTL, formatNumber } = useLanguage();
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedStorage, setSelectedStorage] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(true);
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
-  const colors = [
-    { name: 'تیتانیوم طبیعی', hex: '#C5BFB8', border: 'border-[#9E958C]' },
-    { name: 'مشکی فضایی', hex: '#2A2A2E', border: 'border-[#1E1E22]' },
-    { name: 'سفید صدفی', hex: '#F0EFEA', border: 'border-[#DCDAD2]' },
-    { name: 'آبی صحرایی', hex: '#B8C1CD', border: 'border-[#8F9AA9]' },
-  ];
+  const colors = isRTL
+    ? [
+        { name: 'تیتانیوم طبیعی', hex: '#C5BFB8', border: 'border-[#9E958C]' },
+        { name: 'مشکی فضایی', hex: '#2A2A2E', border: 'border-[#1E1E22]' },
+        { name: 'سفید صدفی', hex: '#F0EFEA', border: 'border-[#DCDAD2]' },
+        { name: 'آبی صحرایی', hex: '#B8C1CD', border: 'border-[#8F9AA9]' },
+      ]
+    : [
+        { name: 'Natural Titanium', hex: '#C5BFB8', border: 'border-[#9E958C]' },
+        { name: 'Space Black', hex: '#2A2A2E', border: 'border-[#1E1E22]' },
+        { name: 'White Titanium', hex: '#F0EFEA', border: 'border-[#DCDAD2]' },
+        { name: 'Desert Blue', hex: '#B8C1CD', border: 'border-[#8F9AA9]' },
+      ];
 
-  const storages = ['۲۵۶ گیگابایت', '۵۱۲ گیگابایت', '۱ ترابایت'];
+  const storages = isRTL
+    ? ['۲۵۶ گیگابایت', '۵۱۲ گیگابایت', '۱ ترابایت']
+    : ['256 GB', '512 GB', '1 TB'];
 
   const handleAddToCart = () => {
     setIsAdded(true);
@@ -33,16 +44,23 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
   };
 
   return (
-    <div className="flex flex-col min-h-full pb-20 font-persian text-[#111116] select-none text-right" dir="rtl">
+    <div
+      className={`flex flex-col min-h-full pb-20 text-[#111116] select-none ${
+        isRTL ? 'font-persian text-right' : 'font-sans text-left'
+      }`}
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       {/* Detail Top Navigation */}
       <div className="flex items-center justify-between pt-1 pb-2">
         <button
           onClick={onBack}
           className="w-8 h-8 rounded-xl bg-white border border-[#ECECF1] flex items-center justify-center text-[#202126] shadow-xs active:scale-90 transition-transform"
         >
-          <ChevronRight size={16} />
+          {isRTL ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
         </button>
-        <span className="text-[11px] font-black text-[#111116]">جزئیات محصول</span>
+        <span className="text-[11px] font-black text-[#111116]">
+          {isRTL ? 'جزئیات محصول' : 'Product Details'}
+        </span>
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => setIsWishlisted(!isWishlisted)}
@@ -59,9 +77,13 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
       {/* 3D Gallery Frame */}
       <div className="relative mt-1 mb-3 rounded-2xl bg-gradient-to-b from-[#F2F2F6] to-[#E6E7EE] border border-[#ECECF1] p-4 flex flex-col items-center justify-center overflow-hidden min-h-[170px] shadow-inner">
         {/* Visual Badge */}
-        <div className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-black/70 backdrop-blur-md text-white text-[8px] font-black rounded-full flex items-center gap-1">
+        <div
+          className={`absolute top-2.5 ${
+            isRTL ? 'right-2.5' : 'left-2.5'
+          } px-2 py-0.5 bg-black/70 backdrop-blur-md text-white text-[8px] font-black rounded-full flex items-center gap-1`}
+        >
           <Sparkles size={9} className="text-amber-400" />
-          <span>تیتانیوم گرید ۵ فضایی</span>
+          <span>{isRTL ? 'تیتانیوم گرید ۵ فضایی' : 'Aerospace Grade 5 Titanium'}</span>
         </div>
 
         {/* Dynamic Mock of the Luxury Product */}
@@ -100,12 +122,14 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
       <div className="px-0.5">
         <div className="flex items-center gap-2">
           <span className="px-1.5 py-0.5 bg-[#FFF0ED] text-[#FF5C39] text-[8px] font-black rounded">
-            گارانتی ۱۸ ماهه شرکتی
+            {isRTL ? 'گارانتی ۱۸ ماهه شرکتی' : '18-Month Official Warranty'}
           </span>
           <div className="flex items-center gap-1 text-amber-500 text-[9px] font-bold">
             <Star size={10} fill="currentColor" />
-            <span>۴.۹</span>
-            <span className="text-[#858791] font-normal">(۳۸۲ نظر ثبت‌شده)</span>
+            <span>{isRTL ? '۴.۹' : '4.9'}</span>
+            <span className="text-[#858791] font-normal">
+              {isRTL ? '(۳۸۲ نظر ثبت‌شده)' : '(382 verified reviews)'}
+            </span>
           </div>
         </div>
 
@@ -113,15 +137,23 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
           iPhone 16 Pro Max Natural Titanium
         </h1>
         <p className="text-[9px] text-[#858791] mt-0.5">
-          تراشه ۳ نانومتری Apple A18 Pro · بدنه تیتانیومی فوق سبک با کنترل لمسی دوربین
+          {isRTL
+            ? 'تراشه ۳ نانومتری Apple A18 Pro · بدنه تیتانیومی فوق سبک با کنترل لمسی دوربین'
+            : 'Apple A18 Pro 3nm Silicon · Ultra-light Titanium Frame with Camera Control'}
         </p>
 
         {/* Price Box */}
         <div className="mt-2.5 flex items-baseline gap-2">
-          <span className="text-base font-black text-[#111116]">۱۵۴,۹۰۰,۰۰۰</span>
-          <span className="text-[10px] text-[#858791]">تومان</span>
-          <span className="mr-auto text-[9px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">
-            ارسال اکسپرس امروز
+          <span className="text-base font-black text-[#111116]">
+            {isRTL ? '۱۵۴,۹۰۰,۰۰۰' : '$1,199.00'}
+          </span>
+          {isRTL && <span className="text-[10px] text-[#858791]">تومان</span>}
+          <span
+            className={`${
+              isRTL ? 'mr-auto' : 'ml-auto'
+            } text-[9px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full`}
+          >
+            {isRTL ? 'ارسال اکسپرس امروز' : 'Express Delivery Today'}
           </span>
         </div>
       </div>
@@ -129,7 +161,9 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
       {/* Color Selector */}
       <div className="mt-3.5 pt-3 border-t border-[#ECECF1]">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-bold text-[#111116]">رنگ بدنه:</span>
+          <span className="text-[10px] font-bold text-[#111116]">
+            {isRTL ? 'رنگ بدنه:' : 'Finish Color:'}
+          </span>
           <span className="text-[9px] font-black text-[#7667F4]">{colors[selectedColor].name}</span>
         </div>
         <div className="flex items-center gap-2">
@@ -156,7 +190,9 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
       {/* Storage Selector */}
       <div className="mt-3 pt-3 border-t border-[#ECECF1]">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-bold text-[#111116]">ظرفیت حافظه:</span>
+          <span className="text-[10px] font-bold text-[#111116]">
+            {isRTL ? 'ظرفیت حافظه:' : 'Storage Tier:'}
+          </span>
           <span className="text-[9px] font-black text-[#7667F4]">{storages[selectedStorage]}</span>
         </div>
         <div className="grid grid-cols-3 gap-1.5">
@@ -183,8 +219,12 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
             <Truck size={12} />
           </div>
           <div className="text-[9px]">
-            <strong className="text-[#111116] block">ارسال سریع OVARA Express</strong>
-            <span className="text-[#858791]">تحویل رایگان فردا در سراسر کشور</span>
+            <strong className="text-[#111116] block">
+              {isRTL ? 'ارسال سریع OVARA Express' : 'OVARA White-Glove Dispatch'}
+            </strong>
+            <span className="text-[#858791]">
+              {isRTL ? 'تحویل رایگان فردا در سراسر کشور' : 'Complimentary insured next-day courier'}
+            </span>
           </div>
         </div>
 
@@ -193,8 +233,12 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
             <ShieldCheck size={12} />
           </div>
           <div className="text-[9px]">
-            <strong className="text-[#111116] block">اصالت قطعی ۱۰۰٪ با بارکد گمرکی</strong>
-            <span className="text-[#858791]">۷ روز مهلت تعویض و بازگشت بی‌قید و شرط</span>
+            <strong className="text-[#111116] block">
+              {isRTL ? 'اصالت قطعی ۱۰۰٪ با بارکد گمرکی' : '100% Verified Atelier Authenticity'}
+            </strong>
+            <span className="text-[#858791]">
+              {isRTL ? '۷ روز مهلت تعویض و بازگشت بی‌قید و شرط' : '7-day unconditional returns guarantee'}
+            </span>
           </div>
         </div>
       </div>
@@ -212,11 +256,15 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
           {isAdded ? (
             <>
               <Check size={14} />
-              <span>به سبد خرید افزوده شد!</span>
+              <span>{isRTL ? 'به سبد خرید افزوده شد!' : 'Added to Bag!'}</span>
             </>
           ) : (
             <>
-              <span>افزودن به سبد خرید · ۱۵۴,۹۰۰,۰۰۰ تومان</span>
+              <span>
+                {isRTL
+                  ? 'افزودن به سبد خرید · ۱۵۴,۹۰۰,۰۰۰ تومان'
+                  : 'Add to Bag · $1,199.00'}
+              </span>
             </>
           )}
         </button>
@@ -224,3 +272,4 @@ export const OvaraScreenDetails: React.FC<OvaraScreenProps> = ({
     </div>
   );
 };
+

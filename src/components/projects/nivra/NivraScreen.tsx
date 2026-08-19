@@ -17,22 +17,16 @@ import {
   Luggage,
   ArrowRight,
   ArrowLeft,
-  Clock,
   Heart,
-  Check,
 } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface NivraScreenProps {
   screenId: 'discover' | 'plan' | 'explore' | 'travel';
-  isPersianMode?: boolean;
 }
 
-export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMode = false }) => {
-  // Screen 1 (DISCOVER) State
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-  // Screen 2 (PLAN) State
-  const [activeDayIndex, setActiveDayIndex] = useState<number>(1);
+export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId }) => {
+  const { isRTL, formatNumber } = useLanguage();
 
   // Screen 3 (EXPLORE) State
   const [isLiked, setIsLiked] = useState<boolean>(true);
@@ -44,21 +38,40 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
   // CHAPTER 01: DISCOVER (Destinations & Inspiration)
   // ----------------------------------------------------
   if (screenId === 'discover') {
+    const trending = isRTL
+      ? [
+          { name: 'استانبول', spots: '۴۲ مقصد', img: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=300&q=80' },
+          { name: 'رم', spots: '۳۸ مقصد', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80' },
+          { name: 'بالی', spots: '۳۱ مقصد', img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=300&q=80' },
+          { name: 'پاریس', spots: '۲۷ مقصد', img: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80' },
+        ]
+      : [
+          { name: 'Istanbul', spots: '42 Spots', img: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=300&q=80' },
+          { name: 'Rome', spots: '38 Spots', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80' },
+          { name: 'Bali', spots: '31 Spots', img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=300&q=80' },
+          { name: 'Paris', spots: '27 Spots', img: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80' },
+        ];
+
     return (
-      <div className="w-full h-full text-[#10212B] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#10212B] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-4">
           {/* Header */}
           <div className="flex items-center justify-between pt-1">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#168DF5] to-[#18C5BD] text-white flex items-center justify-center font-bold text-xs shadow-md shadow-[#168DF5]/20">
-                EM
+                {isRTL ? 'ع' : 'EM'}
               </div>
               <div>
                 <span className="text-[10px] text-[#71818A]">
-                  {isPersianMode ? 'صبح بخیر' : 'Good Morning'}
+                  {isRTL ? 'صبح بخیر' : 'Good Morning,'}
                 </span>
                 <h2 className="text-xs font-black text-[#10212B]">
-                  {isPersianMode ? 'عرفان معین' : 'Erfan Moein'}
+                  {isRTL ? 'عرفان معین' : 'Erfan Moein'}
                 </h2>
               </div>
             </div>
@@ -72,9 +85,9 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
           <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-2xl bg-white border border-[#E4EDF1] shadow-xs text-[#71818A]">
             <Search size={15} className="text-[#168DF5]" />
             <span className="text-[10px] font-medium flex-1">
-              {isPersianMode
-                ? 'جستجو در کشورها، شهرها و تجربه‌ها...'
-                : 'Search countries, cities & stays...'}
+              {isRTL
+                ? 'جستجو در کشورها، شهرها و اقامتگاه‌ها...'
+                : 'Search destinations, hotels & activities...'}
             </span>
             <SlidersHorizontal size={13} className="text-[#82939B]" />
           </div>
@@ -91,10 +104,16 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             <div className="relative z-10 space-y-1">
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-white/20 backdrop-blur-md text-[8.5px] font-bold">
                 <Sparkles size={10} className="text-cyan-300" />
-                <span>مقصد برتر هفته</span>
+                <span>{isRTL ? 'مقصد برتر هفته' : 'Featured of the Week'}</span>
               </span>
-              <h3 className="text-base font-black tracking-tight">کشف جزیره سانتورینی</h3>
-              <p className="text-[9px] text-white/90">سفری میان معماری سفید و آبی اژه با چشم‌انداز غروب</p>
+              <h3 className="text-base font-black tracking-tight">
+                {isRTL ? 'کشف جزیره سانتورینی' : 'Discover Santorini Island'}
+              </h3>
+              <p className="text-[9px] text-white/90">
+                {isRTL
+                  ? 'سفری میان معماری سفید و آبی اژه با چشم‌انداز غروب رویایی'
+                  : 'Iconic Aegean white architecture & breathtaking caldera sunsets.'}
+              </p>
             </div>
           </div>
 
@@ -102,27 +121,26 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs px-1">
               <span className="font-bold text-[#10212B]">
-                {isPersianMode ? 'مقصدهای محبوب' : 'Trending Destinations'}
+                {isRTL ? 'مقصدهای محبوب' : 'Trending Destinations'}
               </span>
               <span className="text-[10px] text-[#168DF5] font-bold cursor-pointer">
-                {isPersianMode ? 'مشاهده همه' : 'View all'}
+                {isRTL ? 'مشاهده همه' : 'View all'}
               </span>
             </div>
 
             <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-              {[
-                { name: 'استانبول', spots: '۴۲ مقصد', img: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=300&q=80' },
-                { name: 'رم', spots: '۳۸ مقصد', img: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=300&q=80' },
-                { name: 'بالی', spots: '۳۱ مقصد', img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=300&q=80' },
-                { name: 'پاریس', spots: '۲۷ مقصد', img: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80' },
-              ].map((dest, i) => (
+              {trending.map((dest, i) => (
                 <div
                   key={i}
                   className="relative w-24 h-28 rounded-2xl overflow-hidden shrink-0 shadow-xs cursor-pointer"
                 >
                   <img src={dest.img} alt={dest.name} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                  <div className="absolute bottom-2 right-2 text-white text-right">
+                  <div
+                    className={`absolute bottom-2 ${
+                      isRTL ? 'right-2 text-right' : 'left-2 text-left'
+                    } text-white`}
+                  >
                     <div className="text-[11px] font-black">{dest.name}</div>
                     <div className="text-[8px] opacity-80">{dest.spots}</div>
                   </div>
@@ -136,19 +154,23 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             <img
               src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=200&q=80"
               alt="Istanbul"
-              className="w-14 h-14 rounded-xl object-cover"
+              className="w-14 h-14 rounded-xl object-cover shrink-0"
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <span className="text-[10.5px] font-bold text-[#10212B]">استانبول؛ دو قاره</span>
+                <span className="text-[10.5px] font-bold text-[#10212B]">
+                  {isRTL ? 'استانبول؛ دو قاره' : 'Istanbul: Twin Continents'}
+                </span>
                 <span className="flex items-center gap-1 text-[9px] font-bold text-amber-500">
                   <Star size={10} className="fill-amber-400" />
-                  ۴.۸
+                  {isRTL ? '۴.۸' : '4.8'}
                 </span>
               </div>
-              <span className="text-[8.5px] text-[#71818A] block">ترکیه • ۴ شب اقامت لوکس</span>
-              <span className="text-[10px] font-extrabold text-[#168DF5] mt-1 block">
-                از ۱۴,۹۰۰,۰۰۰ تومان
+              <span className="text-[8.5px] text-[#71818A] block">
+                {isRTL ? 'ترکیه · ۴ شب اقامت لوکس' : 'Turkey · 4 Nights Luxury Stay'}
+              </span>
+              <span className="text-[10px] font-extrabold text-[#168DF5] mt-1 block font-mono">
+                {isRTL ? 'از ۱۴,۹۰۰,۰۰۰ تومان' : 'From $1,420 / Person'}
               </span>
             </div>
           </div>
@@ -161,17 +183,34 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
   // CHAPTER 02: PLAN (Personalized Itinerary & Timeline)
   // ----------------------------------------------------
   if (screenId === 'plan') {
+    const day2Activities = isRTL
+      ? [
+          { title: 'مسجد ایاصوفیه و کاخ توپقاپی', sub: 'تور خصوصی · ورودی سریع VIP', time: '۱۰:۰۰', icon: Compass },
+          { title: 'ناهار در کافه‌های کاراکوی', sub: 'پیشنهاد اختصاصی کیوریتور NIVRA', time: '۱۳:۳۰', icon: Utensils },
+          { title: 'کروز غروب آفتاب تنگه بسفر', sub: 'عرشه اختصاصی گلدن هورن', time: '۱۸:۲۰', icon: Ticket },
+        ]
+      : [
+          { title: 'Hagia Sophia & Topkapi Palace', sub: 'Private Guide · Fast-Track VIP Entry', time: '10:00 AM', icon: Compass },
+          { title: 'Artisan Lunch in Karaköy', sub: 'Nivra Curated Gastro Recommendation', time: '1:30 PM', icon: Utensils },
+          { title: 'Bosphorus Sunset Yacht Cruise', sub: 'Golden Horn · Private Upper Deck', time: '6:20 PM', icon: Ticket },
+        ];
+
     return (
-      <div className="w-full h-full text-[#10212B] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#10212B] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-3.5">
           {/* Header */}
           <div className="flex items-center justify-between pt-1">
             <div>
               <span className="text-[10px] text-[#71818A]">
-                {isPersianMode ? 'برنامه سفر هوشمند' : 'Smart Itinerary'}
+                {isRTL ? 'برنامه سفر هوشمند' : 'Smart Itinerary'}
               </span>
               <h2 className="text-sm font-black text-[#10212B]">
-                {isPersianMode ? 'استانبول · ۵ روز' : 'Istanbul · 5 Days'}
+                {isRTL ? 'استانبول · ۵ روز' : 'Istanbul · 5 Days'}
               </h2>
             </div>
             <button className="w-8 h-8 rounded-xl bg-white border border-[#E4EDF1] shadow-xs text-[#168DF5] flex items-center justify-center">
@@ -183,10 +222,16 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
           <div className="p-3.5 rounded-2xl bg-gradient-to-r from-[#168DF5] to-[#18C5BD] text-white shadow-md shadow-[#168DF5]/20 space-y-2">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[9px] text-white/80">پیشرفت برنامه سفر</div>
-                <div className="text-base font-black mt-0.5">روز ۲ از ۵</div>
+                <div className="text-[9px] text-white/80">
+                  {isRTL ? 'پیشرفت برنامه سفر' : 'Itinerary Progress'}
+                </div>
+                <div className="text-base font-black mt-0.5">
+                  {isRTL ? 'روز ۲ از ۵' : 'Day 2 of 5'}
+                </div>
               </div>
-              <span className="text-xl font-black">۴۰٪</span>
+              <span className="text-xl font-black font-mono">
+                {isRTL ? '۴۰٪' : '40%'}
+              </span>
             </div>
             <div className="w-full h-1.5 rounded-full bg-white/25 overflow-hidden">
               <div className="h-full bg-white rounded-full w-[40%]" />
@@ -194,26 +239,40 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
           </div>
 
           {/* Interactive Timeline */}
-          <div className="relative pl-6 space-y-3 py-1">
-            <div className="absolute left-2.5 top-2 bottom-2 w-px bg-[#E4EDF1]" />
+          <div
+            className={`relative ${
+              isRTL ? 'pr-6' : 'pl-6'
+            } space-y-3 py-1`}
+          >
+            <div
+              className={`absolute ${
+                isRTL ? 'right-2.5' : 'left-2.5'
+              } top-2 bottom-2 w-px bg-[#E4EDF1]`}
+            />
 
             {/* Day 1 Section */}
             <div className="space-y-1.5">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#18C5BD]" />
-                <span className="text-[9.5px] font-bold text-[#10212B]">روز اول · ورود به شهر</span>
+                <span className="text-[9.5px] font-bold text-[#10212B]">
+                  {isRTL ? 'روز اول · ورود به استانبول' : 'Day 1 · Arrival & Check-in'}
+                </span>
                 <span className="text-[8px] text-[#24B985] font-bold bg-[#EAF9F4] px-1.5 py-0.5 rounded">
-                  تکمیل شد
+                  {isRTL ? 'تکمیل شد' : 'Completed'}
                 </span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white border border-[#E4EDF1] shadow-xs flex items-center justify-between text-right">
+              <div className="p-2.5 rounded-xl bg-white border border-[#E4EDF1] shadow-xs flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-lg bg-[#168DF5]/10 text-[#168DF5] flex items-center justify-center">
+                  <div className="w-6 h-6 rounded-lg bg-[#168DF5]/10 text-[#168DF5] flex items-center justify-center shrink-0">
                     <Plane size={13} />
                   </div>
                   <div>
-                    <div className="text-[9.5px] font-bold text-[#10212B]">پرواز تهران → استانبول</div>
-                    <div className="text-[8px] text-[#71818A]">TK879 • فرودگاه استانبول</div>
+                    <div className="text-[9.5px] font-bold text-[#10212B]">
+                      {isRTL ? 'پرواز تهران → استانبول' : 'Flight TK879 Arrival'}
+                    </div>
+                    <div className="text-[8px] text-[#71818A]">
+                      {isRTL ? 'TK879 · فرودگاه بین‌المللی استانبول' : 'IST Airport · Luxury Transfer'}
+                    </div>
                   </div>
                 </div>
                 <span className="text-[9px] font-mono text-[#82939B]">07:30</span>
@@ -224,25 +283,23 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             <div className="space-y-1.5">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#168DF5] animate-pulse" />
-                <span className="text-[9.5px] font-bold text-[#10212B]">روز دوم · بافت تاریخی</span>
+                <span className="text-[9.5px] font-bold text-[#10212B]">
+                  {isRTL ? 'روز دوم · بافت تاریخی و ساحلی' : 'Day 2 · Historic Peninsula'}
+                </span>
                 <span className="text-[8px] text-[#168DF5] font-bold bg-[#E7F4FF] px-1.5 py-0.5 rounded">
-                  امروز
+                  {isRTL ? 'امروز' : 'Today'}
                 </span>
               </div>
 
-              {[
-                { title: 'مسجد ایاصوفیه', sub: 'تور خصوصی · ورودی سریع', time: '10:00', icon: Compass },
-                { title: 'ناهار در Karaköy', sub: 'پیشنهاد اختصاصی NIVRA', time: '13:30', icon: Utensils },
-                { title: 'کروز غروب بسفر', sub: 'Golden Horn · VIP Deck', time: '18:20', icon: Ticket },
-              ].map((act, i) => {
+              {day2Activities.map((act, i) => {
                 const Icon = act.icon;
                 return (
                   <div
                     key={i}
-                    className="p-2.5 rounded-xl bg-white border border-[#E4EDF1] shadow-xs flex items-center justify-between text-right hover:border-[#168DF5]/40 transition-colors"
+                    className="p-2.5 rounded-xl bg-white border border-[#E4EDF1] shadow-xs flex items-center justify-between hover:border-[#168DF5]/40 transition-colors"
                   >
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-lg bg-[#18C5BD]/10 text-[#18C5BD] flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-lg bg-[#18C5BD]/10 text-[#18C5BD] flex items-center justify-center shrink-0">
                         <Icon size={13} />
                       </div>
                       <div>
@@ -265,8 +322,27 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
   // CHAPTER 03: EXPLORE (Destination Detail & Experiences)
   // ----------------------------------------------------
   if (screenId === 'explore') {
+    const gridCards = isRTL
+      ? [
+          { title: 'جاذبه‌ها', count: '۲۸ مکان دیدنی', icon: Compass },
+          { title: 'هتل‌ها', count: '۴۸۰ اقامتگاه', icon: Bed },
+          { title: 'رستوران‌ها', count: '۳۴۰ انتخاب', icon: Utensils },
+          { title: 'فعالیت‌ها', count: '۸۷ تجربه خاص', icon: Ticket },
+        ]
+      : [
+          { title: 'Attractions', count: '28 Sites', icon: Compass },
+          { title: 'Hotels', count: '480 Stays', icon: Bed },
+          { title: 'Dining', count: '340 Tables', icon: Utensils },
+          { title: 'Activities', count: '87 Tours', icon: Ticket },
+        ];
+
     return (
-      <div className="w-full h-full text-[#10212B] font-persian flex flex-col justify-between select-none">
+      <div
+        className={`w-full h-full text-[#10212B] flex flex-col justify-between select-none ${
+          isRTL ? 'font-persian text-right' : 'font-sans text-left'
+        }`}
+        dir={isRTL ? 'rtl' : 'ltr'}
+      >
         <div className="space-y-3">
           {/* Hero Banner with Floating Header */}
           <div className="relative h-44 rounded-3xl overflow-hidden shadow-md shadow-[#168DF5]/15 text-white flex flex-col justify-between p-3">
@@ -280,7 +356,7 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             {/* Top Bar Floating Controls */}
             <div className="relative z-10 flex items-center justify-between">
               <button className="w-7 h-7 rounded-xl bg-white/30 backdrop-blur-md text-white flex items-center justify-center">
-                <ArrowRight size={14} />
+                {isRTL ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}
               </button>
               <button
                 onClick={() => setIsLiked(!isLiked)}
@@ -294,10 +370,14 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             <div className="relative z-10 space-y-0.5">
               <div className="flex items-center gap-1 text-[8.5px] font-bold text-amber-300">
                 <Star size={10} className="fill-amber-300" />
-                <span>۴.۹ · مقصد برگزیده مسافران</span>
+                <span>{isRTL ? '۴.۹ · برگزیده مسافران' : '4.9 · Travelers Choice'}</span>
               </div>
-              <h2 className="text-lg font-black">رم، ایتالیا</h2>
-              <p className="text-[9px] text-white/90">تاریخ، هنر و طعم زندگی در قلب اروپا</p>
+              <h2 className="text-lg font-black">{isRTL ? 'رم، ایتالیا' : 'Rome, Italy'}</h2>
+              <p className="text-[9px] text-white/90">
+                {isRTL
+                  ? 'تاریخ، هنر و طعم زندگی در قلب تپنده اروپا'
+                  : 'Timeless art, history and culinary soul in the eternal city.'}
+              </p>
             </div>
           </div>
 
@@ -306,24 +386,25 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             <div className="flex items-center gap-2.5">
               <Sun size={24} className="text-amber-500" />
               <div>
-                <div className="text-sm font-black text-[#10212B]">۲۳°C</div>
-                <div className="text-[8.5px] text-[#71818A]">آفتابی · مناسب پیاده‌روی</div>
+                <div className="text-sm font-black text-[#10212B] font-mono">
+                  {isRTL ? '۲۳°C' : '23°C'}
+                </div>
+                <div className="text-[8.5px] text-[#71818A]">
+                  {isRTL ? 'آفتابی · مناسب پیاده‌روی' : 'Sunny · Ideal Walking Weather'}
+                </div>
               </div>
             </div>
-            <div className="text-right">
-              <div className="text-[9.5px] font-bold text-[#10212B]">امروز</div>
-              <div className="text-[8px] text-[#71818A]">کمینه ۱۶°</div>
+            <div className={isRTL ? 'text-right' : 'text-left'}>
+              <div className="text-[9.5px] font-bold text-[#10212B]">{isRTL ? 'امروز' : 'Today'}</div>
+              <div className="text-[8px] text-[#71818A] font-mono">
+                {isRTL ? 'کمینه ۱۶°' : 'Low 16°'}
+              </div>
             </div>
           </div>
 
           {/* 4 Feature Mini-Cards Grid */}
           <div className="grid grid-cols-2 gap-2">
-            {[
-              { title: 'جاذبه‌ها', count: '۲۸ مکان دیدنی', icon: Compass },
-              { title: 'هتل‌ها', count: '۴۸۰ اقامتگاه', icon: Bed },
-              { title: 'رستوران‌ها', count: '۳۴۰ انتخاب', icon: Utensils },
-              { title: 'فعالیت‌ها', count: '۸۷ تجربه خاص', icon: Ticket },
-            ].map((card, i) => {
+            {gridCards.map((card, i) => {
               const Icon = card.icon;
               return (
                 <div
@@ -347,12 +428,18 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             <img
               src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=200&q=80"
               alt="Colosseum"
-              className="w-12 h-12 rounded-xl object-cover"
+              className="w-12 h-12 rounded-xl object-cover shrink-0"
             />
             <div className="flex-1 min-w-0">
-              <div className="text-[10px] font-bold text-[#10212B]">کولوسئوم باستان</div>
-              <div className="text-[8px] text-[#71818A]">نماد تاریخی رم · تور ۲ ساعته اختصاصی</div>
-              <div className="text-[9.5px] font-black text-[#168DF5] mt-0.5">از ۳۸ یورو</div>
+              <div className="text-[10px] font-bold text-[#10212B]">
+                {isRTL ? 'کولوسئوم باستان' : 'Ancient Colosseum'}
+              </div>
+              <div className="text-[8px] text-[#71818A]">
+                {isRTL ? 'نماد تاریخی رم · تور ۲ ساعته اختصاصی' : 'Iconic Roman Landmark · 2h VIP Tour'}
+              </div>
+              <div className="text-[9.5px] font-black text-[#168DF5] mt-0.5 font-mono">
+                {isRTL ? 'از ۳۸ یورو' : 'From €38'}
+              </div>
             </div>
           </div>
         </div>
@@ -364,20 +451,25 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
   // CHAPTER 04: TRAVEL (Booking, Pricing & Confirmation)
   // ----------------------------------------------------
   return (
-    <div className="w-full h-full text-[#10212B] font-persian flex flex-col justify-between select-none">
+    <div
+      className={`w-full h-full text-[#10212B] flex flex-col justify-between select-none ${
+        isRTL ? 'font-persian text-right' : 'font-sans text-left'
+      }`}
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       <div className="space-y-3">
         {/* Header */}
         <div className="flex items-center justify-between pt-1">
           <div className="flex items-center gap-2">
             <button className="w-7 h-7 rounded-xl bg-white border border-[#E4EDF1] shadow-xs text-[#71818A] flex items-center justify-center">
-              <ArrowRight size={14} />
+              {isRTL ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}
             </button>
             <h2 className="text-xs font-black text-[#10212B]">
-              {isPersianMode ? 'تکمیل رزرو سفر' : 'Confirm Reservation'}
+              {isRTL ? 'تکمیل رزرو سفر' : 'Confirm Booking'}
             </h2>
           </div>
           <span className="text-[8.5px] font-bold text-[#24B985] bg-[#EAF9F4] px-2 py-0.5 rounded-full">
-            تأیید فوری
+            {isRTL ? 'تأیید فوری' : 'Instant Confirmation'}
           </span>
         </div>
 
@@ -386,17 +478,17 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
           <img
             src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=250&q=80"
             alt="The Stay Bosphorus"
-            className="w-14 h-14 rounded-xl object-cover"
+            className="w-14 h-14 rounded-xl object-cover shrink-0"
           />
           <div className="flex-1 min-w-0">
             <div className="text-[10.5px] font-extrabold text-[#10212B]">The Stay Bosphorus</div>
             <div className="text-[8.5px] text-[#71818A] flex items-center gap-1 mt-0.5">
               <MapPin size={10} className="text-[#168DF5]" />
-              استانبول · بشیکتاش
+              <span>{isRTL ? 'استانبول · بشیکتاش' : 'Istanbul · Beşiktaş'}</span>
             </div>
             <div className="flex items-center gap-1 text-[8.5px] font-bold text-amber-500 mt-1">
               <Star size={10} className="fill-amber-400" />
-              ۴.۸ (۲۴۰ دیدگاه مسافران)
+              <span>{isRTL ? '۴.۸ (۲۴۰ دیدگاه مسافران)' : '4.8 (240 reviews)'}</span>
             </div>
           </div>
         </div>
@@ -407,53 +499,67 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
             <div className="flex items-center gap-2">
               <Calendar size={13} className="text-[#168DF5]" />
               <div>
-                <span className="font-bold text-[#10212B] block">تاریخ اقامت</span>
-                <span className="text-[#71818A] text-[8px]">۲۵ تا ۲۹ شهریور · ۴ شب</span>
+                <span className="font-bold text-[#10212B] block">
+                  {isRTL ? 'تاریخ اقامت' : 'Travel Dates'}
+                </span>
+                <span className="text-[#71818A] text-[8px]">
+                  {isRTL ? '۲۵ تا ۲۹ شهریور · ۴ شب' : 'Sep 25 - Sep 29 · 4 Nights'}
+                </span>
               </div>
             </div>
-            <ArrowLeft size={12} className="text-[#82939B]" />
+            {isRTL ? <ArrowLeft size={12} className="text-[#82939B]" /> : <ArrowRight size={12} className="text-[#82939B]" />}
           </div>
 
           <div className="p-2.5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Luggage size={13} className="text-[#168DF5]" />
               <div>
-                <span className="font-bold text-[#10212B] block">مسافران</span>
-                <span className="text-[#71818A] text-[8px]">۲ بزرگسال · ۱ اتاق اختصاصی</span>
+                <span className="font-bold text-[#10212B] block">
+                  {isRTL ? 'مسافران و اتاق' : 'Guests & Room'}
+                </span>
+                <span className="text-[#71818A] text-[8px]">
+                  {isRTL ? '۲ بزرگسال · ۱ سوئیت لوکس' : '2 Adults · 1 Deluxe Suite'}
+                </span>
               </div>
             </div>
-            <ArrowLeft size={12} className="text-[#82939B]" />
+            {isRTL ? <ArrowLeft size={12} className="text-[#82939B]" /> : <ArrowRight size={12} className="text-[#82939B]" />}
           </div>
 
           <div className="p-2.5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <CreditCard size={13} className="text-[#168DF5]" />
               <div>
-                <span className="font-bold text-[#10212B] block">روش پرداخت</span>
-                <span className="text-[#71818A] text-[8px]">کارت بانکی •••• ۴۸۲۱</span>
+                <span className="font-bold text-[#10212B] block">
+                  {isRTL ? 'روش پرداخت' : 'Payment Method'}
+                </span>
+                <span className="text-[#71818A] text-[8px] font-mono">
+                  {isRTL ? 'کارت بانکی •••• ۴۸۲۱' : 'Visa Debit •••• 4821'}
+                </span>
               </div>
             </div>
-            <ArrowLeft size={12} className="text-[#82939B]" />
+            {isRTL ? <ArrowLeft size={12} className="text-[#82939B]" /> : <ArrowRight size={12} className="text-[#82939B]" />}
           </div>
         </div>
 
         {/* Price Breakdown */}
         <div className="p-3 rounded-2xl bg-white border border-[#E4EDF1] shadow-xs space-y-1.5 text-[8.5px]">
           <div className="flex justify-between text-[#71818A]">
-            <span>اقامت · ۴ شب</span>
-            <span className="font-mono">۲۶,۴۰۰,۰۰۰</span>
+            <span>{isRTL ? 'اقامت · ۴ شب' : 'Accommodation (4 Nights)'}</span>
+            <span className="font-mono">{isRTL ? '۲۶,۴۰۰,۰۰۰' : '$1,680.00'}</span>
           </div>
           <div className="flex justify-between text-[#71818A]">
-            <span>مالیات و خدمات هتل</span>
-            <span className="font-mono">۱,۳۲۰,۰۰۰</span>
+            <span>{isRTL ? 'مالیات و خدمات هتل' : 'Taxes & Service Fees'}</span>
+            <span className="font-mono">{isRTL ? '۱,۳۲۰,۰۰۰' : '$124.00'}</span>
           </div>
           <div className="flex justify-between text-[#24B985] font-bold">
-            <span>تخفیف ویژه NIVRA+</span>
-            <span className="font-mono">−۸۵۰,۰۰۰</span>
+            <span>{isRTL ? 'تخفیف ویژه NIVRA+' : 'NIVRA+ Member Discount'}</span>
+            <span className="font-mono">{isRTL ? '−۸۵۰,۰۰۰' : '-$90.00'}</span>
           </div>
           <div className="pt-1.5 border-t border-[#E4EDF1] flex justify-between text-[#10212B] font-extrabold text-[10px]">
-            <span>مبلغ قابل پرداخت</span>
-            <span className="text-[#168DF5]">۲۶,۸۷۰,۰۰۰ تومان</span>
+            <span>{isRTL ? 'مبلغ نهایی قابل پرداخت' : 'Total Amount Due'}</span>
+            <span className="text-[#168DF5] font-mono">
+              {isRTL ? '۲۶,۸۷۰,۰۰۰ تومان' : '$1,714.00 USD'}
+            </span>
           </div>
         </div>
 
@@ -466,13 +572,19 @@ export const NivraScreen: React.FC<NivraScreenProps> = ({ screenId, isPersianMod
               : 'bg-gradient-to-r from-[#168DF5] to-[#18C5BD] shadow-[#168DF5]/25'
           }`}
         >
-          {isPaid ? 'رزرو با موفقیت ثبت شد ✓' : 'پرداخت و تأیید رزرو'}
+          {isPaid
+            ? (isRTL ? 'رزرو با موفقیت ثبت شد ✓' : 'Booking Confirmed ✓')
+            : (isRTL ? 'پرداخت و تأیید نهایی رزرو' : 'Pay & Confirm Reservation')}
         </button>
 
         {/* Trust Badges */}
         <div className="flex items-center justify-center gap-1.5 text-[8px] text-[#71818A]">
           <ShieldCheck size={11} className="text-[#24B985]" />
-          <span>پرداخت امن با رمزنگاری سرتاسری NIVRA · لغو رایگان ۲۴ ساعته</span>
+          <span>
+            {isRTL
+              ? 'پرداخت امن ۲۵۶ بیتی NIVRA · لغو رایگان تا ۲۴ ساعت قبل'
+              : '256-bit encrypted checkout · Free cancellation up to 24h prior'}
+          </span>
         </div>
       </div>
     </div>
