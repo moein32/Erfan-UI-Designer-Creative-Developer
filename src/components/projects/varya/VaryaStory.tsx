@@ -1,7 +1,8 @@
 import React from 'react';
 import { ProjectData } from '../../../types';
-import { Sparkles, ArrowUpRight, Activity, Moon, Bot, Heart } from 'lucide-react';
+import { ArrowUpRight, Activity, Moon, Bot, Heart } from 'lucide-react';
 import { useCursor } from '../../../context/CursorContext';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface VaryaStoryProps {
   project: ProjectData;
@@ -11,168 +12,123 @@ interface VaryaStoryProps {
   isPersianMode?: boolean;
 }
 
-const CHAPTERS = [
-  {
-    number: '01',
-    id: 'equilibrium',
-    title: 'EQUILIBRIUM',
-    subtitle: 'Daily Bio-Score & Circadian Balance',
-    persianTitle: 'تعادل زیستی و امتیاز سلامت',
-    description:
-      'Harmonizing heart rate variability, hydration, and mindful micro-rituals into a single living biometric score.',
-    icon: Heart,
-  },
-  {
-    number: '02',
-    id: 'vitality',
-    title: 'VITALITY',
-    subtitle: 'Kinetic Movement & Caloric Flow',
-    persianTitle: 'پایش تحرک و پویایی هفتگی',
-    description:
-      'Calm, non-punitive activity tracking with multi-tier progress rings and adaptive workout journaling.',
-    icon: Activity,
-  },
-  {
-    number: '03',
-    id: 'circadian',
-    title: 'CIRCADIAN',
-    subtitle: 'Deep Sleep Architecture & Recovery',
-    persianTitle: 'معماری خواب عمیق و ریکاوری',
-    description:
-      'Chronobiology-aligned sleep staging, restorative delta wave tracking, and proactive bedtime guidance.',
-    icon: Moon,
-  },
-  {
-    number: '04',
-    id: 'intelligence',
-    title: 'INTELLIGENCE',
-    subtitle: 'AI Wellness Companion & Nutrition',
-    persianTitle: 'مربی هوشمند و تغذیه آگاهانه',
-    description:
-      'Context-aware conversational health guidance with proactive recovery stretches and balanced nutrition insights.',
-    icon: Bot,
-  },
-];
+const ICONS = [Heart, Activity, Moon, Bot];
 
 export const VaryaStory: React.FC<VaryaStoryProps> = ({
   project,
   activeChapterIndex,
   onSelectChapter,
   onOpenCaseStudy,
-  isPersianMode = false,
 }) => {
   const { setCursor, resetCursor } = useCursor();
+  const { t, isRTL, formatNumber } = useLanguage();
+  const pTrans = t.projects.varya;
+
+  const chapters = pTrans.storySteps;
 
   return (
-    <div className="space-y-10 lg:space-y-12">
-      {/* Editorial Title & Subtitle */}
-      <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E9E9F1] text-[11px] font-mono font-bold text-[#6F62E8] shadow-xs">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#55C99B] animate-pulse" />
-          <span>CIRCADIAN WELLNESS & BIOMETRICS</span>
+    <div className="flex flex-col justify-between h-full space-y-8">
+      {/* Editorial Header */}
+      <div>
+        <div className="flex items-center gap-3">
+          <span className="px-3 py-1 bg-[#0A0A0A]/5 text-[#0A0A0A] border border-[#E5E7EB] text-xs font-mono font-bold tracking-wider uppercase rounded-full liquid-glass">
+            {isRTL ? 'پلتفرم پایش سلامت و بیومتریک' : 'BIOMETRIC WELLNESS'}
+          </span>
+          <span className="text-xs font-mono text-[#71717A]">{formatNumber(pTrans.year)}</span>
         </div>
 
-        <div className="space-y-2">
-          <h2
-            className="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-[#111116] cursor-pointer hover:opacity-85 transition-opacity"
-            onClick={onOpenCaseStudy}
-            onMouseEnter={() => setCursor({ type: 'project', text: 'VIEW ↗' })}
-            onMouseLeave={resetCursor}
-          >
-            VARYA
-          </h2>
-          <p className="text-xl sm:text-2xl font-medium text-[#444449] tracking-tight">
-            {isPersianMode ? 'ویرا — سلامت، تندرستی و ریتم زیستی' : project.tagline}
-          </p>
-        </div>
+        <h3 className="text-3xl md:text-5xl font-display font-extrabold text-[#0A0A0A] mt-4 tracking-tight">
+          {pTrans.title}
+        </h3>
+        <p className="text-base md:text-lg font-medium text-[#71717A] mt-1">
+          {pTrans.tagline}
+        </p>
 
-        <p className="text-sm sm:text-base text-[#666664] leading-relaxed max-w-xl">
-          {project.overview}
+        <p className="text-[#52525B] text-sm md:text-base leading-relaxed mt-4 max-w-xl">
+          {pTrans.overview}
         </p>
       </div>
 
-      {/* 4 Interactive Story Chapters */}
+      {/* 4 Interactive Story Chapters — Liquid Glass */}
       <div className="space-y-3 pt-2">
-        <span className="text-[11px] font-mono font-bold tracking-widest text-[#888884] uppercase block">
-          CIRCADIAN WORKFLOW CHAPTERS
+        <span className="text-[11px] font-mono font-bold tracking-widest text-[#71717A] uppercase block">
+          {isRTL ? 'فصل‌های پایش سلامت و تعادل زیستی' : 'WELLNESS PILLARS'}
         </span>
 
         <div className="space-y-2.5">
-          {CHAPTERS.map((chapter, idx) => {
+          {chapters.map((ch, idx) => {
             const isActive = activeChapterIndex === idx;
-            const Icon = chapter.icon;
-
+            const Icon = ICONS[idx] || Heart;
             return (
               <div
-                key={chapter.id}
+                key={ch.number}
                 onClick={() => onSelectChapter(idx)}
-                onMouseEnter={() => setCursor({ type: 'interactive', text: 'EXPLORE' })}
+                onMouseEnter={() => setCursor({ type: 'button' })}
                 onMouseLeave={resetCursor}
-                className={`p-4 sm:p-5 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-white border-[#6F62E8]/40 shadow-[0_10px_30px_rgba(111,98,232,0.08)] ring-1 ring-[#6F62E8]/20'
-                    : 'bg-white/40 border-black/5 hover:bg-white/80 hover:border-black/10'
+                    ? 'liquid-glass border-[#0A0A0A] shadow-xs'
+                    : 'bg-[#FFFFFF] border-[#E5E7EB] hover:border-[#A1A1AA]'
                 }`}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`font-mono text-xs font-bold transition-colors ${
-                        isActive ? 'text-[#6F62E8]' : 'text-[#999994]'
-                      }`}
-                    >
-                      {chapter.number}
-                    </span>
-                    <div>
-                      <h4 className="text-base font-extrabold text-[#111116] tracking-tight">
-                        {chapter.title}
-                      </h4>
-                      <p className="text-xs text-[#666664]">
-                        {isPersianMode ? chapter.persianTitle : chapter.subtitle}
-                      </p>
-                    </div>
-                  </div>
-
+                <div className="flex items-start gap-4">
                   <div
-                    className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors ${
+                    className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                       isActive
-                        ? 'bg-[#EEEAFF] text-[#6F62E8]'
-                        : 'bg-black/5 text-[#888884]'
+                        ? 'bg-[#0A0A0A] text-white shadow-xs'
+                        : 'bg-[#FAFAFA] border border-[#E5E7EB] text-[#71717A]'
                     }`}
                   >
-                    <Icon size={16} />
+                    <Icon size={18} />
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-mono font-bold text-[#71717A]">
+                          {formatNumber(ch.number)}
+                        </span>
+                        <h4 className="font-display text-base sm:text-lg font-bold text-[#0A0A0A]">
+                          {ch.title}
+                        </h4>
+                      </div>
+                      <span className="text-[11px] font-mono text-[#0A0A0A] font-semibold">
+                        {isActive ? (isRTL ? 'در حال نمایش' : 'ACTIVE VIEW') : ''}
+                      </span>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-[#52525B] mt-1 leading-relaxed">
+                      {ch.description}
+                    </p>
                   </div>
                 </div>
-
-                {isActive && (
-                  <p className="mt-3 pt-3 border-t border-black/5 text-xs sm:text-sm text-[#555552] leading-relaxed animate-fadeIn">
-                    {chapter.description}
-                  </p>
-                )}
               </div>
             );
           })}
         </div>
       </div>
 
-      {/* Case Study Call-to-Action */}
-      <div className="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      {/* Case Study Deep Dive Action */}
+      <div className="flex flex-wrap items-center gap-4 pt-2">
         <button
           onClick={onOpenCaseStudy}
-          onMouseEnter={() => setCursor({ type: 'action', text: 'OPEN' })}
+          id={`view-case-study-${project.id}`}
+          className="group px-7 py-3.5 rounded-full bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold tracking-wider hover:bg-[#27272A] transition-all flex items-center gap-2 shadow-xs active:scale-95 cursor-pointer"
+          onMouseEnter={() => setCursor({ type: 'button', text: t.cursor.view })}
           onMouseLeave={resetCursor}
-          className="inline-flex items-center gap-3 px-7 py-4 rounded-full bg-[#111116] text-white font-bold text-sm tracking-wide shadow-lg shadow-black/10 hover:bg-[#6F62E8] hover:shadow-[#6F62E8]/25 transition-all duration-300 group"
         >
-          <span>VIEW FULL CASE STUDY</span>
+          <span>{isRTL ? `مشاهده کیس‌استادی کامل ${pTrans.title}` : `EXPLORE FULL ${project.title} CASE STUDY`}</span>
           <ArrowUpRight
-            size={18}
-            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            size={15}
+            className={`group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ${isRTL ? 'rotate-[-90deg]' : ''}`}
           />
         </button>
 
-        <span className="text-xs text-[#888884] font-mono">
-          {project.timeline} · {project.role}
-        </span>
+        <div className="flex items-center gap-2 text-xs font-mono text-[#71717A]">
+          <span>{formatNumber(pTrans.year)}</span>
+          <span>·</span>
+          <span>{pTrans.client}</span>
+        </div>
       </div>
     </div>
   );

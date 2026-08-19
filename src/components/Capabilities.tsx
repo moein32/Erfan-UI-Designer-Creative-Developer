@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { SectionHeading } from './SectionHeading';
-import { CAPABILITIES } from '../data/projectsData';
 import { useCursor } from '../context/CursorContext';
-import { ArrowUpRight, Check, Sparkles, Plus, Minus } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { Sparkles, Plus, Minus, Check } from 'lucide-react';
 
 export const Capabilities: React.FC = () => {
   const { setCursor, resetCursor } = useCursor();
-  const [activeCapId, setActiveCapId] = useState<string>(CAPABILITIES[0].id);
+  const { t, isRTL, formatNumber } = useLanguage();
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  const capabilities = t.capabilities.items;
+  const activeCap = capabilities[activeIndex] || capabilities[0];
 
   return (
     <section
@@ -14,22 +18,21 @@ export const Capabilities: React.FC = () => {
       className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB]"
     >
       <SectionHeading
-        number="03"
-        tag="CORE EXPERTISE"
-        title="CAPABILITIES & DISCIPLINES."
-        persianTitle="تخصص‌ها و حوزه‌های فعالیت"
-        description="A specialized set of design and technical proficiencies developed over years of shipping high-impact products."
+        number={t.sectionHeadings.capabilities.number}
+        tag={t.sectionHeadings.capabilities.tag}
+        title={t.sectionHeadings.capabilities.title}
+        description={t.sectionHeadings.capabilities.description}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left List of Capabilities with Interactive Hover / Click */}
         <div className="lg:col-span-7 divide-y divide-[#E5E7EB] border-y border-[#E5E7EB]">
-          {CAPABILITIES.map((cap) => {
-            const isActive = activeCapId === cap.id;
+          {capabilities.map((cap, idx) => {
+            const isActive = activeIndex === idx;
             return (
               <div
-                key={cap.id}
-                onClick={() => setActiveCapId(cap.id)}
+                key={cap.title}
+                onClick={() => setActiveIndex(idx)}
                 className={`group py-6 md:py-8 cursor-pointer transition-all duration-300 ${
                   isActive ? 'bg-[#0A0A0A]/[0.02]' : 'hover:bg-[#0A0A0A]/[0.01]'
                 }`}
@@ -39,7 +42,7 @@ export const Capabilities: React.FC = () => {
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-baseline gap-4 md:gap-8">
                     <span className="text-xs font-mono font-bold text-[#A1A1AA] group-hover:text-[#0A0A0A] transition-colors">
-                      {cap.number}
+                      {formatNumber(cap.number)}
                     </span>
                     <h3
                       className={`font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight transition-colors ${
@@ -87,68 +90,63 @@ export const Capabilities: React.FC = () => {
           })}
         </div>
 
-        {/* Right Sticky Detail Box (Desktop) */}
+        {/* Right Sticky Detail Box (Desktop) — Liquid Glass */}
         <div className="hidden lg:block lg:col-span-5 sticky top-28">
-          {(() => {
-            const current = CAPABILITIES.find((c) => c.id === activeCapId) || CAPABILITIES[0];
-            return (
-              <div className="p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#E5E7EB] shadow-sm space-y-6 animate-in fade-in zoom-in-95 duration-200">
-                <div className="flex items-center justify-between pb-4 border-b border-[#F4F4F5]">
-                  <span className="text-xs font-mono font-bold text-[#0A0A0A] bg-[#0A0A0A]/5 px-3 py-1 rounded-md">
-                    {current.number} / SPECIFICATION
+          <div className="p-8 sm:p-10 rounded-3xl liquid-glass border border-[#E5E7EB] shadow-xs space-y-6 animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-[#E5E7EB]">
+              <span className="text-xs font-mono font-bold text-[#0A0A0A] bg-[#0A0A0A]/5 px-3 py-1 rounded-md">
+                {formatNumber(activeCap.number)} / {isRTL ? 'مشخصات تخصصی' : 'SPECIFICATION'}
+              </span>
+              <span className="text-xs font-mono text-[#71717A]">{activeCap.subtitle}</span>
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="font-display text-2xl font-bold text-[#0A0A0A]">
+                {activeCap.title}
+              </h4>
+              <p className="text-sm text-[#52525B] leading-relaxed">
+                {activeCap.description}
+              </p>
+            </div>
+
+            {/* Highlight Quote */}
+            <div className="p-4 rounded-2xl bg-[#FFFFFF] border border-[#E5E7EB] text-xs font-mono text-[#3F3F46] flex items-center gap-2.5 shadow-xs">
+              <Sparkles size={16} className="text-[#0A0A0A] shrink-0" />
+              <span>{activeCap.highlight}</span>
+            </div>
+
+            {/* Skill Chips */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono text-[#71717A] tracking-widest uppercase block">
+                {isRTL ? 'حوزه‌های تسلط' : 'AREAS OF MASTERY'}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {activeCap.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1 rounded-lg text-xs font-mono bg-[#FFFFFF] border border-[#E5E7EB] text-[#0A0A0A] font-medium shadow-2xs"
+                  >
+                    {skill}
                   </span>
-                  <span className="text-xs font-mono text-[#71717A]">{current.subtitle}</span>
-                </div>
-
-                <div className="space-y-2">
-                  <h4 className="font-display text-2xl font-bold text-[#0A0A0A]">
-                    {current.title}
-                  </h4>
-                  <p className="text-sm text-[#52525B] leading-relaxed">
-                    {current.description}
-                  </p>
-                </div>
-
-                {/* Highlight Quote */}
-                <div className="p-4 rounded-2xl bg-[#FAFAFA] border border-[#E5E7EB] text-xs font-mono text-[#3F3F46] flex items-center gap-2.5">
-                  <Sparkles size={16} className="text-[#0A0A0A] shrink-0" />
-                  <span>{current.highlight}</span>
-                </div>
-
-                {/* Skill Chips */}
-                <div className="space-y-2">
-                  <span className="text-xs font-mono text-[#71717A] tracking-widest uppercase block">
-                    AREAS OF MASTERY
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {current.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 rounded-lg text-xs font-mono bg-[#FAFAFA] border border-[#E5E7EB] text-[#0A0A0A] font-medium"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Deliverables Checklist */}
-                <div className="space-y-2 pt-2 border-t border-[#F4F4F5]">
-                  <span className="text-xs font-mono text-[#71717A] tracking-widest uppercase block">
-                    KEY DELIVERABLES
-                  </span>
-                  <div className="space-y-2">
-                    {current.deliverables.map((item) => (
-                      <div key={item} className="flex items-center gap-2 text-xs font-mono text-[#52525B]">
-                        <Check size={13} className="text-emerald-600 shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
-            );
-          })()}
+            </div>
+
+            {/* Deliverables Checklist */}
+            <div className="space-y-2 pt-2 border-t border-[#E5E7EB]">
+              <span className="text-xs font-mono text-[#71717A] tracking-widest uppercase block">
+                {isRTL ? 'خروجی‌های کلیدی پروژه' : 'KEY DELIVERABLES'}
+              </span>
+              <div className="space-y-2">
+                {activeCap.deliverables.map((item) => (
+                  <div key={item} className="flex items-center gap-2 text-xs font-mono text-[#52525B]">
+                    <Check size={13} className="text-emerald-600 shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

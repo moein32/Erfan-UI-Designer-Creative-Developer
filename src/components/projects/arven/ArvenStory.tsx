@@ -1,7 +1,8 @@
 import React from 'react';
 import { ProjectData } from '../../../types';
-import { Sparkles, ArrowUpRight, Check, Brain, Calendar, CheckSquare, Layers } from 'lucide-react';
+import { Sparkles, ArrowUpRight, Brain, Calendar, CheckSquare } from 'lucide-react';
 import { useCursor } from '../../../context/CursorContext';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface ArvenStoryProps {
   project: ProjectData;
@@ -11,114 +12,71 @@ interface ArvenStoryProps {
   isPersianMode?: boolean;
 }
 
-const CHAPTERS = [
-  {
-    number: '01',
-    id: 'think',
-    title: 'THINK',
-    subtitle: 'Neural Intelligence & Contextual Feed',
-    persianTitle: 'تفکر و پردازش هوشمند',
-    description:
-      'Arven predicts daily leverage points, auto-synthesizes meetings, and generates context-aware briefs before your day starts.',
-    icon: Sparkles,
-  },
-  {
-    number: '02',
-    id: 'organize',
-    title: 'ORGANIZE',
-    subtitle: 'Autonomous Task Decomposition',
-    persianTitle: 'سازماندهی و تفکیک وظایف',
-    description:
-      'Large cognitive hurdles decompose into 45-minute focus sprints with dynamic priority tracking and milestone tracking.',
-    icon: CheckSquare,
-  },
-  {
-    number: '03',
-    id: 'plan',
-    title: 'PLAN',
-    subtitle: 'Cognitive Scheduling & Focus Shielding',
-    persianTitle: 'برنامه‌ریزی و تمرکز عمیق',
-    description:
-      'Time-blocking matches your biological focus curve, automatically shielding deep work windows from notification interruptions.',
-    icon: Calendar,
-  },
-  {
-    number: '04',
-    id: 'create',
-    title: 'CREATE',
-    subtitle: 'Multimodal Knowledge Synthesis',
-    persianTitle: 'سنتز دانش و پردازش خلاق',
-    description:
-      'A friction-free second brain connecting product notes, design tokens, and recurring insights into structured knowledge maps.',
-    icon: Brain,
-  },
-];
+const ICONS = [Sparkles, CheckSquare, Calendar, Brain];
 
 export const ArvenStory: React.FC<ArvenStoryProps> = ({
   project,
   activeChapterIndex,
   onSelectChapter,
   onOpenCaseStudy,
-  isPersianMode = false,
 }) => {
   const { setCursor, resetCursor } = useCursor();
+  const { t, isRTL, formatNumber } = useLanguage();
+  const pTrans = t.projects.arven;
+
+  const chapters = pTrans.storySteps;
 
   return (
-    <div className="space-y-10 lg:space-y-12">
-      {/* Editorial Title & Core Hook */}
-      <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E7E9F1] text-[11px] font-mono font-bold text-[#5146E5] shadow-xs">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#5146E5] animate-pulse" />
-          <span>AI PRODUCTIVITY EXPERIENCE</span>
+    <div className="flex flex-col justify-between h-full space-y-8">
+      {/* Editorial Header */}
+      <div>
+        <div className="flex items-center gap-3">
+          <span className="px-3 py-1 bg-[#0A0A0A]/5 text-[#0A0A0A] border border-[#E5E7EB] text-xs font-mono font-bold tracking-wider uppercase rounded-full liquid-glass">
+            {isRTL ? 'پروژه هوش مصنوعی' : 'AUTONOMOUS WORKSPACE'}
+          </span>
+          <span className="text-xs font-mono text-[#71717A]">{formatNumber(pTrans.year)}</span>
         </div>
 
-        <div className="space-y-2">
-          <h2
-            className="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tighter text-[#111116] cursor-pointer hover:opacity-85 transition-opacity"
-            onClick={onOpenCaseStudy}
-            onMouseEnter={() => setCursor({ type: 'project', text: 'VIEW ↗' })}
-            onMouseLeave={resetCursor}
-          >
-            ARVEN
-          </h2>
-          <p className="text-xl sm:text-2xl font-medium text-[#444449] tracking-tight">
-            {isPersianMode ? 'دستیار هوشمند کارآمدی و محیط کار شناختی' : project.tagline}
-          </p>
-        </div>
+        <h3 className="text-3xl md:text-5xl font-display font-extrabold text-[#0A0A0A] mt-4 tracking-tight">
+          {pTrans.title}
+        </h3>
+        <p className="text-base md:text-lg font-medium text-[#71717A] mt-1">
+          {pTrans.tagline}
+        </p>
 
-        <p className="text-sm sm:text-base text-[#666664] leading-relaxed max-w-xl">
-          {project.overview}
+        <p className="text-[#52525B] text-sm md:text-base leading-relaxed mt-4 max-w-xl">
+          {pTrans.overview}
         </p>
       </div>
 
-      {/* 4 Interactive Story Chapters */}
+      {/* 4 Interactive Story Chapters — Liquid Glass */}
       <div className="space-y-3 pt-2">
-        <span className="text-[11px] font-mono font-bold tracking-widest text-[#888884] uppercase block">
-          SYSTEM WORKFLOW CHAPTERS
+        <span className="text-[11px] font-mono font-bold tracking-widest text-[#71717A] uppercase block">
+          {isRTL ? 'فصل‌های جریان کاری سیستم' : 'SYSTEM WORKFLOW CHAPTERS'}
         </span>
 
         <div className="space-y-2.5">
-          {CHAPTERS.map((ch, idx) => {
+          {chapters.map((ch, idx) => {
             const isActive = activeChapterIndex === idx;
-            const Icon = ch.icon;
+            const Icon = ICONS[idx] || Sparkles;
             return (
               <div
-                key={ch.id}
+                key={ch.number}
                 onClick={() => onSelectChapter(idx)}
                 onMouseEnter={() => setCursor({ type: 'button' })}
                 onMouseLeave={resetCursor}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-white border-[#5146E5] shadow-md shadow-[#5146E5]/10 translate-x-1 sm:translate-x-2'
-                    : 'bg-white/60 border-[#E8E8E4] hover:bg-white hover:border-[#D1D1CF]'
+                    ? 'liquid-glass border-[#0A0A0A] shadow-xs'
+                    : 'bg-[#FFFFFF] border-[#E5E7EB] hover:border-[#A1A1AA]'
                 }`}
               >
                 <div className="flex items-start gap-4">
                   <div
                     className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                       isActive
-                        ? 'bg-[#5146E5] text-white shadow-xs'
-                        : 'bg-[#F0F2F8] text-[#73788C]'
+                        ? 'bg-[#0A0A0A] text-white shadow-xs'
+                        : 'bg-[#FAFAFA] border border-[#E5E7EB] text-[#71717A]'
                     }`}
                   >
                     <Icon size={18} />
@@ -127,19 +85,19 @@ export const ArvenStory: React.FC<ArvenStoryProps> = ({
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-[#888884]">
-                          {ch.number}
+                        <span className="text-xs font-mono font-bold text-[#71717A]">
+                          {formatNumber(ch.number)}
                         </span>
-                        <h3 className="font-display text-base sm:text-lg font-bold text-[#111116]">
+                        <h4 className="font-display text-base sm:text-lg font-bold text-[#0A0A0A]">
                           {ch.title}
-                        </h3>
+                        </h4>
                       </div>
-                      <span className="text-[11px] font-mono text-[#5146E5] font-semibold">
-                        {isActive ? 'ACTIVE VIEW' : ''}
+                      <span className="text-[11px] font-mono text-[#0A0A0A] font-semibold">
+                        {isActive ? (isRTL ? 'در حال نمایش' : 'ACTIVE VIEW') : ''}
                       </span>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-[#555558] mt-1 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#52525B] mt-1 leading-relaxed">
                       {ch.description}
                     </p>
                   </div>
@@ -155,21 +113,21 @@ export const ArvenStory: React.FC<ArvenStoryProps> = ({
         <button
           onClick={onOpenCaseStudy}
           id={`view-case-study-${project.id}`}
-          className="group px-7 py-3.5 rounded-full bg-[#111116] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2A2A2E] transition-all flex items-center gap-2 shadow-md active:scale-95 cursor-pointer"
-          onMouseEnter={() => setCursor({ type: 'project', text: 'EXPLORE ↗' })}
+          className="group px-7 py-3.5 rounded-full bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold tracking-wider hover:bg-[#27272A] transition-all flex items-center gap-2 shadow-xs active:scale-95 cursor-pointer"
+          onMouseEnter={() => setCursor({ type: 'button', text: t.cursor.view })}
           onMouseLeave={resetCursor}
         >
-          <span>EXPLORE FULL ARVEN CASE STUDY</span>
+          <span>{isRTL ? `مشاهده کیس‌استادی کامل ${pTrans.title}` : `EXPLORE FULL ${project.title} CASE STUDY`}</span>
           <ArrowUpRight
             size={15}
-            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            className={`group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ${isRTL ? 'rotate-[-90deg]' : ''}`}
           />
         </button>
 
-        <div className="flex items-center gap-2 text-xs font-mono text-[#777774]">
-          <span>{project.year}</span>
+        <div className="flex items-center gap-2 text-xs font-mono text-[#71717A]">
+          <span>{formatNumber(pTrans.year)}</span>
           <span>·</span>
-          <span>{project.client}</span>
+          <span>{pTrans.client}</span>
         </div>
       </div>
     </div>

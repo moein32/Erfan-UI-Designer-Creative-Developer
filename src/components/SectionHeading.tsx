@@ -1,10 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface SectionHeadingProps {
   number: string;
   tag: string;
   title: string;
-  persianTitle?: string;
   description?: string;
   align?: 'left' | 'center' | 'between';
   light?: boolean;
@@ -14,11 +14,12 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   number,
   tag,
   title,
-  persianTitle,
   description,
   align = 'left',
   light = false,
 }) => {
+  const { isRTL, formatNumber } = useLanguage();
+
   return (
     <div className={`mb-12 md:mb-20 ${align === 'center' ? 'text-center mx-auto max-w-3xl' : ''}`}>
       {/* Category tag & Number */}
@@ -27,23 +28,17 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           light ? 'text-[#A1A1AA]' : 'text-[#71717A]'
         } ${align === 'center' ? 'justify-center' : ''}`}
       >
-        <span className="font-semibold text-[#0A0A0A] bg-[#0A0A0A]/5 px-2 py-0.5 rounded-sm">
-          {number}
+        <span className="font-semibold text-[#0A0A0A] bg-[#0A0A0A]/5 px-2 py-0.5 rounded-md">
+          {formatNumber(number)}
         </span>
         <span>/</span>
-        <span>{tag}</span>
-        {persianTitle && (
-          <>
-            <span>·</span>
-            <span className="font-persian text-[#71717A]">{persianTitle}</span>
-          </>
-        )}
+        <span className="font-bold">{tag}</span>
       </div>
 
       {/* Main Headline */}
       <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 ${align === 'center' ? 'items-center' : ''}`}>
         <h2
-          className={`font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] ${
+          className={`font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] ${
             light ? 'text-[#FFFFFF]' : 'text-[#0A0A0A]'
           }`}
         >

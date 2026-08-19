@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { CursorProvider } from './context/CursorContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { CustomCursor } from './components/CustomCursor';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
@@ -21,10 +22,10 @@ import { ProjectData } from './types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function App() {
+function PortfolioMain() {
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<ProjectData | null>(null);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
-  const [isPersianMode, setIsPersianMode] = useState(false);
+  const { t, isRTL } = useLanguage();
 
   // Initialize Lenis Smooth Scrolling and link with GSAP ScrollTrigger
   useEffect(() => {
@@ -58,80 +59,84 @@ export default function App() {
   };
 
   return (
-    <CursorProvider>
-      <div className={`min-h-screen bg-[#FFFFFF] text-[#0A0A0A] bg-noise ${isPersianMode ? 'persian-sub-active' : ''}`}>
-        {/* Custom Interactive Cursor */}
-        <CustomCursor />
+    <div className={`min-h-screen bg-[#FFFFFF] text-[#0A0A0A] bg-noise transition-colors duration-300 ${isRTL ? 'font-persian' : ''}`}>
+      {/* Custom Interactive Cursor */}
+      <CustomCursor />
 
-        {/* Floating Smart Navigation */}
-        <Navigation
-          onOpenContactModal={() => setIsInquiryModalOpen(true)}
-          isPersianMode={isPersianMode}
-          onTogglePersian={() => setIsPersianMode(!isPersianMode)}
-        />
+      {/* Floating Smart Navigation with Liquid Glass & Language Switcher */}
+      <Navigation
+        onOpenContactModal={() => setIsInquiryModalOpen(true)}
+      />
 
-        {/* Hero Section */}
-        <Hero
-          onExploreWork={handleExploreWork}
-          onOpenContact={() => setIsInquiryModalOpen(true)}
-          isPersianMode={isPersianMode}
-        />
+      {/* Hero Section */}
+      <Hero
+        onExploreWork={handleExploreWork}
+        onOpenContact={() => setIsInquiryModalOpen(true)}
+      />
 
-        {/* 01 / SELECTED WORK SCENES */}
-        <section id="selected-work" className="relative pt-16 md:pt-24 pb-8">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <SectionHeading
-              number="01"
-              tag="PORTFOLIO HIGHLIGHTS"
-              title="SELECTED WORK (2024–2026)."
-              persianTitle="منتخب پروژه‌های طراحی و مهندسی"
-              description="Five flagship digital ecosystems spanning luxury commerce, autonomous AI workspaces, geospatial travel, biometric wellness, and institutional fintech."
+      {/* 01 / SELECTED WORK SCENES */}
+      <section id="selected-work" className="relative pt-16 md:pt-24 pb-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <SectionHeading
+            number="01"
+            tag={t.sectionHeadings.work.tag}
+            title={t.sectionHeadings.work.title}
+            description={t.sectionHeadings.work.description}
+          />
+        </div>
+
+        {/* 5 Deep Project Scenes */}
+        <div className="space-y-4">
+          {PROJECTS.map((project, idx) => (
+            <ProjectScene
+              key={project.id}
+              project={project}
+              index={idx}
+              total={PROJECTS.length}
+              onOpenCaseStudy={(p) => setSelectedCaseStudy(p)}
+              isPersianMode={isRTL}
             />
-          </div>
+          ))}
+        </div>
+      </section>
 
-          {/* 5 Deep Project Scenes */}
-          <div className="space-y-4">
-            {PROJECTS.map((project, idx) => (
-              <ProjectScene
-                key={project.id}
-                project={project}
-                index={idx}
-                total={PROJECTS.length}
-                onOpenCaseStudy={(p) => setSelectedCaseStudy(p)}
-                isPersianMode={isPersianMode}
-              />
-            ))}
-          </div>
-        </section>
+      {/* 02 / ABOUT SECTION */}
+      <AboutSection />
 
-        {/* 02 / ABOUT SECTION */}
-        <AboutSection />
+      {/* 03 / CAPABILITIES */}
+      <Capabilities />
 
-        {/* 03 / CAPABILITIES */}
-        <Capabilities />
+      {/* 04 / PROCESS */}
+      <Process />
 
-        {/* 04 / PROCESS */}
-        <Process />
+      {/* 05 / CONTACT SECTION */}
+      <ContactSection onOpenInquiryModal={() => setIsInquiryModalOpen(true)} />
 
-        {/* 05 / CONTACT SECTION */}
-        <ContactSection onOpenInquiryModal={() => setIsInquiryModalOpen(true)} />
+      {/* FOOTER */}
+      <Footer />
 
-        {/* FOOTER */}
-        <Footer />
+      {/* Full Case Study Modal */}
+      <CaseStudyModal
+        project={selectedCaseStudy}
+        onClose={() => setSelectedCaseStudy(null)}
+        onSelectProject={(p) => setSelectedCaseStudy(p)}
+      />
 
-        {/* Full Case Study Modal */}
-        <CaseStudyModal
-          project={selectedCaseStudy}
-          onClose={() => setSelectedCaseStudy(null)}
-          onSelectProject={(p) => setSelectedCaseStudy(p)}
-        />
+      {/* Quick Project Inquiry Modal */}
+      <QuickInquiryModal
+        isOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+      />
+    </div>
+  );
+}
 
-        {/* Quick Project Inquiry Modal */}
-        <QuickInquiryModal
-          isOpen={isInquiryModalOpen}
-          onClose={() => setIsInquiryModalOpen(false)}
-        />
-      </div>
-    </CursorProvider>
+export default function App() {
+  return (
+    <LanguageProvider>
+      <CursorProvider>
+        <PortfolioMain />
+      </CursorProvider>
+    </LanguageProvider>
   );
 }
