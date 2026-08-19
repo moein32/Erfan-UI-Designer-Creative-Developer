@@ -125,9 +125,10 @@ export const PROJECTS: ProjectData[] = [
       { font: 'Plus Jakarta Sans', usage: 'Itineraries and boarding guides', sample: 'Private glacier trek departing at sunrise' },
     ],
     appScreens: [
-      { id: 'nivra-1', title: 'Live Trip Dashboard', description: 'Weather-adaptive boarding pass & flight tracker card', type: 'booking' },
-      { id: 'nivra-2', title: 'Predictive Itinerary', description: 'Curated 5-day schedule with walking times and local tips', type: 'dashboard' },
-      { id: 'nivra-3', title: 'Curated Destinations', description: 'Editorial visual cards with ambient soundscape integration', type: 'feed' },
+      { id: 'nivra-1', title: '01 / DISCOVER — Curated Stays', description: 'Visual destination discovery with micro-climate forecasts and cultural stories', type: 'feed' },
+      { id: 'nivra-2', title: '02 / PLAN — Smart Itinerary', description: 'Multi-day personalized timeline syncing flights, stays, and guided explorations', type: 'dashboard' },
+      { id: 'nivra-3', title: '03 / EXPLORE — Destination Hub', description: 'In-depth destination guide with live weather, maps, and must-see landmarks', type: 'detail' },
+      { id: 'nivra-4', title: '04 / TRAVEL — Fast Booking', description: 'One-tap reservation confirmation with transparent fees and SSL security', type: 'booking' },
     ],
     deliverables: ['Mobile App (iOS & Android)', 'Live Dynamic Island Widgets', 'Interactive Maps UI', 'Motion Design Spec'],
   },
