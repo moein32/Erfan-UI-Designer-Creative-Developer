@@ -58,6 +58,16 @@ export interface TranslationSchema {
     stat3Label: string;
     scrollHint: string;
     availability: string;
+    designerName: string;
+    shortName: string;
+    roleLine1: string;
+    roleAmpersand: string;
+    roleLine2: string;
+    portraitAlt: string;
+    location: string;
+    experienceBadge: string;
+    statusPill: string;
+    disciplines: string[];
   };
   sectionHeadings: {
     work: { number: string; tag: string; title: string; description: string };
