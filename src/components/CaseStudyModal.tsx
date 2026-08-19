@@ -22,6 +22,7 @@ import { IphoneMockup } from './IphoneMockup';
 import { OvaraPhoneScene } from './projects/ovara/OvaraPhoneScene';
 import { ArvenPhoneScene } from './projects/arven/ArvenPhoneScene';
 import { NivraPhoneScene } from './projects/nivra/NivraPhoneScene';
+import { VaryaPhoneScene } from './projects/varya/VaryaPhoneScene';
 import { PROJECTS } from '../data/projectsData';
 
 interface CaseStudyModalProps {
@@ -318,6 +319,12 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 />
               ) : project.id === 'nivra' ? (
                 <NivraPhoneScene
+                  activeChapterIndex={modalScreenIndex}
+                  onChapterChange={setModalScreenIndex}
+                  isInteractive={true}
+                />
+              ) : project.id === 'varya' || project.id === 'veyra' ? (
+                <VaryaPhoneScene
                   activeChapterIndex={modalScreenIndex}
                   onChapterChange={setModalScreenIndex}
                   isInteractive={true}

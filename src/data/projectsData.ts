@@ -169,9 +169,10 @@ export const PROJECTS: ProjectData[] = [
       { font: 'Plus Jakarta Sans', usage: 'Sleep stages & HRV analytics', sample: 'Deep REM cycle: 2h 18m · Recovery 94%' },
     ],
     appScreens: [
-      { id: 'veyra-1', title: 'Circadian Vitality Ring', description: 'Holistic 24-hour cycle visualizing recovery, strain, and sleep', type: 'dashboard' },
-      { id: 'veyra-2', title: 'Breath & Soundscape', description: 'Interactive bio-reactive sine wave breathing guide', type: 'assistant' },
-      { id: 'veyra-3', title: 'Deep HRV Trends', description: 'Smooth biometric curves replacing chaotic clinical bar charts', type: 'insights' },
+      { id: 'veyra-1', title: '01 / EQUILIBRIUM — Wellness Dashboard', description: 'Holistic bio-score ring with real-time vitals, HRV, and daily hydration rituals', type: 'dashboard' },
+      { id: 'veyra-2', title: '02 / VITALITY — Activity & Kinetic Flow', description: 'Weekly caloric burn charts, multi-tier movement rings, and workout logs', type: 'insights' },
+      { id: 'veyra-3', title: '03 / CIRCADIAN — Sleep & Recovery Hub', description: 'Chronobiology staging, restorative delta wave tracking, and sleep score analytics', type: 'detail' },
+      { id: 'veyra-4', title: '04 / INTELLIGENCE — AI Coach & Nutrition', description: 'Conversational health companion with recovery stretches and macro-nutrient balance', type: 'assistant' },
     ],
     deliverables: ['iOS HealthKit App UI', 'Apple Watch Companion UI', 'Design System Library', 'Interactive Prototype'],
   },

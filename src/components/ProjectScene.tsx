@@ -5,6 +5,7 @@ import { IphoneMockup } from './IphoneMockup';
 import { OvaraExperience } from './projects/ovara/OvaraExperience';
 import { ArvenExperience } from './projects/arven/ArvenExperience';
 import { NivraExperience } from './projects/nivra/NivraExperience';
+import { VaryaExperience } from './projects/varya/VaryaExperience';
 import { ArrowUpRight, Sparkles, Layers, ChevronRight, Check } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -56,6 +57,19 @@ export const ProjectScene: React.FC<ProjectSceneProps> = ({
   if (project.id === 'nivra') {
     return (
       <NivraExperience
+        project={project}
+        index={index}
+        total={total}
+        onOpenCaseStudy={onOpenCaseStudy}
+        isPersianMode={isPersianMode}
+      />
+    );
+  }
+
+  // If this is Varya / Veyra, render the flagship VaryaExperience showcase!
+  if (project.id === 'varya' || project.id === 'veyra') {
+    return (
+      <VaryaExperience
         project={project}
         index={index}
         total={total}
