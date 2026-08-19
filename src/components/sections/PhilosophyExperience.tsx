@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCursor } from '../../context/CursorContext';
 import { Sparkles, Compass, Layers, ShieldCheck, Quote } from 'lucide-react';
+import { AmbientLight, GridField, TypographicWatermark } from '../ui/VisualEnvironment';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -11,7 +12,6 @@ export const PhilosophyExperience: React.FC = () => {
   const { t, isRTL, formatNumber } = useLanguage();
   const { setCursor, resetCursor } = useCursor();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const quoteContainerRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
 
   const data = t.experienceSection.philosophy;
@@ -29,11 +29,11 @@ export const PhilosophyExperience: React.FC = () => {
       if (words && words.length > 0) {
         gsap.fromTo(
           words,
-          { opacity: 0.15, y: 15 },
+          { opacity: 0.12, y: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 0.85,
             stagger: 0.08,
             ease: 'power2.out',
             scrollTrigger: {
@@ -77,13 +77,13 @@ export const PhilosophyExperience: React.FC = () => {
     <section
       ref={sectionRef}
       id="philosophy"
-      className="relative py-28 md:py-40 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden"
+      className="relative py-32 md:py-44 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden border-t border-[#E5E7EB]"
     >
-      {/* Subtle Environmental Ambient Lighting & Grid Accent */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-[#F4F4F5] to-transparent rounded-full blur-3xl opacity-60" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#F4F4F5_1px,transparent_1px),linear-gradient(to_bottom,#F4F4F5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-40" />
-      </div>
+      {/* Environmental Architectural Depth */}
+      <AmbientLight position="top-center" size="xl" intensity="medium" />
+      <AmbientLight position="bottom-center" size="lg" intensity="soft" />
+      <GridField opacity={0.35} maskRadius="ellipse 70% 50% at 50% 30%" />
+      <TypographicWatermark text="PHILOSOPHY" position="top-right" opacity="opacity-[0.02]" />
 
       {/* Chapter Tagline */}
       <div className="flex items-center gap-3 mb-10 md:mb-16">
@@ -119,12 +119,11 @@ export const PhilosophyExperience: React.FC = () => {
             </p>
           </div>
 
-          {/* Quote Attribution Pill */}
+          {/* Quote Attribution Pill — Real Liquid Glass */}
           <div
-            ref={quoteContainerRef}
-            className="p-5 rounded-2xl liquid-glass border border-[#E5E7EB] flex items-start gap-4 shadow-xs"
+            className="p-5 rounded-2xl glass-medium border border-[#E5E7EB] flex items-start gap-4 shadow-xs"
           >
-            <div className="w-8 h-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center shrink-0 mt-0.5">
+            <div className="w-8 h-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
               <Quote size={14} className="text-white/80" />
             </div>
             <div className="space-y-1">
@@ -143,7 +142,7 @@ export const PhilosophyExperience: React.FC = () => {
           {data.pillars.map((pillar, idx) => (
             <div
               key={pillar.title}
-              className="philosophy-pillar-card p-6 sm:p-8 rounded-2xl bg-[#FAFAFA] hover:bg-white border border-[#E5E7EB] hover:border-[#D4D4D8] transition-all duration-300 shadow-xs hover:shadow-md group cursor-default"
+              className="philosophy-pillar-card p-6 sm:p-8 rounded-2xl glass-subtle bg-white/70 hover:bg-white border border-[#E5E7EB] hover:border-[#0A0A0A]/30 transition-all duration-300 shadow-xs hover:shadow-md group cursor-default"
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
             >

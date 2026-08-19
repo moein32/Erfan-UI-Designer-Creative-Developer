@@ -16,6 +16,7 @@ import { CaseStudyModal } from './components/CaseStudyModal';
 import { QuickInquiryModal } from './components/QuickInquiryModal';
 import { PROJECTS } from './data/projectsData';
 import { ProjectData } from './types';
+import { AmbientLight, GridField } from './components/ui/VisualEnvironment';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,8 +73,11 @@ function PortfolioMain() {
       />
 
       {/* 01 / SELECTED WORK SCENES */}
-      <section id="selected-work" className="relative pt-16 md:pt-24 pb-8">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <section id="selected-work" className="relative pt-16 md:pt-24 pb-8 overflow-hidden">
+        <AmbientLight position="top-center" size="xl" intensity="soft" />
+        <GridField opacity={0.25} />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <SectionHeading
             number="01"
             tag={t.sectionHeadings.work.tag}

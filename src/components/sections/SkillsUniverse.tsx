@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCursor } from '../../context/CursorContext';
-import { Sparkles, Layers, Code2, MoveRight, MoveLeft, Terminal, Check } from 'lucide-react';
+import { AmbientLight, GridField, TypographicWatermark } from '../ui/VisualEnvironment';
 
 export const SkillsUniverse: React.FC = () => {
   const { t, isRTL, formatNumber } = useLanguage();
@@ -15,10 +15,16 @@ export const SkillsUniverse: React.FC = () => {
   return (
     <section
       id="skills"
-      className="py-28 md:py-40 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB] relative overflow-hidden"
+      className="py-32 md:py-44 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB] relative overflow-hidden"
     >
+      {/* Environmental Architectural Depth */}
+      <AmbientLight position="top-right" size="lg" intensity="medium" />
+      <AmbientLight position="bottom-center" size="md" intensity="soft" />
+      <GridField opacity={0.35} />
+      <TypographicWatermark text="SKILLS" position="top-left" opacity="opacity-[0.02]" />
+
       {/* Chapter Tagline */}
-      <div className="flex items-center gap-3 mb-10 md:mb-14">
+      <div className="flex items-center gap-3 mb-10 md:mb-14 relative z-10">
         <div className="w-2.5 h-2.5 rounded-full bg-[#0A0A0A]" />
         <span className="font-mono text-xs font-bold tracking-[0.2em] text-[#71717A] uppercase">
           {formatNumber(skillsData.number)} / {skillsData.tag}
@@ -26,7 +32,7 @@ export const SkillsUniverse: React.FC = () => {
       </div>
 
       {/* Section Headline */}
-      <div className="mb-14 md:mb-20 max-w-3xl space-y-4">
+      <div className="mb-14 md:mb-20 max-w-3xl space-y-4 relative z-10">
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#0A0A0A] leading-tight">
           {skillsData.title}
         </h2>
@@ -35,8 +41,8 @@ export const SkillsUniverse: React.FC = () => {
         </p>
       </div>
 
-      {/* Interactive Category Selector Tabs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
+      {/* Interactive Category Selector Tabs — Liquid Glass */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10 relative z-10">
         {categories.map((cat) => {
           const isSelected = selectedCatId === cat.id;
           return (
@@ -46,7 +52,7 @@ export const SkillsUniverse: React.FC = () => {
               className={`p-5 rounded-2xl text-start transition-all duration-300 border cursor-pointer ${
                 isSelected
                   ? 'bg-[#0A0A0A] text-white border-[#0A0A0A] shadow-md -translate-y-0.5'
-                  : 'bg-[#FAFAFA] hover:bg-white text-[#0A0A0A] border-[#E5E7EB] hover:border-[#D4D4D8]'
+                  : 'glass-subtle bg-white/70 hover:bg-white text-[#0A0A0A] border-[#E5E7EB] hover:border-[#D4D4D8]'
               }`}
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
@@ -74,8 +80,8 @@ export const SkillsUniverse: React.FC = () => {
         })}
       </div>
 
-      {/* Active Category Display Panel */}
-      <div className="p-8 sm:p-12 rounded-[32px] liquid-glass-strong border border-[#E5E7EB] shadow-xl space-y-8">
+      {/* Active Category Display Panel — Focal Liquid Glass Surface */}
+      <div className="p-8 sm:p-12 rounded-[32px] glass-strong border border-[#E5E7EB] shadow-xl space-y-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#E5E7EB]">
           <div>
             <span className="font-mono text-xs font-bold tracking-widest text-[#71717A] uppercase">

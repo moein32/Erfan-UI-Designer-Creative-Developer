@@ -12,6 +12,7 @@ import {
   Send,
   MessageSquare,
 } from 'lucide-react';
+import { AmbientLight, GridField, TypographicWatermark } from '../ui/VisualEnvironment';
 import confetti from 'canvas-confetti';
 
 interface ContactFinaleProps {
@@ -47,15 +48,16 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
   return (
     <section
       id="contact"
-      className="py-28 md:py-44 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB] relative overflow-hidden"
+      className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB] relative overflow-hidden"
     >
-      {/* Background Atmosphere */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-t from-[#F4F4F5] to-transparent rounded-full blur-3xl opacity-70" />
-      </div>
+      {/* Environmental Architectural Depth */}
+      <AmbientLight position="bottom-center" size="xl" intensity="medium" />
+      <AmbientLight position="top-right" size="lg" intensity="soft" />
+      <GridField opacity={0.35} maskRadius="ellipse 80% 60% at 50% 70%" />
+      <TypographicWatermark text="VISION" position="bottom-right" opacity="opacity-[0.02]" />
 
       {/* Chapter Tag */}
-      <div className="flex items-center gap-3 mb-10 md:mb-14">
+      <div className="flex items-center gap-3 mb-10 md:mb-14 relative z-10">
         <div className="w-2.5 h-2.5 rounded-full bg-[#0A0A0A]" />
         <span className="font-mono text-xs font-bold tracking-[0.2em] text-[#71717A] uppercase">
           {formatNumber(contactData.number)} / {contactData.tag}
@@ -63,7 +65,7 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
       </div>
 
       {/* Cinematic Display Headline */}
-      <div className="mb-14 md:mb-20">
+      <div className="mb-14 md:mb-20 relative z-10">
         <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight text-[#0A0A0A] leading-[1.02] md:leading-[0.95] uppercase">
           <span className="block">{contactData.headline1}</span>
           <span className="block text-[#71717A] font-light">{contactData.headline2}</span>
@@ -72,7 +74,7 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
       </div>
 
       {/* Subtext and Action Console */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end relative z-10">
         <div className="lg:col-span-6 space-y-6">
           <p className="text-base sm:text-xl text-[#3F3F46] leading-relaxed max-w-lg font-normal">
             {contactData.subtext}
@@ -86,12 +88,14 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
           </div>
         </div>
 
-        {/* Primary Interactive Contact Actions */}
+        {/* Primary Interactive Contact Actions — Single Dominant Liquid Glass Console */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="p-6 sm:p-8 rounded-[28px] liquid-glass-strong border border-[#E5E7EB] shadow-2xl space-y-6">
-            
+          <div className="p-6 sm:p-8 rounded-[32px] glass-strong border border-[#E5E7EB] shadow-2xl space-y-6 relative overflow-hidden">
+            {/* Top Specular Shimmer */}
+            <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-white/90 via-white/20 to-transparent pointer-events-none" />
+
             {/* Email Bar with Quick Copy */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 bg-white rounded-2xl border border-[#E5E7EB]">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 bg-white rounded-2xl border border-[#E5E7EB] relative z-10">
               <div className="flex items-center gap-3 px-3 py-1 text-sm font-mono font-bold text-[#0A0A0A] select-all truncate">
                 <Mail size={16} className="text-[#71717A] shrink-0" />
                 <span className="truncate">{emailAddress}</span>
@@ -109,7 +113,7 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-2 relative z-10">
               <button
                 onClick={onOpenInquiryModal}
                 className="flex-1 py-4 px-6 rounded-2xl bg-[#0A0A0A] text-white text-xs font-mono font-bold tracking-wider hover:bg-[#27272A] transition-all flex items-center justify-center gap-2 shadow-md active:scale-95 cursor-pointer"
@@ -122,7 +126,7 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
 
               <a
                 href={`mailto:${emailAddress}`}
-                className="py-4 px-6 rounded-2xl liquid-glass-pill border border-[#E5E7EB] text-[#0A0A0A] text-xs font-mono font-bold tracking-wider hover:bg-white transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
+                className="py-4 px-6 rounded-2xl glass-subtle border border-[#E5E7EB] text-[#0A0A0A] text-xs font-mono font-bold tracking-wider hover:bg-white transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
                 onMouseEnter={() => setCursor({ type: 'button' })}
                 onMouseLeave={resetCursor}
               >
@@ -132,7 +136,7 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
             </div>
 
             {/* Social Channels Strip */}
-            <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB] text-xs font-mono text-[#71717A]">
+            <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB] text-xs font-mono text-[#71717A] relative z-10">
               <span>{contactData.timezone}</span>
               <div className="flex items-center gap-4">
                 {socialLinks.map((s) => (

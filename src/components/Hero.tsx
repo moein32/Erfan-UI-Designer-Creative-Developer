@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useCursor } from '../context/CursorContext';
 import { useLanguage } from '../context/LanguageContext';
 import { ArrowDown, MoveRight, MoveLeft, Sparkles, MapPin } from 'lucide-react';
+import { AmbientLight, GridField, TypographicWatermark } from './ui/VisualEnvironment';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -180,6 +181,12 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
       id="hero-section"
       className="relative min-h-[92vh] md:min-h-screen flex flex-col justify-between pt-28 md:pt-36 pb-10 px-6 md:px-12 max-w-7xl mx-auto select-none overflow-visible"
     >
+      {/* Environmental Ambient Light & Precision Grid */}
+      <AmbientLight position="top-right" size="xl" intensity="subtle" />
+      <AmbientLight position="bottom-center" size="lg" intensity="soft" />
+      <GridField opacity={0.35} />
+      <TypographicWatermark text="ERFAN" position="top-right" opacity="opacity-[0.025]" />
+
       {/* Top Status & Location Ribbon — Liquid Glass */}
       <div
         ref={badgeRef}
