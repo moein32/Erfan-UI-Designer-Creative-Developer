@@ -48,9 +48,10 @@ export const Footer: React.FC = () => {
             </span>
             <ul className="space-y-1.5 text-[11px]">
               <li><a href="#selected-work" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('01')} / {t.nav.work}</a></li>
-              <li><a href="#about" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('02')} / {t.nav.about}</a></li>
-              <li><a href="#capabilities" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('03')} / {t.nav.capabilities}</a></li>
-              <li><a href="#process" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('04')} / {t.nav.process}</a></li>
+              <li><a href="#philosophy" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('02')} / {t.nav.about}</a></li>
+              <li><a href="#approach" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('03')} / {t.nav.process}</a></li>
+              <li><a href="#skills" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('04')} / {t.nav.capabilities}</a></li>
+              <li><a href="#contact" className="hover:text-[#0A0A0A] transition-colors">{formatNumber('05')} / {t.nav.contact}</a></li>
             </ul>
           </div>
 

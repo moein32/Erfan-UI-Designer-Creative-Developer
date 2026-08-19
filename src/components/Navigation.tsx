@@ -67,9 +67,9 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
 
   const navLinks = [
     { label: t.nav.work, href: '#selected-work' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.capabilities, href: '#capabilities' },
-    { label: t.nav.process, href: '#process' },
+    { label: t.nav.about, href: '#philosophy' },
+    { label: t.nav.process, href: '#approach' },
+    { label: t.nav.capabilities, href: '#skills' },
     { label: t.nav.contact, href: '#contact' },
   ];
 

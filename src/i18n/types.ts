@@ -128,6 +128,69 @@ export interface TranslationSchema {
       output: string;
     }[];
   };
+  experienceSection: {
+    philosophy: {
+      number: string;
+      tag: string;
+      headlineLine1: string;
+      headlineLine2: string;
+      headlineLine3: string;
+      paragraph1: string;
+      paragraph2: string;
+      quoteAuthor: string;
+      pillars: {
+        number: string;
+        title: string;
+        desc: string;
+      }[];
+    };
+    approach: {
+      number: string;
+      tag: string;
+      title: string;
+      description: string;
+      steps: {
+        number: string;
+        phase: string;
+        title: string;
+        desc: string;
+        bulletPoints: string[];
+        hudTitle: string;
+        hudMetrics: { label: string; val: string }[];
+      }[];
+    };
+    skills: {
+      number: string;
+      tag: string;
+      title: string;
+      description: string;
+      categories: {
+        id: string;
+        name: string;
+        count: string;
+        description: string;
+        items: {
+          name: string;
+          badge: string;
+          level: string;
+        }[];
+      }[];
+    };
+    cinematicContact: {
+      number: string;
+      tag: string;
+      headline1: string;
+      headline2: string;
+      headline3: string;
+      subtext: string;
+      copyEmail: string;
+      copied: string;
+      startInquiry: string;
+      directEmail: string;
+      status: string;
+      timezone: string;
+    };
+  };
   contact: {
     tag: string;
     title: string;

@@ -10,10 +10,7 @@ import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
 import { SectionHeading } from './components/SectionHeading';
 import { ProjectScene } from './components/ProjectScene';
-import { AboutSection } from './components/AboutSection';
-import { Capabilities } from './components/Capabilities';
-import { Process } from './components/Process';
-import { ContactSection } from './components/ContactSection';
+import { ExperienceSection } from './components/sections/ExperienceSection';
 import { Footer } from './components/Footer';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { QuickInquiryModal } from './components/QuickInquiryModal';
@@ -100,17 +97,8 @@ function PortfolioMain() {
         </div>
       </section>
 
-      {/* 02 / ABOUT SECTION */}
-      <AboutSection />
-
-      {/* 03 / CAPABILITIES */}
-      <Capabilities />
-
-      {/* 04 / PROCESS */}
-      <Process />
-
-      {/* 05 / CONTACT SECTION */}
-      <ContactSection onOpenInquiryModal={() => setIsInquiryModalOpen(true)} />
+      {/* POST-PROJECT VISUAL EXPERIENCE LAYER */}
+      <ExperienceSection onOpenInquiryModal={() => setIsInquiryModalOpen(true)} />
 
       {/* FOOTER */}
       <Footer />
