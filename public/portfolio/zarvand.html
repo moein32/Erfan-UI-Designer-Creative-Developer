@@ -1,0 +1,3227 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zarvand — Fintech UI Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#f4f6fa;
+    --paper:#ffffff;
+    --text:#111827;
+    --muted:#7b8494;
+    --line:#e7eaf0;
+
+    --blue:#2563eb;
+    --blue-soft:#eff6ff;
+
+    --green:#16a34a;
+    --green-soft:#ecfdf3;
+
+    --purple:#7c3aed;
+    --purple-soft:#f5f3ff;
+
+    --orange:#f59e0b;
+    --orange-soft:#fff7ed;
+
+    --red:#ef4444;
+
+    --phone:#d9dde5;
+    --phone-dark:#b9bec8;
+    --screen:#fbfcfe;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    font-family:'Vazirmatn',sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,#ffffff 0%,#f4f6fa 55%,#eef1f6 100%);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.portfolio-page{
+    width:100%;
+    max-width:1500px;
+    min-height:100vh;
+    margin:auto;
+    padding:42px 48px 36px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:32px;
+}
+
+.header-left{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.4px;
+    color:var(--blue);
+    text-transform:uppercase;
+}
+
+.eyebrow-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--blue);
+    box-shadow:0 0 0 5px rgba(37,99,235,.10);
+}
+
+.title{
+    font-size:32px;
+    line-height:1.2;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.subtitle{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:500;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.badge{
+    padding:9px 15px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    background:rgba(255,255,255,.8);
+
+    font-size:10px;
+    font-weight:700;
+    color:#697386;
+}
+
+.badge.primary{
+    background:var(--blue-soft);
+    color:var(--blue);
+    border-color:#dbeafe;
+}
+
+/* =========================
+   PHONE GRID
+========================= */
+
+.phones{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
+    align-items:start;
+}
+
+/* =========================
+   PHONE ITEM
+========================= */
+
+.phone-column{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-width:0;
+}
+
+.screen-label{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:12px;
+
+    font-size:10px;
+    font-weight:800;
+    color:#697386;
+}
+
+.screen-number{
+    width:21px;
+    height:21px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:7px;
+
+    background:#eef2f7;
+    color:#64748b;
+
+    font-size:9px;
+    font-weight:900;
+}
+
+/* =========================
+   IPHONE
+========================= */
+
+.iphone{
+    width:100%;
+    max-width:245px;
+    aspect-ratio:393 / 852;
+
+    padding:6px;
+
+    border-radius:36px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eef1f5 0%,
+            #cfd4dd 35%,
+            #b7bcc6 70%,
+            #e5e8ed 100%
+        );
+
+    box-shadow:
+        0 20px 40px rgba(27,39,61,.15),
+        inset 0 0 0 1px rgba(255,255,255,.85),
+        inset 0 0 0 2px rgba(120,130,145,.28);
+
+    position:relative;
+}
+
+.iphone::before{
+    content:"";
+    position:absolute;
+    left:-3px;
+    top:110px;
+
+    width:3px;
+    height:42px;
+
+    border-radius:3px 0 0 3px;
+
+    background:#aeb4bf;
+}
+
+.iphone::after{
+    content:"";
+    position:absolute;
+    right:-3px;
+    top:170px;
+
+    width:3px;
+    height:70px;
+
+    border-radius:0 3px 3px 0;
+
+    background:#aeb4bf;
+}
+
+.screen{
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    border-radius:31px;
+
+    background:var(--screen);
+
+    position:relative;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.07);
+}
+
+/* =========================
+   DYNAMIC ISLAND
+========================= */
+
+.dynamic-island{
+    position:absolute;
+
+    top:9px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:70px;
+    height:21px;
+
+    background:#08090b;
+
+    border-radius:20px;
+
+    z-index:20;
+}
+
+.camera{
+    position:absolute;
+    right:7px;
+    top:6px;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            #364152 0%,
+            #111827 50%,
+            #000 100%
+        );
+}
+
+/* =========================
+   STATUS BAR
+========================= */
+
+.status{
+    height:34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    direction:ltr;
+
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    font-size:9px;
+    font-weight:700;
+
+    color:#111827;
+
+    position:relative;
+    z-index:10;
+}
+
+.status-right{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.status-signal{
+    width:13px;
+    height:9px;
+
+    display:flex;
+    align-items:flex-end;
+    gap:1px;
+}
+
+.status-signal i{
+    width:2px;
+    background:#111827;
+    border-radius:2px;
+}
+
+.status-signal i:nth-child(1){height:3px}
+.status-signal i:nth-child(2){height:5px}
+.status-signal i:nth-child(3){height:7px}
+.status-signal i:nth-child(4){height:9px}
+
+.wifi{
+    width:11px;
+    height:8px;
+
+    border:1.6px solid #111827;
+    border-top-color:transparent;
+    border-left-color:transparent;
+    border-right-color:transparent;
+
+    border-radius:50%;
+    position:relative;
+}
+
+.wifi::after{
+    content:"";
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:#111827;
+    border-radius:50%;
+
+    bottom:-2px;
+    left:3px;
+}
+
+.battery{
+    width:18px;
+    height:8px;
+
+    border:1px solid #111827;
+
+    border-radius:2px;
+
+    position:relative;
+}
+
+.battery::after{
+    content:"";
+
+    position:absolute;
+
+    right:-2px;
+    top:2px;
+
+    width:1.5px;
+    height:3px;
+
+    background:#111827;
+}
+
+.battery::before{
+    content:"";
+
+    position:absolute;
+
+    left:1px;
+    top:1px;
+
+    width:12px;
+    height:4px;
+
+    background:#111827;
+
+    border-radius:1px;
+}
+
+/* =========================
+   APP CONTENT
+========================= */
+
+.app{
+    height:calc(100% - 34px);
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.padding{
+    padding:0 17px;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:9px 17px 10px;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.avatar{
+    width:29px;
+    height:29px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c7d2fe,
+            #818cf8
+        );
+
+    display:grid;
+    place-items:center;
+
+    color:white;
+    font-size:11px;
+    font-weight:900;
+}
+
+.greeting{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+}
+
+.greeting small{
+    color:#9aa2b1;
+    font-size:6px;
+    font-weight:600;
+}
+
+.greeting strong{
+    font-size:9px;
+    font-weight:900;
+}
+
+.circle-button{
+    width:27px;
+    height:27px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid #e7eaf0;
+
+    background:white;
+
+    border-radius:9px;
+
+    box-shadow:0 4px 10px rgba(15,23,42,.05);
+}
+
+/* =========================
+   SVG ICON
+========================= */
+
+.icon{
+    width:14px;
+    height:14px;
+
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* =========================
+   BALANCE
+========================= */
+
+.balance{
+    margin:2px 17px 12px;
+
+    border-radius:18px;
+
+    padding:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb 0%,
+            #3b82f6 55%,
+            #60a5fa 100%
+        );
+
+    color:white;
+
+    position:relative;
+    overflow:hidden;
+
+    box-shadow:
+        0 14px 25px rgba(37,99,235,.20);
+}
+
+.balance::after{
+    content:"";
+
+    position:absolute;
+
+    width:110px;
+    height:110px;
+
+    border-radius:50%;
+
+    right:-45px;
+    bottom:-60px;
+
+    background:rgba(255,255,255,.12);
+}
+
+.balance-label{
+    font-size:7px;
+    opacity:.75;
+    font-weight:600;
+}
+
+.balance-number{
+    margin-top:4px;
+
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    font-size:23px;
+    font-weight:900;
+
+    letter-spacing:-1px;
+
+    direction:ltr;
+    text-align:right;
+}
+
+.balance-unit{
+    font-family:'Vazirmatn';
+    font-size:7px;
+    font-weight:600;
+    opacity:.75;
+}
+
+.balance-bottom{
+    margin-top:10px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.growth{
+    display:flex;
+    align-items:center;
+    gap:4px;
+
+    background:rgba(255,255,255,.14);
+
+    padding:4px 7px;
+
+    border-radius:7px;
+
+    font-size:6px;
+    font-weight:800;
+}
+
+.balance-caption{
+    font-size:6px;
+    opacity:.65;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:7px;
+
+    margin:10px 13px 14px;
+}
+
+.action{
+    text-align:center;
+}
+
+.action-icon{
+    width:34px;
+    height:34px;
+
+    margin:auto auto 5px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:11px;
+
+    border:1px solid #e9edf3;
+
+    background:white;
+
+    box-shadow:
+        0 5px 12px rgba(15,23,42,.05);
+}
+
+.action span{
+    font-size:6px;
+    font-weight:700;
+    color:#687285;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin:0 17px 7px;
+}
+
+.section-title strong{
+    font-size:9px;
+    font-weight:900;
+}
+
+.section-title span{
+    font-size:6px;
+    color:var(--blue);
+    font-weight:800;
+}
+
+/* =========================
+   TRANSACTIONS
+========================= */
+
+.transaction{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:8px 17px;
+
+    border-bottom:1px solid #eef0f4;
+}
+
+.transaction:last-child{
+    border-bottom:0;
+}
+
+.transaction-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.transaction-icon{
+    width:29px;
+    height:29px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:9px;
+}
+
+.transaction-info strong{
+    display:block;
+
+    font-size:7px;
+    font-weight:800;
+
+    margin-bottom:2px;
+}
+
+.transaction-info small{
+    font-size:5.5px;
+    color:#a1a8b5;
+}
+
+.amount{
+    text-align:left;
+
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    direction:ltr;
+}
+
+.amount strong{
+    display:block;
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.amount small{
+    font-size:5px;
+    color:#a3a9b4;
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav{
+    position:absolute;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:47px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    background:rgba(255,255,255,.94);
+
+    backdrop-filter:blur(16px);
+
+    border-top:1px solid #e9edf2;
+
+    padding:6px 8px 9px;
+
+    z-index:15;
+}
+
+.nav-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:2px;
+
+    color:#a0a7b4;
+
+    font-size:5px;
+    font-weight:700;
+}
+
+.nav-item.active{
+    color:var(--blue);
+}
+
+.nav-icon{
+    width:14px;
+    height:14px;
+}
+
+/* =========================
+   SCREEN 2
+========================= */
+
+.page-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:12px 17px 13px;
+}
+
+.page-title strong{
+    font-size:10px;
+    font-weight:900;
+}
+
+.asset{
+    margin:0 17px 8px;
+
+    padding:11px;
+
+    border-radius:15px;
+
+    border:1px solid #e8ebf1;
+
+    background:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    box-shadow:0 5px 14px rgba(15,23,42,.035);
+}
+
+.asset-main{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.asset-icon{
+    width:32px;
+    height:32px;
+
+    border-radius:10px;
+
+    display:grid;
+    place-items:center;
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.asset-name strong{
+    display:block;
+    font-size:7px;
+    font-weight:900;
+}
+
+.asset-name small{
+    display:block;
+    margin-top:2px;
+    font-size:5.5px;
+    color:#9aa2b0;
+}
+
+.asset-value{
+    text-align:left;
+}
+
+.asset-value strong{
+    display:block;
+
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.asset-value small{
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    font-size:5.5px;
+    color:var(--green);
+
+    direction:ltr;
+}
+
+/* =========================
+   ANALYTICS
+========================= */
+
+.donut{
+    width:128px;
+    height:128px;
+
+    margin:14px auto 17px;
+
+    position:relative;
+}
+
+.donut svg{
+    width:100%;
+    height:100%;
+
+    transform:rotate(-90deg);
+}
+
+.donut-track{
+    fill:none;
+    stroke:#edf0f5;
+    stroke-width:12;
+}
+
+.donut-blue{
+    fill:none;
+    stroke:#2563eb;
+    stroke-width:12;
+    stroke-linecap:round;
+
+    stroke-dasharray:220;
+    stroke-dashoffset:70;
+}
+
+.donut-purple{
+    fill:none;
+    stroke:#7c3aed;
+    stroke-width:12;
+    stroke-linecap:round;
+
+    stroke-dasharray:220;
+    stroke-dashoffset:155;
+}
+
+.donut-center{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.donut-center small{
+    color:#9aa2b0;
+    font-size:6px;
+}
+
+.donut-center strong{
+    margin:4px 0;
+
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    font-size:17px;
+    font-weight:900;
+}
+
+.month{
+    background:#f3f5f8;
+
+    border-radius:6px;
+
+    padding:3px 7px;
+
+    font-size:5px;
+    font-weight:700;
+    color:#727b8b;
+}
+
+.budget{
+    margin:0 17px 12px;
+}
+
+.budget-head{
+    display:flex;
+    justify-content:space-between;
+
+    margin-bottom:5px;
+}
+
+.budget-head span{
+    font-size:6px;
+    color:#737c8d;
+}
+
+.budget-head strong{
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    font-size:7px;
+    direction:ltr;
+}
+
+.progress{
+    width:100%;
+    height:5px;
+
+    background:#eef1f5;
+
+    border-radius:10px;
+
+    overflow:hidden;
+}
+
+.progress div{
+    height:100%;
+    border-radius:10px;
+}
+
+.budget-note{
+    margin-top:4px;
+
+    font-size:5px;
+
+    color:#a0a7b3;
+}
+
+/* =========================
+   AI SCREEN
+========================= */
+
+.ai-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:11px 17px;
+
+    border-bottom:1px solid #edf0f4;
+}
+
+.ai-profile{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.ai-avatar{
+    width:28px;
+    height:28px;
+
+    border-radius:9px;
+
+    display:grid;
+    place-items:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #a78bfa
+        );
+
+    color:white;
+}
+
+.online{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:0 0 0 3px #dcfce7;
+}
+
+.ai-name strong{
+    display:block;
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.ai-name small{
+    font-size:5px;
+    color:#22a05a;
+}
+
+.chat{
+    padding:12px 17px 55px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:8px;
+}
+
+.date{
+    text-align:center;
+
+    font-size:5px;
+
+    color:#a1a8b5;
+
+    margin-bottom:4px;
+}
+
+.message{
+    max-width:88%;
+
+    padding:9px 10px;
+
+    border-radius:12px;
+
+    font-size:6.5px;
+
+    line-height:1.8;
+
+    font-weight:500;
+}
+
+.message.ai{
+    align-self:flex-start;
+
+    background:white;
+
+    border:1px solid #e8ebf0;
+
+    border-radius:12px 12px 12px 4px;
+
+    box-shadow:0 4px 12px rgba(15,23,42,.04);
+}
+
+.message.user{
+    align-self:flex-end;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:12px 12px 4px 12px;
+
+    box-shadow:0 7px 14px rgba(37,99,235,.18);
+}
+
+.invest-card{
+    margin-top:7px;
+
+    padding:8px;
+
+    border-radius:9px;
+
+    background:#f8fafc;
+
+    border:1px solid #e8edf4;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.invest-card strong{
+    font-size:6px;
+}
+
+.invest-card small{
+    display:block;
+
+    color:#8b94a4;
+
+    font-size:4.8px;
+
+    margin-top:2px;
+}
+
+.apy{
+    color:#16a34a;
+
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    font-size:7px;
+    font-weight:900;
+}
+
+.chat-input{
+    position:absolute;
+
+    left:11px;
+    right:11px;
+    bottom:9px;
+
+    height:31px;
+
+    border-radius:100px;
+
+    background:white;
+
+    border:1px solid #e6eaf0;
+
+    box-shadow:0 7px 18px rgba(15,23,42,.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:4px 5px 4px 12px;
+
+    color:#a2a9b5;
+
+    font-size:5.5px;
+
+    z-index:20;
+}
+
+.send{
+    width:23px;
+    height:23px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:grid;
+    place-items:center;
+}
+
+/* =========================
+   CARD SCREEN
+========================= */
+
+.bank-card{
+    margin:3px 17px 14px;
+
+    height:118px;
+
+    border-radius:17px;
+
+    padding:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172033 0%,
+            #25334c 50%,
+            #111827 100%
+        );
+
+    color:white;
+
+    box-shadow:
+        0 14px 24px rgba(15,23,42,.18);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.bank-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    right:-70px;
+    top:-80px;
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.chip{
+    width:25px;
+    height:18px;
+
+    border-radius:4px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f6d365,
+            #d7a83d
+        );
+
+    position:relative;
+}
+
+.chip::after{
+    content:"";
+
+    position:absolute;
+
+    inset:3px;
+
+    border:1px solid rgba(80,50,0,.3);
+
+    border-radius:2px;
+}
+
+.brand{
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:1.2px;
+}
+
+.card-number{
+    margin-top:22px;
+
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+    direction:ltr;
+
+    text-align:left;
+
+    letter-spacing:1.5px;
+
+    font-size:12px;
+    font-weight:700;
+}
+
+.card-bottom{
+    display:flex;
+    justify-content:space-between;
+
+    margin-top:7px;
+}
+
+.card-bottom small{
+    display:block;
+
+    font-size:4px;
+
+    color:#9ca8ba;
+
+    margin-bottom:2px;
+}
+
+.card-bottom strong{
+    font-size:6px;
+}
+
+.setting{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:9px 17px;
+
+    border-bottom:1px solid #edf0f4;
+}
+
+.setting-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.setting-icon{
+    width:28px;
+    height:28px;
+
+    border-radius:9px;
+
+    background:#f3f5f8;
+
+    display:grid;
+    place-items:center;
+
+    color:#667085;
+}
+
+.setting-text strong{
+    display:block;
+
+    font-size:6.5px;
+    font-weight:900;
+
+    margin-bottom:2px;
+}
+
+.setting-text small{
+    font-size:4.7px;
+    color:#9aa2b0;
+}
+
+.toggle{
+    width:26px;
+    height:16px;
+
+    border-radius:20px;
+
+    background:#22c55e;
+
+    position:relative;
+}
+
+.toggle::after{
+    content:"";
+
+    position:absolute;
+
+    width:12px;
+    height:12px;
+
+    right:2px;
+    top:2px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:0 1px 3px rgba(0,0,0,.15);
+}
+
+.toggle.off{
+    background:#dfe4eb;
+}
+
+.toggle.off::after{
+    right:auto;
+    left:2px;
+}
+
+/* =========================
+   HOME INDICATOR
+========================= */
+
+.home-indicator{
+    position:absolute;
+
+    bottom:3px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:54px;
+    height:3px;
+
+    border-radius:20px;
+
+    background:#111827;
+
+    z-index:30;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    margin-top:28px;
+
+    padding-top:16px;
+
+    border-top:1px solid var(--line);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.footer-left{
+    font-size:8px;
+    color:#9aa2b0;
+}
+
+.footer-brand{
+    font-size:9px;
+    font-weight:900;
+    color:#667085;
+}
+
+.footer-brand span{
+    color:var(--blue);
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@page{
+    size:A4 landscape;
+    margin:0;
+}
+
+@media print{
+
+    html,
+    body{
+        width:297mm;
+        height:210mm;
+        min-height:210mm;
+
+        background:white !important;
+    }
+
+    body{
+        -webkit-print-color-adjust:exact !important;
+        print-color-adjust:exact !important;
+    }
+
+    .portfolio-page{
+        width:297mm;
+        height:210mm;
+
+        max-width:none;
+
+        padding:
+            9mm
+            10mm
+            7mm;
+
+        margin:0;
+
+        overflow:hidden;
+    }
+
+    .header{
+        margin-bottom:6mm;
+    }
+
+    .title{
+        font-size:25px;
+    }
+
+    .subtitle{
+        font-size:9px;
+    }
+
+    .eyebrow{
+        font-size:8px;
+    }
+
+    .badge{
+        font-size:8px;
+        padding:6px 10px;
+    }
+
+    .phones{
+        gap:4mm;
+    }
+
+    .iphone{
+        max-width:none;
+        width:100%;
+
+        border-radius:29px;
+
+        box-shadow:
+            0 8px 18px rgba(27,39,61,.13),
+            inset 0 0 0 1px rgba(255,255,255,.8),
+            inset 0 0 0 2px rgba(120,130,145,.25);
+    }
+
+    .screen-label{
+        margin-bottom:6px;
+    }
+
+    .screen-number{
+        width:17px;
+        height:17px;
+    }
+
+    .footer{
+        margin-top:5mm;
+        padding-top:3mm;
+    }
+
+    .footer-left,
+    .footer-brand{
+        font-size:7px;
+    }
+
+}
+
+/* =========================
+   SCREEN SIZING
+========================= */
+
+@media screen and (min-width:1200px){
+
+    .iphone{
+        max-width:235px;
+    }
+
+}
+
+@media screen and (max-width:1100px){
+
+    .portfolio-page{
+        padding:30px;
+    }
+
+    .phones{
+        gap:12px;
+    }
+
+    .iphone{
+        max-width:210px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="portfolio-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-left">
+
+            <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                FINTECH UI / UX CASE STUDY
+            </div>
+
+            <h1 class="title">
+                زروند — تجربه‌ای مدرن برای مدیریت مالی
+            </h1>
+
+            <p class="subtitle">
+                طراحی رابط کاربری اپلیکیشن فین‌تک با تمرکز بر سادگی، وضوح و تجربه کاربری نسل جدید
+            </p>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="badge">
+                iOS 18
+            </div>
+
+            <div class="badge primary">
+                05 SCREENS
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= PHONES ================= -->
+
+    <main class="phones">
+
+
+        <!-- =========================================
+             SCREEN 01
+        ========================================== -->
+
+        <section class="phone-column">
+
+            <div class="screen-label">
+                <span class="screen-number">01</span>
+                داشبورد مالی
+            </div>
+
+            <div class="iphone">
+
+                <div class="screen">
+
+                    <div class="dynamic-island">
+                        <div class="camera"></div>
+                    </div>
+
+                    <div class="status">
+
+                        <span>9:41</span>
+
+                        <div class="status-right">
+
+                            <div class="status-signal">
+                                <i></i><i></i><i></i><i></i>
+                            </div>
+
+                            <div class="wifi"></div>
+
+                            <div class="battery"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="app">
+
+                        <div class="topbar">
+
+                            <div class="user">
+
+                                <div class="avatar">
+                                    ع
+                                </div>
+
+                                <div class="greeting">
+
+                                    <small>صبح بخیر</small>
+
+                                    <strong>عرفان معین</strong>
+
+                                </div>
+
+                            </div>
+
+                            <div class="circle-button">
+
+                                <svg class="icon">
+                                    <use href="#bell"></use>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="balance">
+
+                            <div class="balance-label">
+                                موجودی کل حساب‌ها
+                            </div>
+
+                            <div class="balance-number">
+                                345,820,000
+                                <span class="balance-unit">تومان</span>
+                            </div>
+
+                            <div class="balance-bottom">
+
+                                <div class="growth">
+
+                                    <svg class="icon" style="width:9px;height:9px;">
+                                        <use href="#trend-up"></use>
+                                    </svg>
+
+                                    +۱۲.۴٪
+
+                                </div>
+
+                                <div class="balance-caption">
+                                    نسبت به ماه گذشته
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="actions">
+
+                            <div class="action">
+
+                                <div class="action-icon" style="color:#2563eb;">
+
+                                    <svg class="icon">
+                                        <use href="#send"></use>
+                                    </svg>
+
+                                </div>
+
+                                <span>انتقال وجه</span>
+
+                            </div>
+
+
+                            <div class="action">
+
+                                <div class="action-icon" style="color:#16a34a;">
+
+                                    <svg class="icon">
+                                        <use href="#download"></use>
+                                    </svg>
+
+                                </div>
+
+                                <span>دریافت</span>
+
+                            </div>
+
+
+                            <div class="action">
+
+                                <div class="action-icon" style="color:#f59e0b;">
+
+                                    <svg class="icon">
+                                        <use href="#qr"></use>
+                                    </svg>
+
+                                </div>
+
+                                <span>پرداخت QR</span>
+
+                            </div>
+
+
+                            <div class="action">
+
+                                <div class="action-icon" style="color:#7c3aed;">
+
+                                    <svg class="icon">
+                                        <use href="#card"></use>
+                                    </svg>
+
+                                </div>
+
+                                <span>کارت‌ها</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="section-title">
+
+                            <strong>
+                                تراکنش‌های اخیر
+                            </strong>
+
+                            <span>
+                                مشاهده همه
+                            </span>
+
+                        </div>
+
+
+                        <div class="transaction">
+
+                            <div class="transaction-left">
+
+                                <div
+                                    class="transaction-icon"
+                                    style="background:#fff1f2;color:#ef4444;"
+                                >
+
+                                    <svg class="icon">
+                                        <use href="#shopping"></use>
+                                    </svg>
+
+                                </div>
+
+                                <div class="transaction-info">
+
+                                    <strong>
+                                        دیجی‌کالا
+                                    </strong>
+
+                                    <small>
+                                        امروز، ۱۸:۴۵
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="amount">
+
+                                <strong>
+                                    -450,000
+                                </strong>
+
+                                <small>
+                                    TRX-9482
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="transaction">
+
+                            <div class="transaction-left">
+
+                                <div
+                                    class="transaction-icon"
+                                    style="background:#ecfdf3;color:#16a34a;"
+                                >
+
+                                    <svg class="icon">
+                                        <use href="#trend-down"></use>
+                                    </svg>
+
+                                </div>
+
+                                <div class="transaction-info">
+
+                                    <strong>
+                                        سود صندوق
+                                    </strong>
+
+                                    <small>
+                                        دیروز، ۰۶:۰۰
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="amount">
+
+                                <strong style="color:#16a34a;">
+                                    +2,400,000
+                                </strong>
+
+                                <small>
+                                    TRX-1029
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <nav class="bottom-nav">
+
+                            <div class="nav-item active">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#home"></use>
+                                </svg>
+
+                                خانه
+
+                            </div>
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#wallet"></use>
+                                </svg>
+
+                                دارایی‌ها
+
+                            </div>
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#chart"></use>
+                                </svg>
+
+                                تحلیل
+
+                            </div>
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#bot"></use>
+                                </svg>
+
+                                دستیار
+
+                            </div>
+
+                        </nav>
+
+                    </div>
+
+                    <div class="home-indicator"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SCREEN 02
+        ========================================== -->
+
+        <section class="phone-column">
+
+            <div class="screen-label">
+                <span class="screen-number">02</span>
+                سبد دارایی‌ها
+            </div>
+
+            <div class="iphone">
+
+                <div class="screen">
+
+                    <div class="dynamic-island">
+                        <div class="camera"></div>
+                    </div>
+
+                    <div class="status">
+
+                        <span>9:41</span>
+
+                        <div class="status-right">
+                            <div class="status-signal">
+                                <i></i><i></i><i></i><i></i>
+                            </div>
+                            <div class="wifi"></div>
+                            <div class="battery"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="app">
+
+                        <div class="page-title">
+
+                            <div class="circle-button">
+
+                                <svg class="icon">
+                                    <use href="#back"></use>
+                                </svg>
+
+                            </div>
+
+                            <strong>
+                                سبد دارایی‌ها
+                            </strong>
+
+                            <div
+                                class="circle-button"
+                                style="color:#2563eb;"
+                            >
+
+                                <svg class="icon">
+                                    <use href="#plus"></use>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="asset">
+
+                            <div class="asset-main">
+
+                                <div
+                                    class="asset-icon"
+                                    style="background:#fff7ed;color:#f59e0b;"
+                                >
+                                    ₿
+                                </div>
+
+                                <div class="asset-name">
+
+                                    <strong>
+                                        بیت‌کوین
+                                    </strong>
+
+                                    <small>
+                                        0.4502 BTC
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="asset-value">
+
+                                <strong>
+                                    $31,240
+                                </strong>
+
+                                <small>
+                                    +2.4%
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="asset">
+
+                            <div class="asset-main">
+
+                                <div
+                                    class="asset-icon"
+                                    style="background:#eef2ff;color:#6366f1;"
+                                >
+                                    Ξ
+                                </div>
+
+                                <div class="asset-name">
+
+                                    <strong>
+                                        اتریوم
+                                    </strong>
+
+                                    <small>
+                                        4.2000 ETH
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="asset-value">
+
+                                <strong>
+                                    $8,650
+                                </strong>
+
+                                <small style="color:#ef4444;">
+                                    -1.2%
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="asset">
+
+                            <div class="asset-main">
+
+                                <div
+                                    class="asset-icon"
+                                    style="background:#ecfdf3;color:#16a34a;"
+                                >
+                                    ₮
+                                </div>
+
+                                <div class="asset-name">
+
+                                    <strong>
+                                        تتر
+                                    </strong>
+
+                                    <small>
+                                        12,400 USDT
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="asset-value">
+
+                                <strong>
+                                    $12,400
+                                </strong>
+
+                                <small style="color:#94a3b8;">
+                                    0.00%
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="asset">
+
+                            <div class="asset-main">
+
+                                <div
+                                    class="asset-icon"
+                                    style="background:#eff6ff;color:#2563eb;"
+                                >
+                                    $
+                                </div>
+
+                                <div class="asset-name">
+
+                                    <strong>
+                                        دلار آمریکا
+                                    </strong>
+
+                                    <small>
+                                        2,850 USD
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="asset-value">
+
+                                <strong>
+                                    $2,850
+                                </strong>
+
+                                <small style="color:#16a34a;">
+                                    +0.3%
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <nav class="bottom-nav">
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#home"></use>
+                                </svg>
+
+                                خانه
+
+                            </div>
+
+                            <div class="nav-item active">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#wallet"></use>
+                                </svg>
+
+                                دارایی‌ها
+
+                            </div>
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#chart"></use>
+                                </svg>
+
+                                تحلیل
+
+                            </div>
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#bot"></use>
+                                </svg>
+
+                                دستیار
+
+                            </div>
+
+                        </nav>
+
+                    </div>
+
+                    <div class="home-indicator"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SCREEN 03
+        ========================================== -->
+
+        <section class="phone-column">
+
+            <div class="screen-label">
+                <span class="screen-number">03</span>
+                تحلیل مالی
+            </div>
+
+            <div class="iphone">
+
+                <div class="screen">
+
+                    <div class="dynamic-island">
+                        <div class="camera"></div>
+                    </div>
+
+                    <div class="status">
+
+                        <span>9:41</span>
+
+                        <div class="status-right">
+                            <div class="status-signal">
+                                <i></i><i></i><i></i><i></i>
+                            </div>
+                            <div class="wifi"></div>
+                            <div class="battery"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="app">
+
+                        <div class="page-title">
+
+                            <div
+                                class="circle-button"
+                                style="opacity:0;"
+                            ></div>
+
+                            <strong>
+                                بودجه و هزینه‌ها
+                            </strong>
+
+                            <div
+                                class="circle-button"
+                                style="opacity:0;"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="donut">
+
+                            <svg viewBox="0 0 100 100">
+
+                                <circle
+                                    class="donut-track"
+                                    cx="50"
+                                    cy="50"
+                                    r="35"
+                                />
+
+                                <circle
+                                    class="donut-blue"
+                                    cx="50"
+                                    cy="50"
+                                    r="35"
+                                />
+
+                                <circle
+                                    class="donut-purple"
+                                    cx="50"
+                                    cy="50"
+                                    r="35"
+                                />
+
+                            </svg>
+
+                            <div class="donut-center">
+
+                                <small>
+                                    مصرف این ماه
+                                </small>
+
+                                <strong>
+                                    12.4M
+                                </strong>
+
+                                <div class="month">
+                                    آبان ۱۴۰۵
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="budget">
+
+                            <div class="budget-head">
+
+                                <span>
+                                    مسکن و قبوض
+                                </span>
+
+                                <strong>
+                                    5,200,000
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    style="
+                                    width:65%;
+                                    background:#2563eb;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <div class="budget-note">
+                                ۲,۰۰۰,۰۰۰ تومان باقی مانده
+                            </div>
+
+                        </div>
+
+
+                        <div class="budget">
+
+                            <div class="budget-head">
+
+                                <span>
+                                    توسعه و آموزش
+                                </span>
+
+                                <strong>
+                                    3,100,000
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    style="
+                                    width:45%;
+                                    background:#7c3aed;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <div class="budget-note">
+                                بدون محدودیت بودجه
+                            </div>
+
+                        </div>
+
+
+                        <div class="budget">
+
+                            <div class="budget-head">
+
+                                <span>
+                                    خرید و سرگرمی
+                                </span>
+
+                                <strong>
+                                    2,100,000
+                                </strong>
+
+                            </div>
+
+                            <div class="progress">
+
+                                <div
+                                    style="
+                                    width:32%;
+                                    background:#f59e0b;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <div class="budget-note">
+                                ۳,۹۰۰,۰۰۰ تومان باقی مانده
+                            </div>
+
+                        </div>
+
+
+                        <nav class="bottom-nav">
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#home"></use>
+                                </svg>
+
+                                خانه
+
+                            </div>
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#wallet"></use>
+                                </svg>
+
+                                دارایی‌ها
+
+                            </div>
+
+                            <div class="nav-item active">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#chart"></use>
+                                </svg>
+
+                                تحلیل
+
+                            </div>
+
+                            <div class="nav-item">
+
+                                <svg class="nav-icon icon">
+                                    <use href="#bot"></use>
+                                </svg>
+
+                                دستیار
+
+                            </div>
+
+                        </nav>
+
+                    </div>
+
+                    <div class="home-indicator"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SCREEN 04
+        ========================================== -->
+
+        <section class="phone-column">
+
+            <div class="screen-label">
+                <span class="screen-number">04</span>
+                دستیار هوشمند
+            </div>
+
+            <div class="iphone">
+
+                <div class="screen">
+
+                    <div class="dynamic-island">
+                        <div class="camera"></div>
+                    </div>
+
+                    <div class="status">
+
+                        <span>9:41</span>
+
+                        <div class="status-right">
+                            <div class="status-signal">
+                                <i></i><i></i><i></i><i></i>
+                            </div>
+                            <div class="wifi"></div>
+                            <div class="battery"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="app">
+
+                        <div class="ai-header">
+
+                            <div class="circle-button">
+
+                                <svg class="icon">
+                                    <use href="#back"></use>
+                                </svg>
+
+                            </div>
+
+
+                            <div class="ai-profile">
+
+                                <div class="ai-avatar">
+
+                                    <svg class="icon" style="width:15px;height:15px;">
+                                        <use href="#spark"></use>
+                                    </svg>
+
+                                </div>
+
+                                <div class="ai-name">
+
+                                    <strong>
+                                        مشاور هوشمند
+                                    </strong>
+
+                                    <small>
+                                        آنلاین
+                                    </small>
+
+                                </div>
+
+                                <div class="online"></div>
+
+                            </div>
+
+
+                            <div
+                                class="circle-button"
+                                style="opacity:0;"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="chat">
+
+                            <div class="date">
+                                امروز، ۱۸:۴۰
+                            </div>
+
+
+                            <div class="message ai">
+
+                                سلام عرفان 👋
+
+                                <br>
+
+                                تحلیل داده‌ها نشون میده این ماه
+                                <strong>۱۵٪</strong>
+                                کمتر از میانگین برای رفت‌وآمد هزینه کردی.
+
+                                <br>
+
+                                عالیه!
+
+                            </div>
+
+
+                            <div class="message user">
+
+                                چطور می‌تونم این پس‌انداز رو به بهترین شکل سرمایه‌گذاری کنم؟
+
+                            </div>
+
+
+                            <div class="message ai">
+
+                                پیشنهاد می‌کنم مبلغ
+                                <strong>۱,۵۰۰,۰۰۰ تومان</strong>
+                                رو به یک صندوق درآمد ثابت منتقل کنی.
+
+                                <div class="invest-card">
+
+                                    <div>
+
+                                        <strong>
+                                            صندوق درآمد ثابت
+                                        </strong>
+
+                                        <small>
+                                            ریسک پایین • سود روزشمار
+                                        </small>
+
+                                    </div>
+
+                                    <div class="apy">
+                                        +24%
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                style="
+                                display:flex;
+                                gap:5px;
+                                flex-wrap:wrap;
+                                "
+                            >
+
+                                <div
+                                    style="
+                                    background:#eff6ff;
+                                    color:#2563eb;
+                                    border:1px solid #dbeafe;
+                                    padding:5px 8px;
+                                    border-radius:100px;
+                                    font-size:5px;
+                                    font-weight:800;
+                                    "
+                                >
+                                    تأیید و انتقال
+                                </div>
+
+                                <div
+                                    style="
+                                    background:white;
+                                    color:#6b7280;
+                                    border:1px solid #e5e7eb;
+                                    padding:5px 8px;
+                                    border-radius:100px;
+                                    font-size:5px;
+                                    font-weight:700;
+                                    "
+                                >
+                                    صندوق سهامی؟
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chat-input">
+
+                            <span>
+                                پیام یا دستور مالی...
+                            </span>
+
+                            <div class="send">
+
+                                <svg
+                                    class="icon"
+                                    style="width:12px;height:12px;transform:rotate(90deg);"
+                                >
+                                    <use href="#send"></use>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="home-indicator"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SCREEN 05
+        ========================================== -->
+
+        <section class="phone-column">
+
+            <div class="screen-label">
+                <span class="screen-number">05</span>
+                مدیریت کارت
+            </div>
+
+            <div class="iphone">
+
+                <div class="screen">
+
+                    <div class="dynamic-island">
+                        <div class="camera"></div>
+                    </div>
+
+                    <div class="status">
+
+                        <span>9:41</span>
+
+                        <div class="status-right">
+                            <div class="status-signal">
+                                <i></i><i></i><i></i><i></i>
+                            </div>
+                            <div class="wifi"></div>
+                            <div class="battery"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="app">
+
+                        <div class="page-title">
+
+                            <div class="circle-button">
+
+                                <svg class="icon">
+                                    <use href="#back"></use>
+                                </svg>
+
+                            </div>
+
+                            <strong>
+                                کارت‌های بانکی
+                            </strong>
+
+                            <div
+                                class="circle-button"
+                                style="color:#2563eb;"
+                            >
+
+                                <svg class="icon">
+                                    <use href="#plus"></use>
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="bank-card">
+
+                            <div class="card-top">
+
+                                <div class="chip"></div>
+
+                                <div class="brand">
+                                    ZARVAND
+                                </div>
+
+                            </div>
+
+
+                            <div class="card-number">
+                                5022 2910 8492 0014
+                            </div>
+
+
+                            <div class="card-bottom">
+
+                                <div>
+
+                                    <small>
+                                        CARD HOLDER
+                                    </small>
+
+                                    <strong>
+                                        ERFAN MOEIN
+                                    </strong>
+
+                                </div>
+
+
+                                <div>
+
+                                    <small>
+                                        EXPIRES
+                                    </small>
+
+                                    <strong>
+                                        12/28
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            style="
+                            padding:0 17px 7px;
+                            font-size:8px;
+                            font-weight:900;
+                            "
+                        >
+                            تنظیمات امنیتی
+                        </div>
+
+
+                        <div class="setting">
+
+                            <div class="setting-left">
+
+                                <div class="setting-icon">
+
+                                    <svg class="icon">
+                                        <use href="#globe"></use>
+                                    </svg>
+
+                                </div>
+
+                                <div class="setting-text">
+
+                                    <strong>
+                                        پرداخت اینترنتی
+                                    </strong>
+
+                                    <small>
+                                        خرید از درگاه‌های آنلاین
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="toggle"></div>
+
+                        </div>
+
+
+                        <div class="setting">
+
+                            <div class="setting-left">
+
+                                <div class="setting-icon">
+
+                                    <svg class="icon">
+                                        <use href="#lock"></use>
+                                    </svg>
+
+                                </div>
+
+                                <div class="setting-text">
+
+                                    <strong>
+                                        مسدودسازی موقت
+                                    </strong>
+
+                                    <small>
+                                        غیرفعال شدن تراکنش‌ها
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="toggle off"></div>
+
+                        </div>
+
+
+                        <div class="setting">
+
+                            <div class="setting-left">
+
+                                <div class="setting-icon">
+
+                                    <svg class="icon">
+                                        <use href="#sliders"></use>
+                                    </svg>
+
+                                </div>
+
+                                <div class="setting-text">
+
+                                    <strong>
+                                        سقف خرید روزانه
+                                    </strong>
+
+                                    <small>
+                                        50,000,000 تومان
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <div
+                                style="
+                                width:28px;
+                                height:5px;
+                                border-radius:20px;
+                                background:#e8edf4;
+                                overflow:hidden;
+                                "
+                            >
+
+                                <div
+                                    style="
+                                    width:50%;
+                                    height:100%;
+                                    background:#2563eb;
+                                    border-radius:20px;
+                                    "
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="home-indicator"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-left">
+            Fintech Product Design · Mobile UI/UX · 2026
+        </div>
+
+        <div class="footer-brand">
+            Designed by <span>ERFAN MOEIN</span>
+        </div>
+
+    </footer>
+
+</div>
+
+
+
+<!-- =====================================================
+     SVG ICON LIBRARY
+===================================================== -->
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    style="display:none;"
+>
+
+    <symbol id="home" viewBox="0 0 24 24">
+
+        <path d="M3 10.5L12 3l9 7.5"></path>
+
+        <path d="M5 9.5V21h14V9.5"></path>
+
+        <path d="M9 21v-7h6v7"></path>
+
+    </symbol>
+
+
+    <symbol id="wallet" viewBox="0 0 24 24">
+
+        <path d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path>
+
+        <path d="M16 12h6v4h-6a2 2 0 0 1 0-4z"></path>
+
+        <circle cx="17" cy="14" r=".8"></circle>
+
+        <path d="M4 6V4a2 2 0 0 1 2-2h12"></path>
+
+    </symbol>
+
+
+    <symbol id="chart" viewBox="0 0 24 24">
+
+        <path d="M4 19V5"></path>
+
+        <path d="M4 19h16"></path>
+
+        <path d="M7 15l3-4 3 2 5-7"></path>
+
+        <circle cx="7" cy="15" r="1"></circle>
+        <circle cx="10" cy="11" r="1"></circle>
+        <circle cx="13" cy="13" r="1"></circle>
+        <circle cx="18" cy="6" r="1"></circle>
+
+    </symbol>
+
+
+    <symbol id="bot" viewBox="0 0 24 24">
+
+        <rect x="4" y="8" width="16" height="12" rx="3"></rect>
+
+        <path d="M12 8V4"></path>
+
+        <circle cx="12" cy="3" r="1"></circle>
+
+        <circle cx="9" cy="14" r="1"></circle>
+        <circle cx="15" cy="14" r="1"></circle>
+
+        <path d="M8 17h8"></path>
+
+    </symbol>
+
+
+    <symbol id="bell" viewBox="0 0 24 24">
+
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"></path>
+
+        <path d="M10 20a2 2 0 0 0 4 0"></path>
+
+    </symbol>
+
+
+    <symbol id="trend-up" viewBox="0 0 24 24">
+
+        <path d="M4 16l6-6 4 4 6-7"></path>
+
+        <path d="M15 7h5v5"></path>
+
+    </symbol>
+
+
+    <symbol id="trend-down" viewBox="0 0 24 24">
+
+        <path d="M4 8l6 6 4-4 6 7"></path>
+
+        <path d="M15 17h5v-5"></path>
+
+    </symbol>
+
+
+    <symbol id="send" viewBox="0 0 24 24">
+
+        <path d="M22 2L11 13"></path>
+
+        <path d="M22 2l-7 20-4-9-9-4z"></path>
+
+    </symbol>
+
+
+    <symbol id="download" viewBox="0 0 24 24">
+
+        <path d="M12 3v13"></path>
+
+        <path d="M7 11l5 5 5-5"></path>
+
+        <path d="M4 21h16"></path>
+
+    </symbol>
+
+
+    <symbol id="qr" viewBox="0 0 24 24">
+
+        <rect x="3" y="3" width="7" height="7"></rect>
+
+        <rect x="14" y="3" width="7" height="7"></rect>
+
+        <rect x="3" y="14" width="7" height="7"></rect>
+
+        <path d="M14 14h3v3h-3z"></path>
+
+        <path d="M18 18h3v3h-3z"></path>
+
+        <path d="M18 14v2"></path>
+
+        <path d="M14 18h2"></path>
+
+    </symbol>
+
+
+    <symbol id="card" viewBox="0 0 24 24">
+
+        <rect x="2" y="5" width="20" height="14" rx="3"></rect>
+
+        <path d="M2 10h20"></path>
+
+        <path d="M6 15h4"></path>
+
+    </symbol>
+
+
+    <symbol id="shopping" viewBox="0 0 24 24">
+
+        <path d="M5 8h14l-1 12H6L5 8z"></path>
+
+        <path d="M9 8a3 3 0 0 1 6 0"></path>
+
+    </symbol>
+
+
+    <symbol id="plus" viewBox="0 0 24 24">
+
+        <path d="M12 5v14"></path>
+
+        <path d="M5 12h14"></path>
+
+    </symbol>
+
+
+    <symbol id="back" viewBox="0 0 24 24">
+
+        <path d="M15 5l-7 7 7 7"></path>
+
+    </symbol>
+
+
+    <symbol id="globe" viewBox="0 0 24 24">
+
+        <circle cx="12" cy="12" r="9"></circle>
+
+        <path d="M3 12h18"></path>
+
+        <path d="M12 3c3 3 3 15 0 18"></path>
+
+        <path d="M12 3c-3 3-3 15 0 18"></path>
+
+    </symbol>
+
+
+    <symbol id="lock" viewBox="0 0 24 24">
+
+        <rect x="4" y="10" width="16" height="11" rx="2"></rect>
+
+        <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+
+        <circle cx="12" cy="15" r="1"></circle>
+
+        <path d="M12 16v2"></path>
+
+    </symbol>
+
+
+    <symbol id="sliders" viewBox="0 0 24 24">
+
+        <path d="M4 6h16"></path>
+
+        <path d="M4 12h16"></path>
+
+        <path d="M4 18h16"></path>
+
+        <circle cx="9" cy="6" r="2"></circle>
+
+        <circle cx="15" cy="12" r="2"></circle>
+
+        <circle cx="8" cy="18" r="2"></circle>
+
+    </symbol>
+
+
+    <symbol id="spark" viewBox="0 0 24 24">
+
+        <path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"></path>
+
+        <path d="M19 16l.7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7z"></path>
+
+    </symbol>
+
+</svg>
+
+</body>
+</html>

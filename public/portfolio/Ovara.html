@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OVARA — Premium Commerce UI Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+
+:root{
+  --bg:#f4f5f8;
+  --white:#fff;
+  --ink:#111116;
+  --muted:#858791;
+  --line:#ececf1;
+  --coral:#ff6f61;
+  --violet:#7667f4;
+  --blue:#3d8dff;
+  --mint:#52c7b2;
+  --soft-coral:#fff0ed;
+  --soft-violet:#f0efff;
+  --soft-blue:#edf5ff;
+  --green:#31ad82;
+  --phone:#d9dce2;
+  --shadow:0 34px 80px rgba(18,20,35,.14);
+  --radius:28px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 8% 5%,rgba(118,103,244,.09),transparent 24%),
+    radial-gradient(circle at 92% 20%,rgba(255,111,97,.08),transparent 25%),
+    var(--bg);
+  color:var(--ink);
+  font-family:'Vazirmatn',sans-serif;
+}
+
+button,input{font:inherit}
+button{border:0;cursor:pointer}
+
+.portfolio{
+  width:min(1800px,100%);
+  margin:auto;
+  padding:70px 34px 110px;
+}
+
+.hero{
+  max-width:1160px;
+  margin:0 auto 90px;
+  text-align:center;
+}
+
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 16px 9px 11px;
+  border:1px solid rgba(118,103,244,.14);
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(18px);
+  border-radius:100px;
+  box-shadow:0 10px 35px rgba(30,30,50,.06);
+  font-size:13px;
+  font-weight:700;
+}
+
+.brand-mark{
+  width:29px;height:29px;
+  border-radius:10px;
+  display:grid;place-items:center;
+  color:white;
+  background:linear-gradient(135deg,var(--coral),var(--violet));
+  box-shadow:0 7px 18px rgba(118,103,244,.3);
+}
+
+.hero h1{
+  margin:24px 0 13px;
+  font-size:clamp(42px,6vw,82px);
+  letter-spacing:-3px;
+  line-height:1.05;
+  font-weight:900;
+}
+
+.hero h1 span{
+  background:linear-gradient(100deg,var(--coral),var(--violet) 52%,var(--blue));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:720px;
+  margin:auto;
+  color:var(--muted);
+  font-size:17px;
+  line-height:2;
+}
+
+.device-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(240px,1fr));
+  gap:30px;
+  align-items:start;
+}
+
+.project{
+  min-width:0;
+}
+
+.project-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 5px 16px;
+}
+
+.project-number{
+  color:#a0a1a9;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.project-title{
+  font-size:15px;
+  font-weight:800;
+}
+
+.phone-wrap{
+  position:relative;
+  padding:7px;
+  border-radius:48px;
+  background:linear-gradient(145deg,#f4f5f7,#aeb2ba 48%,#eef0f3);
+  box-shadow:
+    0 38px 70px rgba(26,29,42,.18),
+    0 9px 18px rgba(26,29,42,.1),
+    inset 1px 1px 2px rgba(255,255,255,.95),
+    inset -1px -1px 2px rgba(0,0,0,.18);
+}
+
+.phone{
+  position:relative;
+  height:690px;
+  overflow:hidden;
+  border-radius:41px;
+  background:#fff;
+  border:1px solid #101115;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.14);
+}
+
+.phone::after{
+  content:"";
+  pointer-events:none;
+  position:absolute;
+  inset:0;
+  z-index:50;
+  border-radius:40px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.35),
+    inset 0 -20px 35px rgba(0,0,0,.025);
+}
+
+.dynamic-island{
+  position:absolute;
+  z-index:100;
+  top:9px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92px;
+  height:27px;
+  border-radius:20px;
+  background:#09090b;
+  box-shadow:0 2px 3px rgba(0,0,0,.3);
+}
+
+.status{
+  height:42px;
+  padding:11px 19px 0;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  font-size:9px;
+  font-weight:800;
+  direction:ltr;
+  position:relative;
+  z-index:20;
+}
+
+.status-right{
+  display:flex;
+  gap:5px;
+  align-items:center;
+}
+
+.status svg{width:12px;height:12px}
+
+.screen{
+  height:calc(100% - 42px);
+  overflow-y:auto;
+  padding:0 15px 62px;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+}
+
+.screen::-webkit-scrollbar{display:none}
+
+.home-indicator{
+  position:absolute;
+  z-index:110;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92px;height:4px;
+  border-radius:20px;
+  background:#111;
+  opacity:.9;
+}
+
+/* shared app UI */
+.app-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:7px 0 18px;
+}
+
+.avatar{
+  width:38px;height:38px;
+  border-radius:14px;
+  background:linear-gradient(145deg,#fbd4cd,#fff2ef);
+  display:grid;place-items:center;
+  font-size:13px;font-weight:800;
+  color:#a7463c;
+}
+
+.greeting small{color:var(--muted);font-size:9px}
+.greeting strong{display:block;font-size:16px;margin-top:2px}
+
+.icon-btn{
+  width:36px;height:36px;
+  border-radius:13px;
+  display:grid;place-items:center;
+  background:#f7f7f9;
+  color:#202126;
+}
+
+.icon-btn svg{width:17px;height:17px}
+
+.search{
+  height:45px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:0 13px;
+  background:#f6f6f8;
+  border:1px solid #ededf1;
+  border-radius:15px;
+  color:#a0a1a8;
+  font-size:10px;
+}
+
+.search svg{width:17px}
+
+.section{
+  margin-top:20px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.section-head h3{
+  font-size:12px;
+  margin:0;
+}
+
+.section-head span{
+  color:var(--violet);
+  font-size:8px;
+  font-weight:700;
+}
+
+.category-row{
+  display:flex;
+  gap:8px;
+  overflow:hidden;
+  padding-bottom:3px;
+}
+
+.category{
+  min-width:64px;
+  text-align:center;
+}
+
+.category-icon{
+  width:47px;height:47px;
+  margin:auto auto 5px;
+  display:grid;place-items:center;
+  border-radius:16px;
+  background:var(--soft-violet);
+  color:var(--violet);
+}
+
+.category:nth-child(2) .category-icon{background:var(--soft-coral);color:var(--coral)}
+.category:nth-child(3) .category-icon{background:var(--soft-blue);color:var(--blue)}
+.category:nth-child(4) .category-icon{background:#eaf9f5;color:var(--mint)}
+
+.category svg{width:22px;height:22px}
+.category span{font-size:8px;color:#6f7079}
+
+.banner{
+  min-height:138px;
+  border-radius:23px;
+  padding:18px;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(125deg,#171821,#3e3a70 58%,#7466ef);
+  color:white;
+}
+
+.banner::before,
+.banner::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,.1);
+}
+
+.banner::before{width:150px;height:150px;left:-60px;top:-65px}
+.banner::after{width:110px;height:110px;right:-30px;bottom:-55px}
+
+.banner small{font-size:8px;opacity:.7}
+.banner h4{margin:7px 0 4px;font-size:17px;position:relative;z-index:2}
+.banner p{margin:0;font-size:8px;opacity:.72;position:relative;z-index:2}
+.banner button{
+  margin-top:13px;
+  padding:7px 12px;
+  border-radius:9px;
+  background:white;
+  color:#252432;
+  font-size:8px;
+  font-weight:800;
+  position:relative;
+  z-index:2;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.product-card{
+  position:relative;
+  min-width:0;
+}
+
+.product-image{
+  height:132px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,#f2f4f8,#e5e8ef);
+}
+
+.product-image::before{
+  content:"";
+  position:absolute;
+  width:95px;height:95px;
+  border-radius:50%;
+  background:rgba(255,255,255,.75);
+  filter:blur(1px);
+}
+
+.product-art{
+  position:relative;
+  z-index:1;
+  width:68px;height:105px;
+  border-radius:17px;
+  background:linear-gradient(145deg,#292c35,#090a0d);
+  box-shadow:12px 16px 25px rgba(0,0,0,.2);
+}
+
+.product-art.phone-art{
+  width:54px;height:94px;
+  border-radius:12px;
+  transform:rotate(9deg);
+}
+
+.product-art.watch{
+  width:56px;height:67px;
+  border-radius:16px;
+  background:linear-gradient(145deg,#c9ccd1,#7f848d);
+}
+
+.product-art.shoe{
+  width:95px;height:50px;
+  border-radius:50px 25px 16px 18px;
+  background:linear-gradient(145deg,#fff,#c9ced8);
+  transform:rotate(-8deg);
+}
+
+.product-art.bottle{
+  width:35px;height:93px;
+  border-radius:11px 11px 17px 17px;
+  background:linear-gradient(90deg,#a9e7df,#fff,#7ecbc0);
+}
+
+.product-art.headphone{
+  width:70px;height:72px;
+  border:13px solid #272a32;
+  border-bottom-color:transparent;
+  border-radius:50%;
+  background:transparent;
+  box-shadow:none;
+}
+
+.product-info{padding:8px 2px 2px}
+.product-name{
+  font-size:9px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.product-meta{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  margin-top:4px;
+}
+.rating{font-size:7px;color:#e7a82e}
+.product-price{
+  margin-top:4px;
+  font-size:10px;
+  font-weight:900;
+}
+.product-price small{
+  font-size:7px;
+  color:var(--muted);
+  font-weight:500;
+}
+.discount{
+  display:inline-flex;
+  padding:2px 5px;
+  border-radius:5px;
+  background:#fff0ed;
+  color:var(--coral);
+  font-size:7px;
+  font-weight:800;
+}
+.wish{
+  position:absolute;
+  z-index:3;
+  top:7px;right:7px;
+  width:27px;height:27px;
+  display:grid;place-items:center;
+  border-radius:9px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(8px);
+}
+.wish svg{width:13px}
+
+.flash{
+  background:#fff5f2;
+  border:1px solid #ffe3dd;
+  border-radius:20px;
+  padding:12px;
+}
+.flash-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:9px;
+}
+.flash-title{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:10px;
+  font-weight:900;
+}
+.timer{
+  display:flex;
+  gap:3px;
+  direction:ltr;
+}
+.timer b{
+  padding:4px 5px;
+  border-radius:6px;
+  background:#17171c;
+  color:white;
+  font-size:7px;
+}
+
+.discovery-title h2{
+  margin:4px 0 3px;
+  font-size:20px;
+}
+.discovery-title p{
+  margin:0 0 14px;
+  font-size:8px;
+  color:var(--muted);
+}
+
+.filter-row{
+  display:flex;
+  gap:6px;
+  margin:12px 0;
+  overflow:hidden;
+}
+.filter{
+  white-space:nowrap;
+  border:1px solid #e9e9ed;
+  border-radius:9px;
+  padding:6px 8px;
+  background:white;
+  font-size:7px;
+}
+.filter.active{
+  color:white;
+  background:#17171c;
+  border-color:#17171c;
+}
+
+.rating-row{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  font-size:7px;
+}
+
+.gallery{
+  height:255px;
+  border-radius:25px;
+  background:linear-gradient(145deg,#f4f5f7,#e5e8ef);
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+
+.gallery::before{
+  content:"";
+  position:absolute;
+  width:220px;height:220px;
+  border-radius:50%;
+  background:rgba(255,255,255,.72);
+}
+
+.hero-product{
+  position:relative;
+  z-index:2;
+  width:112px;height:190px;
+  border-radius:25px;
+  background:linear-gradient(145deg,#31353e,#08090b 60%,#272b34);
+  transform:rotate(8deg);
+  box-shadow:25px 30px 40px rgba(0,0,0,.23);
+}
+
+.hero-product::before{
+  content:"";
+  position:absolute;
+  width:31px;height:31px;
+  border-radius:10px;
+  background:#15171c;
+  top:12px;right:12px;
+  box-shadow:
+    -3px 3px 0 #31343b,
+    0 8px 0 -4px #090a0d;
+}
+
+.gallery-nav{
+  position:absolute;
+  z-index:4;
+  left:11px;right:11px;top:50%;
+  display:flex;
+  justify-content:space-between;
+}
+.gallery-nav button{
+  width:28px;height:28px;
+  border-radius:50%;
+  background:rgba(255,255,255,.8);
+  display:grid;place-items:center;
+}
+.gallery-nav svg{width:12px}
+
+.details h2{
+  margin:15px 0 5px;
+  font-size:16px;
+  line-height:1.5;
+}
+.seller{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:8px;
+  color:var(--muted);
+}
+.verified{
+  color:var(--blue);
+}
+.big-price{
+  margin:13px 0;
+  font-size:20px;
+  font-weight:900;
+}
+.big-price small{font-size:9px;color:var(--muted);font-weight:500}
+
+.option-title{
+  font-size:9px;
+  font-weight:800;
+  margin:13px 0 7px;
+}
+.options{
+  display:flex;
+  gap:6px;
+}
+.option{
+  border:1px solid #e4e4e9;
+  border-radius:10px;
+  padding:7px 10px;
+  font-size:8px;
+  background:white;
+}
+.option.selected{
+  border-color:#17171c;
+  box-shadow:inset 0 0 0 1px #17171c;
+}
+
+.delivery-card{
+  margin-top:13px;
+  border-radius:16px;
+  background:#f6fbfa;
+  padding:11px;
+}
+.delivery-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+}
+.delivery-row:last-child{margin-bottom:0}
+.delivery-icon{
+  width:28px;height:28px;
+  display:grid;place-items:center;
+  border-radius:9px;
+  background:white;
+  color:var(--green);
+}
+.delivery-icon svg{width:14px}
+.delivery-row strong{display:block;font-size:8px}
+.delivery-row span{font-size:7px;color:var(--muted)}
+
+.sticky-buy{
+  position:sticky;
+  bottom:0;
+  z-index:20;
+  padding:10px 0 4px;
+  background:linear-gradient(transparent,#fff 25%);
+}
+.buy-btn{
+  width:100%;
+  height:46px;
+  border-radius:15px;
+  color:white;
+  font-size:10px;
+  font-weight:900;
+  background:linear-gradient(110deg,var(--coral),var(--violet));
+  box-shadow:0 10px 25px rgba(118,103,244,.25);
+}
+
+.cart-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:7px 0 17px;
+}
+.cart-title h2{margin:0;font-size:20px}
+.cart-count{
+  width:28px;height:28px;
+  display:grid;place-items:center;
+  border-radius:10px;
+  color:var(--coral);
+  background:var(--soft-coral);
+  font-size:9px;font-weight:900;
+}
+
+.cart-item{
+  display:flex;
+  gap:9px;
+  padding:9px;
+  border:1px solid #ededf1;
+  background:white;
+  border-radius:17px;
+  margin-bottom:8px;
+}
+.cart-art{
+  flex:0 0 64px;
+  height:64px;
+  border-radius:13px;
+  background:#f1f3f7;
+  display:grid;place-items:center;
+}
+.cart-art .product-art{transform:scale(.55)}
+.cart-content{flex:1;min-width:0}
+.cart-content strong{
+  display:block;
+  font-size:9px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.cart-content small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:7px;
+}
+.cart-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:8px;
+}
+.qty{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.qty button{
+  width:20px;height:20px;
+  border-radius:7px;
+  background:#f3f3f6;
+  font-size:12px;
+}
+.qty span{font-size:8px;font-weight:800}
+
+.code-box{
+  margin-top:13px;
+  display:flex;
+  gap:6px;
+}
+.code-box input{
+  min-width:0;
+  flex:1;
+  height:40px;
+  border:1px solid #e7e7ec;
+  border-radius:12px;
+  padding:0 10px;
+  outline:none;
+  font-size:8px;
+  background:white;
+}
+.code-box button{
+  padding:0 12px;
+  border-radius:12px;
+  color:var(--violet);
+  background:var(--soft-violet);
+  font-size:8px;
+  font-weight:800;
+}
+
+.checkout-card{
+  margin-top:13px;
+  border-radius:18px;
+  padding:12px;
+  background:#f7f7f9;
+}
+.checkout-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 0;
+  font-size:8px;
+  color:#6f7079;
+}
+.checkout-row.total{
+  margin-top:5px;
+  padding-top:11px;
+  border-top:1px solid #e7e7eb;
+  color:#111;
+  font-size:10px;
+  font-weight:900;
+}
+
+.pay-option{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px;
+  border:1px solid #e8e8ed;
+  border-radius:14px;
+  margin-top:7px;
+  background:white;
+}
+.pay-option.active{
+  border-color:var(--violet);
+  box-shadow:0 0 0 2px rgba(118,103,244,.08);
+}
+.pay-left{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.pay-logo{
+  width:27px;height:27px;
+  display:grid;place-items:center;
+  border-radius:8px;
+  background:#111;
+  color:white;
+  font-size:7px;font-weight:900;
+}
+.pay-option span{font-size:8px}
+.radio{
+  width:13px;height:13px;
+  border-radius:50%;
+  border:1px solid #c8c8cf;
+}
+.pay-option.active .radio{
+  border:4px solid var(--violet);
+}
+
+.profile-head{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:7px 0 17px;
+}
+.profile-avatar{
+  width:55px;height:55px;
+  border-radius:19px;
+  background:linear-gradient(145deg,#e7e3ff,#bdb4ff);
+  display:grid;place-items:center;
+  color:#5c50ce;
+  font-size:18px;font-weight:900;
+}
+.profile-head strong{font-size:13px}
+.profile-head small{display:block;color:var(--muted);font-size:7px;margin-top:4px}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+}
+.stat{
+  text-align:center;
+  padding:11px 5px;
+  background:#f7f7f9;
+  border-radius:14px;
+}
+.stat strong{font-size:13px;display:block}
+.stat span{font-size:7px;color:var(--muted)}
+
+.order-card{
+  margin-top:14px;
+  border:1px solid #ededf1;
+  border-radius:18px;
+  padding:11px;
+  background:white;
+}
+.order-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:8px;
+}
+.order-status{
+  color:var(--green);
+  background:#eaf9f4;
+  padding:3px 6px;
+  border-radius:6px;
+  font-size:7px;
+  font-weight:800;
+}
+.order-products{
+  display:flex;
+  gap:5px;
+  margin:10px 0;
+}
+.mini-art{
+  width:43px;height:43px;
+  border-radius:10px;
+  background:#f1f3f6;
+  display:grid;place-items:center;
+  overflow:hidden;
+}
+.mini-art .product-art{transform:scale(.35)}
+.tracking{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  margin:15px 5px 4px;
+}
+.tracking::before{
+  content:"";
+  position:absolute;
+  top:5px;left:8px;right:8px;
+  height:2px;
+  background:#e5e5e9;
+}
+.track-step{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  font-size:6px;
+  color:var(--muted);
+}
+.track-dot{
+  width:11px;height:11px;
+  margin:auto auto 4px;
+  border-radius:50%;
+  background:#e1e2e7;
+  border:3px solid white;
+  box-shadow:0 0 0 1px #dddde2;
+}
+.track-step.done{color:var(--green)}
+.track-step.done .track-dot{background:var(--green)}
+
+.menu{
+  margin-top:12px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid #ededf1;
+  background:white;
+}
+.menu-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:13px 11px;
+  border-bottom:1px solid #f0f0f3;
+}
+.menu-item:last-child{border-bottom:0}
+.menu-left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.menu-icon{
+  width:29px;height:29px;
+  display:grid;place-items:center;
+  border-radius:9px;
+  background:#f5f5f8;
+  color:#454650;
+}
+.menu-icon svg{width:14px}
+.menu-item span{font-size:8px}
+.menu-item > svg{width:12px;color:#b0b1b8}
+
+/* phone-specific backgrounds */
+.p2 .product-image:nth-child(odd){background:linear-gradient(145deg,#eef2ff,#e3e8fb)}
+.p3 .gallery{background:linear-gradient(145deg,#f8f3f1,#e8e2ed)}
+.p4 .cart-art{background:linear-gradient(145deg,#eef2f8,#e3e6ec)}
+.p5 .profile-avatar{background:linear-gradient(145deg,#ffe2dd,#ffbdb2)}
+
+/* presentation details */
+.phone-shadow{
+  height:22px;
+  width:78%;
+  margin:15px auto 0;
+  border-radius:50%;
+  background:rgba(25,28,40,.14);
+  filter:blur(13px);
+}
+
+.caption{
+  margin-top:22px;
+  text-align:center;
+}
+.caption strong{font-size:12px}
+.caption span{
+  display:block;
+  margin-top:4px;
+  font-size:9px;
+  color:var(--muted);
+}
+
+.footer{
+  margin-top:90px;
+  text-align:center;
+  color:#92939c;
+  font-size:10px;
+}
+.footer b{color:#111}
+
+@media(max-width:1400px){
+  .device-grid{
+    grid-template-columns:repeat(3,minmax(250px,1fr));
+    max-width:1040px;
+    margin:auto;
+  }
+}
+
+@media(max-width:900px){
+  .portfolio{padding:45px 18px 80px}
+  .device-grid{
+    grid-template-columns:repeat(2,minmax(250px,1fr));
+    gap:25px;
+  }
+}
+
+@media(max-width:600px){
+  .portfolio{padding:30px 14px 70px}
+  .hero{margin-bottom:55px}
+  .hero h1{letter-spacing:-2px}
+  .hero p{font-size:14px}
+  .device-grid{
+    grid-template-columns:1fr;
+    max-width:390px;
+    margin:auto;
+  }
+  .phone{height:760px}
+}
+</style>
+</head>
+
+<body>
+
+<main class="portfolio">
+
+<header class="hero">
+  <div class="brand">
+    <span class="brand-mark">
+      <svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2.4">
+        <path d="M6 18 12 5l6 13M8.5 14h7"/>
+      </svg>
+    </span>
+    OVARA · PREMIUM COMMERCE EXPERIENCE
+  </div>
+  <h1>خرید، <span>زیباتر از همیشه.</span></h1>
+  <p>
+    طراحی مفهومی رابط کاربری اپلیکیشن فروشگاهی OVARA؛
+    ترکیبی از تجارت دیجیتال، مینیمالیسم iOS و تجربه خرید سریع، لوکس و شخصی‌سازی‌شده.
+  </p>
+</header>
+
+<section class="device-grid">
+
+<!-- ========================================================= -->
+<!-- 01 HOME -->
+<!-- ========================================================= -->
+<article class="project">
+  <div class="project-head">
+    <span class="project-title">خانه و پیشنهادها</span>
+    <span class="project-number">01 / 05</span>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="dynamic-island"></div>
+
+      <div class="status">
+        <span>9:41</span>
+        <span class="status-right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 18h2M8 15h2M12 12h2M16 9h2"/>
+          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 9c4-4 10-4 14 0M8 12c2-2 6-2 8 0M11 15h2"/>
+          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="7" width="17" height="10" rx="2"/>
+            <path d="M21 10v4"/>
+          </svg>
+        </span>
+      </div>
+
+      <div class="screen">
+        <div class="app-top">
+          <div class="greeting">
+            <small>صبح بخیر،</small>
+            <strong>عرفان 👋</strong>
+          </div>
+          <button class="avatar">ع</button>
+        </div>
+
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m16 16 5 5"/>
+          </svg>
+          <span>دنبال چیزی خاص می‌گردی؟</span>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>دسته‌بندی‌ها</h3>
+            <span>مشاهده همه</span>
+          </div>
+
+          <div class="category-row">
+            <div class="category">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="7" y="3" width="10" height="18" rx="2"/>
+                  <path d="M10 6h4"/>
+                </svg>
+              </div>
+              <span>موبایل</span>
+            </div>
+
+            <div class="category">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M7 8h10v12H7z"/>
+                  <path d="M9 8V5h6v3"/>
+                </svg>
+              </div>
+              <span>فشن</span>
+            </div>
+
+            <div class="category">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M4 15h16l-2 5H6z"/>
+                  <path d="m7 15 2-8h6l2 8"/>
+                </svg>
+              </div>
+              <span>خانه</span>
+            </div>
+
+            <div class="category">
+              <div class="category-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M8 5h8v14H8z"/>
+                  <path d="M10 3h4M10 21h4"/>
+                </svg>
+              </div>
+              <span>دیجیتال</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="banner">
+            <small>پیشنهاد ویژه OVARA</small>
+            <h4>استایل جدید،<br>انتخاب متفاوت.</h4>
+            <p>تا ۳۵٪ تخفیف روی محصولات منتخب</p>
+            <button>مشاهده کالکشن</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>پرفروش‌های امروز</h3>
+            <span>همه محصولات</span>
+          </div>
+
+          <div class="products">
+            <div class="product-card">
+              <div class="product-image">
+                <button class="wish">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                  </svg>
+                </button>
+                <div class="product-art phone-art"></div>
+              </div>
+              <div class="product-info">
+                <div class="product-name">iPhone 16 Pro 256GB</div>
+                <div class="product-meta"><span class="rating">★ 4.9</span><span class="discount">۱۲٪</span></div>
+                <div class="product-price">۱۲۹,۸۰۰,۰۰۰ <small>تومان</small></div>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-image">
+                <button class="wish">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                  </svg>
+                </button>
+                <div class="product-art watch"></div>
+              </div>
+              <div class="product-info">
+                <div class="product-name">Apple Watch Series 10</div>
+                <div class="product-meta"><span class="rating">★ 4.8</span><span class="discount">۸٪</span></div>
+                <div class="product-price">۲۸,۴۰۰,۰۰۰ <small>تومان</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="flash">
+            <div class="flash-top">
+              <div class="flash-title">
+                <span style="color:var(--coral)">●</span>
+                فروش برق‌آسا
+              </div>
+              <div class="timer"><b>02</b><b>18</b><b>46</b></div>
+            </div>
+
+            <div class="products">
+              <div class="product-card">
+                <div class="product-image">
+                  <div class="product-art shoe"></div>
+                </div>
+                <div class="product-info">
+                  <div class="product-name">New Balance 9060</div>
+                  <div class="product-price">۷,۹۸۰,۰۰۰ <small>تومان</small></div>
+                </div>
+              </div>
+
+              <div class="product-card">
+                <div class="product-image">
+                  <div class="product-art bottle"></div>
+                </div>
+                <div class="product-info">
+                  <div class="product-name">Aesop Tacit 50ml</div>
+                  <div class="product-price">۵,۲۵۰,۰۰۰ <small>تومان</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>پیشنهاد مخصوص تو</h3>
+            <span>بر اساس علاقه‌مندی‌ها</span>
+          </div>
+          <div class="products">
+            <div class="product-card">
+              <div class="product-image"><div class="product-art headphone"></div></div>
+              <div class="product-info">
+                <div class="product-name">AirPods Max USB-C</div>
+                <div class="product-meta"><span class="rating">★ 4.7</span></div>
+                <div class="product-price">۳۲,۷۰۰,۰۰۰ <small>تومان</small></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-image"><div class="product-art bottle"></div></div>
+              <div class="product-info">
+                <div class="product-name">Le Labo Another 13</div>
+                <div class="product-meta"><span class="rating">★ 4.9</span></div>
+                <div class="product-price">۱۸,۹۰۰,۰۰۰ <small>تومان</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="phone-shadow"></div>
+  <div class="caption">
+    <strong>Shopping Home</strong>
+    <span>Personalized commerce dashboard</span>
+  </div>
+</article>
+
+
+<!-- ========================================================= -->
+<!-- 02 DISCOVERY -->
+<!-- ========================================================= -->
+<article class="project">
+  <div class="project-head">
+    <span class="project-title">جستجو و کشف</span>
+    <span class="project-number">02 / 05</span>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="dynamic-island"></div>
+
+      <div class="status">
+        <span>9:41</span>
+        <span class="status-right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h2M8 15h2M12 12h2M16 9h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9c4-4 10-4 14 0M8 12c2-2 6-2 8 0M11 15h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="17" height="10" rx="2"/><path d="M21 10v4"/></svg>
+        </span>
+      </div>
+
+      <div class="screen">
+        <div class="discovery-title">
+          <h2>کشف کن</h2>
+          <p>چیزی که دوست داری، همین‌جاست.</p>
+        </div>
+
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m16 16 5 5"/>
+          </svg>
+          <span>آیفون، ساعت، کفش...</span>
+        </div>
+
+        <div class="filter-row">
+          <button class="filter active">همه</button>
+          <button class="filter">محبوب‌ترین</button>
+          <button class="filter">جدیدترین</button>
+          <button class="filter">ارزان‌تر</button>
+        </div>
+
+        <div class="section-head">
+          <h3>۱۲۴ محصول پیدا شد</h3>
+          <span>مرتب‌سازی ↕</span>
+        </div>
+
+        <div class="products">
+          <div class="product-card">
+            <div class="product-image">
+              <button class="wish">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                </svg>
+              </button>
+              <div class="product-art phone-art"></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">iPhone 16 Pro Max</div>
+              <div class="rating-row"><span class="rating">★★★★★</span> <span>۴.۹</span></div>
+              <div class="product-price">۱۵۴,۹۰۰,۰۰۰ <small>تومان</small></div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <button class="wish">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                </svg>
+              </button>
+              <div class="product-art headphone"></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">Sony WH-1000XM6</div>
+              <div class="rating-row"><span class="rating">★★★★★</span> <span>۴.۸</span></div>
+              <div class="product-price">۲۴,۸۰۰,۰۰۰ <small>تومان</small></div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <button class="wish">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                </svg>
+              </button>
+              <div class="product-art watch"></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">Apple Watch Ultra 2</div>
+              <div class="rating-row"><span class="rating">★★★★★</span> <span>۴.۹</span></div>
+              <div class="product-price">۴۱,۹۰۰,۰۰۰ <small>تومان</small></div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <button class="wish">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                </svg>
+              </button>
+              <div class="product-art shoe"></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">Nike Air Max DN8</div>
+              <div class="rating-row"><span class="rating">★★★★★</span> <span>۴.۷</span></div>
+              <div class="product-price">۹,۶۰۰,۰۰۰ <small>تومان</small></div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <button class="wish">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                </svg>
+              </button>
+              <div class="product-art bottle"></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">Aesop Hwyl 50ml</div>
+              <div class="rating-row"><span class="rating">★★★★★</span> <span>۴.۹</span></div>
+              <div class="product-price">۴,۹۹۰,۰۰۰ <small>تومان</small></div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <button class="wish">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                </svg>
+              </button>
+              <div class="product-art phone-art"></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">Samsung Galaxy S25 Ultra</div>
+              <div class="rating-row"><span class="rating">★★★★★</span> <span>۴.۸</span></div>
+              <div class="product-price">۱۲۱,۵۰۰,۰۰۰ <small>تومان</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="banner" style="background:linear-gradient(120deg,#ff7668,#ee5d8f)">
+            <small>OVARA PICKS</small>
+            <h4>انتخاب‌های<br>سردبیر</h4>
+            <p>محصولاتی که ارزش خرید دارند.</p>
+            <button>مشاهده</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>اخیراً دیده‌شده</h3>
+            <span>پاک کردن</span>
+          </div>
+          <div class="products">
+            <div class="product-card">
+              <div class="product-image"><div class="product-art watch"></div></div>
+              <div class="product-info">
+                <div class="product-name">Garmin Venu 3</div>
+                <div class="product-price">۲۶,۸۰۰,۰۰۰ <small>تومان</small></div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-image"><div class="product-art shoe"></div></div>
+              <div class="product-info">
+                <div class="product-name">Adidas Ultraboost</div>
+                <div class="product-price">۸,۹۰۰,۰۰۰ <small>تومان</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="phone-shadow"></div>
+  <div class="caption">
+    <strong>Product Discovery</strong>
+    <span>Search · Filters · Smart recommendations</span>
+  </div>
+</article>
+
+
+<!-- ========================================================= -->
+<!-- 03 PRODUCT DETAILS -->
+<!-- ========================================================= -->
+<article class="project">
+  <div class="project-head">
+    <span class="project-title">جزئیات محصول</span>
+    <span class="project-number">03 / 05</span>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone p3">
+      <div class="dynamic-island"></div>
+
+      <div class="status">
+        <span>9:41</span>
+        <span class="status-right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h2M8 15h2M12 12h2M16 9h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9c4-4 10-4 14 0M8 12c2-2 6-2 8 0M11 15h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="17" height="10" rx="2"/><path d="M21 10v4"/></svg>
+        </span>
+      </div>
+
+      <div class="screen">
+        <div class="app-top">
+          <button class="icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="m15 5-7 7 7 7"/>
+            </svg>
+          </button>
+          <strong style="font-size:11px">جزئیات محصول</strong>
+          <button class="icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="gallery">
+          <div class="gallery-nav">
+            <button>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14 6-6 6 6 6"/></svg>
+            </button>
+            <button>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="hero-product"></div>
+        </div>
+
+        <div class="details">
+          <h2>iPhone 16 Pro Max<br>256GB Natural Titanium</h2>
+
+          <div class="seller">
+            <span class="rating">★★★★★</span>
+            <strong>۴.۹</strong>
+            <span>(۳۸۲ نظر)</span>
+            <span class="verified">● فروشنده تأییدشده</span>
+          </div>
+
+          <div class="big-price">۱۵۴,۹۰۰,۰۰۰ <small>تومان</small></div>
+
+          <div class="option-title">رنگ</div>
+          <div class="options">
+            <button class="option selected">تیتانیوم طبیعی</button>
+            <button class="option">مشکی</button>
+            <button class="option">سفید</button>
+          </div>
+
+          <div class="option-title">حافظه داخلی</div>
+          <div class="options">
+            <button class="option selected">۲۵۶GB</button>
+            <button class="option">۵۱۲GB</button>
+            <button class="option">۱TB</button>
+          </div>
+
+          <div class="delivery-card">
+            <div class="delivery-row">
+              <div class="delivery-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/>
+                  <circle cx="7" cy="19" r="2"/><circle cx="18" cy="19" r="2"/>
+                </svg>
+              </div>
+              <div>
+                <strong>ارسال سریع OVARA</strong>
+                <span>تحویل فردا · رایگان</span>
+              </div>
+            </div>
+
+            <div class="delivery-row">
+              <div class="delivery-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M12 3v18M5 7h14M5 17h14"/>
+                </svg>
+              </div>
+              <div>
+                <strong>ضمانت اصالت کالا</strong>
+                <span>۷ روز ضمانت بازگشت</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-title">فروشنده</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #eeeef2;border-radius:14px">
+            <div>
+              <strong style="font-size:9px">دیجیتال‌لند</strong>
+              <div style="font-size:7px;color:var(--green);margin-top:3px">۹۸٪ رضایت خریداران</div>
+            </div>
+            <span style="font-size:8px;color:var(--violet);font-weight:800">مشاهده فروشگاه</span>
+          </div>
+
+          <div class="option-title">درباره محصول</div>
+          <p style="font-size:8px;line-height:1.9;color:#777982;margin:0">
+            تجربه‌ای حرفه‌ای با تراشه قدرتمند، دوربین پیشرفته و بدنه تیتانیومی.
+            مناسب کسانی که بهترین تجربه موبایل را می‌خواهند.
+          </p>
+        </div>
+
+        <div class="sticky-buy">
+          <button class="buy-btn">افزودن به سبد خرید · ۱۵۴,۹۰۰,۰۰۰ تومان</button>
+        </div>
+      </div>
+
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="phone-shadow"></div>
+  <div class="caption">
+    <strong>Product Details</strong>
+    <span>Immersive gallery · Variants · Sticky purchase</span>
+  </div>
+</article>
+
+
+<!-- ========================================================= -->
+<!-- 04 CART -->
+<!-- ========================================================= -->
+<article class="project">
+  <div class="project-head">
+    <span class="project-title">سبد خرید و پرداخت</span>
+    <span class="project-number">04 / 05</span>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone p4">
+      <div class="dynamic-island"></div>
+
+      <div class="status">
+        <span>9:41</span>
+        <span class="status-right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h2M8 15h2M12 12h2M16 9h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9c4-4 10-4 14 0M8 12c2-2 6-2 8 0M11 15h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="17" height="10" rx="2"/><path d="M21 10v4"/></svg>
+        </span>
+      </div>
+
+      <div class="screen">
+        <div class="cart-title">
+          <h2>سبد خرید</h2>
+          <span class="cart-count">۳</span>
+        </div>
+
+        <div class="cart-item">
+          <div class="cart-art"><div class="product-art phone-art"></div></div>
+          <div class="cart-content">
+            <strong>iPhone 16 Pro Max 256GB</strong>
+            <small>تیتانیوم طبیعی · ۲۵۶ گیگ</small>
+            <div class="cart-bottom">
+              <b style="font-size:10px">۱۵۴,۹۰۰,۰۰۰</b>
+              <div class="qty">
+                <button>−</button><span>۱</span><button>+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-item">
+          <div class="cart-art"><div class="product-art headphone"></div></div>
+          <div class="cart-content">
+            <strong>AirPods Max USB-C</strong>
+            <small>Midnight · نسخه جدید</small>
+            <div class="cart-bottom">
+              <b style="font-size:10px">۳۲,۷۰۰,۰۰۰</b>
+              <div class="qty">
+                <button>−</button><span>۱</span><button>+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-item">
+          <div class="cart-art"><div class="product-art bottle"></div></div>
+          <div class="cart-content">
+            <strong>Aesop Tacit Eau de Parfum</strong>
+            <small>50ml · Original</small>
+            <div class="cart-bottom">
+              <b style="font-size:10px">۵,۲۵۰,۰۰۰</b>
+              <div class="qty">
+                <button>−</button><span>۱</span><button>+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-box">
+          <input placeholder="کد تخفیف دارید؟">
+          <button>اعمال کد</button>
+        </div>
+
+        <div class="section">
+          <div class="section-head"><h3>روش ارسال</h3><span>تغییر</span></div>
+
+          <div class="pay-option active">
+            <div class="pay-left">
+              <div class="pay-logo" style="background:var(--green)">⚡</div>
+              <div><span style="display:block;font-weight:800">ارسال سریع OVARA</span><small style="font-size:6px;color:var(--muted)">تحویل فردا · رایگان</small></div>
+            </div>
+            <div class="radio"></div>
+          </div>
+
+          <div class="pay-option">
+            <div class="pay-left">
+              <div class="pay-logo" style="background:#7d7f89">۲</div>
+              <div><span style="display:block;font-weight:800">ارسال عادی</span><small style="font-size:6px;color:var(--muted)">۲ تا ۳ روز کاری</small></div>
+            </div>
+            <div class="radio"></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head"><h3>روش پرداخت</h3><span>انتخاب</span></div>
+
+          <div class="pay-option active">
+            <div class="pay-left">
+              <div class="pay-logo">V</div>
+              <span>کارت بانکی · •••• ۸۲۴۱</span>
+            </div>
+            <div class="radio"></div>
+          </div>
+        </div>
+
+        <div class="checkout-card">
+          <div class="checkout-row"><span>جمع کالاها</span><b>۱۹۲,۸۵۰,۰۰۰</b></div>
+          <div class="checkout-row"><span>تخفیف OVARA</span><b style="color:var(--green)">− ۷,۸۵۰,۰۰۰</b></div>
+          <div class="checkout-row"><span>هزینه ارسال</span><b style="color:var(--green)">رایگان</b></div>
+          <div class="checkout-row total"><span>مبلغ نهایی</span><strong>۱۸۵,۰۰۰,۰۰۰ تومان</strong></div>
+        </div>
+
+        <div style="height:14px"></div>
+        <button class="buy-btn">پرداخت و ثبت سفارش · ۱۸۵,۰۰۰,۰۰۰ تومان</button>
+        <div style="height:10px"></div>
+      </div>
+
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="phone-shadow"></div>
+  <div class="caption">
+    <strong>Cart & Checkout</strong>
+    <span>Frictionless checkout · Delivery · Payment</span>
+  </div>
+</article>
+
+
+<!-- ========================================================= -->
+<!-- 05 PROFILE -->
+<!-- ========================================================= -->
+<article class="project">
+  <div class="project-head">
+    <span class="project-title">سفارش‌ها و پروفایل</span>
+    <span class="project-number">05 / 05</span>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone p5">
+      <div class="dynamic-island"></div>
+
+      <div class="status">
+        <span>9:41</span>
+        <span class="status-right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18h2M8 15h2M12 12h2M16 9h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9c4-4 10-4 14 0M8 12c2-2 6-2 8 0M11 15h2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="17" height="10" rx="2"/><path d="M21 10v4"/></svg>
+        </span>
+      </div>
+
+      <div class="screen">
+        <div class="profile-head">
+          <div class="profile-avatar">ع</div>
+          <div>
+            <strong>عرفان معین</strong>
+            <small>عضو OVARA از شهریور ۱۴۰۴</small>
+          </div>
+          <button class="icon-btn" style="margin-right:auto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
+              <path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2L14.3 3h-4l-.4 2.6a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4 2 1.5A7 7 0 0 0 5.5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.4 2.6h4l.4-2.6a7 7 0 0 0 2-1.2l2.3.9 2-3.4-2-1.5c.1-.4.1-.8.1-1.2Z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>۱۲</strong><span>سفارش</span></div>
+          <div class="stat"><strong>۸</strong><span>علاقه‌مندی</span></div>
+          <div class="stat"><strong>۲۴۰</strong><span>امتیاز</span></div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>سفارش فعال</h3>
+            <span>مشاهده همه</span>
+          </div>
+
+          <div class="order-card">
+            <div class="order-top">
+              <strong>سفارش #OV-84219</strong>
+              <span class="order-status">در حال ارسال</span>
+            </div>
+
+            <div class="order-products">
+              <div class="mini-art"><div class="product-art phone-art"></div></div>
+              <div class="mini-art"><div class="product-art headphone"></div></div>
+              <div style="font-size:7px;color:var(--muted);padding:5px 0">
+                <b style="display:block;color:#222;font-size:8px">۲ محصول</b>
+                تحویل فردا، سه‌شنبه
+              </div>
+            </div>
+
+            <div class="tracking">
+              <div class="track-step done">
+                <div class="track-dot"></div>
+                ثبت سفارش
+              </div>
+              <div class="track-step done">
+                <div class="track-dot"></div>
+                آماده‌سازی
+              </div>
+              <div class="track-step done">
+                <div class="track-dot"></div>
+                تحویل پیک
+              </div>
+              <div class="track-step">
+                <div class="track-dot"></div>
+                تحویل
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>دسترسی سریع</h3>
+          </div>
+
+          <div class="menu">
+            <div class="menu-item">
+              <div class="menu-left">
+                <div class="menu-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M20.8 8.8c0 5-8.8 10-8.8 10S3.2 13.8 3.2 8.8A4.6 4.6 0 0 1 12 6.1a4.6 4.6 0 0 1 8.8 2.7Z"/>
+                  </svg>
+                </div>
+                <span>علاقه‌مندی‌ها</span>
+              </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-left">
+                <div class="menu-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 10h16v10H4z"/>
+                    <path d="M7 10V7a5 5 0 0 1 10 0v3"/>
+                  </svg>
+                </div>
+                <span>سفارش‌های من</span>
+              </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-left">
+                <div class="menu-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 21s7-5.1 7-11A7 7 0 0 0 5 10c0 5.9 7 11 7 11Z"/>
+                    <circle cx="12" cy="10" r="2"/>
+                  </svg>
+                </div>
+                <span>آدرس‌های ذخیره‌شده</span>
+              </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-left">
+                <div class="menu-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 3v18M5 7h14M5 17h14"/>
+                  </svg>
+                </div>
+                <span>کیف پول و اعتبار</span>
+              </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+
+            <div class="menu-item">
+              <div class="menu-left">
+                <div class="menu-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="8"/>
+                    <path d="M12 8v4l3 2"/>
+                  </svg>
+                </div>
+                <span>تاریخچه فعالیت</span>
+              </div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-head">
+            <h3>سفارش‌های اخیر</h3>
+            <span>آرشیو</span>
+          </div>
+
+          <div class="order-card">
+            <div class="order-top">
+              <strong>سفارش #OV-81742</strong>
+              <span style="color:#7d7e87;font-size:7px">۲۸ مرداد</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:10px">
+              <span style="font-size:8px;color:var(--muted)">Apple Watch Series 10</span>
+              <strong style="font-size:8px">۲۸,۴۰۰,۰۰۰ تومان</strong>
+            </div>
+            <div style="margin-top:8px;color:var(--green);font-size:7px">✓ تحویل داده شد</div>
+          </div>
+        </div>
+
+        <div style="height:30px"></div>
+      </div>
+
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+  <div class="phone-shadow"></div>
+  <div class="caption">
+    <strong>Orders & Profile</strong>
+    <span>Tracking · Wishlist · Account management</span>
+  </div>
+</article>
+
+</section>
+
+<footer class="footer">
+  Designed as a fictional premium commerce concept · <b>OVARA</b> · UI/UX Portfolio Showcase
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NIVRA — Premium Travel UI/UX Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#eef5f8;
+  --surface:#fff;
+  --surface-2:#f6fafc;
+  --text:#10212b;
+  --muted:#71818a;
+  --line:#e4edf1;
+  --blue:#168df5;
+  --cyan:#18c5bd;
+  --sky:#67c9ff;
+  --sun:#ff9d62;
+  --green:#24b985;
+  --red:#ef6262;
+  --shadow:0 35px 90px rgba(30,71,92,.16);
+  --shadow-soft:0 18px 45px rgba(30,71,92,.11);
+  --radius:28px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Vazirmatn',sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(103,201,255,.23),transparent 28%),
+    radial-gradient(circle at 85% 8%,rgba(24,197,189,.13),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+button,input{font:inherit}
+
+svg{
+  width:100%;
+  height:100%;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.icon{
+  width:22px;
+  height:22px;
+  flex:none;
+}
+
+.page{
+  width:100%;
+  padding:80px 0 120px;
+}
+
+.portfolio-head{
+  width:min(920px,calc(100% - 40px));
+  margin:0 auto 72px;
+  text-align:center;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 18px;
+  border:1px solid rgba(22,141,245,.18);
+  background:rgba(255,255,255,.72);
+  border-radius:100px;
+  color:#1681d8;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  box-shadow:0 10px 30px rgba(30,71,92,.07);
+}
+
+.eyebrow i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 0 5px rgba(24,197,189,.12);
+}
+
+.portfolio-head h1{
+  font-size:clamp(42px,6vw,76px);
+  line-height:1.02;
+  letter-spacing:-3px;
+  font-weight:900;
+  margin:25px 0 20px;
+  background:linear-gradient(135deg,#10212b 15%,#168df5 55%,#16b8b0);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.portfolio-head p{
+  color:var(--muted);
+  font-size:16px;
+  line-height:2;
+  max-width:760px;
+  margin:auto;
+}
+
+.showcase{
+  width:100%;
+  overflow-x:auto;
+  overflow-y:visible;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+  padding:35px max(40px,calc((100vw - 1600px)/2)) 100px;
+}
+
+.showcase::-webkit-scrollbar{display:none}
+
+.screens{
+  width:max-content;
+  display:flex;
+  direction:ltr;
+  gap:55px;
+  align-items:flex-start;
+}
+
+.phone{
+  width:393px;
+  height:852px;
+  flex:none;
+  position:relative;
+  padding:7px;
+  border-radius:59px;
+  background:
+    linear-gradient(145deg,#d8e0e3,#ffffff 18%,#b9c6ca 50%,#edf2f3 80%,#9caab0);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.95),
+    inset 0 0 0 3px rgba(80,102,110,.25),
+    0 45px 100px rgba(31,75,97,.22),
+    0 10px 30px rgba(31,75,97,.13);
+  scroll-snap-align:center;
+}
+
+.phone:before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:58px;
+  pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
+}
+
+.screen{
+  width:100%;
+  height:100%;
+  position:relative;
+  overflow:hidden;
+  border-radius:52px;
+  background:#f7fafb;
+}
+
+.status{
+  height:51px;
+  padding:13px 24px 0;
+  display:flex;
+  direction:ltr;
+  align-items:flex-end;
+  justify-content:space-between;
+  position:relative;
+  z-index:20;
+  color:#182830;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:700;
+  font-size:14px;
+}
+
+.status-icons{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.status-icons svg{
+  width:17px;
+  height:17px;
+  stroke-width:2.3;
+}
+
+.island{
+  position:absolute;
+  width:122px;
+  height:36px;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#050607;
+  border-radius:22px;
+  box-shadow:inset 0 0 0 1px #17191b;
+}
+
+.island:after{
+  content:"";
+  position:absolute;
+  right:11px;
+  top:9px;
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#39424a,#050607 60%);
+}
+
+.home{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:134px;
+  height:5px;
+  border-radius:10px;
+  background:#111a1f;
+  z-index:30;
+}
+
+.app{
+  position:absolute;
+  inset:51px 0 0;
+  overflow-y:auto;
+  scrollbar-width:none;
+  padding-bottom:96px;
+}
+
+.app::-webkit-scrollbar{display:none}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 22px;
+}
+
+.header-title{
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:-.5px;
+}
+
+.header-sub{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:4px;
+  font-weight:600;
+}
+
+.avatar{
+  width:43px;
+  height:43px;
+  border-radius:15px;
+  object-fit:cover;
+  box-shadow:0 8px 18px rgba(30,71,92,.15);
+}
+
+.round-btn{
+  width:43px;
+  height:43px;
+  border-radius:15px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.85);
+  color:#33464f;
+  display:grid;
+  place-items:center;
+  box-shadow:0 8px 20px rgba(30,71,92,.07);
+}
+
+.round-btn .icon{width:20px;height:20px}
+
+.search{
+  margin:6px 20px 22px;
+  height:57px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:19px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 16px;
+  box-shadow:var(--shadow-soft);
+  color:#82939b;
+}
+
+.search .icon{color:var(--blue)}
+
+.search span{
+  font-size:13px;
+  font-weight:600;
+}
+
+.section{
+  padding:0 20px;
+  margin-bottom:27px;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:13px;
+}
+
+.section-title{
+  font-size:17px;
+  font-weight:900;
+}
+
+.section-link{
+  font-size:11px;
+  font-weight:800;
+  color:var(--blue);
+}
+
+.hero{
+  min-height:235px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  color:#fff;
+  box-shadow:0 22px 40px rgba(20,91,125,.2);
+}
+
+.hero img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(3,24,35,.78),rgba(3,24,35,.03) 68%);
+}
+
+.hero-content{
+  position:absolute;
+  inset:auto 20px 20px;
+  z-index:2;
+}
+
+.hero-label{
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:9px;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  font-size:9px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.hero h2{
+  font-size:25px;
+  line-height:1.25;
+  font-weight:900;
+}
+
+.hero p{
+  font-size:11px;
+  opacity:.9;
+  margin-top:6px;
+}
+
+.destination-row{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding:3px 2px 10px;
+  scrollbar-width:none;
+  direction:rtl;
+}
+
+.destination-row::-webkit-scrollbar{display:none}
+
+.destination{
+  width:115px;
+  flex:none;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  height:150px;
+  box-shadow:0 12px 25px rgba(30,71,92,.12);
+}
+
+.destination img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.destination:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent 65%);
+}
+
+.destination-info{
+  position:absolute;
+  z-index:2;
+  bottom:11px;
+  right:11px;
+  color:#fff;
+}
+
+.destination-info strong{
+  display:block;
+  font-size:13px;
+}
+
+.destination-info small{
+  font-size:9px;
+  opacity:.85;
+}
+
+.trip-card{
+  display:flex;
+  gap:13px;
+  padding:12px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  margin-bottom:11px;
+  box-shadow:0 10px 25px rgba(30,71,92,.06);
+}
+
+.trip-img{
+  width:77px;
+  height:77px;
+  border-radius:16px;
+  object-fit:cover;
+}
+
+.trip-info{
+  flex:1;
+  min-width:0;
+}
+
+.trip-info strong{
+  font-size:13px;
+  display:block;
+  margin:2px 0 7px;
+}
+
+.trip-meta{
+  font-size:10px;
+  color:var(--muted);
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.trip-price{
+  font-size:12px;
+  font-weight:900;
+  color:var(--blue);
+  margin-top:8px;
+}
+
+.bottom-nav{
+  position:absolute;
+  z-index:15;
+  left:0;
+  right:0;
+  bottom:0;
+  height:82px;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(25px);
+  border-top:1px solid rgba(218,231,236,.8);
+  display:flex;
+  justify-content:space-around;
+  padding:11px 10px 25px;
+}
+
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  color:#91a0a7;
+  font-size:9px;
+  font-weight:700;
+  min-width:65px;
+}
+
+.nav-item .icon{
+  width:21px;
+  height:21px;
+}
+
+.nav-item.active{
+  color:var(--blue);
+}
+
+.nav-item.active .nav-icon-box{
+  background:#e7f4ff;
+}
+
+.nav-icon-box{
+  width:34px;
+  height:27px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+}
+
+.nav-icon-box .icon{
+  width:19px;
+  height:19px;
+}
+
+/* SCREEN 2 */
+.destination-hero{
+  height:300px;
+  margin:0 20px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+}
+
+.destination-hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.destination-hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(4,25,34,.85),transparent 60%);
+}
+
+.hero-back{
+  position:absolute;
+  top:15px;
+  right:15px;
+  z-index:3;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(12px);
+}
+
+.place-info{
+  position:absolute;
+  bottom:19px;
+  right:20px;
+  left:20px;
+  z-index:3;
+  color:#fff;
+}
+
+.place-info h2{
+  font-size:29px;
+  font-weight:900;
+}
+
+.place-info p{
+  font-size:11px;
+  margin-top:4px;
+  opacity:.9;
+}
+
+.weather-card{
+  margin-top:-30px;
+  position:relative;
+  z-index:4;
+  margin-left:35px;
+  margin-right:35px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(20px);
+  border:1px solid #fff;
+  border-radius:22px;
+  padding:15px;
+  box-shadow:0 18px 40px rgba(30,71,92,.16);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.weather-temp{
+  font-size:27px;
+  font-weight:900;
+}
+
+.weather-meta{
+  font-size:9px;
+  color:var(--muted);
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+
+.mini-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:19px;
+  padding:14px;
+  box-shadow:0 9px 22px rgba(30,71,92,.06);
+}
+
+.mini-card .mini-icon{
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:#eaf7ff;
+  color:var(--blue);
+  margin-bottom:10px;
+}
+
+.mini-card strong{
+  font-size:12px;
+  display:block;
+}
+
+.mini-card small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:4px;
+}
+
+.map{
+  height:170px;
+  border-radius:23px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(28deg,transparent 44%,rgba(255,255,255,.8) 45%,rgba(255,255,255,.8) 47%,transparent 48%),
+    linear-gradient(140deg,transparent 48%,rgba(255,255,255,.75) 49%,rgba(255,255,255,.75) 51%,transparent 52%),
+    #dfeee8;
+}
+
+.map:before,
+.map:after{
+  content:"";
+  position:absolute;
+  background:#fff;
+  opacity:.8;
+}
+
+.map:before{
+  width:150%;
+  height:12px;
+  transform:rotate(-23deg);
+  top:72px;
+  right:-40px;
+}
+
+.map:after{
+  width:140%;
+  height:7px;
+  transform:rotate(38deg);
+  top:42px;
+  right:-40px;
+}
+
+.map-pin{
+  position:absolute;
+  z-index:2;
+  width:38px;
+  height:38px;
+  border-radius:50% 50% 50% 4px;
+  background:var(--blue);
+  color:#fff;
+  transform:rotate(-45deg);
+  display:grid;
+  place-items:center;
+  top:65px;
+  right:145px;
+  box-shadow:0 10px 25px rgba(22,141,245,.35);
+}
+
+.map-pin .icon{
+  width:18px;
+  height:18px;
+  transform:rotate(45deg);
+}
+
+/* SCREEN 3 */
+.timeline{
+  position:relative;
+  margin:10px 20px;
+}
+
+.timeline:before{
+  content:"";
+  position:absolute;
+  right:13px;
+  top:13px;
+  bottom:20px;
+  width:2px;
+  background:#dcebf2;
+}
+
+.day{
+  position:relative;
+  padding-right:38px;
+  margin-bottom:25px;
+}
+
+.day-dot{
+  position:absolute;
+  right:5px;
+  top:2px;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#fff;
+  border:5px solid var(--blue);
+  z-index:2;
+}
+
+.day-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.day-head strong{
+  font-size:14px;
+}
+
+.day-head span{
+  font-size:9px;
+  color:var(--muted);
+  background:#edf7fb;
+  padding:5px 9px;
+  border-radius:8px;
+}
+
+.event{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:19px;
+  padding:12px;
+  margin-bottom:9px;
+  box-shadow:0 8px 20px rgba(30,71,92,.05);
+  display:flex;
+  gap:11px;
+  align-items:center;
+}
+
+.event-icon{
+  width:42px;
+  height:42px;
+  flex:none;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:#eef8ff;
+  color:var(--blue);
+}
+
+.event-info{
+  flex:1;
+}
+
+.event-info strong{
+  display:block;
+  font-size:11px;
+}
+
+.event-info small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:4px;
+}
+
+.event-time{
+  font-family:-apple-system,sans-serif;
+  direction:ltr;
+  font-size:10px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+/* SCREEN 4 */
+.booking-summary{
+  margin:0 20px 16px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:23px;
+  padding:15px;
+  box-shadow:var(--shadow-soft);
+}
+
+.booking-image{
+  width:100%;
+  height:125px;
+  border-radius:17px;
+  object-fit:cover;
+}
+
+.booking-name{
+  font-size:16px;
+  font-weight:900;
+  margin:12px 0 5px;
+}
+
+.booking-location{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.selector{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:13px;
+  margin-bottom:9px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 7px 17px rgba(30,71,92,.04);
+}
+
+.selector-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.selector-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:#eef8ff;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+}
+
+.selector strong{
+  font-size:11px;
+  display:block;
+}
+
+.selector small{
+  font-size:9px;
+  color:var(--muted);
+  display:block;
+  margin-top:3px;
+}
+
+.price-box{
+  margin-top:17px;
+  padding:17px;
+  background:#f4f9fb;
+  border-radius:20px;
+}
+
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+  font-size:11px;
+  color:#61737d;
+}
+
+.price-row.total{
+  border-top:1px dashed #d4e2e7;
+  padding-top:12px;
+  margin-top:12px;
+  color:var(--text);
+  font-size:14px;
+  font-weight:900;
+}
+
+.primary-btn{
+  width:100%;
+  height:53px;
+  border:none;
+  border-radius:17px;
+  background:linear-gradient(135deg,#168df5,#13b9bd);
+  color:#fff;
+  font-weight:900;
+  box-shadow:0 15px 30px rgba(22,141,245,.24);
+  margin-top:14px;
+}
+
+/* SCREEN 5 */
+.ai-head{
+  margin:10px 20px 20px;
+  padding:20px;
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(255,255,255,.22),transparent 28%),
+    linear-gradient(135deg,#087ee8,#19bcb8);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+.ai-head:after{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  left:-50px;
+  top:-65px;
+}
+
+.ai-avatar{
+  width:50px;
+  height:50px;
+  border-radius:17px;
+  background:rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.25);
+  display:grid;
+  place-items:center;
+  margin-bottom:13px;
+}
+
+.ai-avatar .icon{
+  width:27px;
+  height:27px;
+}
+
+.ai-head h2{
+  font-size:21px;
+  font-weight:900;
+}
+
+.ai-head p{
+  font-size:10px;
+  opacity:.9;
+  line-height:1.8;
+  margin-top:4px;
+}
+
+.message{
+  max-width:86%;
+  padding:14px 15px;
+  border-radius:21px;
+  font-size:11px;
+  line-height:1.9;
+  margin-bottom:11px;
+}
+
+.message.ai{
+  background:#fff;
+  border:1px solid var(--line);
+  border-top-right-radius:6px;
+  box-shadow:0 8px 20px rgba(30,71,92,.05);
+}
+
+.message.user{
+  margin-right:auto;
+  background:#168df5;
+  color:#fff;
+  border-top-left-radius:6px;
+  box-shadow:0 10px 22px rgba(22,141,245,.18);
+}
+
+.ai-card{
+  margin-top:11px;
+  background:#f5fafc;
+  border:1px solid #dfedf2;
+  border-radius:17px;
+  padding:11px;
+}
+
+.ai-card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.ai-card strong{
+  font-size:11px;
+}
+
+.ai-card small{
+  color:var(--muted);
+  font-size:9px;
+  display:block;
+  margin-top:3px;
+}
+
+.ai-price{
+  color:var(--green);
+  font-size:11px;
+  font-weight:900;
+}
+
+.quick-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:14px 20px;
+}
+
+.quick{
+  border:1px solid #dceaf0;
+  background:#fff;
+  color:#4b6571;
+  border-radius:100px;
+  padding:8px 12px;
+  font-size:9px;
+  font-weight:800;
+}
+
+.chat-input{
+  position:sticky;
+  bottom:0;
+  margin:20px;
+  height:52px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(20px);
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 9px 0 15px;
+  color:#9aa8ae;
+  font-size:10px;
+  box-shadow:0 10px 30px rgba(30,71,92,.12);
+}
+
+.send{
+  width:35px;
+  height:35px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:var(--blue);
+  color:#fff;
+}
+
+.send .icon{
+  width:16px;
+  height:16px;
+}
+
+/* utility */
+.ltr{
+  direction:ltr;
+  text-align:right;
+}
+
+.rating{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  color:#f39a35;
+  font-size:10px;
+  font-weight:800;
+}
+
+.divider{
+  height:1px;
+  background:var(--line);
+  margin:15px 0;
+}
+
+@media(max-width:700px){
+  .page{padding-top:45px}
+  .portfolio-head{margin-bottom:30px}
+  .portfolio-head h1{letter-spacing:-2px}
+  .showcase{padding-left:20px;padding-right:20px}
+  .screens{gap:28px}
+  .phone{
+    width:min(393px,calc(100vw - 40px));
+    height:calc((min(100vw - 40px,393px))*2.168);
+    max-height:852px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SVG ICON SYSTEM -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+
+<symbol id="i-search" viewBox="0 0 24 24">
+<circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path>
+</symbol>
+
+<symbol id="i-bell" viewBox="0 0 24 24">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"></path>
+<path d="M10 20h4"></path>
+</symbol>
+
+<symbol id="i-home" viewBox="0 0 24 24">
+<path d="m3 10 9-7 9 7"></path><path d="M5 9v11h14V9"></path><path d="M9 20v-6h6v6"></path>
+</symbol>
+
+<symbol id="i-compass" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="m15.5 8.5-2.1 4.9-4.9 2.1 2.1-4.9z"></path>
+</symbol>
+
+<symbol id="i-calendar" viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="16" rx="3"></rect>
+<path d="M8 3v4M16 3v4M3 10h18"></path>
+</symbol>
+
+<symbol id="i-spark" viewBox="0 0 24 24">
+<path d="m12 2 1.5 6.5L20 10l-6.5 1.5L12 18l-1.5-6.5L4 10l6.5-1.5z"></path>
+<path d="m19 16 .7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7z"></path>
+</symbol>
+
+<symbol id="i-map-pin" viewBox="0 0 24 24">
+<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+<circle cx="12" cy="10" r="2.5"></circle>
+</symbol>
+
+<symbol id="i-arrow-left" viewBox="0 0 24 24">
+<path d="M19 12H5M12 19l-7-7 7-7"></path>
+</symbol>
+
+<symbol id="i-arrow-right" viewBox="0 0 24 24">
+<path d="M5 12h14M12 5l7 7-7 7"></path>
+</symbol>
+
+<symbol id="i-plane" viewBox="0 0 24 24">
+<path d="m3 11 18-7-6 17-3-7-6-3z"></path><path d="m12 14 4-4"></path>
+</symbol>
+
+<symbol id="i-bed" viewBox="0 0 24 24">
+<path d="M3 18v-7"></path><path d="M3 14h18v4"></path><path d="M6 14v-4a3 3 0 0 1 3-3h8a4 4 0 0 1 4 4v3"></path><path d="M3 21v-3M21 21v-3"></path>
+</symbol>
+
+<symbol id="i-coffee" viewBox="0 0 24 24">
+<path d="M5 8h12v7a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"></path><path d="M17 10h2a2.5 2.5 0 0 1 0 5h-2"></path><path d="M8 4c0 1 1 1 1 2M12 4c0 1 1 1 1 2"></path>
+</symbol>
+
+<symbol id="i-wallet" viewBox="0 0 24 24">
+<path d="M4 6a3 3 0 0 1 3-3h12v4H7a3 3 0 0 0 0 6h14v8H7a3 3 0 0 1-3-3z"></path><path d="M18 13h3"></path>
+</symbol>
+
+<symbol id="i-chat" viewBox="0 0 24 24">
+<path d="M20 11a7 7 0 0 1-7 7H8l-4 3 1.5-5A7 7 0 1 1 20 11Z"></path>
+<path d="M9 11h.01M12 11h.01M15 11h.01"></path>
+</symbol>
+
+<symbol id="i-restaurant" viewBox="0 0 24 24">
+<path d="M7 3v8M4 3v5a3 3 0 0 0 6 0V3M7 11v10"></path>
+<path d="M16 3v18M16 3c3 1 4 3 4 6v3h-4"></path>
+</symbol>
+
+<symbol id="i-star" viewBox="0 0 24 24">
+<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"></path>
+</symbol>
+
+<symbol id="i-location" viewBox="0 0 24 24">
+<circle cx="12" cy="10" r="3"></circle><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"></path>
+</symbol>
+
+<symbol id="i-weather" viewBox="0 0 24 24">
+<circle cx="8" cy="9" r="3"></circle><path d="M8 2v2M8 14v2M2 9h2M12 9h2"></path>
+<path d="M8 18h10a3 3 0 0 0 0-6 5 5 0 0 0-9-1"></path>
+</symbol>
+
+<symbol id="i-filter" viewBox="0 0 24 24">
+<path d="M4 6h16M7 12h10M10 18h4"></path>
+</symbol>
+
+<symbol id="i-credit-card" viewBox="0 0 24 24">
+<rect x="2" y="5" width="20" height="14" rx="3"></rect><path d="M2 10h20M6 15h4"></path>
+</symbol>
+
+<symbol id="i-check" viewBox="0 0 24 24">
+<path d="m5 12 4 4L19 6"></path>
+</symbol>
+
+<symbol id="i-robot" viewBox="0 0 24 24">
+<rect x="4" y="7" width="16" height="13" rx="3"></rect>
+<path d="M12 3v4M9 13h.01M15 13h.01M8 17h8"></path>
+<circle cx="12" cy="3" r="1"></circle>
+</symbol>
+
+<symbol id="i-send" viewBox="0 0 24 24">
+<path d="m21 3-7 18-4-7-7-4z"></path><path d="M10 14 21 3"></path>
+</symbol>
+
+<symbol id="i-suitcase" viewBox="0 0 24 24">
+<rect x="4" y="7" width="16" height="14" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M4 12h16"></path>
+</symbol>
+
+<symbol id="i-ticket" viewBox="0 0 24 24">
+<path d="M4 5h16v5a2 2 0 0 0 0 4v5H4v-5a2 2 0 0 0 0-4z"></path><path d="M12 7v2M12 15v2"></path>
+</symbol>
+
+</defs>
+</svg>
+
+<main class="page">
+
+<header class="portfolio-head">
+  <div class="eyebrow"><i></i> PREMIUM TRAVEL TECHNOLOGY · UI/UX PORTFOLIO</div>
+  <h1>NIVRA</h1>
+  <p>
+    یک تجربه سفر نسل جدید؛ ترکیبی از کشف مقصد، برنامه‌ریزی هوشمند،
+    رزرو سفر و دستیار هوش مصنوعی در یک اکوسیستم یکپارچه و مینیمال.
+  </p>
+</header>
+
+<section class="showcase">
+<div class="screens">
+
+<!-- =========================================================
+     SCREEN 1 — DISCOVERY
+========================================================= -->
+<article class="phone">
+<div class="screen">
+
+<div class="status">
+  <span>9:41</span>
+  <div class="island"></div>
+  <div class="status-icons">
+    <svg><use href="#i-weather"/></svg>
+    <svg><use href="#i-compass"/></svg>
+    <svg><use href="#i-wallet"/></svg>
+  </div>
+</div>
+
+<div class="app">
+
+<div class="header">
+  <div style="display:flex;gap:11px;align-items:center">
+    <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80" alt="profile">
+    <div>
+      <div class="header-sub">صبح بخیر،</div>
+      <div class="header-title">عرفان 👋</div>
+    </div>
+  </div>
+  <div class="round-btn">
+    <svg class="icon"><use href="#i-bell"/></svg>
+  </div>
+</div>
+
+<div class="search">
+  <svg class="icon"><use href="#i-search"/></svg>
+  <span>کجا می‌خواهی سفر کنی؟</span>
+</div>
+
+<section class="section">
+<div class="hero">
+  <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=900&q=85" alt="Tokyo">
+  <div class="hero-content">
+    <span class="hero-label">پیشنهاد اختصاصی NIVRA</span>
+    <h2>توکیو، جایی که آینده<br>با سنت زندگی می‌کند.</h2>
+    <p>از ۴۸ میلیون تومان · ۷ شب</p>
+  </div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-head">
+  <div class="section-title">مقصدهای محبوب</div>
+  <div class="section-link">همه</div>
+</div>
+
+<div class="destination-row">
+
+<div class="destination">
+<img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=400&q=80" alt="India">
+<div class="destination-info"><strong>هند</strong><small>۲۴ مقصد</small></div>
+</div>
+
+<div class="destination">
+<img src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=400&q=80" alt="Japan">
+<div class="destination-info"><strong>ژاپن</strong><small>۱۸ مقصد</small></div>
+</div>
+
+<div class="destination">
+<img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=400&q=80" alt="Bali">
+<div class="destination-info"><strong>بالی</strong><small>۳۱ مقصد</small></div>
+</div>
+
+<div class="destination">
+<img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80" alt="Paris">
+<div class="destination-info"><strong>پاریس</strong><small>۲۷ مقصد</small></div>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="section-head">
+  <div class="section-title">سفرهای پیشنهادی برای تو</div>
+  <div class="section-link">مشاهده همه</div>
+</div>
+
+<div class="trip-card">
+<img class="trip-img" src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=300&q=80" alt="India">
+<div class="trip-info">
+<strong>دهلی تا آگرا</strong>
+<div class="trip-meta">
+<span>هند</span><span>•</span><span>۵ روز</span>
+</div>
+<div class="rating">
+<svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+۴.۹
+</div>
+<div class="trip-price">از ۲۱,۸۰۰,۰۰۰ تومان</div>
+</div>
+</div>
+
+<div class="trip-card">
+<img class="trip-img" src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=300&q=80" alt="Turkey">
+<div class="trip-info">
+<strong>استانبول؛ دو قاره</strong>
+<div class="trip-meta">
+<span>ترکیه</span><span>•</span><span>۴ شب</span>
+</div>
+<div class="rating">
+<svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+۴.۸
+</div>
+<div class="trip-price">از ۱۴,۹۰۰,۰۰۰ تومان</div>
+</div>
+</div>
+
+</section>
+
+<section class="section">
+<div class="section-head">
+  <div class="section-title">الهام سفر</div>
+</div>
+
+<div class="trip-card">
+<img class="trip-img" src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=300&q=80" alt="travel">
+<div class="trip-info">
+<strong>۷ شهر برای سفر پاییزی</strong>
+<div class="trip-meta">راهنمای انتخاب مقصد بر اساس آب‌وهوا</div>
+</div>
+</div>
+</section>
+
+</div>
+
+<nav class="bottom-nav">
+<div class="nav-item active">
+<div class="nav-icon-box"><svg class="icon"><use href="#i-home"/></svg></div>خانه
+</div>
+<div class="nav-item">
+<div class="nav-icon-box"><svg class="icon"><use href="#i-compass"/></svg></div>کشف
+</div>
+<div class="nav-item">
+<div class="nav-icon-box"><svg class="icon"><use href="#i-calendar"/></svg></div>سفرهای من
+</div>
+<div class="nav-item">
+<div class="nav-icon-box"><svg class="icon"><use href="#i-spark"/></svg></div>دستیار
+</div>
+</nav>
+
+<div class="home"></div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     SCREEN 2 — DESTINATION
+========================================================= -->
+<article class="phone">
+<div class="screen">
+
+<div class="status">
+  <span>9:41</span>
+  <div class="island"></div>
+  <div class="status-icons">
+    <svg><use href="#i-weather"/></svg>
+    <svg><use href="#i-compass"/></svg>
+    <svg><use href="#i-wallet"/></svg>
+  </div>
+</div>
+
+<div class="app">
+
+<div class="header">
+  <div class="round-btn">
+    <svg class="icon"><use href="#i-arrow-right"/></svg>
+  </div>
+  <div class="header-title">کشف مقصد</div>
+  <div class="round-btn">
+    <svg class="icon"><use href="#i-filter"/></svg>
+  </div>
+</div>
+
+<div class="destination-hero">
+  <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=900&q=90" alt="Rome">
+  <div class="hero-back"></div>
+  <div class="place-info">
+    <div class="rating">
+      <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+      ۴.۹ · مقصد منتخب مسافران
+    </div>
+    <h2>رم، ایتالیا</h2>
+    <p>تاریخ، هنر و طعم زندگی در قلب اروپا</p>
+  </div>
+</div>
+
+<div class="weather-card">
+<div>
+  <div class="weather-temp">۲۳°</div>
+  <div class="weather-meta">آفتابی · مناسب پیاده‌روی</div>
+</div>
+<svg class="icon" style="width:40px;height:40px;color:#f5a33b"><use href="#i-weather"/></svg>
+<div style="text-align:left">
+  <strong style="font-size:11px">امروز</strong>
+  <div style="font-size:9px;color:var(--muted)">کمینه ۱۶°</div>
+</div>
+</div>
+
+<section class="section" style="margin-top:28px">
+<div class="section-head">
+  <div class="section-title">تجربه‌های رم</div>
+  <div class="section-link">مشاهده همه</div>
+</div>
+
+<div class="feature-grid">
+
+<div class="mini-card">
+<div class="mini-icon"><svg class="icon"><use href="#i-compass"/></svg></div>
+<strong>جاذبه‌ها</strong>
+<small>۲۸ مکان دیدنی</small>
+</div>
+
+<div class="mini-card">
+<div class="mini-icon"><svg class="icon"><use href="#i-bed"/></svg></div>
+<strong>هتل‌ها</strong>
+<small>۴۸۰ اقامتگاه</small>
+</div>
+
+<div class="mini-card">
+<div class="mini-icon"><svg class="icon"><use href="#i-restaurant"/></svg></div>
+<strong>رستوران‌ها</strong>
+<small>۳۴۰ انتخاب</small>
+</div>
+
+<div class="mini-card">
+<div class="mini-icon"><svg class="icon"><use href="#i-ticket"/></svg></div>
+<strong>فعالیت‌ها</strong>
+<small>۸۷ تجربه خاص</small>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="section-head">
+<div class="section-title">نقشه اطراف</div>
+<div class="section-link">باز کردن نقشه</div>
+</div>
+
+<div class="map">
+<div class="map-pin">
+<svg class="icon"><use href="#i-map-pin"/></svg>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-head">
+<div class="section-title">جاهایی که نباید از دست بدهی</div>
+</div>
+
+<div class="trip-card">
+<img class="trip-img" src="https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=300&q=80" alt="Colosseum">
+<div class="trip-info">
+<strong>کولوسئوم</strong>
+<div class="trip-meta">نماد تاریخی رم · تور ۲ ساعته</div>
+<div class="trip-price">از ۳۸ یورو</div>
+</div>
+</div>
+
+<div class="trip-card">
+<img class="trip-img" src="https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=300&q=80" alt="Rome">
+<div class="trip-info">
+<strong>تور غذایی تراستوره</strong>
+<div class="trip-meta">پاستا، قهوه و تجربه محلی</div>
+<div class="trip-price">از ۵۵ یورو</div>
+</div>
+</div>
+</section>
+
+</div>
+
+<nav class="bottom-nav">
+<div class="nav-item"><div class="nav-icon-box"><svg class="icon"><use href="#i-home"/></svg></div>خانه</div>
+<div class="nav-item active"><div class="nav-icon-box"><svg class="icon"><use href="#i-compass"/></svg></div>کشف</div>
+<div class="nav-item"><div class="nav-icon-box"><svg class="icon"><use href="#i-calendar"/></svg></div>سفرهای من</div>
+<div class="nav-item"><div class="nav-icon-box"><svg class="icon"><use href="#i-spark"/></svg></div>دستیار</div>
+</nav>
+
+<div class="home"></div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     SCREEN 3 — TRIP PLANNER
+========================================================= -->
+<article class="phone">
+<div class="screen">
+
+<div class="status">
+  <span>9:41</span>
+  <div class="island"></div>
+  <div class="status-icons">
+    <svg><use href="#i-weather"/></svg>
+    <svg><use href="#i-compass"/></svg>
+    <svg><use href="#i-wallet"/></svg>
+  </div>
+</div>
+
+<div class="app">
+
+<div class="header">
+<div>
+<div class="header-sub">برنامه سفر</div>
+<div class="header-title">استانبول · ۵ روز</div>
+</div>
+<div class="round-btn">
+<svg class="icon"><use href="#i-spark"/></svg>
+</div>
+</div>
+
+<div style="margin:5px 20px 20px;background:linear-gradient(135deg,#168df5,#16b8b1);border-radius:23px;padding:17px;color:white;box-shadow:0 18px 35px rgba(22,141,245,.2)">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div>
+<div style="font-size:10px;opacity:.8">پیشرفت برنامه سفر</div>
+<div style="font-size:22px;font-weight:900;margin-top:3px">روز ۲ از ۵</div>
+</div>
+<div style="font-size:26px;font-weight:900">۴۰٪</div>
+</div>
+<div style="height:5px;border-radius:10px;background:rgba(255,255,255,.2);margin-top:15px;overflow:hidden">
+<div style="width:40%;height:100%;background:#fff;border-radius:10px"></div>
+</div>
+</div>
+
+<div class="timeline">
+
+<div class="day">
+<div class="day-dot"></div>
+<div class="day-head">
+<strong>روز اول · ورود و کشف شهر</strong>
+<span>تکمیل شد</span>
+</div>
+
+<div class="event">
+<div class="event-icon"><svg class="icon"><use href="#i-plane"/></svg></div>
+<div class="event-info">
+<strong>پرواز تهران → استانبول</strong>
+<small>فرودگاه امام خمینی · TK879</small>
+</div>
+<div class="event-time">07:30</div>
+</div>
+
+<div class="event">
+<div class="event-icon"><svg class="icon"><use href="#i-bed"/></svg></div>
+<div class="event-info">
+<strong>تحویل اتاق هتل</strong>
+<small>Galata Premium Hotel</small>
+</div>
+<div class="event-time">13:00</div>
+</div>
+</div>
+
+<div class="day">
+<div class="day-dot" style="border-color:var(--cyan)"></div>
+<div class="day-head">
+<strong>روز دوم · بافت تاریخی</strong>
+<span style="color:var(--blue)">امروز</span>
+</div>
+
+<div class="event">
+<div class="event-icon"><svg class="icon"><use href="#i-compass"/></svg></div>
+<div class="event-info">
+<strong>مسجد ایاصوفیه</strong>
+<small>تور خصوصی · رزرو شده</small>
+</div>
+<div class="event-time">10:00</div>
+</div>
+
+<div class="event">
+<div class="event-icon"><svg class="icon"><use href="#i-restaurant"/></svg></div>
+<div class="event-info">
+<strong>ناهار در Karaköy</strong>
+<small>پیشنهاد NIVRA · میز رزرو شده</small>
+</div>
+<div class="event-time">13:30</div>
+</div>
+
+<div class="event">
+<div class="event-icon"><svg class="icon"><use href="#i-ticket"/></svg></div>
+<div class="event-info">
+<strong>کروز غروب بسفر</strong>
+<small>Golden Horn · VIP Deck</small>
+</div>
+<div class="event-time">18:20</div>
+</div>
+</div>
+
+<div class="day">
+<div class="day-dot" style="border-color:#c5d6dd"></div>
+<div class="day-head">
+<strong>روز سوم · سمت آسیایی</strong>
+<span>فردا</span>
+</div>
+
+<div class="event">
+<div class="event-icon"><svg class="icon"><use href="#i-spark"/></svg></div>
+<div class="event-info">
+<strong>کادیکوی و مودا</strong>
+<small>پیشنهاد هوشمند NIVRA</small>
+</div>
+<div class="event-time">09:30</div>
+</div>
+</div>
+
+<div class="day">
+<div class="day-dot" style="border-color:#c5d6dd"></div>
+<div class="day-head">
+<strong>روز چهارم · خرید و غذا</strong>
+<span>۲ روز دیگر</span>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<nav class="bottom-nav">
+<div class="nav-item"><div class="nav-icon-box"><svg class="icon"><use href="#i-home"/></svg></div>خانه</div>
+<div class="nav-item"><div class="nav-icon-box"><svg class="icon"><use href="#i-compass"/></svg></div>کشف</div>
+<div class="nav-item active"><div class="nav-icon-box"><svg class="icon"><use href="#i-calendar"/></svg></div>سفرهای من</div>
+<div class="nav-item"><div class="nav-icon-box"><svg class="icon"><use href="#i-spark"/></svg></div>دستیار</div>
+</nav>
+
+<div class="home"></div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     SCREEN 4 — BOOKING
+========================================================= -->
+<article class="phone">
+<div class="screen">
+
+<div class="status">
+  <span>9:41</span>
+  <div class="island"></div>
+  <div class="status-icons">
+    <svg><use href="#i-weather"/></svg>
+    <svg><use href="#i-compass"/></svg>
+    <svg><use href="#i-wallet"/></svg>
+  </div>
+</div>
+
+<div class="app">
+
+<div class="header">
+<div class="round-btn"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+<div class="header-title">تکمیل رزرو</div>
+<div style="width:43px"></div>
+</div>
+
+<div class="booking-summary">
+<img class="booking-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=85" alt="Hotel">
+
+<div class="booking-name">The Stay Bosphorus</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div class="booking-location">
+<svg class="icon" style="width:12px;height:12px;display:inline;vertical-align:middle"><use href="#i-map-pin"/></svg>
+استانبول · بشیکتاش
+</div>
+<div class="rating">
+<svg class="icon" style="width:11px;height:11px"><use href="#i-star"/></svg>
+۴.۸
+</div>
+</div>
+</div>
+
+<section class="section">
+<div class="selector">
+<div class="selector-left">
+<div class="selector-icon"><svg class="icon"><use href="#i-calendar"/></svg></div>
+<div>
+<strong>تاریخ اقامت</strong>
+<small>۲۵ تا ۲۹ شهریور · ۴ شب</small>
+</div>
+</div>
+<svg class="icon" style="width:17px;color:#8a9ba3"><use href="#i-arrow-left"/></svg>
+</div>
+
+<div class="selector">
+<div class="selector-left">
+<div class="selector-icon"><svg class="icon"><use href="#i-suitcase"/></svg></div>
+<div>
+<strong>مسافران</strong>
+<small>۲ بزرگسال · ۱ اتاق</small>
+</div>
+</div>
+<svg class="icon" style="width:17px;color:#8a9ba3"><use href="#i-arrow-left"/></svg>
+</div>
+
+<div class="selector">
+<div class="selector-left">
+<div class="selector-icon"><svg class="icon"><use href="#i-credit-card"/></svg></div>
+<div>
+<strong>روش پرداخت</strong>
+<small>کارت بانکی ·•••• ۴۸۲۱</small>
+</div>
+</div>
+<svg class="icon" style="width:17px;color:#8a9ba3"><use href="#i-arrow-left"/></svg>
+</div>
+</section>
+
+<section class="section">
+<div class="section-title">خلاصه هزینه</div>
+
+<div class="price-box">
+<div class="price-row">
+<span>اقامت · ۴ شب</span>
+<strong>۲۶,۴۰۰,۰۰۰</strong>
+</div>
+
+<div class="price-row">
+<span>مالیات و خدمات</span>
+<strong>۱,۳۲۰,۰۰۰</strong>
+</div>
+
+<div class="price-row">
+<span>تخفیف NIVRA+</span>
+<strong style="color:var(--green)">−۸۵۰,۰۰۰</strong>
+</div>
+
+<div class="price-row total">
+<span>مبلغ نهایی</span>
+<strong>۲۶,۸۷۰,۰۰۰ تومان</strong>
+</div>
+</div>
+
+<button class="primary-btn">
+پرداخت و تأیید رزرو
+</button>
+
+<div style="text-align:center;font-size:9px;color:var(--muted);margin-top:11px">
+پرداخت امن با رمزنگاری سرتاسری NIVRA
+</div>
+</section>
+
+<section class="section">
+<div style="background:#eaf9f4;border:1px solid #d5f0e7;border-radius:18px;padding:13px;display:flex;gap:10px;align-items:center">
+<div style="width:34px;height:34px;border-radius:11px;background:#fff;color:var(--green);display:grid;place-items:center">
+<svg class="icon"><use href="#i-check"/></svg>
+</div>
+<div>
+<strong style="font-size:11px;display:block">لغو رایگان</strong>
+<span style="font-size:9px;color:#66817a">تا ۲۴ ساعت قبل از ورود</span>
+</div>
+</div>
+</section>
+
+</div>
+
+<div class="home"></div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     SCREEN 5 — AI ASSISTANT
+========================================================= -->
+<article class="phone">
+<div class="screen">
+
+<div class="status">
+  <span>9:41</span>
+  <div class="island"></div>
+  <div class="status-icons">
+    <svg><use href="#i-weather"/></svg>
+    <svg><use href="#i-compass"/></svg>
+    <svg><use href="#i-wallet"/></svg>
+  </div>
+</div>
+
+<div class="app">
+
+<div class="header">
+<div class="round-btn"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(36,185,133,.1)"></div>
+<div class="header-title">NIVRA AI</div>
+</div>
+<div class="round-btn"><svg class="icon"><use href="#i-spark"/></svg></div>
+</div>
+
+<div class="ai-head">
+<div class="ai-avatar">
+<svg class="icon"><use href="#i-robot"/></svg>
+</div>
+<h2>سفر بعدی‌ات را<br>با من بساز.</h2>
+<p>من مقصد، بودجه، آب‌وهوا و علایقت را کنار هم می‌گذارم تا بهترین برنامه را برایت بسازم.</p>
+</div>
+
+<div style="padding:0 20px">
+
+<div class="message ai">
+سلام عرفان! 👋
+<br>
+با توجه به سفرهای قبلی‌ات، این هفته برای یک سفر <strong>۴ روزه به رم</strong> شرایط خیلی خوبی داری.
+<br><br>
+می‌خواهی یک برنامه کامل با پرواز، هتل و تجربه‌های محلی برات آماده کنم؟
+</div>
+
+<div class="message user">
+آره، ولی دوست دارم بیشتر روی غذا و معماری تمرکز داشته باشه.
+</div>
+
+<div class="message ai">
+عالیه. پس برنامه را بر اساس <strong>غذا، معماری و پیاده‌روی</strong> تنظیم کردم.
+<br><br>
+این پیشنهاد اولیه من است:
+<div class="ai-card">
+<div class="ai-card-top">
+<div>
+<strong>رم · ۴ روز</strong>
+<small>۲ نفر · شهریور ۱۴۰۵</small>
+</div>
+<div class="ai-price">۴۲.۸M</div>
+</div>
+
+<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+<span style="background:#eaf7ff;color:#168df5;border-radius:8px;padding:5px 7px;font-size:8px;font-weight:800">پرواز رفت‌وبرگشت</span>
+<span style="background:#e9faf5;color:#1ca87c;border-radius:8px;padding:5px 7px;font-size:8px;font-weight:800">هتل ۴ ستاره</span>
+<span style="background:#fff4eb;color:#e38b3a;border-radius:8px;padding:5px 7px;font-size:8px;font-weight:800">۳ تجربه غذایی</span>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="quick-actions">
+<div class="quick">برنامه کامل را بساز</div>
+<div class="quick">هتل ارزان‌تر پیدا کن</div>
+<div class="quick">مقصد دیگری پیشنهاد بده</div>
+</div>
+
+<div class="message ai" style="margin-right:20px">
+یک نکته مهم: طبق پیش‌بینی هوا، <strong>روز سوم</strong> بارندگی سبک داریم. بهتر است موزه واتیکان را همان روز قرار دهیم. ☁
+</div>
+
+<div class="chat-input">
+<span>از NIVRA چیزی بپرس...</span>
+<div class="send">
+<svg class="icon"><use href="#i-send"/></svg>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="home"></div>
+</div>
+</article>
+
+</div>
+</section>
+
+</main>
+
+<script>
+document.querySelectorAll('.round-btn,.nav-item,.quick,.primary-btn,.selector,.trip-card,.destination')
+.forEach(el=>{
+  el.addEventListener('click',()=>{
+    el.animate(
+      [
+        {transform:'scale(1)'},
+        {transform:'scale(.96)'},
+        {transform:'scale(1)'}
+      ],
+      {duration:180,easing:'ease-out'}
+    );
+  });
+});
+</script>
+
+</body>
+</html>
