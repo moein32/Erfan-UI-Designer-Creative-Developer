@@ -213,9 +213,10 @@ export const PROJECTS: ProjectData[] = [
       { font: 'Plus Jakarta Sans', usage: 'Portfolio governance & compliance', sample: 'Multi-Signature Smart Treasury Quorum Met' },
     ],
     appScreens: [
-      { id: 'zarvand-1', title: 'Global Liquidity Matrix', description: 'Real-time multi-asset vault balancing and yield visualization', type: 'dashboard' },
-      { id: 'zarvand-2', title: 'Secure Vault Guard', description: 'Zero-knowledge biometric multi-signature release sequence', type: 'checkout' },
-      { id: 'zarvand-3', title: 'Real-Time Telemetry', description: 'Live transaction latency and liquidity routing stream', type: 'insights' },
+      { id: 'zarvand-1', title: '01 / LIQUIDITY — Treasury Dashboard', description: 'Real-time liquidity balance, instant multi-rail transfers, and automated yield compounding', type: 'dashboard' },
+      { id: 'zarvand-2', title: '02 / PORTFOLIO — Sovereign Vault', description: 'Multi-asset portfolio balancing across BTC, ETH, USDT, and USD reserves', type: 'insights' },
+      { id: 'zarvand-3', title: '03 / ANALYTICS — Budget Telemetry', description: 'Radial expense analytics donut and categorized monthly budget bounds', type: 'detail' },
+      { id: 'zarvand-4', title: '04 / INTELLIGENCE — AI Advisor & Cards', description: 'Context-aware financial advisor with titanium card hardware security controls', type: 'assistant' },
     ],
     deliverables: ['Web & Desktop Workstation UI', 'Institutional Design Tokens', 'Security UX Architecture', 'Interactive D3 Visualizers'],
   },
