@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ProjectData } from '../../../types';
 import { VaryaPhoneScene } from './VaryaPhoneScene';
 import { VaryaStory } from './VaryaStory';
-import { useCursor } from '../../../context/CursorContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AmbientLight } from '../../ui/VisualEnvironment';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,123 +23,61 @@ export const VaryaExperience: React.FC<VaryaExperienceProps> = ({
   onOpenCaseStudy,
   isPersianMode = false,
 }) => {
+  const [activeChapterIndex, setActiveChapterIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const pinSectionRef = useRef<HTMLDivElement>(null);
-  const phoneWrapperRef = useRef<HTMLDivElement>(null);
-  const storyWrapperRef = useRef<HTMLDivElement>(null);
-
-  const [activeChapterIndex, setActiveChapterIndex] = useState<number>(0);
-  const { setCursor, resetCursor } = useCursor();
+  const phoneContainerRef = useRef<HTMLDivElement>(null);
+  const storyContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    const pinSection = pinSectionRef.current;
-    const phone = phoneWrapperRef.current;
-    const story = storyWrapperRef.current;
+    const phone = phoneContainerRef.current;
+    const story = storyContainerRef.current;
 
-    if (!container || !pinSection || !phone || !story) return;
-
-    // Check media query for mobile/tablet vs desktop
-    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!isDesktop || prefersReducedMotion) {
-      // On mobile or reduced-motion, keep natural flow
-      return;
-    }
+    if (!container || !phone || !story) return;
 
     const ctx = gsap.context(() => {
-      // Main Master Timeline for Pinned 350vh Experience
-      const masterTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: 'top top',
-          end: '+=320%',
-          pin: pinSection,
-          scrub: 0.65,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            // Map scroll progress to 4 chapters (0, 1, 2, 3)
-            if (progress < 0.28) {
-              setActiveChapterIndex(0);
-            } else if (progress < 0.52) {
-              setActiveChapterIndex(1);
-            } else if (progress < 0.76) {
-              setActiveChapterIndex(2);
-            } else {
-              setActiveChapterIndex(3);
-            }
-          },
-        },
-      });
-
-      // 1. Entrance Phase
-      masterTl.fromTo(
+      gsap.fromTo(
         phone,
         {
-          opacity: 0,
-          scale: 0.78,
-          y: 160,
-          rotation: 6,
+          y: 80,
+          scale: 0.92,
+          opacity: 0.4,
         },
         {
-          opacity: 1,
-          scale: 1,
           y: 0,
-          rotation: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 1.2,
           ease: 'power2.out',
-          duration: 0.8,
+          scrollTrigger: {
+            trigger: container,
+            start: 'top 75%',
+            end: 'top 20%',
+            scrub: 0.8,
+          },
         }
       );
 
-      masterTl.fromTo(
+      gsap.fromTo(
         story,
         {
-          opacity: 0,
           y: 60,
+          opacity: 0.3,
         },
         {
-          opacity: 1,
           y: 0,
+          opacity: 1,
+          duration: 1.2,
           ease: 'power2.out',
-          duration: 0.8,
-        },
-        '<0.1'
+          scrollTrigger: {
+            trigger: container,
+            start: 'top 75%',
+            end: 'top 30%',
+            scrub: 0.8,
+          },
+        }
       );
-
-      // 2. Mid-Scroll Active Scrubbing (Chapters 0 -> 1 -> 2 -> 3)
-      masterTl.to(phone, {
-        y: -15,
-        scale: 1.02,
-        duration: 1.8,
-        ease: 'none',
-      });
-
-      // 3. Exit Phase — Seamless transition into next project
-      masterTl.to(
-        phone,
-        {
-          scale: 0.88,
-          y: -120,
-          opacity: 0,
-          ease: 'power2.in',
-          duration: 0.7,
-        },
-        '>-0.2'
-      );
-
-      masterTl.to(
-        story,
-        {
-          y: -80,
-          opacity: 0,
-          ease: 'power2.in',
-          duration: 0.7,
-        },
-        '<'
-      );
-    }, container);
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
@@ -148,49 +86,54 @@ export const VaryaExperience: React.FC<VaryaExperienceProps> = ({
     <div
       ref={containerRef}
       id={`project-${project.id}`}
-      className="relative w-full min-h-screen border-b border-black/5"
+      className="relative min-h-screen py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto"
     >
-      {/* Pinned Experience Viewport */}
-      <div
-        ref={pinSectionRef}
-        className="w-full min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-12 relative overflow-hidden"
-      >
-        {/* Subtle Ambient Bioluminescent Gradient Backing */}
-        <div className="absolute inset-0 pointer-events-none opacity-40 z-0">
-          <div className="absolute -top-[15%] right-[5%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-br from-[#BCAEFF]/20 via-[#83DFF1]/15 to-transparent blur-3xl" />
-          <div className="absolute -bottom-[20%] left-[10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-tr from-[#8DE5C8]/15 via-[#6F62E8]/10 to-transparent blur-3xl" />
+      {/* Subtle Mint Atmosphere for Varya */}
+      <AmbientLight position="top-right" color="mint" size="xl" intensity="soft" />
+
+      {/* Flagship Scene Section Header */}
+      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-12">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-sm font-bold text-[#F5F5F7]">
+            PROJECT {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+          </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+          <span className="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
+            {project.category}
+          </span>
         </div>
 
-        {/* 2-Column Split: Editorial Story Left, Dominant Phone Right */}
-        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
-          {/* Left Column: Editorial Narrative & Interactive Chapters (6 cols) */}
-          <div
-            ref={storyWrapperRef}
-            className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center"
-          >
-            <VaryaStory
-              project={project}
-              activeChapterIndex={activeChapterIndex}
-              onSelectChapter={(idx) => setActiveChapterIndex(idx)}
-              onOpenCaseStudy={() => onOpenCaseStudy(project)}
-              isPersianMode={isPersianMode}
-            />
-          </div>
+        <div className="hidden sm:flex items-center gap-2">
+          <span className="px-3 py-1 rounded-full glass-subtle border border-white/10 text-[11px] font-mono text-[#A1A1AA]">
+            BIOMETRIC HEALTH OS
+          </span>
+        </div>
+      </div>
 
-          {/* Right Column: Dominant iPhone Scene (6 cols) */}
-          <div
-            ref={phoneWrapperRef}
-            className="lg:col-span-6 xl:col-span-6 flex items-center justify-center lg:justify-end"
-            onMouseEnter={() => setCursor({ type: 'project', text: 'EXPLORE' })}
-            onMouseLeave={resetCursor}
-          >
-            <VaryaPhoneScene
-              activeChapterIndex={activeChapterIndex}
-              onChapterChange={(idx) => setActiveChapterIndex(idx)}
-              isInteractive={true}
-              isPersianMode={isPersianMode}
-            />
-          </div>
+      {/* Main Grid: Device on one side, Editorial Story on the other */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        
+        {/* Interactive Phone Mockup (Sticky on Desktop) */}
+        <div
+          ref={phoneContainerRef}
+          className="lg:col-span-6 flex justify-center lg:sticky lg:top-24"
+        >
+          <VaryaPhoneScene
+            activeChapterIndex={activeChapterIndex}
+            onChapterChange={(idx) => setActiveChapterIndex(idx)}
+            isInteractive={true}
+          />
+        </div>
+
+        {/* Editorial Story, Narrative & System Chapters */}
+        <div ref={storyContainerRef} className="lg:col-span-6">
+          <VaryaStory
+            project={project}
+            activeChapterIndex={activeChapterIndex}
+            onSelectChapter={(idx) => setActiveChapterIndex(idx)}
+            onOpenCaseStudy={() => onOpenCaseStudy(project)}
+            isPersianMode={isPersianMode}
+          />
         </div>
       </div>
     </div>

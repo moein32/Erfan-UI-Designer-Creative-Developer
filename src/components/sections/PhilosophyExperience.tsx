@@ -29,7 +29,7 @@ export const PhilosophyExperience: React.FC = () => {
       if (words && words.length > 0) {
         gsap.fromTo(
           words,
-          { opacity: 0.12, y: 20 },
+          { opacity: 0.15, y: 20 },
           {
             opacity: 1,
             y: 0,
@@ -68,27 +68,27 @@ export const PhilosophyExperience: React.FC = () => {
   }, [isRTL]);
 
   const pillarIcons = [
-    <Layers key="layers" size={18} className="text-[#0A0A0A]" />,
-    <Sparkles key="sparkles" size={18} className="text-[#0A0A0A]" />,
-    <ShieldCheck key="shield" size={18} className="text-[#0A0A0A]" />,
+    <Layers key="layers" size={18} className="text-[#F5F5F7]" />,
+    <Sparkles key="sparkles" size={18} className="text-[#F5F5F7]" />,
+    <ShieldCheck key="shield" size={18} className="text-[#F5F5F7]" />,
   ];
 
   return (
     <section
       ref={sectionRef}
       id="philosophy"
-      className="relative py-32 md:py-44 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden border-t border-[#E5E7EB]"
+      className="relative py-32 md:py-44 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden border-t border-white/10"
     >
       {/* Environmental Architectural Depth */}
       <AmbientLight position="top-center" size="xl" intensity="medium" />
       <AmbientLight position="bottom-center" size="lg" intensity="soft" />
-      <GridField opacity={0.35} maskRadius="ellipse 70% 50% at 50% 30%" />
-      <TypographicWatermark text="PHILOSOPHY" position="top-right" opacity="opacity-[0.02]" />
+      <GridField opacity={0.2} maskRadius="ellipse 70% 50% at 50% 30%" />
+      <TypographicWatermark text="PHILOSOPHY" position="top-right" opacity="opacity-[0.03]" />
 
       {/* Chapter Tagline */}
       <div className="flex items-center gap-3 mb-10 md:mb-16">
-        <div className="w-2.5 h-2.5 rounded-full bg-[#0A0A0A]" />
-        <span className="font-mono text-xs font-bold tracking-[0.2em] text-[#71717A] uppercase">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#F5F5F7] shadow-[0_0_8px_rgba(245,245,247,0.6)]" />
+        <span className="font-mono text-xs font-bold tracking-[0.2em] text-[#A1A1AA] uppercase">
           {formatNumber(data.number)} / {data.tag}
         </span>
       </div>
@@ -97,7 +97,7 @@ export const PhilosophyExperience: React.FC = () => {
       <div className="mb-20 md:mb-28">
         <h2
           ref={headlineRef}
-          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight text-[#0A0A0A] leading-[1.1] md:leading-[1.05]"
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight text-[#F5F5F7] leading-[1.1] md:leading-[1.05]"
         >
           <span className="block philosophy-word">{data.headlineLine1}</span>
           <span className="block philosophy-word text-[#71717A] font-light">{data.headlineLine2}</span>
@@ -111,27 +111,27 @@ export const PhilosophyExperience: React.FC = () => {
         {/* Left Column: Manifesto Narrative */}
         <div className="lg:col-span-5 space-y-6 md:space-y-8">
           <div className="space-y-4">
-            <p className="text-base sm:text-lg leading-relaxed text-[#3F3F46] font-normal">
+            <p className="text-base sm:text-lg leading-relaxed text-[#A1A1AA] font-normal">
               {data.paragraph1}
             </p>
-            <p className="text-base sm:text-lg leading-relaxed text-[#3F3F46] font-normal">
+            <p className="text-base sm:text-lg leading-relaxed text-[#A1A1AA] font-normal">
               {data.paragraph2}
             </p>
           </div>
 
-          {/* Quote Attribution Pill — Real Liquid Glass */}
+          {/* Quote Attribution Pill — Real Dark Liquid Glass */}
           <div
-            className="p-5 rounded-2xl glass-medium border border-[#E5E7EB] flex items-start gap-4 shadow-xs"
+            className="p-5 rounded-2xl glass-medium border border-white/10 flex items-start gap-4 shadow-lg"
           >
-            <div className="w-8 h-8 rounded-full bg-[#0A0A0A] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-              <Quote size={14} className="text-white/80" />
+            <div className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0 mt-0.5 border border-white/10">
+              <Quote size={14} className="text-[#F5F5F7]" />
             </div>
             <div className="space-y-1">
-              <span className="block text-xs font-mono font-bold text-[#0A0A0A] tracking-wider uppercase">
+              <span className="block text-xs font-mono font-bold text-[#F5F5F7] tracking-wider uppercase">
                 {data.quoteAuthor}
               </span>
               <span className="block text-[11px] font-mono text-[#71717A]">
-                {isRTL ? 'تهران · تعهد به بالاترین کیفیت تولید' : 'EST. 2018 · COMMITTED TO CRAFT'}
+                {isRTL ? 'تهران · تعهد به بالاترین کیفیت ساخت دیجیتال' : 'EST. 2018 · COMMITTED TO CRAFT'}
               </span>
             </div>
           </div>
@@ -142,28 +142,28 @@ export const PhilosophyExperience: React.FC = () => {
           {data.pillars.map((pillar, idx) => (
             <div
               key={pillar.title}
-              className="philosophy-pillar-card p-6 sm:p-8 rounded-2xl glass-subtle bg-white/70 hover:bg-white border border-[#E5E7EB] hover:border-[#0A0A0A]/30 transition-all duration-300 shadow-xs hover:shadow-md group cursor-default"
+              className="philosophy-pillar-card p-6 sm:p-8 rounded-2xl glass-subtle hover:glass-medium border border-white/8 hover:border-white/20 transition-all duration-300 shadow-lg group cursor-default"
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
             >
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-white border border-[#E5E7EB] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                    {pillarIcons[idx] || <Compass size={18} />}
+                  <div className="w-8 h-8 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                    {pillarIcons[idx] || <Compass size={18} className="text-[#F5F5F7]" />}
                   </div>
-                  <span className="font-mono text-xs font-bold text-[#A1A1AA] group-hover:text-[#0A0A0A] transition-colors">
+                  <span className="font-mono text-xs font-bold text-[#71717A] group-hover:text-[#F5F5F7] transition-colors">
                     {formatNumber(pillar.number)}
                   </span>
                 </div>
-                <span className="text-[10px] font-mono tracking-widest text-[#A1A1AA] uppercase">
+                <span className="text-[10px] font-mono tracking-widest text-[#71717A] uppercase">
                   {isRTL ? 'اصل بنیادین' : 'CORE TENET'}
                 </span>
               </div>
 
-              <h3 className="text-lg sm:text-xl font-bold text-[#0A0A0A] tracking-tight mb-2 group-hover:translate-x-1 transition-transform">
+              <h3 className="text-lg sm:text-xl font-bold text-[#F5F5F7] tracking-tight mb-2 group-hover:translate-x-1 transition-transform">
                 {pillar.title}
               </h3>
-              <p className="text-sm leading-relaxed text-[#71717A] group-hover:text-[#3F3F46] transition-colors">
+              <p className="text-sm leading-relaxed text-[#A1A1AA] group-hover:text-[#E4E4E7] transition-colors">
                 {pillar.desc}
               </p>
             </div>

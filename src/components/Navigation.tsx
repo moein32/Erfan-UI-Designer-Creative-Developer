@@ -51,10 +51,8 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
       }
 
       if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        // Scrolling down -> hide navbar
         setIsVisible(false);
       } else {
-        // Scrolling up -> show navbar
         setIsVisible(true);
       }
 
@@ -89,24 +87,24 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
           onMouseEnter={() => setCursor({ type: 'button' })}
           onMouseLeave={resetCursor}
         >
-          <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-[#0A0A0A] group-hover:opacity-60 transition-opacity">
+          <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-[#F5F5F7] group-hover:text-white transition-colors">
             {isRTL ? 'عرفان' : 'ERFAN'}
           </span>
-          <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-[#71717A] uppercase border-s border-[#E5E7EB] ps-3">
-            {isRTL ? 'طراحی رابط کاربری و وب' : 'UI & CREATIVE DEV'}
+          <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-[#71717A] uppercase border-s border-white/10 ps-3">
+            {isRTL ? 'طراحی محصول و تجربه کاربری' : 'PRODUCT & INTERFACE DESIGN'}
           </span>
         </a>
 
-        {/* Desktop Navigation Island — Liquid Glass */}
+        {/* Desktop Navigation Island — Dark Liquid Glass */}
         <nav
           id="desktop-nav"
-          className="hidden md:flex items-center gap-1.5 liquid-glass px-3.5 py-1.5 rounded-full transition-all duration-300 hover:border-[#0A0A0A]/20"
+          className="hidden md:flex items-center gap-1.5 glass-subtle px-3.5 py-1.5 rounded-full transition-all duration-300 hover:border-white/20 shadow-lg"
         >
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="px-3 py-1 text-[12px] font-medium tracking-[0.05em] text-[#0A0A0A] hover:text-[#71717A] transition-colors rounded-full"
+              className="px-3.5 py-1 text-[12px] font-medium tracking-[0.03em] text-[#A1A1AA] hover:text-[#F5F5F7] transition-colors rounded-full"
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
             >
@@ -114,10 +112,10 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
             </a>
           ))}
 
-          {/* Liquid Glass Language Switcher Pill */}
+          {/* Dark Liquid Glass Language Switcher Pill */}
           <div
             id="lang-switcher-pill"
-            className="ms-1.5 p-0.5 rounded-full bg-[#E5E7EB]/60 border border-[#E5E7EB] flex items-center gap-0.5"
+            className="ms-1.5 p-0.5 rounded-full bg-white/6 border border-white/10 flex items-center gap-0.5"
             role="group"
             aria-label={t.nav.switchLang}
           >
@@ -125,10 +123,10 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
               type="button"
               id="lang-btn-fa"
               onClick={() => setLanguage('fa')}
-              className={`px-2 py-0.5 text-[11px] font-persian font-bold rounded-full transition-all duration-200 cursor-pointer ${
+              className={`px-2.5 py-0.5 text-[11px] font-persian font-bold rounded-full transition-all duration-200 cursor-pointer ${
                 language === 'fa'
-                  ? 'bg-[#FFFFFF] text-[#0A0A0A] shadow-xs'
-                  : 'text-[#71717A] hover:text-[#0A0A0A]'
+                  ? 'bg-white text-[#070709] shadow-xs'
+                  : 'text-[#71717A] hover:text-[#F5F5F7]'
               }`}
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
@@ -139,10 +137,10 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
               type="button"
               id="lang-btn-en"
               onClick={() => setLanguage('en')}
-              className={`px-2 py-0.5 text-[10px] font-mono font-bold rounded-full transition-all duration-200 cursor-pointer ${
+              className={`px-2.5 py-0.5 text-[10px] font-mono font-bold rounded-full transition-all duration-200 cursor-pointer ${
                 language === 'en'
-                  ? 'bg-[#FFFFFF] text-[#0A0A0A] shadow-xs'
-                  : 'text-[#71717A] hover:text-[#0A0A0A]'
+                  ? 'bg-white text-[#070709] shadow-xs'
+                  : 'text-[#71717A] hover:text-[#F5F5F7]'
               }`}
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
@@ -155,11 +153,11 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
         {/* Right Status Pill & CTA */}
         <div className="flex items-center gap-3">
           {/* Availability & Time badge */}
-          <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass text-[11px] font-mono text-[#52525B]">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-subtle text-[11px] font-mono text-[#A1A1AA] border border-white/8">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>{isRTL ? 'آماده همکاری' : 'AVAILABLE'}</span>
-            <span className="text-[#D4D4D8]">·</span>
-            <span className="text-[#0A0A0A] font-medium">{localTime || '14:20'} {isRTL ? 'تهران' : 'THR'}</span>
+            <span className="text-white/20">·</span>
+            <span className="text-[#F5F5F7] font-medium">{localTime || '14:20'} {isRTL ? 'تهران' : 'THR'}</span>
           </div>
 
           {/* Quick CTA */}
@@ -167,7 +165,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
             type="button"
             id="nav-cta-btn"
             onClick={onOpenContactModal}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono tracking-wider font-semibold rounded-full bg-[#0A0A0A] text-[#FFFFFF] hover:bg-[#27272A] transition-all duration-200 active:scale-95 shadow-xs cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono tracking-wider font-bold rounded-full bg-[#F5F5F7] text-[#070709] hover:bg-white transition-all duration-200 active:scale-95 shadow-md cursor-pointer"
             onMouseEnter={() => setCursor({ type: 'button', text: t.cursor.send })}
             onMouseLeave={resetCursor}
           >
@@ -179,7 +177,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
-            className="md:hidden p-2 rounded-full liquid-glass text-[#0A0A0A] focus:outline-none cursor-pointer"
+            className="md:hidden p-2 rounded-full glass-subtle text-[#F5F5F7] focus:outline-none cursor-pointer border border-white/10"
             aria-label={mobileMenuOpen ? t.nav.close : t.nav.menu}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -187,29 +185,29 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu — Liquid Glass Strong */}
+      {/* Mobile Drawer Menu — Dark Liquid Glass Strong */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 mx-6 p-6 rounded-3xl liquid-glass-strong shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="flex items-center justify-between pb-3 border-b border-[#E5E7EB]">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#71717A]">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <div className="md:hidden mt-2 mx-6 p-6 rounded-3xl glass-strong border border-white/12 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#A1A1AA]">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span>{t.nav.status}</span>
             </div>
 
             {/* Mobile Language Switcher */}
-            <div className="p-0.5 rounded-full bg-[#E5E7EB] flex items-center gap-0.5">
+            <div className="p-0.5 rounded-full bg-white/8 border border-white/10 flex items-center gap-0.5">
               <button
                 onClick={() => setLanguage('fa')}
-                className={`px-2.5 py-1 text-xs font-persian font-bold rounded-full ${
-                  language === 'fa' ? 'bg-[#FFFFFF] text-[#0A0A0A] shadow-xs' : 'text-[#71717A]'
+                className={`px-3 py-1 text-xs font-persian font-bold rounded-full ${
+                  language === 'fa' ? 'bg-white text-[#070709] shadow-xs' : 'text-[#A1A1AA]'
                 }`}
               >
                 فارسی
               </button>
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-2.5 py-1 text-xs font-mono font-bold rounded-full ${
-                  language === 'en' ? 'bg-[#FFFFFF] text-[#0A0A0A] shadow-xs' : 'text-[#71717A]'
+                className={`px-3 py-1 text-xs font-mono font-bold rounded-full ${
+                  language === 'en' ? 'bg-white text-[#070709] shadow-xs' : 'text-[#A1A1AA]'
                 }`}
               >
                 EN
@@ -223,10 +221,10 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-display font-medium text-[#0A0A0A] hover:text-[#71717A] py-1.5 transition-colors flex items-center justify-between"
+                className="text-base font-display font-medium text-[#F5F5F7] hover:text-white py-1.5 transition-colors flex items-center justify-between"
               >
                 <span>{link.label}</span>
-                <ArrowUpRight size={16} className={`text-[#A1A1AA] ${isRTL ? 'rotate-[-90deg]' : ''}`} />
+                <ArrowUpRight size={16} className={`text-[#71717A] ${isRTL ? 'rotate-[-90deg]' : ''}`} />
               </a>
             ))}
           </div>
@@ -236,7 +234,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
               setMobileMenuOpen(false);
               onOpenContactModal?.();
             }}
-            className="mt-2 w-full py-3.5 text-center text-xs font-mono tracking-wider font-semibold rounded-2xl bg-[#0A0A0A] text-[#FFFFFF] flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-95"
+            className="mt-2 w-full py-3.5 text-center text-xs font-mono tracking-wider font-bold rounded-2xl bg-white text-[#070709] flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-95"
           >
             <span>{t.nav.startProject}</span>
             <Sparkles size={14} />

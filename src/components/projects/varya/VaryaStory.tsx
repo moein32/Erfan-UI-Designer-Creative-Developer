@@ -31,25 +31,25 @@ export const VaryaStory: React.FC<VaryaStoryProps> = ({
       {/* Editorial Header */}
       <div>
         <div className="flex items-center gap-3">
-          <span className="px-3 py-1 bg-[#0A0A0A]/5 text-[#0A0A0A] border border-[#E5E7EB] text-xs font-mono font-bold tracking-wider uppercase rounded-full liquid-glass">
+          <span className="px-3 py-1 bg-white/8 text-[#F5F5F7] border border-white/10 text-xs font-mono font-bold tracking-wider uppercase rounded-full glass-subtle">
             {isRTL ? 'پلتفرم پایش سلامت و بیومتریک' : 'BIOMETRIC WELLNESS'}
           </span>
           <span className="text-xs font-mono text-[#71717A]">{formatNumber(pTrans.year)}</span>
         </div>
 
-        <h3 className="text-3xl md:text-5xl font-display font-extrabold text-[#0A0A0A] mt-4 tracking-tight">
+        <h3 className="text-3xl md:text-5xl font-display font-extrabold text-[#F5F5F7] mt-4 tracking-tight">
           {pTrans.title}
         </h3>
-        <p className="text-base md:text-lg font-medium text-[#71717A] mt-1">
+        <p className="text-base md:text-lg font-medium text-[#A1A1AA] mt-1">
           {pTrans.tagline}
         </p>
 
-        <p className="text-[#52525B] text-sm md:text-base leading-relaxed mt-4 max-w-xl">
+        <p className="text-[#A1A1AA] text-sm md:text-base leading-relaxed mt-4 max-w-xl">
           {pTrans.overview}
         </p>
       </div>
 
-      {/* 4 Interactive Story Chapters — Liquid Glass */}
+      {/* 4 Interactive Story Chapters — Dark Liquid Glass */}
       <div className="space-y-3 pt-2">
         <span className="text-[11px] font-mono font-bold tracking-widest text-[#71717A] uppercase block">
           {isRTL ? 'فصل‌های پایش سلامت و تعادل زیستی' : 'WELLNESS PILLARS'}
@@ -67,16 +67,16 @@ export const VaryaStory: React.FC<VaryaStoryProps> = ({
                 onMouseLeave={resetCursor}
                 className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer ${
                   isActive
-                    ? 'liquid-glass border-[#0A0A0A] shadow-xs'
-                    : 'bg-[#FFFFFF] border-[#E5E7EB] hover:border-[#A1A1AA]'
+                    ? 'glass-strong border-emerald-400/40 shadow-xl'
+                    : 'glass-subtle border-white/8 hover:border-white/20'
                 }`}
               >
                 <div className="flex items-start gap-4">
                   <div
                     className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                       isActive
-                        ? 'bg-[#0A0A0A] text-white shadow-xs'
-                        : 'bg-[#FAFAFA] border border-[#E5E7EB] text-[#71717A]'
+                        ? 'bg-emerald-500 text-black shadow-lg font-bold'
+                        : 'bg-white/6 border border-white/10 text-[#A1A1AA]'
                     }`}
                   >
                     <Icon size={18} />
@@ -85,19 +85,19 @@ export const VaryaStory: React.FC<VaryaStoryProps> = ({
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-[#71717A]">
+                        <span className="text-xs font-mono font-bold text-[#A1A1AA]">
                           {formatNumber(ch.number)}
                         </span>
-                        <h4 className="font-display text-base sm:text-lg font-bold text-[#0A0A0A]">
+                        <h4 className="font-display text-base sm:text-lg font-bold text-[#F5F5F7]">
                           {ch.title}
                         </h4>
                       </div>
-                      <span className="text-[11px] font-mono text-[#0A0A0A] font-semibold">
+                      <span className="text-[11px] font-mono text-emerald-400 font-semibold">
                         {isActive ? (isRTL ? 'در حال نمایش' : 'ACTIVE VIEW') : ''}
                       </span>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-[#52525B] mt-1 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#A1A1AA] mt-1 leading-relaxed">
                       {ch.description}
                     </p>
                   </div>
@@ -113,7 +113,7 @@ export const VaryaStory: React.FC<VaryaStoryProps> = ({
         <button
           onClick={onOpenCaseStudy}
           id={`view-case-study-${project.id}`}
-          className="group px-7 py-3.5 rounded-full bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold tracking-wider hover:bg-[#27272A] transition-all flex items-center gap-2 shadow-xs active:scale-95 cursor-pointer"
+          className="group px-7 py-3.5 rounded-full bg-[#F5F5F7] text-[#070709] text-xs font-mono font-bold tracking-wider hover:bg-white transition-all flex items-center gap-2 shadow-lg active:scale-95 cursor-pointer"
           onMouseEnter={() => setCursor({ type: 'button', text: t.cursor.view })}
           onMouseLeave={resetCursor}
         >
@@ -126,7 +126,7 @@ export const VaryaStory: React.FC<VaryaStoryProps> = ({
 
         <div className="flex items-center gap-2 text-xs font-mono text-[#71717A]">
           <span>{formatNumber(pTrans.year)}</span>
-          <span>·</span>
+          <span className="text-white/20">·</span>
           <span>{pTrans.client}</span>
         </div>
       </div>

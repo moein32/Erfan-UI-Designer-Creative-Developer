@@ -3,6 +3,7 @@ import { ProjectData } from '../../../types';
 import { ZarvandPhoneScene } from './ZarvandPhoneScene';
 import { ZarvandStory } from './ZarvandStory';
 import { useCursor } from '../../../context/CursorContext';
+import { AmbientLight } from '../../ui/VisualEnvironment';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -39,17 +40,14 @@ export const ZarvandExperience: React.FC<ZarvandExperienceProps> = ({
 
     if (!container || !pinSection || !phone || !story) return;
 
-    // Check media query for mobile/tablet vs desktop
     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!isDesktop || prefersReducedMotion) {
-      // On mobile or reduced-motion, keep natural flow
       return;
     }
 
     const ctx = gsap.context(() => {
-      // Main Master Timeline for Pinned 320% Experience
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -60,7 +58,6 @@ export const ZarvandExperience: React.FC<ZarvandExperienceProps> = ({
           anticipatePin: 1,
           onUpdate: (self) => {
             const progress = self.progress;
-            // Map scroll progress to 4 chapters (0, 1, 2, 3)
             if (progress < 0.28) {
               setActiveChapterIndex(0);
             } else if (progress < 0.52) {
@@ -74,7 +71,6 @@ export const ZarvandExperience: React.FC<ZarvandExperienceProps> = ({
         },
       });
 
-      // 1. Entrance Phase
       masterTl.fromTo(
         phone,
         {
@@ -108,7 +104,6 @@ export const ZarvandExperience: React.FC<ZarvandExperienceProps> = ({
         '<0.1'
       );
 
-      // 2. Mid-Scroll Active Scrubbing (Chapters 0 -> 1 -> 2 -> 3)
       masterTl.to(phone, {
         y: -15,
         scale: 1.02,
@@ -116,7 +111,6 @@ export const ZarvandExperience: React.FC<ZarvandExperienceProps> = ({
         ease: 'none',
       });
 
-      // 3. Exit Phase — Smooth fade and scale up into footer
       masterTl.to(
         phone,
         {
@@ -148,22 +142,19 @@ export const ZarvandExperience: React.FC<ZarvandExperienceProps> = ({
     <div
       ref={containerRef}
       id={`project-${project.id}`}
-      className="relative w-full min-h-screen border-b border-black/5"
+      className="relative w-full min-h-screen border-b border-white/10"
     >
       {/* Pinned Experience Viewport */}
       <div
         ref={pinSectionRef}
         className="w-full min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-12 relative overflow-hidden"
       >
-        {/* Subtle Neutral / Blue Glow Backing */}
-        <div className="absolute inset-0 pointer-events-none opacity-30 z-0">
-          <div className="absolute -top-[15%] right-[5%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-br from-[#2563EB]/15 via-[#60A5FA]/10 to-transparent blur-3xl" />
-          <div className="absolute -bottom-[20%] left-[10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-tr from-[#7C3AED]/10 via-[#16A34A]/10 to-transparent blur-3xl" />
-        </div>
+        {/* Subtle Amber Glow Backing */}
+        <AmbientLight position="top-right" tint="amber" size="xl" intensity="soft" />
 
         {/* 2-Column Split: Editorial Story Left, Dominant Phone Right */}
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
-          {/* Left Column: Editorial Narrative & Interactive Chapters (6 cols) */}
+          {/* Left Column: Editorial Narrative & Interactive Chapters */}
           <div
             ref={storyWrapperRef}
             className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center"
@@ -177,7 +168,7 @@ export const ZarvandExperience: React.FC<ZarvandExperienceProps> = ({
             />
           </div>
 
-          {/* Right Column: Dominant iPhone Scene (6 cols) */}
+          {/* Right Column: Dominant iPhone Scene */}
           <div
             ref={phoneWrapperRef}
             className="lg:col-span-6 xl:col-span-6 flex items-center justify-center lg:justify-end"

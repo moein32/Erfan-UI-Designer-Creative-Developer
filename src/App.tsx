@@ -57,11 +57,11 @@ function PortfolioMain() {
   };
 
   return (
-    <div className={`min-h-screen bg-[#FFFFFF] text-[#0A0A0A] bg-noise transition-colors duration-300 ${isRTL ? 'font-persian' : ''}`}>
+    <div className={`min-h-screen bg-[#030304] text-[#F5F5F7] bg-noise transition-colors duration-300 ${isRTL ? 'font-persian' : ''}`}>
       {/* Custom Interactive Cursor */}
       <CustomCursor />
 
-      {/* Floating Smart Navigation with Liquid Glass & Language Switcher */}
+      {/* Floating Smart Navigation with Dark Liquid Glass & Language Switcher */}
       <Navigation
         onOpenContactModal={() => setIsInquiryModalOpen(true)}
       />
@@ -74,8 +74,8 @@ function PortfolioMain() {
 
       {/* 01 / SELECTED WORK SCENES */}
       <section id="selected-work" className="relative pt-16 md:pt-24 pb-8 overflow-hidden">
-        <AmbientLight position="top-center" size="xl" intensity="soft" />
-        <GridField opacity={0.25} />
+        <AmbientLight position="top-center" color="violet" size="xl" intensity="soft" />
+        <GridField opacity={0.18} />
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <SectionHeading

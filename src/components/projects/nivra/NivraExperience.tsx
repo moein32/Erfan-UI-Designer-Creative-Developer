@@ -4,6 +4,7 @@ import { NivraPhoneScene } from './NivraPhoneScene';
 import { NivraStory } from './NivraStory';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AmbientLight } from '../../ui/VisualEnvironment';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,12 +37,10 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
 
     if (!section || !pinContainer || !phone || !story) return;
 
-    // Check if on desktop screen width (>= 1024px)
     const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 
     const ctx = gsap.context(() => {
       if (isDesktop) {
-        // Desktop: Immersive pinned scroll timeline across 320% space
         const mainTl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
@@ -51,21 +50,19 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
             scrub: 0.8,
             onUpdate: (self) => {
               const progress = self.progress;
-              // Map 0 -> 1 progress into 4 discrete chapter states
               if (progress < 0.25) {
-                setActiveChapterIndex(0); // 01 DISCOVER
+                setActiveChapterIndex(0);
               } else if (progress < 0.5) {
-                setActiveChapterIndex(1); // 02 PLAN
+                setActiveChapterIndex(1);
               } else if (progress < 0.75) {
-                setActiveChapterIndex(2); // 03 EXPLORE
+                setActiveChapterIndex(2);
               } else {
-                setActiveChapterIndex(3); // 04 TRAVEL
+                setActiveChapterIndex(3);
               }
             },
           },
         });
 
-        // 1. Entrance animation: opacity 0 -> 1, scale 0.78 -> 1, y 160 -> 0, rotation 6deg -> 0
         mainTl
           .fromTo(
             phone,
@@ -100,7 +97,6 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
             0
           );
 
-        // 2. Mid scroll subtle elevation
         mainTl.to(
           phone,
           {
@@ -111,7 +107,6 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
           0.25
         );
 
-        // 3. Smooth exit transition at final 15%: scale down, translate up, fade out
         mainTl
           .to(
             phone,
@@ -135,24 +130,19 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
             0.75
           );
       } else {
-        // Mobile & Tablet: Standard non-pinned responsive entrance
         gsap.fromTo(
           phone,
-          {
-            opacity: 0.3,
-            scale: 0.88,
-            y: 80,
-          },
+          { opacity: 0.3, y: 60, scale: 0.92 },
           {
             opacity: 1,
-            scale: 1,
             y: 0,
+            scale: 1,
             duration: 1,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 80%',
-              end: 'top 30%',
+              start: 'top 75%',
+              end: 'top 20%',
               scrub: 0.8,
             },
           }
@@ -164,58 +154,52 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
   }, []);
 
   return (
-    <div
+    <section
       ref={sectionRef}
       id={`project-${project.id}`}
-      className="relative w-full border-t border-[#E8E8E4] bg-transparent"
+      className="relative w-full bg-transparent overflow-hidden"
     >
-      {/* Pinned Viewport Container */}
       <div
         ref={pinContainerRef}
-        className="w-full min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto"
+        className="w-full min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto relative"
       >
-        {/* Subtle Environmental Sunset/Sky Glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-gradient-to-br from-[#168DF5]/10 via-[#18C5BD]/8 to-[#FF9D62]/5 blur-3xl pointer-events-none -z-10" />
+        {/* Subtle Cyan Atmosphere for Nivra */}
+        <AmbientLight position="center" tint="cyan" size="xl" intensity="soft" />
 
-        {/* Section Header Meta Tracker */}
-        <div className="flex items-center justify-between border-b border-[#E8E8E4] pb-4 mb-10">
+        {/* Flagship Scene Section Header */}
+        <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-12">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-sm font-bold text-[#111116]">
+            <span className="font-mono text-sm font-bold text-[#F5F5F7]">
               PROJECT {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#168DF5]" />
-            <span className="text-xs font-mono text-[#888884] uppercase tracking-wider">
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+            <span className="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
               {project.category}
             </span>
           </div>
 
           <div className="hidden sm:flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-white border border-[#E0E0DC] text-[11px] font-mono text-[#168DF5] font-bold">
-              SCROLL-LINKED STORYTELLING
+            <span className="px-3 py-1 rounded-full glass-subtle border border-white/10 text-[11px] font-mono text-[#A1A1AA]">
+              SPATIAL EXPLORATION ENGINE
             </span>
           </div>
         </div>
 
-        {/* Main Grid: Phone Centerpiece & Editorial Story */}
+        {/* Main Grid: Device Mockup on Left, Narrative Chapters on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          {/* Left Column: Phone Chassis with Active Real UI */}
+          
           <div
             ref={phoneWrapperRef}
-            className="lg:col-span-6 flex justify-center order-2 lg:order-1"
+            className="lg:col-span-6 flex justify-center will-change-transform"
           >
             <NivraPhoneScene
               activeChapterIndex={activeChapterIndex}
               onChapterChange={(idx) => setActiveChapterIndex(idx)}
               isInteractive={true}
-              isPersianMode={isPersianMode}
             />
           </div>
 
-          {/* Right Column: Editorial Narrative & 4 Story Chapters */}
-          <div
-            ref={storyWrapperRef}
-            className="lg:col-span-6 order-1 lg:order-2"
-          >
+          <div ref={storyWrapperRef} className="lg:col-span-6 will-change-transform">
             <NivraStory
               project={project}
               activeChapterIndex={activeChapterIndex}
@@ -226,6 +210,6 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

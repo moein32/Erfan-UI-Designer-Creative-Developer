@@ -89,23 +89,23 @@ export const OvaraExperience: React.FC<OvaraExperienceProps> = ({
       id={`project-${project.id}`}
       className="relative min-h-screen py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto"
     >
-      {/* Background Ambient Aura */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-[#FF5C39]/10 via-[#7667F4]/8 to-transparent blur-3xl pointer-events-none" />
+      {/* Background Ambient Aura — Subtle Coral Accent */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-[#FF5C39]/12 via-[#7667F4]/6 to-transparent blur-[120px] pointer-events-none -z-10 opacity-35" />
 
       {/* Flagship Scene Section Header */}
-      <div className="flex items-center justify-between border-b border-[#E0E0DC] pb-4 mb-12">
+      <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-12">
         <div className="flex items-center gap-3">
-          <span className="font-mono text-sm font-bold text-[#111116]">
+          <span className="font-mono text-sm font-bold text-[#F5F5F7]">
             PROJECT {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF5C39]" />
-          <span className="text-xs font-mono text-[#888884] uppercase tracking-wider">
+          <span className="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
             {project.category}
           </span>
         </div>
 
         <div className="hidden sm:flex items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-full bg-white border border-[#DCDCD8] text-[11px] font-mono text-[#444]">
+          <span className="px-3 py-1 rounded-full glass-subtle border border-white/10 text-[11px] font-mono text-[#A1A1AA]">
             LIVE INTERACTIVE ENGINE
           </span>
         </div>

@@ -2,26 +2,44 @@
 
 @layer base {
   :root {
-    /* Centralized Liquid Glass Material Design Tokens */
-    --glass-bg-subtle: rgba(255, 255, 255, 0.62);
-    --glass-bg-medium: rgba(255, 255, 255, 0.78);
-    --glass-bg-strong: rgba(255, 255, 255, 0.90);
+    /* Sophisticated Dark Color Foundation */
+    --bg-void: #030304;
+    --bg-primary: #070709;
+    --bg-secondary: #0D0D11;
+    --bg-elevated: #131317;
+    --bg-surface: #18181D;
     
-    --glass-border-subtle: rgba(229, 231, 235, 0.70);
-    --glass-border-medium: rgba(229, 231, 235, 0.85);
-    --glass-border-strong: rgba(229, 231, 235, 0.95);
+    /* Text Hierarchy */
+    --text-primary: #F5F5F7;
+    --text-secondary: #A1A1AA;
+    --text-muted: #71717A;
+    --text-subtle: #52525B;
     
-    --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.25) 45%, rgba(255, 255, 255, 0) 100%);
-    --glass-inner-bevel: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.02);
+    /* Borders */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.14);
+    --border-strong: rgba(255, 255, 255, 0.20);
     
-    --glass-shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
-    --glass-shadow-medium: 0 16px 36px -10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
-    --glass-shadow-strong: 0 24px 50px -12px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.02);
+    /* True Dark Liquid Glass Material Tokens */
+    --glass-bg-subtle: rgba(18, 18, 22, 0.58);
+    --glass-bg-medium: rgba(24, 24, 30, 0.72);
+    --glass-bg-strong: rgba(30, 30, 38, 0.86);
     
-    --glass-blur-subtle: 10px;
-    --glass-blur-medium: 16px;
-    --glass-blur-strong: 24px;
-    --glass-saturation: 180%;
+    --glass-border-subtle: rgba(255, 255, 255, 0.08);
+    --glass-border-medium: rgba(255, 255, 255, 0.14);
+    --glass-border-strong: rgba(255, 255, 255, 0.20);
+    
+    --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 45%, rgba(255, 255, 255, 0) 100%);
+    --glass-inner-bevel: inset 0 1px 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.45);
+    
+    --glass-shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    --glass-shadow-medium: 0 16px 36px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    --glass-shadow-strong: 0 28px 60px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.10);
+    
+    --glass-blur-subtle: 14px;
+    --glass-blur-medium: 20px;
+    --glass-blur-strong: 28px;
+    --glass-saturation: 190%;
     
     --glass-radius-pill: 9999px;
     --glass-radius-panel: 28px;
@@ -29,8 +47,8 @@
 
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #0A0A0A;
-    background-color: #FFFFFF;
+    color: #F5F5F7;
+    background-color: #070709;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -69,10 +87,10 @@
 }
 
 /* ==================================================
-   REAL LIQUID GLASS MATERIAL SYSTEM
+   TRUE DARK LIQUID GLASS MATERIAL SYSTEM
    ================================================== */
 
-/* Density 1: Subtle (Navigation, small pills, tags) */
+/* Density 1: Subtle (Navigation, small pills, status tags) */
 .glass-subtle,
 .liquid-glass-pill {
   position: relative;
@@ -82,12 +100,13 @@
   border: 1px solid var(--glass-border-subtle);
   box-shadow: var(--glass-shadow-subtle), var(--glass-inner-bevel);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #F5F5F7;
 }
 
 .glass-subtle:hover,
 .liquid-glass-pill:hover {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: rgba(10, 10, 10, 0.2);
+  background: rgba(28, 28, 34, 0.75);
+  border-color: rgba(255, 255, 255, 0.22);
   box-shadow: var(--glass-shadow-medium), var(--glass-inner-bevel);
   transform: translateY(-1px);
 }
@@ -97,7 +116,7 @@
   transform: translateY(0) scale(0.985);
 }
 
-/* Density 2: Medium (Cards, standard interactive modules) */
+/* Density 2: Medium (Cards, interactive modules, modal bodies) */
 .glass-medium,
 .liquid-glass {
   position: relative;
@@ -107,44 +126,66 @@
   border: 1px solid var(--glass-border-medium);
   box-shadow: var(--glass-shadow-medium), var(--glass-inner-bevel);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #F5F5F7;
 }
 
 .glass-medium:hover {
-  border-color: rgba(212, 212, 216, 1);
+  border-color: rgba(255, 255, 255, 0.25);
   box-shadow: var(--glass-shadow-strong), var(--glass-inner-bevel);
 }
 
-/* Density 3: Strong (Focal UI panels, design system engine, contact console) */
+/* Density 3: Strong (Focal UI panels, design system object, contact console) */
 .glass-strong,
 .liquid-glass-strong {
   position: relative;
   background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur-strong)) saturate(190%);
-  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(190%);
+  backdrop-filter: blur(var(--glass-blur-strong)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(200%);
   border: 1px solid var(--glass-border-strong);
-  box-shadow: var(--glass-shadow-strong), inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  box-shadow: var(--glass-shadow-strong), var(--glass-inner-bevel);
+  color: #F5F5F7;
 }
 
-/* Tactile Glass Button */
+/* Tactile Dark Glass Action Button */
 .glass-btn,
 .liquid-glass-btn {
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  background: #FFFFFF;
+  color: #070709;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-btn:hover,
 .liquid-glass-btn:hover {
-  background: #0A0A0A;
+  background: #E4E4E7;
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 28px -6px rgba(255, 255, 255, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 .glass-btn:active,
 .liquid-glass-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Secondary Button on Dark */
+.glass-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F5F5F7;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.glass-btn-secondary:active {
   transform: translateY(0) scale(0.98);
 }
 
@@ -156,10 +197,10 @@
   .liquid-glass,
   .liquid-glass-strong,
   .liquid-glass-pill {
-    background: #FFFFFF !important;
+    background: #131317 !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    border-color: #E5E7EB !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
   }
 }
 
@@ -175,9 +216,14 @@
   }
 }
 
-/* Crisp Outline Stroke Text */
+/* Crisp Outline Stroke Text on Dark */
 .stroke-text {
-  -webkit-text-stroke: 1.5px #0A0A0A;
+  -webkit-text-stroke: 1.5px #F5F5F7;
+  color: transparent;
+}
+
+.stroke-text-muted {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.2);
   color: transparent;
 }
 
@@ -186,25 +232,26 @@
   color: transparent;
 }
 
-/* Subtle micro-dot tactile texture */
+/* Subtle micro-dot tactile texture for Dark Mode */
 .bg-noise {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 0);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0);
   background-size: 24px 24px;
 }
 
-/* Custom scrollbar in sleek minimal tones */
+/* Custom scrollbar in dark minimal tones */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFFFFF;
+  background: #070709;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E5E7EB;
+  background: #27272A;
   border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D1D5DB;
+  background: #3F3F46;
 }
 
 /* Dynamic Island Animation */
@@ -227,25 +274,23 @@
   }
 }
 
-/* Modern Minimalist Card & Edge Tokens */
+/* Modern Minimalist Dark Card & Edge Tokens */
 .minimal-border {
-  border-color: #E5E7EB;
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .minimal-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  background-color: #0D0D11;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .titanium-edge {
   box-shadow: 
-    0 0 0 1px #E5E7EB,
-    0 25px 50px -12px rgba(0, 0, 0, 0.08),
-    0 10px 20px -6px rgba(0, 0, 0, 0.04);
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    0 10px 20px -6px rgba(0, 0, 0, 0.4);
 }
 
 .perspective-1000 {
   perspective: 1000px;
 }
-
-
