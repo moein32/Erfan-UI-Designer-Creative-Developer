@@ -24,7 +24,7 @@ export interface ProjectData {
     id: string;
     title: string;
     description: string;
-    type: 'feed' | 'detail' | 'checkout' | 'dashboard' | 'insights' | 'booking' | 'assistant';
+    type: 'feed' | 'detail' | 'checkout' | 'dashboard' | 'insights' | 'booking' | 'assistant' | 'tasks' | 'calendar';
   }[];
   deliverables: string[];
 }

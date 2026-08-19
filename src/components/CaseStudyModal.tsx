@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { IphoneMockup } from './IphoneMockup';
 import { OvaraPhoneScene } from './projects/ovara/OvaraPhoneScene';
+import { ArvenPhoneScene } from './projects/arven/ArvenPhoneScene';
 import { PROJECTS } from '../data/projectsData';
 
 interface CaseStudyModalProps {
@@ -306,6 +307,12 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                 <OvaraPhoneScene
                   activeScreenIndex={modalScreenIndex}
                   onScreenChange={setModalScreenIndex}
+                  isInteractive={true}
+                />
+              ) : project.id === 'arven' ? (
+                <ArvenPhoneScene
+                  activeChapterIndex={modalScreenIndex}
+                  onChapterChange={setModalScreenIndex}
                   isInteractive={true}
                 />
               ) : (

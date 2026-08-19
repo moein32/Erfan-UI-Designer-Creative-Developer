@@ -81,9 +81,10 @@ export const PROJECTS: ProjectData[] = [
       { font: 'Plus Jakarta Sans', usage: 'Workspace documents & notes', sample: 'Quarterly Strategic Expansion Blueprint' },
     ],
     appScreens: [
-      { id: 'arven-1', title: 'Neural Feed & Agenda', description: 'Contextual timeline that auto-prioritizes high-leverage tasks', type: 'dashboard' },
-      { id: 'arven-2', title: 'Cognitive Copilot', description: 'Voice-to-action reasoning engine with streaming markdown', type: 'assistant' },
-      { id: 'arven-3', title: 'Knowledge Graph Matrix', description: 'Semantic nodes linking files, team comments, and action items', type: 'insights' },
+      { id: 'arven-1', title: '01 / THINK — Neural Feed', description: 'Contextual AI workspace that auto-prioritizes high-leverage focus tasks', type: 'dashboard' },
+      { id: 'arven-2', title: '02 / ORGANIZE — Smart Tasks', description: 'Autonomous task decomposition and 45-minute focus milestone tracking', type: 'tasks' },
+      { id: 'arven-3', title: '03 / PLAN — Cognitive Calendar', description: 'Deep work time-blocking matched to biological productivity curves', type: 'calendar' },
+      { id: 'arven-4', title: '04 / CREATE — Knowledge Graph', description: 'Semantic node indexing connecting notes, ideas, and actionable synthesis', type: 'insights' },
     ],
     deliverables: ['Desktop & Mobile Architecture', 'Interactive Design Tokens', 'Fluid Canvas Engine', 'Design System Guidelines'],
   },

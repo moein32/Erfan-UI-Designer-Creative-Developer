@@ -3,6 +3,7 @@ import { ProjectData } from '../types';
 import { useCursor } from '../context/CursorContext';
 import { IphoneMockup } from './IphoneMockup';
 import { OvaraExperience } from './projects/ovara/OvaraExperience';
+import { ArvenExperience } from './projects/arven/ArvenExperience';
 import { ArrowUpRight, Sparkles, Layers, ChevronRight, Check } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -28,6 +29,19 @@ export const ProjectScene: React.FC<ProjectSceneProps> = ({
   if (project.id === 'ovara') {
     return (
       <OvaraExperience
+        project={project}
+        index={index}
+        total={total}
+        onOpenCaseStudy={onOpenCaseStudy}
+        isPersianMode={isPersianMode}
+      />
+    );
+  }
+
+  // If this is Arven, render the flagship ArvenExperience showcase!
+  if (project.id === 'arven') {
+    return (
+      <ArvenExperience
         project={project}
         index={index}
         total={total}
