@@ -42,10 +42,10 @@ export const CustomCursor: React.FC = () => {
       <div
         className={`flex items-center justify-center rounded-full transition-all duration-300 ease-out backdrop-blur-[2px] ${
           isExpanded
-            ? 'w-24 h-24 bg-[#111111] text-[#F7F7F5] shadow-2xl scale-100'
+            ? 'w-24 h-24 bg-[#0A0A0A] text-[#FFFFFF] shadow-2xl scale-100'
             : isButtonHover
-            ? 'w-12 h-12 bg-[#111111]/20 border border-[#111111]/40 scale-100'
-            : 'w-3.5 h-3.5 bg-[#111111] shadow-sm'
+            ? 'w-12 h-12 bg-[#0A0A0A]/15 border border-[#0A0A0A]/30 scale-100'
+            : 'w-3 h-3 bg-[#0A0A0A] shadow-xs'
         }`}
       >
         {isExpanded && (

@@ -57,16 +57,16 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
     >
       <div
         id="quick-inquiry-modal-card"
-        className="relative w-full max-w-lg bg-[#FFFFFF] rounded-3xl border border-[#d1d1cf] shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-200 text-[#111111]"
+        className="relative w-full max-w-lg bg-[#FFFFFF] rounded-3xl border border-[#E5E7EB] shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-200 text-[#0A0A0A]"
       >
-        <div className="flex items-center justify-between pb-4 border-b border-[#F0F0EC] mb-6">
+        <div className="flex items-center justify-between pb-4 border-b border-[#E5E7EB] mb-6">
           <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
             <span>START A PROJECT WITH ERFAN</span>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-[#111111]/5 hover:bg-[#111111] hover:text-white transition-colors cursor-pointer"
+            className="p-2 rounded-full bg-[#0A0A0A]/5 hover:bg-[#0A0A0A] hover:text-white transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X size={16} />
@@ -78,13 +78,13 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
             <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
               <Check size={28} />
             </div>
-            <h3 className="font-display text-2xl font-bold">Brief Transmitted!</h3>
-            <p className="text-xs sm:text-sm text-[#666666]">
+            <h3 className="font-display text-2xl font-bold text-[#0A0A0A]">Brief Transmitted!</h3>
+            <p className="text-xs sm:text-sm text-[#52525B]">
               Thanks {formData.name}, I will evaluate your scope and reply via {formData.email} in under 24 hours.
             </p>
             <button
               onClick={onClose}
-              className="mt-2 px-6 py-2.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold cursor-pointer"
+              className="mt-2 px-6 py-2.5 rounded-full bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold cursor-pointer"
             >
               CLOSE
             </button>
@@ -92,7 +92,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-left">
             <div className="space-y-1">
-              <label htmlFor="modal-name-input" className="text-xs font-mono text-[#555555]">YOUR NAME *</label>
+              <label htmlFor="modal-name-input" className="text-xs font-mono text-[#52525B]">YOUR NAME *</label>
               <input
                 id="modal-name-input"
                 type="text"
@@ -100,12 +100,12 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Erfan Moein"
-                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111]"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A]"
               />
             </div>
 
             <div className="space-y-1">
-              <label htmlFor="modal-email-input" className="text-xs font-mono text-[#555555]">EMAIL ADDRESS *</label>
+              <label htmlFor="modal-email-input" className="text-xs font-mono text-[#52525B]">EMAIL ADDRESS *</label>
               <input
                 id="modal-email-input"
                 type="email"
@@ -113,18 +113,18 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="erfan@studio.design"
-                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111]"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A]"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label htmlFor="modal-scope-select" className="text-xs font-mono text-[#555555]">SERVICE</label>
+                <label htmlFor="modal-scope-select" className="text-xs font-mono text-[#52525B]">SERVICE</label>
                 <select
                   id="modal-scope-select"
                   value={formData.scope}
                   onChange={(e) => setFormData({ ...formData, scope: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-xs"
+                  className="w-full px-3 py-2.5 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-xs focus:outline-none focus:border-[#0A0A0A]"
                 >
                   <option>Mobile UI/UX</option>
                   <option>Design System</option>
@@ -134,12 +134,12 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
               </div>
 
               <div className="space-y-1">
-                <label htmlFor="modal-timeline-select" className="text-xs font-mono text-[#555555]">TIMELINE</label>
+                <label htmlFor="modal-timeline-select" className="text-xs font-mono text-[#52525B]">TIMELINE</label>
                 <select
                   id="modal-timeline-select"
                   value={formData.timeline}
                   onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-xs"
+                  className="w-full px-3 py-2.5 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-xs focus:outline-none focus:border-[#0A0A0A]"
                 >
                   <option>Urgent (&lt; 2 wks)</option>
                   <option>Within 1 Month</option>
@@ -149,21 +149,21 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
             </div>
 
             <div className="space-y-1">
-              <label htmlFor="modal-details-input" className="text-xs font-mono text-[#555555]">PROJECT DETAILS</label>
+              <label htmlFor="modal-details-input" className="text-xs font-mono text-[#52525B]">PROJECT DETAILS</label>
               <textarea
                 id="modal-details-input"
                 rows={2}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Briefly describe what you're building..."
-                className="w-full px-4 py-2.5 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] resize-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A] resize-none"
               />
             </div>
 
             <button
               type="submit"
               id="modal-submit-btn"
-              className="w-full py-3.5 rounded-xl bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2A2A2A] transition-all flex items-center justify-center gap-2 shadow-md active:scale-95 cursor-pointer"
+              className="w-full py-3.5 rounded-xl bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold tracking-wider hover:bg-[#27272A] transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95 cursor-pointer"
               onMouseEnter={() => setCursor({ type: 'button', text: 'SEND' })}
               onMouseLeave={resetCursor}
             >

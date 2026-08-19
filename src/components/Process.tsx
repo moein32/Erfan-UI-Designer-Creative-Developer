@@ -37,7 +37,7 @@ export const Process: React.FC = () => {
     <section
       ref={sectionRef}
       id="process"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#d1d1cf]"
+      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB]"
     >
       <SectionHeading
         number="04"
@@ -52,23 +52,23 @@ export const Process: React.FC = () => {
         {PROCESS_STEPS.map((step, idx) => (
           <div
             key={step.number}
-            className="process-card-item p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] flex flex-col justify-between hover:border-[#111111]/40 hover:shadow-sm transition-all duration-300 group shadow-xs"
+            className="process-card-item p-8 rounded-3xl bg-[#FFFFFF] border border-[#E5E7EB] flex flex-col justify-between hover:border-[#0A0A0A]/30 hover:shadow-sm transition-all duration-300 group shadow-xs"
             onMouseEnter={() => setCursor({ type: 'button' })}
             onMouseLeave={resetCursor}
           >
             <div className="space-y-4">
               {/* Header number & phase badge */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#F0F0EC]">
-                <span className="font-display text-3xl font-extrabold text-[#111111]">
+              <div className="flex items-center justify-between pb-4 border-b border-[#F4F4F5]">
+                <span className="font-display text-3xl font-extrabold text-[#0A0A0A]">
                   {step.number}
                 </span>
                 <div className="flex items-center gap-2">
                   {step.persianPhase && (
-                    <span className="text-xs font-persian text-[#888888]">
+                    <span className="text-xs font-persian text-[#71717A]">
                       {step.persianPhase}
                     </span>
                   )}
-                  <span className="px-2.5 py-1 rounded-md bg-[#111111]/5 text-[11px] font-mono font-bold text-[#111111] uppercase tracking-wider">
+                  <span className="px-2.5 py-1 rounded-md bg-[#0A0A0A]/5 text-[11px] font-mono font-bold text-[#0A0A0A] uppercase tracking-wider">
                     {step.phase}
                   </span>
                 </div>
@@ -76,22 +76,22 @@ export const Process: React.FC = () => {
 
               {/* Title & Description */}
               <div className="space-y-2">
-                <h3 className="font-display text-xl font-bold text-[#111111] group-hover:text-[#FF5C39] transition-colors">
+                <h3 className="font-display text-xl font-bold text-[#0A0A0A] group-hover:text-[#52525B] transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed">
                   {step.description}
                 </p>
               </div>
 
               {/* Activities list */}
               <div className="pt-3 space-y-1.5">
-                <span className="text-[10px] font-mono text-[#888888] tracking-widest uppercase block mb-1">
+                <span className="text-[10px] font-mono text-[#71717A] tracking-widest uppercase block mb-1">
                   ACTIVITIES
                 </span>
                 {step.activities.map((act) => (
-                  <div key={act} className="flex items-center gap-2 text-xs font-mono text-[#555555]">
-                    <span className="w-1 h-1 rounded-full bg-[#111111]/40" />
+                  <div key={act} className="flex items-center gap-2 text-xs font-mono text-[#52525B]">
+                    <span className="w-1 h-1 rounded-full bg-[#0A0A0A]/40" />
                     <span>{act}</span>
                   </div>
                 ))}
@@ -99,11 +99,11 @@ export const Process: React.FC = () => {
             </div>
 
             {/* Output Phase Milestone */}
-            <div className="mt-6 pt-4 border-t border-[#F0F0EC] flex items-center justify-between text-xs font-mono">
-              <span className="text-[#888888] truncate max-w-[190px]">
+            <div className="mt-6 pt-4 border-t border-[#F4F4F5] flex items-center justify-between text-xs font-mono">
+              <span className="text-[#71717A] truncate max-w-[190px]">
                 {step.output}
               </span>
-              <div className="w-6 h-6 rounded-full bg-[#111111]/5 flex items-center justify-center text-[#111111] group-hover:bg-[#111111] group-hover:text-white transition-colors">
+              <div className="w-6 h-6 rounded-full bg-[#0A0A0A]/5 flex items-center justify-center text-[#0A0A0A] group-hover:bg-[#0A0A0A] group-hover:text-white transition-colors">
                 <ArrowRight size={12} />
               </div>
             </div>

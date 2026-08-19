@@ -73,38 +73,35 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact, isPers
     <section
       ref={heroRef}
       id="hero-section"
-      className="relative min-h-[92vh] md:min-h-screen flex flex-col justify-between pt-28 md:pt-36 pb-12 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden select-none"
+      className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-between pt-28 md:pt-36 pb-12 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden select-none"
     >
-      {/* Background Natural Warm Blush Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[700px] h-[500px] md:h-[700px] bg-[#FF6B6B] opacity-[0.08] blur-[100px] rounded-full pointer-events-none -z-10" />
-
       {/* Top Tagline / Status */}
       <div ref={badgeRef} className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-2.5 h-2.5 bg-[#111111] rounded-full"></div>
-          <span className="text-[10px] font-bold tracking-[0.2em] opacity-40 uppercase">
-            Professional Portfolio 2026
+          <div className="w-2 h-2 bg-[#0A0A0A] rounded-full"></div>
+          <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#71717A] uppercase">
+            SELECTED WORK · 2024–2026
           </span>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] opacity-50 uppercase">
-          <span>BASED IN TEHRAN</span>
+        <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono font-bold tracking-[0.15em] text-[#71717A] uppercase">
+          <span>TEHRAN</span>
           <span>·</span>
-          <span>WORKING GLOBALLY</span>
+          <span>AVAILABLE WORLDWIDE</span>
         </div>
       </div>
 
       {/* Hero Primary Headline */}
-      <div className="my-auto py-6 md:py-10 space-y-6 md:space-y-8">
+      <div className="my-auto py-8 md:py-14 space-y-8 md:space-y-10">
         <div className="flex flex-col">
           <h1
             ref={headlineRef}
-            className="text-[52px] sm:text-[84px] md:text-[96px] lg:text-[110px] leading-[0.88] md:leading-[0.85] font-semibold tracking-[-0.03em] uppercase text-[#111111] will-change-transform"
+            className="text-[54px] sm:text-[88px] md:text-[104px] lg:text-[120px] leading-[0.88] md:leading-[0.84] font-semibold tracking-[-0.035em] uppercase text-[#0A0A0A] will-change-transform"
           >
             <div className="hero-char-line overflow-hidden">
               UI DESIGNER
             </div>
-            <div className="hero-char-line overflow-hidden flex items-baseline gap-3">
+            <div className="hero-char-line overflow-hidden flex items-baseline gap-3 md:gap-5">
               <span className="stroke-text font-serif italic text-transparent font-light">&amp;</span>
               <span>CREATIVE</span>
             </div>
@@ -117,14 +114,14 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact, isPers
         {/* Supporting statement */}
         <div
           ref={subtextRef}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 pt-6 border-t border-[#d1d1cf]"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-[#E5E7EB]"
         >
-          <div className="space-y-2 max-w-md">
-            <p className="text-base sm:text-lg leading-relaxed font-medium text-[#444444]">
-              I design digital experiences that feel <span className="font-semibold text-[#111111] underline decoration-[#FF6B6B] decoration-2 underline-offset-4">alive</span>. Specializing in high-end design systems and interactive motion.
+          <div className="space-y-2 max-w-lg">
+            <p className="text-base sm:text-lg leading-relaxed font-medium text-[#3F3F46]">
+              Architecting thoughtful digital experiences with uncompromising craft. Specializing in high-end design systems, mobile ergonomics, and creative engineering.
             </p>
-            <p className="text-xs sm:text-sm font-persian text-[#666666] leading-relaxed">
-              طراحی رابط‌های کاربری چشم‌نواز و توسعه وب‌سایت‌های خلاقانه با تکیه بر جزئیات و موشن هدفمند.
+            <p className="text-xs sm:text-sm font-persian text-[#71717A] leading-relaxed">
+              طراحی رابط‌های کاربری محصول‌محور و مهندسی تجربیات تعاملی با بالاترین استاندارد استودیوهای جهانی.
             </p>
           </div>
 
@@ -132,7 +129,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact, isPers
             <button
               onClick={onExploreWork}
               id="hero-explore-btn"
-              className="group px-6 py-3.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2B2B2B] transition-all flex items-center gap-3 shadow-md"
+              className="group px-7 py-4 rounded-full bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold tracking-wider hover:bg-[#27272A] transition-all flex items-center gap-3 shadow-sm active:scale-95 cursor-pointer"
               onMouseEnter={() => setCursor({ type: 'button', text: 'VIEW ↗' })}
               onMouseLeave={resetCursor}
             >
@@ -143,39 +140,39 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact, isPers
             <button
               onClick={onOpenContact}
               id="hero-contact-btn"
-              className="px-5 py-3.5 rounded-full bg-[#FFFFFF] border border-[#d1d1cf] text-[#111111] text-xs font-mono font-semibold tracking-wider hover:border-[#111111] hover:bg-[#111111]/5 transition-all"
+              className="px-6 py-4 rounded-full bg-[#FFFFFF] border border-[#E5E7EB] text-[#0A0A0A] text-xs font-mono font-semibold tracking-wider hover:border-[#0A0A0A] hover:bg-[#F4F4F5] transition-all active:scale-95 cursor-pointer"
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
             >
-              LET'S TALK
+              LET’S TALK
             </button>
           </div>
         </div>
       </div>
 
       {/* Bottom Scroll Indicator & Disciplines Ribbon */}
-      <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 text-xs font-mono text-[#777777]">
+      <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 text-xs font-mono text-[#71717A]">
         <div className="flex items-center gap-6 overflow-x-auto max-w-full pb-1">
-          <span className="hover:text-[#111111] transition-colors">UI/UX DESIGN</span>
-          <span className="text-[#d1d1cf]">·</span>
-          <span className="hover:text-[#111111] transition-colors">PRODUCT DESIGN</span>
-          <span className="text-[#d1d1cf]">·</span>
-          <span className="hover:text-[#111111] transition-colors">DESIGN SYSTEMS</span>
-          <span className="text-[#d1d1cf]">·</span>
-          <span className="hover:text-[#111111] transition-colors">MOTION &amp; GSAP</span>
+          <span className="hover:text-[#0A0A0A] transition-colors">UI/UX DESIGN</span>
+          <span className="text-[#E5E7EB]">·</span>
+          <span className="hover:text-[#0A0A0A] transition-colors">PRODUCT ARCHITECTURE</span>
+          <span className="text-[#E5E7EB]">·</span>
+          <span className="hover:text-[#0A0A0A] transition-colors">DESIGN SYSTEMS</span>
+          <span className="text-[#E5E7EB]">·</span>
+          <span className="hover:text-[#0A0A0A] transition-colors">CREATIVE DEV &amp; GSAP</span>
         </div>
 
         <a
           href="#selected-work"
-          className="group flex items-center gap-3 text-[#111111] hover:opacity-75 transition-opacity"
+          className="group flex items-center gap-3 text-[#0A0A0A] hover:opacity-75 transition-opacity"
           onMouseEnter={() => setCursor({ type: 'button' })}
           onMouseLeave={resetCursor}
         >
-          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-[#111111] flex items-center justify-center group-hover:bg-[#111111] group-hover:text-white transition-all">
+          <div className="w-10 h-10 md:w-11 md:h-11 rounded-full border border-[#0A0A0A] flex items-center justify-center group-hover:bg-[#0A0A0A] group-hover:text-white transition-all">
             <ArrowDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
           </div>
-          <span className="text-[10px] font-bold tracking-[0.1em] uppercase opacity-60">
-            Scroll to explore
+          <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#71717A]">
+            SCROLL TO DISCOVER
           </span>
         </a>
       </div>

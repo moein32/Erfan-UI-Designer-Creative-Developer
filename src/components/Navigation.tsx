@@ -93,10 +93,10 @@ export const Navigation: React.FC<NavigationProps> = ({
           onMouseEnter={() => setCursor({ type: 'button' })}
           onMouseLeave={resetCursor}
         >
-          <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-[#111111] group-hover:opacity-75 transition-opacity">
+          <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-[#0A0A0A] group-hover:opacity-60 transition-opacity">
             ERFAN
           </span>
-          <span className="hidden sm:inline-block text-[11px] font-mono tracking-widest text-[#777777] uppercase border-l border-[#D5D5D0] pl-3">
+          <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-[#71717A] uppercase border-l border-[#E5E7EB] pl-3">
             UI & CREATIVE DEV
           </span>
         </a>
@@ -104,13 +104,13 @@ export const Navigation: React.FC<NavigationProps> = ({
         {/* Desktop Navigation Island */}
         <nav
           id="desktop-nav"
-          className="hidden md:flex items-center gap-1 bg-[#FFFFFF]/85 backdrop-blur-md px-5 py-2.5 rounded-full border border-[#d1d1cf] shadow-[0_4px_25px_-4px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-[#111111]/30 hover:shadow-[0_8px_30px_-6px_rgba(0,0,0,0.1)]"
+          className="hidden md:flex items-center gap-1 bg-[#FFFFFF]/90 backdrop-blur-md px-4 py-2 rounded-full border border-[#E5E7EB] shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-[#0A0A0A]/20 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
         >
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="px-3.5 py-1 text-[11px] font-medium tracking-[0.15em] uppercase text-[#111111] hover:opacity-50 transition-opacity rounded-full"
+              className="px-3.5 py-1 text-[11px] font-semibold tracking-[0.12em] uppercase text-[#0A0A0A] hover:text-[#71717A] transition-colors rounded-full"
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
             >
@@ -123,12 +123,12 @@ export const Navigation: React.FC<NavigationProps> = ({
             <button
               onClick={onTogglePersian}
               id="lang-toggle-btn"
-              className="ml-2 px-2.5 py-1 text-[10px] font-persian font-medium text-[#555555] hover:text-[#111111] rounded-full border border-[#d1d1cf] hover:bg-[#111111]/5 transition-all flex items-center gap-1"
+              className="ml-1.5 px-2.5 py-0.5 text-[10px] font-persian font-medium text-[#52525B] hover:text-[#0A0A0A] rounded-full border border-[#E5E7EB] hover:bg-[#F4F4F5] transition-all flex items-center gap-1 cursor-pointer"
               title="تغییر زبان به فارسی / Switch Language"
               onMouseEnter={() => setCursor({ type: 'button' })}
               onMouseLeave={resetCursor}
             >
-              <Globe size={11} className="text-[#777777]" />
+              <Globe size={11} className="text-[#71717A]" />
               <span>{isPersianMode ? 'EN' : 'فا'}</span>
             </button>
           )}
@@ -137,11 +137,11 @@ export const Navigation: React.FC<NavigationProps> = ({
         {/* Right Status Pill & CTA */}
         <div className="flex items-center gap-3">
           {/* Availability & Time badge */}
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#111111]/5 border border-[#111111]/10 text-[11px] font-mono text-[#555555]">
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FAFAFA] border border-[#E5E7EB] text-[11px] font-mono text-[#52525B]">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>AVAILABLE</span>
-            <span className="text-[#AAAAAA]">·</span>
-            <span className="text-[#111111] font-medium">{localTime || '14:20'} THR</span>
+            <span className="text-[#D4D4D8]">·</span>
+            <span className="text-[#0A0A0A] font-medium">{localTime || '14:20'} THR</span>
           </div>
 
           {/* Quick CTA */}
@@ -149,7 +149,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             href="#contact"
             id="nav-cta-btn"
             onClick={onOpenContactModal}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono tracking-wider font-semibold rounded-full bg-[#111111] text-[#F7F7F5] hover:bg-[#2A2A2A] transition-all duration-200 active:scale-95 shadow-sm"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono tracking-wider font-semibold rounded-full bg-[#0A0A0A] text-[#FFFFFF] hover:bg-[#27272A] transition-all duration-200 active:scale-95 shadow-sm"
             onMouseEnter={() => setCursor({ type: 'button', text: 'OPEN ↗' })}
             onMouseLeave={resetCursor}
           >
@@ -161,7 +161,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle"
-            className="md:hidden p-2 rounded-full bg-[#FFFFFF]/90 border border-[#111111]/10 text-[#111111] focus:outline-none"
+            className="md:hidden p-2 rounded-full bg-[#FFFFFF] border border-[#E5E7EB] text-[#0A0A0A] focus:outline-none"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -171,9 +171,9 @@ export const Navigation: React.FC<NavigationProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 mx-6 p-6 rounded-2xl bg-[#FFFFFF] border border-[#111111]/10 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="flex items-center justify-between pb-3 border-b border-[#F0F0ED]">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#666666]">
+        <div className="md:hidden mt-2 mx-6 p-6 rounded-2xl bg-[#FFFFFF] border border-[#E5E7EB] shadow-xl flex flex-col gap-4 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="flex items-center justify-between pb-3 border-b border-[#F4F4F5]">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#71717A]">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
               <span>Available for Select Projects</span>
             </div>
@@ -182,7 +182,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                 onClick={() => {
                   onTogglePersian();
                 }}
-                className="px-2.5 py-1 text-xs font-persian rounded-lg border border-[#E0E0DC] text-[#333333]"
+                className="px-2.5 py-1 text-xs font-persian rounded-lg border border-[#E5E7EB] text-[#0A0A0A]"
               >
                 {isPersianMode ? 'English' : 'فارسی'}
               </button>
@@ -195,10 +195,10 @@ export const Navigation: React.FC<NavigationProps> = ({
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-display font-medium text-[#111111] hover:text-[#FF5C39] py-1 transition-colors flex items-center justify-between"
+                className="text-lg font-display font-medium text-[#0A0A0A] hover:text-[#71717A] py-1 transition-colors flex items-center justify-between"
               >
                 <span>{isPersianMode && link.persianLabel ? link.persianLabel : link.label}</span>
-                <ArrowUpRight size={16} className="text-[#888888]" />
+                <ArrowUpRight size={16} className="text-[#A1A1AA]" />
               </a>
             ))}
           </div>
@@ -209,7 +209,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               setMobileMenuOpen(false);
               onOpenContactModal?.();
             }}
-            className="mt-2 w-full py-3 text-center text-xs font-mono tracking-wider font-semibold rounded-xl bg-[#111111] text-[#F7F7F5] flex items-center justify-center gap-2"
+            className="mt-2 w-full py-3 text-center text-xs font-mono tracking-wider font-semibold rounded-xl bg-[#0A0A0A] text-[#FFFFFF] flex items-center justify-center gap-2"
           >
             <span>START A PROJECT</span>
             <Sparkles size={14} />

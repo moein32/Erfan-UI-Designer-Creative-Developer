@@ -73,7 +73,7 @@ export const AboutSection: React.FC = () => {
     <section
       ref={containerRef}
       id="about"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#d1d1cf]"
+      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB]"
     >
       <SectionHeading
         number="02"
@@ -88,24 +88,23 @@ export const AboutSection: React.FC = () => {
         {/* Left Narrative Manifesto */}
         <div className="lg:col-span-7 space-y-8">
           <div className="about-stagger-item space-y-4">
-            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#111111] leading-snug">
+            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#0A0A0A] leading-snug">
               Most digital products suffer from a broken handoff. Designers draw static pictures; engineers build approximate code.
             </h3>
-            <p className="text-base md:text-lg text-[#555555] leading-relaxed">
-              I eliminate that boundary. As both a <span className="font-semibold text-[#111111]">senior UI designer</span> and <span className="font-semibold text-[#111111]">creative frontend developer</span>, I design systems with an innate understanding of layout engines, memory overhead, and state orchestration.
+            <p className="text-base md:text-lg text-[#52525B] leading-relaxed">
+              I eliminate that boundary. As both a <span className="font-semibold text-[#0A0A0A]">senior UI designer</span> and <span className="font-semibold text-[#0A0A0A]">creative frontend developer</span>, I design systems with an innate understanding of layout engines, memory overhead, and state orchestration.
             </p>
           </div>
 
           {/* Persian Editorial Quote Card */}
-          <div className="about-stagger-item p-6 sm:p-8 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-xs relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF5C39]/05 rounded-full blur-2xl pointer-events-none" />
-            <span className="text-xs font-mono text-[#888888] tracking-widest uppercase block mb-3">
+          <div className="about-stagger-item p-6 sm:p-8 rounded-3xl bg-[#FFFFFF] border border-[#E5E7EB] shadow-xs relative overflow-hidden">
+            <span className="text-xs font-mono text-[#71717A] tracking-widest uppercase block mb-3">
               DESIGN PHILOSOPHY / فلسفه طراحی
             </span>
-            <blockquote className="font-persian text-xl sm:text-2xl font-medium text-[#111111] leading-loose text-right">
+            <blockquote className="font-persian text-xl sm:text-2xl font-medium text-[#0A0A0A] leading-loose text-right">
               «زیبایی واقعی در تناسب بی‌نقص جزئیات زاده می‌شود، و کارایی در ساختار مهندسی‌شده پایدار می‌ماند.»
             </blockquote>
-            <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#F0F0EC] text-xs font-mono text-[#777777]">
+            <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#F4F4F5] text-xs font-mono text-[#71717A]">
               <span>ERFAN MOEIN</span>
               <span>TEHRAN / GLOBAL</span>
             </div>
@@ -116,13 +115,13 @@ export const AboutSection: React.FC = () => {
             {corePillars.map((pillar) => (
               <div
                 key={pillar.title}
-                className="p-6 rounded-2xl bg-[#FFFFFF] border border-[#d1d1cf] space-y-2 hover:border-[#111111]/40 transition-colors shadow-xs"
+                className="p-6 rounded-2xl bg-[#FFFFFF] border border-[#E5E7EB] space-y-2 hover:border-[#0A0A0A]/30 transition-colors shadow-xs"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-[#111111]/5">{pillar.icon}</div>
-                  <h4 className="font-display font-bold text-base text-[#111111]">{pillar.title}</h4>
+                  <div className="p-2 rounded-lg bg-[#0A0A0A]/5">{pillar.icon}</div>
+                  <h4 className="font-display font-bold text-base text-[#0A0A0A]">{pillar.title}</h4>
                 </div>
-                <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">{pillar.desc}</p>
+                <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed">{pillar.desc}</p>
               </div>
             ))}
           </div>
@@ -131,7 +130,7 @@ export const AboutSection: React.FC = () => {
         {/* Right Credentials & Stack Box */}
         <div className="lg:col-span-5 space-y-6">
           {/* Quick Profile Summary */}
-          <div className="about-stagger-item p-6 sm:p-8 rounded-3xl bg-[#111111] text-[#F7F7F5] shadow-xl space-y-6 border border-[#222222]">
+          <div className="about-stagger-item p-6 sm:p-8 rounded-3xl bg-[#0A0A0A] text-[#FFFFFF] shadow-xl space-y-6 border border-[#27272A]">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-xs font-mono text-emerald-400 font-bold block mb-0.5">
@@ -179,12 +178,12 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Studio Guarantee Banner */}
-          <div className="about-stagger-item p-6 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] flex items-start gap-4 shadow-xs">
+          <div className="about-stagger-item p-6 rounded-3xl bg-[#FFFFFF] border border-[#E5E7EB] flex items-start gap-4 shadow-xs">
             <CheckCircle2 size={20} className="text-emerald-600 shrink-0 mt-0.5" />
             <div className="text-xs space-y-1">
-              <span className="font-bold text-[#111111] font-mono block">NO TEMPLATES. NO AI SLOP.</span>
-              <p className="text-[#666666] leading-relaxed">
-                Every project is crafted from a blank canvas with custom tokens, bespoke typography, and handcrafted animation curves tailored specifically to your brand identity.
+              <span className="font-bold text-[#0A0A0A] font-mono block">CRAFT PHILOSOPHY</span>
+              <p className="text-[#52525B] leading-relaxed">
+                Every project is crafted from a blank canvas with custom tokens, bespoke typography, and handcrafted animation curves tailored specifically to product vision.
               </p>
             </div>
           </div>

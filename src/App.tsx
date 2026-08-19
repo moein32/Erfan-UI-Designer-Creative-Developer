@@ -59,7 +59,7 @@ export default function App() {
 
   return (
     <CursorProvider>
-      <div className={`min-h-screen bg-[#F7F7F5] text-[#111111] bg-noise ${isPersianMode ? 'persian-sub-active' : ''}`}>
+      <div className={`min-h-screen bg-[#FFFFFF] text-[#0A0A0A] bg-noise ${isPersianMode ? 'persian-sub-active' : ''}`}>
         {/* Custom Interactive Cursor */}
         <CustomCursor />
 

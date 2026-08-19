@@ -64,7 +64,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
   return (
     <section
       id="contact"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#d1d1cf]"
+      className="py-24 md:py-36 px-6 md:px-12 max-w-7xl mx-auto border-t border-[#E5E7EB]"
     >
       <SectionHeading
         number="05"
@@ -78,27 +78,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
         
         {/* Left Column: Direct Email & Direct CTA */}
         <div className="lg:col-span-6 space-y-8">
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#111111] text-[#F7F7F5] space-y-6 shadow-2xl relative overflow-hidden border border-[#222222]">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#FF5C39]/20 to-transparent rounded-full blur-3xl pointer-events-none" />
-
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#0A0A0A] text-[#FFFFFF] space-y-6 shadow-xl relative overflow-hidden border border-[#27272A]">
             <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>CURRENTLY ACCEPTING NEW CLIENTS</span>
+              <span>CURRENTLY ACCEPTING SELECT CLIENTS</span>
             </div>
 
             <div className="space-y-2">
               <h3 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">
                 Have a visionary idea?
               </h3>
-              <p className="text-sm text-[#AAAAAA] leading-relaxed">
-                Send a direct email or copy the address to your clipboard. Expect a detailed response within 24 hours.
+              <p className="text-sm text-[#A1A1AA] leading-relaxed">
+                Send a direct email or copy the address to your clipboard. Expect a thoughtful response within 24 hours.
               </p>
             </div>
 
             {/* Copyable Email Box */}
             <div className="p-4 rounded-2xl bg-white/10 border border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div className="flex items-center gap-3 w-full sm:w-auto">
-                <Mail size={18} className="text-[#FF5C39] shrink-0" />
+                <Mail size={18} className="text-white shrink-0" />
                 <span className="font-mono text-xs sm:text-sm font-semibold truncate">
                   {emailAddress}
                 </span>
@@ -127,7 +125,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
 
             {/* Social Channels Ribbon */}
             <div className="pt-4 border-t border-white/10 space-y-3">
-              <span className="text-xs font-mono text-[#777777] block">DIRECT NETWORKS</span>
+              <span className="text-xs font-mono text-[#71717A] block">DIRECT NETWORKS</span>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {socialLinks.map((link) => (
                   <a
@@ -149,21 +147,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
         </div>
 
         {/* Right Column: Interactive Quick Brief Form */}
-        <div className="lg:col-span-6 p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#d1d1cf] shadow-sm">
+        <div className="lg:col-span-6 p-8 sm:p-10 rounded-3xl bg-[#FFFFFF] border border-[#E5E7EB] shadow-xs">
           {formSubmitted ? (
             <div className="text-center py-12 space-y-4 animate-in fade-in zoom-in-95 duration-300">
               <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                 <Check size={32} />
               </div>
-              <h3 className="font-display text-2xl font-bold text-[#111111]">
+              <h3 className="font-display text-2xl font-bold text-[#0A0A0A]">
                 Inquiry Received!
               </h3>
-              <p className="text-sm text-[#666666] max-w-md mx-auto">
+              <p className="text-sm text-[#52525B] max-w-md mx-auto">
                 Thank you for reaching out, <span className="font-semibold">{formData.name}</span>. I have received your project details and will review your specifications promptly.
               </p>
               <button
                 onClick={() => setFormSubmitted(false)}
-                className="mt-4 px-6 py-2.5 rounded-full bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold cursor-pointer"
+                className="mt-4 px-6 py-2.5 rounded-full bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold cursor-pointer"
               >
                 SEND ANOTHER MESSAGE
               </button>
@@ -171,15 +169,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
           ) : (
             <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
               <div>
-                <span className="text-xs font-mono font-bold text-[#111111] uppercase tracking-wider block mb-1">
+                <span className="text-xs font-mono font-bold text-[#0A0A0A] uppercase tracking-wider block mb-1">
                   START A CONVERSATION
                 </span>
-                <p className="text-xs text-[#777777]">Fill out the brief below for project inquiries.</p>
+                <p className="text-xs text-[#71717A]">Fill out the brief below for project inquiries.</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label htmlFor="name-input" className="text-xs font-mono text-[#555555]">YOUR NAME *</label>
+                  <label htmlFor="name-input" className="text-xs font-mono text-[#52525B]">YOUR NAME *</label>
                   <input
                     id="name-input"
                     type="text"
@@ -187,12 +185,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Jane Doe"
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A] font-sans"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label htmlFor="email-input" className="text-xs font-mono text-[#555555]">EMAIL ADDRESS *</label>
+                  <label htmlFor="email-input" className="text-xs font-mono text-[#52525B]">EMAIL ADDRESS *</label>
                   <input
                     id="email-input"
                     type="email"
@@ -200,19 +198,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="jane@company.com"
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A] font-sans"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label htmlFor="service-select" className="text-xs font-mono text-[#555555]">DISCIPLINE</label>
+                  <label htmlFor="service-select" className="text-xs font-mono text-[#52525B]">DISCIPLINE</label>
                   <select
                     id="service-select"
                     value={formData.projectType}
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A] font-sans"
                   >
                     <option>Mobile App / UI/UX</option>
                     <option>Design System (Tokens)</option>
@@ -223,12 +221,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                 </div>
 
                 <div className="space-y-1">
-                  <label htmlFor="budget-select" className="text-xs font-mono text-[#555555]">BUDGET RANGE</label>
+                  <label htmlFor="budget-select" className="text-xs font-mono text-[#52525B]">BUDGET RANGE</label>
                   <select
                     id="budget-select"
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A] font-sans"
                   >
                     <option>$5k - $10k</option>
                     <option>$10k - $25k</option>
@@ -239,7 +237,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
               </div>
 
               <div className="space-y-1">
-                <label htmlFor="message-input" className="text-xs font-mono text-[#555555]">PROJECT OVERVIEW &amp; TIMELINE</label>
+                <label htmlFor="message-input" className="text-xs font-mono text-[#52525B]">PROJECT OVERVIEW &amp; TIMELINE</label>
                 <textarea
                   id="message-input"
                   required
@@ -247,14 +245,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenInquiryMod
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell me about your product goals, core audience, and target launch window..."
-                  className="w-full px-4 py-3 rounded-xl bg-[#F7F7F5] border border-[#d1d1cf] text-sm focus:outline-none focus:border-[#111111] font-sans resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-[#FAFAFA] border border-[#E5E7EB] text-sm focus:outline-none focus:border-[#0A0A0A] font-sans resize-none"
                 />
               </div>
 
               <button
                 type="submit"
                 id="submit-brief-btn"
-                className="w-full py-4 rounded-xl bg-[#111111] text-[#F7F7F5] text-xs font-mono font-bold tracking-wider hover:bg-[#2A2A2A] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-md cursor-pointer"
+                className="w-full py-4 rounded-xl bg-[#0A0A0A] text-[#FFFFFF] text-xs font-mono font-bold tracking-wider hover:bg-[#27272A] transition-all flex items-center justify-center gap-2 active:scale-95 shadow-sm cursor-pointer"
                 onMouseEnter={() => setCursor({ type: 'button', text: 'SEND' })}
                 onMouseLeave={resetCursor}
               >
