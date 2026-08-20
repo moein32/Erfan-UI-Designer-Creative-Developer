@@ -65,7 +65,7 @@ export const QuickInquiryModal: React.FC<QuickInquiryModalProps> = ({ isOpen, on
         <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
           <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-[#F5F5F7]">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>{isRTL ? 'ثبت درخواست همکاری با عرفان' : 'START A PROJECT WITH ERFAN'}</span>
+            <span>{isRTL ? 'ثبت درخواست همکاری با عرفان معین' : 'START A PROJECT WITH ERFAN MOEIN'}</span>
           </div>
           <button
             onClick={onClose}

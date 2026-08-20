@@ -84,10 +84,9 @@ export const PhilosophyExperience: React.FC = () => {
       <VisualImageEnvironment
         imageSrc="/assets/images/portfolio-atmosphere.webp"
         position="center"
-        blurAmount="55px"
-        opacity={0.18}
-        overlayOpacity={0.82}
-        scale={1.12}
+        blurAmount="35px"
+        opacity={0.25}
+        scale={1.08}
         enableParallax={true}
       />
 
@@ -143,7 +142,7 @@ export const PhilosophyExperience: React.FC = () => {
                 {data.quoteAuthor}
               </span>
               <span className="block text-[11px] font-mono text-[#71717A]">
-                {isRTL ? 'تهران · تعهد به بالاترین کیفیت ساخت دیجیتال' : 'EST. 2018 · COMMITTED TO CRAFT'}
+                {isRTL ? 'قزوین · تعهد به بالاترین کیفیت ساخت دیجیتال' : 'QAZVIN · COMMITTED TO CRAFT'}
               </span>
             </div>
           </div>

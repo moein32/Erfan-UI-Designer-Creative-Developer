@@ -118,7 +118,7 @@ export const AboutSection: React.FC = () => {
             </blockquote>
             <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#E5E7EB] text-xs font-mono text-[#71717A]">
               <span>{isRTL ? 'عرفان معین' : 'ERFAN MOEIN'}</span>
-              <span>{isRTL ? 'تهران / پروژه‌های بین‌المللی' : 'TEHRAN / GLOBAL'}</span>
+              <span>{isRTL ? 'قزوین / پروژه‌های بین‌المللی' : 'QAZVIN / GLOBAL'}</span>
             </div>
           </div>
 

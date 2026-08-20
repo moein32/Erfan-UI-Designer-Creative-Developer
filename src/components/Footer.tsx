@@ -18,20 +18,27 @@ export const Footer: React.FC = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 bg-[#F5F5F7] rounded-full shadow-[0_0_6px_rgba(245,245,247,0.8)]"></div>
-            <span className="font-display text-3xl sm:text-4xl font-extrabold text-[#F5F5F7] tracking-tighter">
-              {isRTL ? 'عرفان' : 'ERFAN'}
+            <span className="font-display text-2xl sm:text-3xl font-extrabold text-[#F5F5F7] tracking-tight">
+              {isRTL ? 'عرفان معین' : 'ERFAN MOEIN'}
             </span>
             <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full border border-white/10 text-[#A1A1AA] glass-subtle">
               {isRTL ? 'ویرایش ۱۴۰۴' : '2026 EDITION'}
             </span>
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="text-[10px] font-mono font-bold tracking-[0.15em] text-[#71717A] uppercase">
               {t.hero.availability}
             </div>
             <div className="text-xs font-mono font-medium text-[#F5F5F7] dir-ltr text-start">
-              erfan.moein.design@gmail.com
+              <a href="mailto:e.moein32@gmail.com" className="hover:text-emerald-400 transition-colors">
+                e.moein32@gmail.com
+              </a>
+            </div>
+            <div className="text-xs font-mono font-medium text-[#A1A1AA] dir-ltr text-start">
+              <a href="tel:+989193819356" className="hover:text-white transition-colors">
+                +98 919 381 9356
+              </a>
             </div>
           </div>
 

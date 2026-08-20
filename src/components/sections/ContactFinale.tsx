@@ -3,6 +3,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useCursor } from '../../context/CursorContext';
 import {
   Mail,
+  Phone,
   Copy,
   Check,
   ArrowUpRight,
@@ -23,21 +24,36 @@ interface ContactFinaleProps {
 export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal }) => {
   const { t, isRTL, formatNumber } = useLanguage();
   const { setCursor, resetCursor } = useCursor();
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const contactData = t.experienceSection.cinematicContact;
-  const emailAddress = 'erfan.moein.design@gmail.com';
+  const emailAddress = 'e.moein32@gmail.com';
+  const phoneNumber = '+989193819356';
+  const phoneDisplay = isRTL ? '۰۹۱۹۳۸۱۹۳۵۶' : '+98 919 381 9356';
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
-    setCopied(true);
+    setCopiedEmail(true);
     confetti({
       particleCount: 45,
       spread: 60,
       origin: { y: 0.8 },
       colors: ['#F5F5F7', '#10B981', '#71717A', '#818CF8'],
     });
-    setTimeout(() => setCopied(false), 3000);
+    setTimeout(() => setCopiedEmail(false), 3000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(phoneNumber);
+    setCopiedPhone(true);
+    confetti({
+      particleCount: 45,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: ['#F5F5F7', '#10B981', '#71717A', '#818CF8'],
+    });
+    setTimeout(() => setCopiedPhone(false), 3000);
   };
 
   const socialLinks = [
@@ -55,10 +71,9 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
       <VisualImageEnvironment
         imageSrc="/assets/images/portfolio-atmosphere.webp"
         position={isRTL ? "left" : "right"}
-        blurAmount="50px"
-        opacity={0.2}
-        overlayOpacity={0.8}
-        scale={1.12}
+        blurAmount="35px"
+        opacity={0.25}
+        scale={1.08}
         enableParallax={true}
       />
 
@@ -115,13 +130,43 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
 
               <button
                 onClick={handleCopyEmail}
-                className="px-5 py-3 rounded-xl bg-white text-black hover:bg-[#E4E4E7] transition-all text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-95"
+                className="px-5 py-2.5 rounded-xl bg-white text-black hover:bg-[#E4E4E7] transition-all text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-95 shrink-0"
                 onMouseEnter={() => setCursor({ type: 'button' })}
                 onMouseLeave={resetCursor}
               >
-                {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
-                <span>{copied ? contactData.copied : contactData.copyEmail}</span>
+                {copiedEmail ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                <span>{copiedEmail ? contactData.copied : contactData.copyEmail}</span>
               </button>
+            </div>
+
+            {/* Phone Call & Direct Line Bar */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 bg-[#0D0D11]/90 rounded-2xl border border-white/10 relative z-10">
+              <div className="flex items-center gap-3 px-3 py-1 text-sm font-mono font-bold text-[#F5F5F7] select-all truncate">
+                <Phone size={16} className="text-[#71717A] shrink-0" />
+                <span className="truncate">{phoneDisplay}</span>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <a
+                  href={`tel:${phoneNumber}`}
+                  className="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white hover:text-black text-[#F5F5F7] transition-all text-xs font-mono font-bold flex items-center justify-center gap-1.5 cursor-pointer border border-white/10 active:scale-95"
+                  onMouseEnter={() => setCursor({ type: 'button' })}
+                  onMouseLeave={resetCursor}
+                >
+                  <Phone size={12} />
+                  <span>{isRTL ? 'تماس مستقیم' : 'CALL'}</span>
+                </a>
+                <button
+                  onClick={handleCopyPhone}
+                  className="px-4 py-2.5 rounded-xl bg-white/6 hover:bg-white/12 text-[#A1A1AA] hover:text-white transition-all text-xs font-mono font-bold flex items-center justify-center gap-1.5 cursor-pointer border border-white/8 active:scale-95"
+                  onMouseEnter={() => setCursor({ type: 'button' })}
+                  onMouseLeave={resetCursor}
+                  title="کپی شماره تماس"
+                >
+                  {copiedPhone ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+                  <span>{copiedPhone ? (isRTL ? 'کپی شد' : 'COPIED') : (isRTL ? 'کپی' : 'COPY')}</span>
+                </button>
+              </div>
             </div>
 
             {/* CTA Buttons */}

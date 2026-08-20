@@ -52,7 +52,7 @@ export const IphoneMockup: React.FC<IphoneMockupProps> = ({
         return {
           icon: <ShoppingBag size={12} className="text-[#FF5C39]" />,
           text: 'Ovara Atelier · Order #8921 Dispatched',
-          subtext: 'تهران، زعفرانیه',
+          subtext: 'قزوین، ملاصدرا',
           badgeColor: 'bg-[#FF5C39]/20 text-[#FF5C39]',
         };
       case 'arven':
@@ -225,7 +225,7 @@ export const IphoneMockup: React.FC<IphoneMockupProps> = ({
                 <div className="grid grid-cols-2 gap-2 text-[10px]">
                   <div className="p-2 rounded-xl bg-white/5 border border-white/5">
                     <span className="text-white/40 block">تحویل اکسپرس</span>
-                    <span className="text-white font-medium">۲ ساعته در تهران</span>
+                    <span className="text-white font-medium">اکسپرس در قزوین</span>
                   </div>
                   <div className="p-2 rounded-xl bg-white/5 border border-white/5">
                     <span className="text-white/40 block">اصالت کالا</span>

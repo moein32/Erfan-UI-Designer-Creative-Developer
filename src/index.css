@@ -2,6 +2,11 @@
 
 @layer base {
   :root {
+    /* Centralized Typography Strategy */
+    --font-fa: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
     /* Sophisticated Dark Color Foundation */
     --bg-void: #030304;
     --bg-primary: #070709;
@@ -46,16 +51,17 @@
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-en);
     color: #F5F5F7;
     background-color: #070709;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  /* RTL / Persian Typography Rules */
-  html[dir="rtl"] body {
-    font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* RTL / Persian Typography System */
+  html[dir="rtl"] body,
+  html[lang="fa"] body {
+    font-family: var(--font-fa);
     letter-spacing: normal !important;
   }
 
@@ -63,26 +69,65 @@
   html[dir="rtl"] h2,
   html[dir="rtl"] h3,
   html[dir="rtl"] h4,
-  html[dir="rtl"] .font-display {
-    font-family: 'Vazirmatn', sans-serif;
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6,
+  html[dir="rtl"] .font-display,
+  html[dir="rtl"] button,
+  html[dir="rtl"] input,
+  html[dir="rtl"] textarea {
+    font-family: var(--font-fa) !important;
     letter-spacing: 0 !important;
     line-height: 1.45;
   }
 
+  /* LTR / English Typography Rules */
   html[dir="ltr"] h1,
   html[dir="ltr"] h2,
   html[dir="ltr"] h3,
   html[dir="ltr"] .font-display {
-    font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Syne', var(--font-en), sans-serif;
     letter-spacing: -0.03em;
   }
 
+  html[dir="ltr"] body {
+    font-family: var(--font-en);
+  }
+
+  /* Explicit Font Classes */
   .font-persian {
-    font-family: 'Vazirmatn', sans-serif;
+    font-family: var(--font-fa) !important;
+  }
+
+  .font-inter {
+    font-family: var(--font-en) !important;
   }
 
   .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
+  }
+
+  /* Product UI Container Language System (Inside Phone Screens) */
+  html[dir="rtl"] .product-ui-root,
+  html[lang="fa"] .product-ui-root,
+  html[dir="rtl"] .phone-screen-viewport,
+  html[lang="fa"] .phone-screen-viewport {
+    font-family: var(--font-fa) !important;
+    direction: rtl;
+  }
+
+  html[dir="ltr"] .product-ui-root,
+  html[lang="en"] .product-ui-root,
+  html[dir="ltr"] .phone-screen-viewport,
+  html[lang="en"] .phone-screen-viewport {
+    font-family: var(--font-en) !important;
+    direction: ltr;
+  }
+
+  /* Persian Numerals in RTL must strictly render with Vazirmatn */
+  html[dir="rtl"] .font-mono,
+  html[dir="rtl"] [data-num],
+  html[dir="rtl"] .numeral {
+    font-family: var(--font-fa) !important;
   }
 }
 

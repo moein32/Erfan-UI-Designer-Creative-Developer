@@ -32,7 +32,9 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
     message: '',
   });
 
-  const emailAddress = 'erfan.moein.design@gmail.com';
+  const emailAddress = 'e.moein32@gmail.com';
+  const phoneNumber = '+989193819356';
+  const phoneDisplay = isRTL ? '۰۹۱۹۳۸۱۹۳۵۶' : '+98 919 381 9356';
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);

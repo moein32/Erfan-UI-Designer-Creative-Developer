@@ -190,8 +190,8 @@ export const OvaraScreenProfile: React.FC<OvaraScreenProps> = ({
           </strong>
           <span className="text-[#666] truncate block">
             {isRTL
-              ? 'تهران، زعفرانیه، خیابان آصف، برج آسمان، طبقه ۸'
-              : '8th Floor, Sky Tower, Asef St, Zaferaniyeh, Tehran'}
+              ? 'قزوین، خیابان ملاصدرا، برج کاسپین، طبقه ۵'
+              : '5th Floor, Caspian Tower, Mollsada St, Qazvin'}
           </span>
         </div>
       </div>

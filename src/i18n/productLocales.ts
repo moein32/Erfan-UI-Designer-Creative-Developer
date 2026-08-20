@@ -480,7 +480,7 @@ export const PRODUCT_LOCALES = {
     fa: {
       header: {
         greeting: 'صبح بخیر،',
-        userName: 'عرفان عزیز',
+        userName: 'عرفان معین',
       },
       tabs: {
         think: 'تفکر',

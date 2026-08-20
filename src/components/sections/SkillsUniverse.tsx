@@ -22,10 +22,9 @@ export const SkillsUniverse: React.FC = () => {
       <VisualImageEnvironment
         imageSrc="/assets/images/portfolio-atmosphere.webp"
         position="shifted"
-        blurAmount="60px"
-        opacity={0.17}
-        overlayOpacity={0.83}
-        scale={1.12}
+        blurAmount="35px"
+        opacity={0.24}
+        scale={1.08}
         enableParallax={true}
       />
 

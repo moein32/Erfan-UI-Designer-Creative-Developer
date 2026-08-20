@@ -90,14 +90,13 @@ export const InteractiveApproach: React.FC = () => {
       id="approach"
       className="relative lg:min-h-[320vh] bg-transparent border-t border-white/10 overflow-hidden"
     >
-      {/* Left-Aligned Atmospheric Background Layer */}
+      {/* Atmospheric Background Layer */}
       <VisualImageEnvironment
         imageSrc="/assets/images/portfolio-atmosphere.webp"
         position={isRTL ? "right" : "left"}
-        blurAmount="65px"
-        opacity={0.16}
-        overlayOpacity={0.84}
-        scale={1.14}
+        blurAmount="40px"
+        opacity={0.24}
+        scale={1.08}
         enableParallax={true}
       />
 
@@ -400,7 +399,7 @@ export const InteractiveApproach: React.FC = () => {
 
         {/* Bottom Pinned Footer Info */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 text-xs font-mono text-[#71717A]">
-          <span>{isRTL ? 'معماری و توسعه تعاملی توسط عرفان' : 'ARCHITECTURE & CRAFT BY ERFAN'}</span>
+          <span>{isRTL ? 'معماری و توسعه تعاملی توسط عرفان معین' : 'ARCHITECTURE & CRAFT BY ERFAN MOEIN'}</span>
           <span className="hidden sm:inline-block">
             {isRTL ? 'اسکرول کنید تا مراحل بعدی متدولوژی آشکار شوند' : 'SCROLL TO ADVANCE METHODOLOGY PHASES'}
           </span>

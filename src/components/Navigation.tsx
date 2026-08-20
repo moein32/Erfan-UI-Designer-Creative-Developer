@@ -88,7 +88,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
           onMouseLeave={resetCursor}
         >
           <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-[#F5F5F7] group-hover:text-white transition-colors">
-            {isRTL ? 'عرفان' : 'ERFAN'}
+            {isRTL ? 'عرفان معین' : 'ERFAN MOEIN'}
           </span>
           <span className="hidden sm:inline-block text-[10px] font-mono tracking-widest text-[#71717A] uppercase border-s border-white/10 ps-3">
             {isRTL ? 'طراحی محصول و تجربه کاربری' : 'PRODUCT & INTERFACE DESIGN'}
@@ -157,7 +157,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onOpenContactModal }) =>
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>{isRTL ? 'آماده همکاری' : 'AVAILABLE'}</span>
             <span className="text-white/20">·</span>
-            <span className="text-[#F5F5F7] font-medium">{localTime || '14:20'} {isRTL ? 'تهران' : 'THR'}</span>
+            <span className="text-[#F5F5F7] font-medium">{localTime || '14:20'} {isRTL ? 'قزوین' : 'QAZVIN'}</span>
           </div>
 
           {/* Quick CTA */}

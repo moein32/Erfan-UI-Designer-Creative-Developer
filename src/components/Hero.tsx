@@ -183,7 +183,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
               </span>
               <span className="text-white/20">·</span>
               <span className="text-[11px] font-mono text-[#A1A1AA]">
-                {isRTL ? 'تهران' : 'EST. 2018'}
+                {isRTL ? 'قزوین' : 'QAZVIN, IR'}
               </span>
             </div>
 
@@ -318,7 +318,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
                   </span>
                 </div>
                 <span className="font-mono text-[11px] tracking-widest text-[#A1A1AA] uppercase">
-                  {isRTL ? 'تهران' : 'IR · 2026'}
+                  {isRTL ? 'قزوین' : 'QAZVIN · 2026'}
                 </span>
               </div>
             </div>
