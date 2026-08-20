@@ -255,18 +255,18 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
             className="lg:col-span-5 xl:col-span-6 flex justify-center lg:justify-end relative order-first lg:order-last"
           >
             {/* Soft Ambient Atmospheric Light behind Portrait */}
-            <div className="absolute -inset-8 bg-gradient-to-tr from-white/15 via-white/6 to-transparent rounded-[52px] blur-3xl pointer-events-none -z-10" />
+            <div className="absolute -inset-10 bg-gradient-to-tr from-white/16 via-white/8 to-transparent rounded-[56px] blur-3xl pointer-events-none -z-10" />
 
             {/* Dominant Editorial Portrait Composition Frame */}
             <div 
-              className="relative w-full max-w-[360px] sm:max-w-[440px] md:max-w-[490px] lg:max-w-[540px] xl:max-w-[580px] aspect-[4/4.9] rounded-[36px] sm:rounded-[44px] overflow-hidden bg-[#0D0D12] border border-white/14 shadow-[0_30px_90px_rgba(0,0,0,0.9)] group"
+              className="relative w-full max-w-[340px] sm:max-w-[440px] md:max-w-[500px] lg:max-w-[580px] xl:max-w-[620px] aspect-[4/4.85] rounded-[36px] sm:rounded-[44px] md:rounded-[48px] overflow-hidden bg-[#0D0D12] border border-white/14 shadow-[0_35px_100px_rgba(0,0,0,0.92)] group"
               style={{
-                width: 'clamp(340px, 38vw, 600px)',
+                width: 'clamp(340px, 38vw, 620px)',
               }}
             >
               
               {/* Subtle Top-Edge Specular Glass Light */}
-              <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/20 via-white/5 to-transparent pointer-events-none z-10" />
+              <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-white/22 via-white/6 to-transparent pointer-events-none z-10" />
 
               {/* Graceful Fallback if Image Fails or is Loading */}
               {!imageLoaded && !imageError && (
@@ -307,7 +307,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
               />
 
               {/* Subtle Bottom Vignette Gradient to blend smoothly with dark framing */}
-              <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#0D0D12] via-[#0D0D12]/70 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0D0D12] via-[#0D0D12]/75 to-transparent pointer-events-none" />
 
               {/* Bottom Identity Label Overlay Inside Frame */}
               <div className="absolute bottom-5 inset-x-6 flex items-center justify-between text-white z-20">
@@ -328,7 +328,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
               ref={floatingBadgeRef}
               className={`absolute -bottom-6 ${
                 isRTL ? '-right-2 sm:-right-4' : '-left-2 sm:-left-4'
-              } glass-strong border border-white/16 rounded-2xl p-4 sm:p-4.5 shadow-2xl z-20 max-w-[220px] sm:max-w-[250px]`}
+              } glass-strong border border-white/16 rounded-2xl p-4 sm:p-4.5 shadow-2xl z-20 max-w-[230px] sm:max-w-[260px]`}
             >
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-white/12 text-white flex items-center justify-center shrink-0 border border-white/12">
@@ -339,7 +339,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onOpenContact }) => {
                     {isRTL ? 'معماری رابط کاربری' : 'UI ARCHITECTURE'}
                   </div>
                   <div className="text-[10px] font-mono text-[#A1A1AA] truncate">
-                    {isRTL ? 'طراحی + کدنویسی فرانت‌اند' : 'Design Systems + Code'}
+                    {isRTL ? 'سیستم‌های طراحی + فرانت‌اند' : 'Design Systems + Code'}
                   </div>
                 </div>
               </div>

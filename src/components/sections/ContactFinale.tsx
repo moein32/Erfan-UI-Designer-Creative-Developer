@@ -13,6 +13,7 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import { AmbientLight, GridField, TypographicWatermark } from '../ui/VisualEnvironment';
+import { VisualImageEnvironment } from '../ui/VisualImageEnvironment';
 import confetti from 'canvas-confetti';
 
 interface ContactFinaleProps {
@@ -50,6 +51,17 @@ export const ContactFinale: React.FC<ContactFinaleProps> = ({ onOpenInquiryModal
       id="contact"
       className="py-32 md:py-48 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10 relative overflow-hidden"
     >
+      {/* Right-Focal Atmospheric Background Layer */}
+      <VisualImageEnvironment
+        imageSrc="/assets/images/portfolio-atmosphere.webp"
+        position={isRTL ? "left" : "right"}
+        blurAmount="50px"
+        opacity={0.2}
+        overlayOpacity={0.8}
+        scale={1.12}
+        enableParallax={true}
+      />
+
       {/* Environmental Architectural Depth */}
       <AmbientLight position="bottom-center" color="violet" size="xl" intensity="soft" />
       <AmbientLight position="top-right" color="indigo" size="lg" intensity="subtle" />

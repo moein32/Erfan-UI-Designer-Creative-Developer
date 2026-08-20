@@ -170,7 +170,9 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
         <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-12">
           <div className="flex items-center gap-3">
             <span className="font-mono text-sm font-bold text-[#F5F5F7]">
-              PROJECT {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+              {isPersianMode
+                ? `پروژه ${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`
+                : `PROJECT ${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`}
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
             <span className="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
@@ -180,7 +182,7 @@ export const NivraExperience: React.FC<NivraExperienceProps> = ({
 
           <div className="hidden sm:flex items-center gap-2">
             <span className="px-3 py-1 rounded-full glass-subtle border border-white/10 text-[11px] font-mono text-[#A1A1AA]">
-              SPATIAL EXPLORATION ENGINE
+              {isPersianMode ? 'موتور کاوش مکانی و گردشگری' : 'SPATIAL EXPLORATION ENGINE'}
             </span>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useCursor } from '../../context/CursorContext';
 import { Sparkles, Compass, Layers, ShieldCheck, Quote } from 'lucide-react';
 import { AmbientLight, GridField, TypographicWatermark } from '../ui/VisualEnvironment';
+import { VisualImageEnvironment } from '../ui/VisualImageEnvironment';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -79,6 +80,17 @@ export const PhilosophyExperience: React.FC = () => {
       id="philosophy"
       className="relative py-32 md:py-44 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden border-t border-white/10"
     >
+      {/* Centered Atmospheric Background Layer */}
+      <VisualImageEnvironment
+        imageSrc="/assets/images/portfolio-atmosphere.webp"
+        position="center"
+        blurAmount="55px"
+        opacity={0.18}
+        overlayOpacity={0.82}
+        scale={1.12}
+        enableParallax={true}
+      />
+
       {/* Environmental Architectural Depth */}
       <AmbientLight position="top-center" size="xl" intensity="medium" />
       <AmbientLight position="bottom-center" size="lg" intensity="soft" />

@@ -17,6 +17,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { AmbientLight, GridField, TypographicWatermark } from '../ui/VisualEnvironment';
+import { VisualImageEnvironment } from '../ui/VisualImageEnvironment';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -89,6 +90,17 @@ export const InteractiveApproach: React.FC = () => {
       id="approach"
       className="relative lg:min-h-[320vh] bg-transparent border-t border-white/10 overflow-hidden"
     >
+      {/* Left-Aligned Atmospheric Background Layer */}
+      <VisualImageEnvironment
+        imageSrc="/assets/images/portfolio-atmosphere.webp"
+        position={isRTL ? "right" : "left"}
+        blurAmount="65px"
+        opacity={0.16}
+        overlayOpacity={0.84}
+        scale={1.14}
+        enableParallax={true}
+      />
+
       {/* Environmental Architectural Depth */}
       <AmbientLight position="top-right" tint="silver" size="xl" intensity="soft" />
       <AmbientLight position="bottom-left" tint="violet" size="lg" intensity="subtle" />

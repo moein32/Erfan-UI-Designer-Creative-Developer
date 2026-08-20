@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useCursor } from '../../context/CursorContext';
 import { AmbientLight, GridField, TypographicWatermark } from '../ui/VisualEnvironment';
+import { VisualImageEnvironment } from '../ui/VisualImageEnvironment';
 
 export const SkillsUniverse: React.FC = () => {
   const { t, isRTL, formatNumber } = useLanguage();
@@ -17,6 +18,17 @@ export const SkillsUniverse: React.FC = () => {
       id="skills"
       className="py-32 md:py-44 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10 relative overflow-hidden"
     >
+      {/* Shifted Atmospheric Background Layer */}
+      <VisualImageEnvironment
+        imageSrc="/assets/images/portfolio-atmosphere.webp"
+        position="shifted"
+        blurAmount="60px"
+        opacity={0.17}
+        overlayOpacity={0.83}
+        scale={1.12}
+        enableParallax={true}
+      />
+
       {/* Environmental Architectural Depth */}
       <AmbientLight position="top-right" tint="silver" size="lg" intensity="soft" />
       <AmbientLight position="bottom-center" tint="violet" size="md" intensity="subtle" />

@@ -96,7 +96,9 @@ export const OvaraExperience: React.FC<OvaraExperienceProps> = ({
       <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-12">
         <div className="flex items-center gap-3">
           <span className="font-mono text-sm font-bold text-[#F5F5F7]">
-            PROJECT {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            {isPersianMode
+              ? `پروژه ${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`
+              : `PROJECT ${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`}
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-[#FF5C39]" />
           <span className="text-xs font-mono text-[#A1A1AA] uppercase tracking-wider">
@@ -106,7 +108,7 @@ export const OvaraExperience: React.FC<OvaraExperienceProps> = ({
 
         <div className="hidden sm:flex items-center gap-2">
           <span className="px-3 py-1 rounded-full glass-subtle border border-white/10 text-[11px] font-mono text-[#A1A1AA]">
-            LIVE INTERACTIVE ENGINE
+            {isPersianMode ? 'موتور تعاملی زنده' : 'LIVE INTERACTIVE ENGINE'}
           </span>
         </div>
       </div>
